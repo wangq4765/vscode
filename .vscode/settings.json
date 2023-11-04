@@ -27,6 +27,7 @@
     "envFile": "${workspaceFolder}/.env",
     "console": "integratedTerminal",
   },
+
   // 右键run code时运行的命令；未注释的仅适用于PowerShell（Win10默认）和pwsh，文件名中有空格也可以编译运行；注释掉的适用于cmd（win7默认）、PS和bash，但文件名中有空格时无法运行
   "code-runner.saveFileBeforeRun": true, // 运行前自动保存
   "code-runner.preserveFocus": true, // 若为false，run code后光标会聚焦到终端上。如果需要频繁输入数据可设为false
@@ -35,6 +36,7 @@
   "code-runner.fileDirectoryAsCwd": true, // 将code runner终端的工作目录切换到文件目录再运行，对依赖cwd的程序产生影响；如果为false，executorMap要加cd $dir
   "code-runner.customCommand": " cls", //这使Ctrl+Alt+K这个快捷键可以快速清空控制台内容
   "code-runner.respectShebang": false, //我是Windows系统所以不需要按shebang来运行
+
   //需要注意的是，所有命令前都有一个空格，用来“喂给”上一次运行结尾的“请按任意键继续. . .”
   "editor.minimap.enabled": false, // 我个人不用minimap，就是右边那个东西
   "editor.acceptSuggestionOnEnter": "off", // 我个人的习惯，按回车时一定是真正的换行，只有tab才会接受Intellisense
@@ -64,6 +66,7 @@
   //"files.trimTrailingWhitespace": true, // 保存时，删除每一行末尾的空格
   "files.insertFinalNewline": true, // 保存后文件最末尾加一整行空行，Linux下的习惯
   "files.autoGuessEncoding": true, //让VScode自动猜源代码文件的编码格式
+  
   "workbench.editor.enablePreview": false, //可以打开多个文件，打开文件时不是“预览”模式，即在编辑一个文件时打开编辑另一个文件不会覆盖当前编辑的文件而是新建一个标签页
   "workbench.list.smoothScrolling": true, //使文件列表滚动变平滑
   "workbench.settings.useSplitJSON": true, // 使用这个完美解决
@@ -71,18 +74,29 @@
   "workbench.editor.decorations.colors": true, //在标签页上以颜色强调标签页的状态（例如有问题或有警告）
   "workbench.editor.decorations.badges": true, //在标签页上以小徽章强调标签页的状态（例如git未提交更改）
   //"workbench.colorTheme": "Default Dark+", // 主题
+
   "terminal.integrated.cursorBlinking": true, //终端光标闪烁
   //"terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe", //将终端设为cmd，个人比较喜欢cmd作为终端
   //"terminal.integrated.rightClickBehavior": "default", //在终端中右键时显示菜单而不是粘贴（个人喜好）
   //"explorer.confirmDelete": false, //删除文件时不弹出确认弹窗（因为很烦）
   //"explorer.confirmDragAndDrop": false, //往左边文件资源管理器拖动东西来移动/复制时不显示确认窗口（因为很烦）
+
   "debug.onTaskErrors": "showErrors", //预启动任务出错后显示错误，并不启动调试
   "debug.internalConsoleOptions": "openOnSessionStart", //每次调试都打开调试控制台，方便调试
   "debug.showBreakpointsInOverviewRuler": true, //在滚动条标尺上显示断点的位置，便于查找断点的位置
   "debug.toolBarLocation": "docked", //固定调试时工具条的位置，防止遮挡代码内容
-  "git": "D:/git/Git/cmd", //可执行文件路径
+
+
+  // Is Git enabled
+  "git.enabled": true,
+  // Path to the Git executable
+  "git.path": "D:/Git/cmd/git.exe",
+
+  // Other settings
+  //"git": "D:/git/Git/cmd", //可执行文件路径
   //"git.enabled": false, // 如果你不用git，可以考虑关闭它
   //"git.ignoreMissingGitWarning": true, // 同上
+
   "window.zoomLevel": 0.2, // 整体放大
   "emmet.triggerExpansionOnTab": true, //tab自动补全html代码失效解决办法  !+tab
   "*.json": "jsonc", //Comments are not permitted in JSON
@@ -106,18 +120,10 @@
     "**/bower_components/**": true,
     "**/dist/**": true
   },
+  
   //某些插件自定义配置
-  //prettier是前端的
-  //-------- prettier配置参数 --------
-  "prettier.eslintIntegration": true, // 让prettier使用eslint的代码格式进行校验
-  "prettier.printWidth": 100, // 超过最大值换行
-  "prettier.tabWidth": 4, // 缩进字节数
-  "prettier.useTabs": false, // 缩进不使用tab，使用空格
-  "prettier.semi": true, // 句尾添加分号
-  "prettier.singleQuote": true, // 使用单引号代替双引号
-  "prettier.trailingComma": "none", // 在对象或数组最后一个元素后面是否加逗号，不加
-  "prettier.arrowParens": "avoid", // prettier- (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
-  "prettier.bracketSpacing": true,
+
+  //todo tree
   "files.associations": {
     "iostream": "cpp"
   },
@@ -140,11 +146,16 @@
       "iconColour": "#ff0000",
     }
   },
-  {
-    // Is Git enabled
-    "git.enabled": true,
-    // Path to the Git executable
-    "git.path": "D:\\Git\\Git\\cmd\\git.exe"
-    // Other settings
-  }
+
+  //prettier是前端的
+  //-------- prettier配置参数 --------
+  "prettier.eslintIntegration": true, // 让prettier使用eslint的代码格式进行校验
+  "prettier.printWidth": 100, // 超过最大值换行
+  "prettier.tabWidth": 4, // 缩进字节数
+  "prettier.useTabs": false, // 缩进不使用tab，使用空格
+  "prettier.semi": true, // 句尾添加分号
+  "prettier.singleQuote": true, // 使用单引号代替双引号
+  "prettier.trailingComma": "none", // 在对象或数组最后一个元素后面是否加逗号，不加
+  "prettier.arrowParens": "avoid", // prettier- (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
+  "prettier.bracketSpacing": true,
 }
