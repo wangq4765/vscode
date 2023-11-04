@@ -139,5 +139,12 @@
       "foreground": "#ff0000",
       "iconColour": "#ff0000",
     }
+  },
+  {
+    // Is Git enabled
+    "git.enabled": true,
+    // Path to the Git executable
+    "git.path": "D:\\Git\\Git\\cmd\\git.exe"
+    // Other settings
   }
 }
