@@ -1,0 +1,1386 @@
+
+
+
+
+TODO ETL
+
+右击Task查看log
+
+电脑ETL数据
+EOH：出了问题，生管刷数据
+
+Host                            Issue
+TM DFSSRV1-10.73.0.213          Var目录使用率超过70%            
+TM DFSSRV1-10.73.0.213          Home目录使用率超过70%
+解决：联系担当清空数据库
+
+
+TODO SAP
+
+SAP BusinessObjects
+
+问题：BI启动板无法登录
+用这个网址就可以了：http://10.73.1.247/BOE/BI
+
+
+TODO 日志
+
+反馈时间点查log
+
+发生的时间+级别+位置+描述
+
+分析问题看日志(代码弹出来的错误)
+
+eclipse→console中每个服务(CNMSvr/CNXSvr/QRYSvr)的日志都不相同
+
+OIC→产线运营→维护→信息记录查看(bsmessagelog)/错误信息记录查看(bserrormessagelog)
+
+降不下来卡夹：查log(设备传递消息给系统，日志收集这些信息)
+解不了Hold：OIC的报错界面(这是因为vs中的代码有限制)
+
+eclipse中的console：实时log(调试)
+vscode：log历史记录
+
+日志等级：
+vscode只有INFO等级的
+eclipse中有INFO和Debug等级的
+
+CNX：OIC错误在这上面查
+CPT：通过carriername搜索log
+PEX：通过machinename搜索log(设备上报请求)
+产线运营(整个流程)→维护→信息记录查看(操作员就是machine，通过“服务器”查看vscode中的那个文件夹)
+--在eclipse中搜索报错的代码
+
+问题：Invalid process state:[5S3U34T0098. Current State is WAIT]     --5S3U34T0098是lotname
+SELECT lotprocessstate,l.* FROM lot l where lotname like '5S3U34T0098%' for update--RUN
+错误：将表lot中的字段lotprocessstate从WAIT改成RUN(因为只有WAIT和RUN两种情况)
+正确：通过查询Log来查询问题来源
+
+
+
+
+
+
+
+
+OIC报错找vscode中的CNX
+
+sql中的eventName<=>log中的message
+
+SFTP：SNS2→mes→log→CNXsvr→20220709
+SNS2中没有再到SNS1上找(SNS1/2对应的是服务器)
+
+CNXsvr22：返回OIC正确和错误的日志
+CNXsvr22_ERROR：返回OIC错误的日志
+
+搜索日志的时间范围
+0~5：usr01/snsadm/mes/log/CNXsvr/20230116
+5~10(MobaXterm)：/logs/mes/log/CNXsvr/
+12~30：logs/CNSsvr/
+
+
+
+
+
+
+
+<MESSAGENAME>就是bpel的名字
+
+这是发送请求，ReleaseHoldLot是字段eventname中的数据
+<MESSAGENAME>ReleaseHoldLot</MESSAGENAME>
+
+<OICFORMNAME>MES.Module.Views.Transfer.RequestCarrierDataView</OICFORMNAME>
+<OICMENUNAME>RequestCarrierData</OICMENUNAME>
+<listener>CNMListener</listener>
+
+<DURABLENAME>5SCQ-0427</DURABLENAME>
+<MACHINENAME>5SQ1C04</MACHINENAME>
+<TRANSFERSTATE>ONEQP</TRANSFERSTATE>
+<ZONENAME />
+<POSITIONTYPE>PORT</POSITIONTYPE>
+<POSITIONNAME>P02</POSITIONNAME>
+
+
+
+
+
+
+
+<MESSAGENAME>ReleaseHoldLot</MESSAGENAME>
+<RETURNMESSAGE>当前Lot[5SD931K0069] Hold 状态: [N]</RETURNMESSAGE>
+
+[23/05/11 22:00:03.96][ComponentGlassOutByUnit] [202305112200031264988862] [THREAD-ID=102] [ INFO] - TIBCO Message Completed
+>> SubjectName = _LOCAL.BOE.TM1.MES.PRD.SNS.CPTsvr
+
+[INFO] - Application context successfully refreshed (OsgiBundleXmlApplicationContext(bundle=MESSolution.Generic, config=osgibundle:/META-INF/spring/*.xml))
+应用程序上下文成功刷新(OsgiBundleXmlApplicationContext)通用的,配置= osgibundle: / meta - inf / spring / * . xml))
+
+
+
+
+
+
+
+CNXSvr(connect execute server)：传送bpel中的sql
+[DEBUG] - Executing prepared SQL query
+[DEBUG] - Executing prepared SQL statement [ /* CommonUtil.getEnumDefValueStringByEnumName [0001] */  SELECT ENUMVALUE FROM ENUMDEFVALUE]
+[DEBUG] - Executing prepared SQL query
+[DEBUG] - Executing prepared SQL statement [ SELECT DEFAULTFLAG FROM ENUMDEFVALUE WHERE ENUMNAME = ? AND ENUMVALUE = ? ]
+[DEBUG] - Executing prepared SQL query
+[DEBUG] - Executing prepared SQL statement [select * from UserLoggedIn where userId=? and UIName=?]
+[INFO] -  SEND : Message=<?xml version="1.0" encoding="UTF-8"?>
+
+QRYSvr(query server)：bscustomquery中的sql在前后端交互
+[INFO] - >> Create Message : 2
+[INFO] - After - createXml
+[INFO] - QueryID: GetAllPortList, Version: 00001, QueryResult: 2
+[DEBUG] - Executing SQL query [select TIMEKEYID.nextval from dual]
+[DEBUG] - Executing prepared SQL update
+[DEBUG] - SQL update affected 1 rows
+
+CNMSvr(connect message server)：返回bpel中的sql(收发消息)       ---PEMsvr/TEMsvr也是同理
+[DEBUG] - Executing prepared SQL query
+[DEBUG] - Executing prepared SQL statement [ /* CommonUtil.getEnumDefValueStringByEnumName [0001] */  SELECT ENUMVALUE FROM ENUMDEFVALUE]
+[INFO] - TIBCO Message Completed
+[INFO] - *** ACTIVITY START :: dispatching.bpel@1048 :: BpelExecuter insertMessageLog
+[DEBUG] - Executing prepared SQL query
+[DEBUG] - Executing prepared SQL statement [ /* CommonUtil.insertMessageLog [0001] */  SELECT DEFAULTFLAG FROM ENUMDEFVALUE]
+[DEBUG] - Executing prepared SQL query
+[DEBUG] - Executing prepared SQL statement [SELECT ENUMVALUE FROM ENUMDEFVALUE WHERE ENUMNAME = ? AND ENUMVALUE = ? ]
+[DEBUG] - SQL update affected 1 rows
+[Tibrv Dispatcher] [ INFO] - [CNMListener] execute
+[Tibrv Dispatcher] [DEBUG] - Executing prepared SQL query
+
+
+
+
+
+
+[23/05/12 17:00:22.20][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: dispatching.bpel@417509 :: dispatching{SEQ}0
+[23/05/12 17:00:22.21][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: dispatching.bpel@417509 :: switch
+[23/05/12 17:00:22.21][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: dispatching.bpel@417509 :: otherwise
+[23/05/12 17:00:22.22][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: dispatching.bpel@417509 :: executeWF
+[23/05/12 17:00:22.23][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ WARN] - RESULT DATA IS EMPTY. RETURN STRING[0][0]
+[23/05/12 17:00:22.26][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - ===============================================================================================
+[23/05/12 17:00:22.26][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - ***** BPEL STARTED :: ChangeMachineState.bpel@417524 
+[23/05/12 17:00:22.27][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - ===============================================================================================
+[23/05/12 17:00:22.27][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: ChangeMachineState
+[23/05/12 17:00:22.28][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: MachineServiceUtil getMachineData
+[23/05/12 17:00:22.29][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - machineName = 5SQPR02
+[23/05/12 17:00:22.30][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: MachineInfoUtil checkReasonCode
+[23/05/12 17:00:22.30][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: EventInfoUtil makeEventInfo
+[23/05/12 17:00:22.32][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: CommonUtil beginTransaction
+[23/05/12 17:00:22.32][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - Transaction has been started. PROPAGATION_NESTED, ISOLATION_READ_COMMITTED, 600 Sec
+[23/05/12 17:00:22.33][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: MachineServiceImpl checkMachineEnergySavingState
+[23/05/12 17:00:22.34][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: switch
+[23/05/12 17:00:22.34][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: case [getVariable('modifyType') = "OEE"]
+[23/05/12 17:00:22.34][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: MachineServiceImpl makeMachineStateForOEE
+[23/05/12 17:00:22.36][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - ▶ START MachineServiceImpl.makeMachineStateByState DataKey=[MachineName:5SQPR02]
+[23/05/12 17:00:22.37][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - Get DefaultActionContainer's Validations For ActionType[action_default], moduleName[Machine], operationName[makeMachineStateByState]
+[23/05/12 17:00:22.37][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ WARN] - [Warn] validationList is null ( ActionType[action_default], moduleName[Machine], operationName[makeMachineStateByState]
+[23/05/12 17:00:22.44][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - ▶ ENDOK MachineServiceImpl.makeMachineStateByState DataKey=[MachineName:5SQPR02] 8 ms (0, 0, 0)
+[23/05/12 17:00:22.44][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - Event Name = ChangeMachineState , EventTimeKey20230512170022031895
+[23/05/12 17:00:22.46][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: CommonUtil commitTransaction
+[23/05/12 17:00:22.47][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - Transaction has been committed. PROPAGATION_NESTED, ISOLATION_READ_COMMITTED
+[23/05/12 17:00:22.48][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - *** ACTIVITY START :: ChangeMachineState.bpel@417524 :: ESBService sendReplyBySender
+[23/05/12 17:00:22.48][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - RETURNMESSAGE : 
+[23/05/12 17:00:22.48][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - senderName = OICSender
+[23/05/12 17:00:22.49][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - senderName = OICSender
+[23/05/12 17:00:22.49][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] - TIBCO Message Completed
+>> SubjectName = _INBOX.0A4901C3.60653D8E382BE97E.108
+[23/05/12 17:00:22.49][  ChangeMachineState] [20230512170021929806] [THREAD-ID=104] [ INFO] -  SEND : Message=<?xml version="1.0" encoding="UTF-8"?>
+<Message>
+    <Header>
+        <MESSAGENAME>ChangeMachineState</MESSAGENAME>
+        <SHOPNAME>SENSOR</SHOPNAME>
+        <MACHINENAME />
+        <TRANSACTIONID>20230512170021929806</TRANSACTIONID>
+        <ORIGINALSOURCESUBJECTNAME>_INBOX.0A4901C3.60653D8E382BE97E.108</ORIGINALSOURCESUBJECTNAME>
+        <SOURCESUBJECTNAME />
+        <TARGETSUBJECTNAME />
+        <EVENTUSER>10149047</EVENTUSER>
+        <EVENTCOMMENT>倒班点技术人力不足无法对应</EVENTCOMMENT>
+        <INPUTSET />
+        <LANGUAGE>Chinese</LANGUAGE>
+        <OICFORMNAME>MES.Module.Views.Machine.ChangeMachineStateView</OICFORMNAME>
+        <OICMENUNAME>ChangeMachineState</OICMENUNAME>
+        <listener>LOCALListener</listener>
+    </Header>
+    <Body>
+        <MACHINENAME>5SQPR02</MACHINENAME>
+        <MACHINESTATENAME>DOWN</MACHINESTATENAME>
+        <REASONCODETYPE>EQPStatus</REASONCODETYPE>
+        <REASONCODE>PR-USD43</REASONCODE>
+        <PITCH>Y</PITCH>
+        <FIRSTLEVELCODE>Unscheduled Downtime</FIRSTLEVELCODE>
+        <SECONDLEVELCODE>Facilities Failure</SECONDLEVELCODE>
+        <PROBLEMUNITNAME />
+        <SUPERREASONCODE>Facilities Failure</SUPERREASONCODE>
+        <MODIFYTYPE>OEE</MODIFYTYPE>
+    </Body>
+    <Return>
+        <RETURNCODE>0</RETURNCODE>
+        <RETURNMESSAGE />
+    </Return>
+</Message>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 登录OIC时传到后端的xml数据 -->
+<Message>
+  <Header>
+    <MESSAGENAME>GetQueryResult</MESSAGENAME>
+    <SHOPNAME>SENSOR</SHOPNAME>
+    <MACHINENAME></MACHINENAME>
+    <TRANSACTIONID>20230328155550958130</TRANSACTIONID>
+    <ORIGINALSOURCESUBJECTNAME></ORIGINALSOURCESUBJECTNAME>
+    <SOURCESUBJECTNAME></SOURCESUBJECTNAME>
+    <TARGETSUBJECTNAME></TARGETSUBJECTNAME>
+    <EVENTUSER>10868834</EVENTUSER>
+    <EVENTCOMMENT></EVENTCOMMENT>
+    <INPUTSET></INPUTSET>
+    <LANGUAGE>Chinese</LANGUAGE>
+    <OICFORMNAME>MES.Module.Views.OICMain.OICMainView</OICFORMNAME>
+    <OICMENUNAME>OIC主界面</OICMENUNAME>
+  </Header>
+  <Body>
+    <QUERYID>GetAreaList</QUERYID>
+    <VERSION>00001</VERSION>
+    <BINDV>
+      <FACTORYNAME>SENSOR</FACTORYNAME>
+    </BINDV>
+  </Body>
+</Message>
+
+
+
+<!-- 点击“打开Excel”按钮 -->
+<Message>
+    <!-- Header显示界面信息 -->
+    <Header>
+        <MESSAGENAME>BindMask</MESSAGENAME>
+        <SHOPNAME>SENSOR</SHOPNAME>
+        <MACHINENAME />
+        <TRANSACTIONID>20230322145915293791</TRANSACTIONID>
+        <ORIGINALSOURCESUBJECTNAME>_INBOX.0A422929.641A978A3226.2</ORIGINALSOURCESUBJECTNAME>
+        <SOURCESUBJECTNAME />
+        <TARGETSUBJECTNAME />
+        <EVENTUSER>10868834</EVENTUSER>
+        <EVENTCOMMENT>BindMask</EVENTCOMMENT>
+        <INPUTSET />
+        <LANGUAGE>Chinese</LANGUAGE>
+        <OICFORMNAME>MES.Module.Views.Mask.BindMaskName</OICFORMNAME>
+        <OICMENUNAME>BindMaskName</OICMENUNAME>
+        <listener>CNMListener</listener>
+    </Header>
+    <!-- Body显示界面中的信息 -->
+    <Body>
+        <INSPECTFLAG>IMPORT</INSPECTFLAG>
+        <DURABLELIST>
+            <DURABLE>
+                <DURABLENAME>W27D0102058BM0R02104</DURABLENAME>
+                <PROCESSOPERATIONNAME>1500-00</PROCESSOPERATIONNAME>
+                <PRODUCTSPECNAME>B5S270E1F1501</PRODUCTSPECNAME>
+                <LOTTYPE>VR</LOTTYPE>
+            </DURABLE>
+            <DURABLE>
+                <DURABLENAME>W27D0102058T10R02104</DURABLENAME>
+                <PROCESSOPERATIONNAME>2500-00</PROCESSOPERATIONNAME>
+                <PRODUCTSPECNAME>B5S270E1F1501</PRODUCTSPECNAME>
+                <LOTTYPE>VR</LOTTYPE>
+            </DURABLE>
+        </DURABLELIST>
+    </Body>
+</Message>
+
+
+
+
+
+FIXME SNS主界面
+
+Bay：Area
+Shop：Factory
+FGCode：Finished Goods
+Line：In the Lamination Shop
+
+选择Bay
+BAYS01：Unpack/Sputter/Anneal
+BAYS02：Sputter
+BAYS03：Photo/Etch/Strip
+BAYS04：Photo/Test
+BAYS05：Clean/Test
+BAYS06：Rework/Scrap/Sorter/Test
+BAYS07：Etch/Strip
+BAYS08：Cut/Printer/Q-Clean
+BAYS09：Printer/Q-Test/Q-Sorter
+BAYS10：Printer/Q-Test/Pack
+
+设备列表：
+--上面是以列表的形式展示
+--下面是以按钮的形式展示(可以复制粘贴信息)
+点击左边的“设备列表”下任一一行，右边的“Lot列表”会出现多行记录(只有设备状态(machinestatename)为MAINT的时候才有数据，其他情况没有数据)
+双击左边的“设备列表”下任一一行，会跳转到一个新的OIC界面“查看设备信息”(点击按钮“信息”也有同样的效果)
+
+// 这个下拉框弹出的值
+comBayID_BeforeDropDown
+/* GetAreaList [00001] */
+  SELECT AREANAME,
+         DESCRIPTION,
+         AREATYPE,
+         FACTORYNAME,
+         SUPERAREANAME
+    FROM AREA
+   WHERE FACTORYNAME = 'SENSOR'
+ORDER BY AREATYPE,AREANAME
+
+// 右边的“Lot列表”
+comBayID_RowSelected
+/* GetMachineList [00013] */
+  SELECT *
+    FROM MACHINE M, MACHINESPEC MS
+   WHERE M.AREANAME = 'BAYS02'
+     AND M.MACHINENAME = MS.MACHINENAME
+     AND MS.DETAILMACHINETYPE = 'MAIN'
+     AND (MS.MACHINETYPE = 'ProductionMachine'
+       OR MS.MACHINETYPE = 'StorageMachine')
+ORDER BY M.MACHINENAME
+
+// 下面的“Port列表”
+grdMachineList_AfterSelectChange
+/* GetAllPortList [00001] */
+SELECT * FROM MACHINE M,PORT P
+WHERE M.MACHINENAME = P.MACHINENAME
+AND P.MACHINENAME like '5SPTK01%'
+ORDER BY
+P.MACHINENAME,
+instr('P01P02P03P04P05P06CR1CR2',P.PORTNAME)
+
+
+
+SELECT * FROM machine 
+where machinename like '5STLM01%'
+and areaname like 'BAYS05%'
+
+select accessmode,unloadaccessmode,p.* from port p
+where machinename like '5STLM01%'
+and portname like 'P01%' 
+and areaname like 'BAYS05%'
+
+
+
+TODO 运维SNS
+
+
+制造通过Lot ID查看信息
+
+制造称呼productname为product id
+
+B5S089E852401站点C5M1-50无法rework，经分析是Out-Operation错误并改正
+
+OIC很卡→vscode中的ftp
+select MODULE,COUNT(*) CNT from gv$session where machine in ('tmsnsap1') GROUP BY MODULE ORDER BY CNT DESC
+select MODULE,COUNT(*) CNT from gv$session where machine in ('tmsnsap2') GROUP BY MODULE ORDER BY CNT DESC
+
+星辰、星渺FGMS站点(9998-00)→贴合站点(9999-00)
+1、删除打拍站点(9100-00)和FGMS站点(9998-00)，不删除打包站点(9300-00)
+2、select productioninputtype,packingtype,p.* from productspec p
+
+问题：5SN12300031   CIM同事看下这个测试lot，不用的话麻烦消掉
+解决：在lot表中把lotstate从Released改成Completed或者Empty
+SELECT LOTSTATE,l.* FROM lot l where lotname ='5SN12300031' 
+
+sensor制造说判N的屏也可以打box，他问是不是系统有问题
+有9个box，等着拆
+判N的屏无法打pallet，但是打box的时候就没有这个限制，他想打box也有这样的功能
+只有mini产品才会限制，他这个是MLOC
+
+
+
+--FactoryModeler
+
+问题：Sensor NO：B5S140L752601，需修改为 24 pcs Q/Box(OIC→Etc→通过Operation 查看设备Recipe→Q/Q1打包数量)
+解决：FactoryModeler→Material→ProductSpec→找Q段的B5Q140L752601右边的DENSEBOXPRODUCTQTY
+
+问题：FactoryModeler中出现The count of selected rows is bigger than 1. Please check the primary keys setted in the ObjectAttributeDef table or other factor.
+分析：recipe多了一个，删除一个就不会出现此错误了
+select * from posmachinerecipe where conditionid like '%B5S089E952401%3500-00%' for update   ---(修改recipe)
+
+问题：FlowDesigner(Drawing)中CheckOut出现you can't use this processflow
+解决：在plsql中的processflow表修改字段createstate为CheckedIn，字段checkoutuser为清空
+select checkstate,checkoutuser,p.* from processflow p where processflowname='SAARW12' for update;
+
+问题：You will lose all data that has been modified. Do you want to cancel this flow
+您将丢失所有修改过的数据。你想取消这个流程吗
+ps：选择No，也就是不取消这个流程
+
+问题：Operation 17M2-00 has no value for condition.
+解决：sort中红色的线没有赋值
+
+问题：This flow has lots in processing. If you modify this flow, it would cause serious problems. Do you want to modify this flow?
+分析：整个flow只要有lot就会出现这个，只要修改的站点没有lot就可以了
+
+
+
+
+
+
+
+--OIC
+
+问题：后面有发邮件说需要批量绑定bin级的功能路径就是截图的功能，上面是绑定模板(GroupID绑定模板)
+慢：OIC→特殊操作→单管管理→AssignGroupNameForF1View(一切之后，Q Test站点7X00-00绑定)
+快：直接运行脚本绑定Group ID.sql
+
+问题：[MES-Alarm] OP Call ID:6 Message:Metal Decap Count Is Large Than 1,This CST[5SCW-0151] Can not Do Load
+解决：目前只是hold没有报警，之前做过一次Decap，超过1次会hold(报警会hold lot/product，告诉技术解hold)
+select metaldecapcount,p.* from product p where lotname ='5S1134E0042'--把metaldecapcount从2改成0/1就可以了
+
+问题：[MES-Alarm] OP Call ID:6 Message:[3ATP320013A1] ProductHoldState is Y.5S1B33P0074
+解决：把表product中的字段productholdstate改为N，表lot中的字段lotholdstate改为N
+select productholdstate,p.* from product p where productname like '3ATP320013A1%'
+select lotholdstate,l.* from lot l where lotname like '5S1B33P0074%'
+PS：改为N后玻璃就可以往后做了，但是没有修改lasteventtime和lasteventcomment，在OIC上则可以修改(产线运营→保留/解除→保留lot)
+
+问题：在“通过Operation查看设备Recipe”上查询不到数据(流程名称：S20RW01)
+解决：跑Rewrok2020再作业脚本(ProcessFlow原始脚本Rework2020)
+
+问题：B5S145L341701这个，工艺流程有C300-01然而查不到设备recipe
+解决：注册recipe(ProcessFlow)，跑“ProcessFlow原始脚本增加站点抽检修改”，再导入到plsql中的Command Window
+
+问题：CD测试超时提醒   Glass ID: 3A3H310014B9 机种: B5S133D745602 生产类型: Production 站点: 5800-30 检测时间: 60.9分钟
+解决：在plsql中的bsproductinunithistory表中修改字段processstate为End，修改字段endtime为当前时间
+SELECT PROCESSSTATE,endtime,b.* FROM BSPRODUCTINUNITHISTORY b WHERE PRODUCTNAME = '3A3H310014B9' and PARAMETERNAME = 'CDInspectTime' FOR UPDATE
+
+问题：麻烦修改下，可以直接从6X10-00跳至1700-00，维护下这个组合
+解决：OIC→产线运营→维护→跳站站点维护
+将工程列表下的1700-00和6X10-00在左边打勾+点击右箭头+确认(F2)
+
+问题：5SSZ2ZT0224 在BM Insp 2 Report 无法显示
+解决：因为lotstate中是Emptied(5SSZ2ZT0224这个lot无屏)，所以无法显示
+select lotstate,l.* from lot l where lotname='5SSZ2ZT0224';
+
+问题：Destination carrer type mismatch，5SCW-0128空卡无法搬到设备上麻烦看一下
+目的地卡夹类型不匹配
+这个卡是空卡，所有设备都搬不上去，我们应该怎么处理
+其他空卡可以吗？
+可以
+那就是这个卡夹有问题呀
+这种问题要联系自动化的同事看，卡夹的类型不对
+
+在OIC哪个界面上，通过QGXMP01找到对应的Sensor No？
+直接数据库查呗，界面应该没有
+请问一下在哪个表查？
+九张表中只要同时有Sensor.No和Flow就行了(conditionid字段有这两个)
+通过Flow找Sensor.No：
+select * from tpfopolicy where conditionid like '%SWWMP01%';
+通过Sensor.No找Flow：
+select * from tpfopolicy where conditionid like '%B5S340E172204%';
+最标准的查询方法：
+SELECT * FROM productspec where processflowname like '%SWWMP01%'
+
+
+
+
+
+
+
+--FactoryModeler
+
+FactoryModeler→Process→ProcessOperationSpec可以home/end/pageup/pagedown(选中一行数据生效)
+
+OIC和plsql表关联度低
+factorymodeler和plsql表关联度高
+
+OIC上每个页面都对应vs文件(也对应FactoryModeler→Menu→Menu→UI：OIC)
+FactoryModeler上每个选项都对应plsql的表(usermenu/processflow/productspec)
+
+factorymodeler和OIC都是图形化界面(plsql)
+OIC处理生产表(lot/product)
+factorymodeler处理基准表(recipe/TPFOPolicy)以及权限
+
+FactoryModeler中的Process→Policy中的界面分别是什么意思？
+只需要注意下面几张表(其他表没学过)
+TPFOMPolicy：POSMachine/POSMachineRecipe/POSProductSampling/POSProductSamplingEQPBySlot
+TPFOPolicy：POSMachine
+TPPlicy：POSGlassMap
+
+
+
+
+
+
+
+
+
+--点检
+
+智能点检
+
+设备点检我们触发
+每4个小时我们触发点检参数
+
+每个设备unit中的电流/电量/设备属性
+1、工厂，人员在OIC上发送点检请求
+2、MES Server将请求发送给设备
+3、设备收到消息后，上传参数信息
+4、……………………………………………………………………
+
+par开头的表
+parmlist：不用(测试用)
+parmlimitspec：上下限表，维护设备
+parmalarminfo：点检/参数报警(字段ENDFLAG改成Y就不报警了)
+parmcollect：字段EVENTNAME中AutoInspectByMes是自动点检的意思
+
+
+
+
+
+
+
+
+--AR
+
+挂片的信息会单独加表
+
+产线运营→AR→挂片/取消挂片
+
+丝印不用，白片和AR只用一个
+
+AR：在sensor贴片+拔片后直接去贴合
+
+Dell创建Batch+创建lot之后需要单片扫码到系统
+
+VCR读取single panel id
+1、DXC一一对应，有信息
+2、打码，虚拟panel id
+
+AR和OGMAR都是虚拟信息(数据对应不到实物)
+创建AR小片，lot是虚拟的(生产规格只能选择AR)
+虚拟信息需要绑定MES，product表里才会有数据
+
+从贴合接收信息：无需AR
+从贴合不接收信息：需AR
+有DRX：扫码
+无DRX：不扫码
+
+
+
+
+
+
+
+
+--Rework2020
+
+自己选，自己配，站点自己选
+
+Rework2020将Rework整合到一起
+
+1、bslotreworkinfo(好像没有这个表)
+2、lot每块屏经过的每一个站点
+
+
+
+
+
+
+
+
+
+
+
+--PCRT
+
+restore
+
+flow+RT
+
+入库东西，拉到线上处理
+
+需要注册flow(例如QPBMP01，一般PCRT02)
+
+posreceiveproductspec表加两条记录：
+1、RT-Export
+2、RT-Domestic
+倒数第4个填啥，通过特殊操作→RT→PCRT信息接收查看fgcode下拉框可以选啥
+PCRT信息接收界面中的Batch找生管开
+
+
+
+
+
+
+
+
+--delaytime
+
+20分钟执行一次
+
+delaytime超限会自动hold
+
+lot为单位管控(不常用)，Glass别DelayTime管理(product为单位管控，常用)
+
+只要涉及过账都会有
+站点是交互的(跳跃性)
+
+0  1  9  /  12
+秒 分 时  / 过12小时(频率)
+
+Operation Type：Inspection
+Mandatory：Sampling
+
+delaytime = Q time + delay time
+两站点过账的时间管控，超过等待范围会出现品质的问题
+
+delaytimestartstep
+delaytimestarttime
+delaytimespec
+select delaytimestartstep,p.* from product p where delaytimestartstep is not null
+贴合也有这3个字段(为了获取sensor信息)
+贴合只有一个delaytimestartstep最开始的站点
+贴合不管用不到，lot表加字段不多，没有product表频率高
+ctrl+点击：看字段注释
+
+设备管理→Glass别DelayTime管理→DelayTime查询(OGM)→导入数据
+select * from posdelaytime(不用)
+select * from posproductdelaytime
+select * from bsproductdelaytime(字段alarmflag是Y的话就是报警的意思)
+以glass别管理：
+track in：查询
+track out：更新
+
+
+
+
+
+
+
+
+
+
+
+--ERP
+
+sensor和贴合共用ERP
+
+表增删改记录通过trigger(触发器)，知道修改了啥
+
+工厂movement：站点/设备过了多少帐，屏过了多少片
+
+plsql→Procedures→RPT(这些表，从report看)→编辑→重复编译(触发器带红叉就是没有被启用)
+
+都是ERP接口：
+1、WIP接口
+2、报废接口
+
+ERP四个模块
+1、MM模块：FGMS
+2、PP模块
+3、SD模块
+4、QM模块：质检
+
+帐传递给ERP系统
+模块特别多，包括财务系统
+少传、多传处理这些问题
+绑定BOM：绑定物料(PR胶/刻蚀液/Mask显影/油墨)
+
+
+
+
+
+
+
+
+
+--bank
+
+跨工厂
+
+模组(成品)→贴合(材料)
+
+中转库位(存在时间不长)
+
+bank：看成池子(Shipped是单个panel的状态)
+
+ETC只有贴合有WIP
+字段ETC IN/OUT
+
+TP bank
+LC bank
+
+没产出都算WIP，bank也算WIP(没拉到线上去做)
+sensor ship到贴合，但贴合没有接收(release)
+
+贴合有两个bank：
+1、AR bank贴合一段→Sensor二段→去bank里面
+2、
+
+bank出现是因为太复杂了：
+从起始投入
+从中间投入
+从最后投入
+
+
+DESTINATIONPRODUCTNAME
+
+destinationproductname
+
+
+
+
+--posconsumablespecmanagement
+
+posmachinemanagement
+posdurablemanagement
+posconsumablespecmanagement
+
+OIC→生产计划→Crate→绑定CrateSpec
+FactoryModeler→Process→Policy→TPPolicy→POSConsumableSpecManagement
+注册一款新产品的时候需要制造注册这个表posconsumablespecmanagement(物料投入)
+
+
+
+
+
+
+
+
+
+
+
+--问题
+
+表之间是相互关联的
+
+看表product中的字段，productquality(帐实一致)
+
+特殊情况：product表中没有lot字段信息
+修改CST把product表和lot表修改全
+数据残留删除表product中的字段lotname和carriername
+
+select * from lot where carrier=''
+select * from product where carriername=''
+select * from durable where durablename=''
+
+
+
+
+
+
+
+
+
+
+
+
+
+PPT：代码用语言表述出来
+
+lot上卡，PPID down到设备
+
+修改量产产品和开通账号需要审批
+
+Report(报告)报表生成的数据：WIP/计划/产品/设备
+
+驾驶舱(OEE)=时间稼动率(AE)×设备稼动率(PE)×良率稼动率(QE)
+
+RMA(Recipe Management Acesses)：集成在MES中，没有买该软件
+
+Flow对应许多Step ID，Step ID对应许多EQP(Step ID对应工艺，一个设备可以做相同的多种工艺)
+
+abort(舍弃)：cancel track in
+对应1块panel：Component Panel Out By Indexer = a panel out
+
+一个CST中只有一个类型的产品(有两款类型的产品是错误的)
+表product中的字段producttype有production和develop
+
+镜检(G6)≠OQA检(G4.5)
+OQA：9Q00-00(OQA Judge)
+镜检：？
+
+carrier 040是虚拟卡夹
+虚拟carrier，账实一致(算账)
+原因：和实物不匹配，在数据库加上(配平)
+
+Sensor重复制造模式，贴合工单管理模式
+Sensor：每天传WIP，每天每个站点
+贴合：每天传了多少就传给它
+
+防呆有三个
+生产前：Recipe点检
+生产中：EDC/FDC
+生产后：SPC
+
+Down机2h报警管理
+设备报上来的PEX
+slotmap：层数   X无  O有
+inputproductmap：  E无  P有
+samplingproductmap： N无  O或X有
+
+ENIG(化金)≠EN(enginer)
+新产品注册时，产品均为EN产品
+EN产品注册后会频繁变更产品信息，而量产产品基本是不会变更太大
+修改EN产品也是按常规的来修改，相对于量产库不要各部门协同审批
+ps：ENIG为什么叫化金呢？
+化学镍金(Electroless Nickel/Immersion Gold)，简写为ENIG
+
+EN是啥，是试验库的意思吗？和量产库以及测试库有啥区别呢？
+EN产品是开发在技术验证的产品，在生产过程中不断去验证生产工艺以及生产条件，
+在验证过程中，产品的信息是不断变更的，
+当EN产品找到最佳的工艺及条件才算具备量产的条件。对于我们来说，新产品注册时，
+产品均为EN产品，EN产品注册后会频繁变更产品信息，而量产产品基本是不会变更太大，
+涉及到量产产品的信息变更时必须要由技术科室来提出的，且至少要邮件邀请的。
+
+我们科工艺设备主要是服务器和软件，存放在3号楼B5 IT机房，
+分别有一个资产标签（HP Hardware-1200007865，CIM-Software-1200009760），
+我跟it李镇基提前联系了，你早上确认下两个资产标签，带上李强和千楠一起，
+熟悉下我们的服务器情况
+[文件]1310 资产盘点表-自盘表（工艺设备、工器具、动力设备）.xlsx
+
+
+
+FIXME 开通权限
+
+OIC录入权限：ENIG OIC→产线运营→维护→收集药液数据
+
+开通SPC权限：SPC→SPC→Control Chart(账号后面带E才有化金产品数据)
+
+
+
+FIXME CVD
+
+CVD Load口5SCW-0112卡夹不进行降卡,重启BC软件忘断开Host连接,麻烦CIM同事排查下信号连接
+OIC→信息查询→CST→查看CST信息→在CST列表中有设备名称，直接复制粘贴到下面的sql中
+select resourcestate,m.* from machine m where machinename like '%SFST01%'
+如果RESOURCESTATE字段为OutOfService修改为InService
+
+解决卡夹降不了卡的问题处理(OIC主界面→选择Bay→设备列表→port列表→Load/Unload访问模式)
+1、OIC主界面查询Port口状态
+MANUAL：表示手动模式
+AUTO：表示自动模式(出现卡夹降不下来查看port口的状态是否为AUTO)
+修改Port表ACCESSMODE(Load)和UNLOADACCESSMODE(UnLoad)都改为AUTO
+2、查询Machine表
+带上设备条件查询，查询RESOUTCESTATE字段的状态：OutOfService为断连状态，InService为连接状态。
+如果RESOURCESTATE字段为OutOfService修改为InService
+
+问题：帮忙把这个Recipe全清了，我重新导入，就这个CVD Dep的Recipe数据
+解决：清空在recipeparameter中搜索到的所有数据
+select * from recipeparameter where RECIPENAMESPACENAME = '5STPE02' and RECIPENAME = '315_WY_CVD_SiN1_SP'
+设备管理→Recipe验证管理→RecipeSpecModifyForENView
+recipeparameter这个表中的数据是photo/etch的人自己导入的
+
+问题：lot id 5SYH32E0020,时间13点之后,Unit 5STPE02-PE02,c300-82站点，那边收到DV数据了吗
+--OIC中的“product过程数据”和下面的sql语句等价
+SELECT * FROM BSPRODUCTPROCESSDATA WHERE TIMEKEY >= '20230214130000' AND MACHINENAME = '5STPE02'
+--bsproductprocessdata和bsproductprocessdataitem两个表通过字段timekey连接(OIC中的"Product过程数据"用到这两个表)
+SELECT * FROM BSPRODUCTPROCESSDATA a, BSPRODUCTPROCESSDATAITEM b 
+where a.timekey=b.timekey
+and a.timekey>'20230316200000000000' and a.timekey<'20230317000000000000'
+and a.unitname='5STSP03-STSP'
+and a.processoperationname='C300-20'
+and a.machinerecipename='174_RJ_SIOXNY1_165'
+and a.PRODUCTNAME in ('5SRJ3300001B0','5SRJ3300001F3','5SRJ3300001F7','5SRJ3300001D3','5SRJ3300001D0','5SRJ3300001A3')
+
+
+
+FIXME batch
+
+两个batch投同一款产品
+
+生管开，因为这个和生产计划有关
+
+batch用来分配lot，lot用来装product
+
+一个lot中有多个batch，这时就需要合lot(将表productrequest中的字段mixflag改成Y)
+
+表productrequest中的字段productrequeststate：
+Released：工单可用
+Completed：关闭工单
+
+问题：batch 5S1736PG02无法混合标签
+分析：mixflag修改成Y就可以了
+SELECT mixflag,p.* FROM productrequest p where productrequestname like '%5S1736PG02%' for update
+
+问题：Products batch Mix error. please check batchs MixFlag
+分析：一个CST中出现两个batch就会报此错误，表productrequest中的字段mixflag是N，不能混合的意思
+解决：制造在OIC上将这个CST中的batch修改成一个就可以了
+
+
+FIXME Crate
+
+B5S039E785101
+CT07080CF15FMODF-695这个是正确的
+CT07080CH15FMODF-7WX这个是错误的
+
+OIC(SNS)→产线运营→OEM→OEM信息接收→OEM信息接收
+
+SELECT * FROM tppolicy where productspecname like '%B5S039E785101%'
+SELECT * FROM posconsumablespecmanagement where conditionid like '%SENSOR_B5S039E785101%' and managegroupname='CRATESPEC'--是这个
+SELECT * FROM consumable where REMARK = 'OEM-SUPERCRATE' and consumablespecname like '%CT07080C%'
+
+Collection<CONSUME> colCon = new Collection<CONSUME>();
+CONSUME obj = new CONSUME();
+obj.PRODUCTSPECNAME = cmbProductSpecName.Text;
+colCon = queryService.GetQueryList<CONSUME>(obj, "GetConsumableList", "00001");
+if (colCon.Count > 0 && !string.IsNullOrEmpty(colCon[0].CONSUMABLENAME))
+{
+    this.txtPalletName.Text = colCon[0].CONSUMABLENAME;
+    this.txtCrateSpecName.Text = colCon[0].CONSUMABLESPECNAME;
+}
+
+
+FIXME 注册设备
+
+解决：OIC(SNS)→设备管理→设备→设备注册
+PS：比脚本方便(脚本需要枚举所有的情况)
+
+对应设备：5SEES03；
+产品类型：14.0 Dell WU Quake N TLCM ;
+对应站点：88N0-1R；
+生产规格：B5S140D172608；
+Batch ID：5S1938PN01； 
+对应Lot ID：5S1938M0008  注册设备
+
+
+FIXME 添加站点
+
+14.96 车载 小鹏 F30 在Q-Test之后增加清洗， 烦请在7x10-00 后加个Clean子站点，绑定 5SQCL01 设备，感谢！
+SELECT * FROM processoperationspec where description like '%Clean%' and processoperationname like '7%' and MANDATORYOPERATIONFLAG= 'N'
+
+
+FIXME 合成大板
+
+IDLE：等待(闲置)
+
+切成Q后合成glass
+
+transferproducttolot也会出现切割错误，需要合成大板的情况
+
+改B5S160P172603(7C)这个排版，改成B5S160P572601(7F)的
+修改glassmap后，如果在切割时信息不对(也就是在7C00-00这个站点)，这时就需要合成大板
+
+Batch ID：5S7C34DA01
+Lot ID：5S7C34C0001/5S7C34C0003/5S7C34C0004
+这里面同ID的基板合一下
+
+--LOTPROCESSSTATE--
+Idle：闲置
+RUN：运行
+WAIT：等待
+
+修改三个生产表就可以了：
+1、BSQTYPEPANELINFO
+2、PRODUCT
+3、LOT
+
+--这种情况没有提供glassname，可以从productname中去掉最后两位就是glassname了
+--例如下面的情况，productname其中一个是5SUL3400004E6AD，那么对应的glassname就是5SUL3400004E6(生产规格可以忽略)
+生产规格：B5S116L372608   
+batch：5SUL34PN01
+5SUL3400004E6AD
+5SUL3400004E6EA
+5SUL3400004E6ED
+5SUL3400004E6AA  合成大板
+
+5S3U31K0174-1
+5S3U31K0176-1
+2sh信息需要合回大板
+你就合到5S3U31K0174-1这个里面吧
+解决：
+--先删除BSQTYPEPANELINFO表信息(所搜Lot信息全部删除，该表存放Panel信息)
+SELECT * FROM BSQTYPEPANELINFO WHERE QTYPEPANELNAME IN (SELECT PRODUCTNAME FROM PRODUCT WHERE LOTNAME IN ('5S3U31K0176-1')) FOR UPDATE
+--Product表Glass信息修改：LotName，CarrierName
+1、如果product信息中没有CarrierName的信息，则证明已解绑，glass信息也不需要填写CarrierName信息
+2、ProductSpecName不要是B5S，ProductState和ProductHoldState与Panel信息保持一致
+3、Product Process State改为Idle
+4、DESTINATIONPRODUCTNAME信息不需要
+5、必须是7C00-00站点的Lot，Q信息删除
+SELECT * FROM PRODUCT WHERE LOTNAME IN ('5S3U31K0176-1') OR PRODUCTNAME IN ('5S3U3100008B6','5S3U3100010D2') FOR UPDATE
+--修改SUBPRODUCTUNITQUANTITY(一个大板切几片，一共有多少个panel)，PRODUCTQUANTITY(一共有几个大板，也就是有几块整玻璃，Product表有几条信息就填几)
+SELECT * FROM LOT WHERE LOTNAME = '5S3U31K0176-1' FOR UPDATE
+
+LOT：
+5SV32YK0029(lotid)--select * from product where lotname like '5SV32YK0029%'
+5SV32Y00002C8BA
+5SV32Y00002C8AC
+5SV32Y00002C8BB
+5SV32Y00002C8BC
+5SV32Y00002C8BD
+5SV32Y00002C8AB
+5SV32Y00002C8AD
+5SV32Y00002C8AA
+这个8Q   帮忙合成1sh   大板ID：5SV32Y00002C8
+解决：
+1、bsqtypepanelinfo删除所有搜索到的数据(该表存放的是panel信息)
+SELECT * FROM BSQTYPEPANELINFO WHERE GLASSNAME like '5SV32Y00002C8%'--没有提供glassname，可以从productname中去掉最后两位就是glassname了
+2、下面这些字段从下往上粘贴，也就是把productname中的复制粘贴到glassname中，也就是Q(G4.5)段的carriername复制粘贴到S(G6)段
+字段productstate改成InProduction
+字段productprocessstate改成Idle
+字段productholdstate改成N
+字段processoperationname改成7C00-00(修改站点)
+字段CarrierName：将productname中的复制粘贴到glassname中，也就是Q(G4.5)段的carriername复制粘贴到S(G6)段，因为G6段和G4.5段的大板都在同一个卡夹中
+--product中字段productname，保留glass(G6段)的信息(13位)，删除Q(G4.5段)的信息(15位)，G4.5段比G6段的productname多了2个单位(spec和flow也是Q)
+SELECT PRODUCTSTATE,PRODUCTPROCESSSTATE,PRODUCTHOLDSTATE,PROCESSOPERATIONNAME,CarrierName,P.* 
+FROM PRODUCT P where lotname like '5SV32YK0029%' or productname like '5SV32Y00002C8%'--漏了glass信息，所以要加or后面的代码
+3、lot中是大板的信息
+productquantity中8改成1(修改大板数量)，subproductunitquantity(Q中的panel数量)×productquantity(大板数量)=subproductquantity(panel总数)
+lotprocessstate中wait改成Idle
+select subproductunitquantity,productquantity,subproductquantity,lotprocessstate,l.* from lot l where lotname like '5SV32YK0029%'
+--注意下面两个字段
+--SUBPRODUCTUNITQUANTITY(一个大板切几片，一共有多少个panel)
+这个字段不需要修改，合成大板之后还会切割成这些数量的大板
+--PRODUCTQUANTITY(一共有几个大板，也就是有几块整玻璃，Product表有几条信息就填几)
+把productname信息删除后只留下一条glassname信息，所以修改成1(两张大板合成1张修改成2，product表中的lotname也要修改)
+--OIC→信息查询→Lot信息→查看Lot信息界面检验
+
+
+FIXME 解除Hold
+
+只要有1个panel被hold，整个lot都会被hold
+
+直接在sql修改没有操作员的记录(跳过很多判断)
+
+产线运营→保留/解除→保留Lot/解除保留/释放保留Product
+
+EDC alarm report报警不会被hold，track out的时候会被hold
+
+报警时：不能在产线运营→保留/解除→解除lot/解除保留中解hold
+正确方法：设备管理→报警管理→SPC/EDC报警管理:clear
+
+if (this.txtHoldState.Text != LotHoldState.Hold)
+{   // SELECT * FROM BSNLSDATA WHERE NLSNAME='COMM30060' --此 Lot 状态不是 Hold,因此不能执行此进程
+    ExceptionMsgBox.This.ShowMessageBox(MessageType.Warning, "COMM30060", this.Text);
+    return;
+}
+
+ALARM holdLotAlarm = new ALARM();
+holdLotAlarm.LOTNAME = LotName;
+/*
+    SELECT * FROM BSALARMHOLDLOT C, BSALARM S 
+    WHERE C.ALARMID = S.ALARMID
+    AND C.LOTNAME = :LOTNAME
+    AND S.ALARMSTATE = 'ISSUE'
+*/
+Collection<ALARM> colAlarmList = lotService.GetHoldLotAlarmList(holdLotAlarm, "00011");
+if (this.grdHoldLotAlarmList.Rows.Count > 0|| colAlarmList.Count > 0)
+{
+    ExceptionMsgBox.This.ShowMessageBox(MessageType.Warning, "Please Clear Alarm Before Release Hold Lot\nYou'd better click Refresh button", this.Text);
+    return;
+}
+
+//Check Release MicroExam Hold Authority  检查释放镜检hold权限
+bool authFlag = false;
+bool examFlag = false;
+/*
+    SELECT USERID, USERNAME FROM USERINFO WHERE USERID = :USERID
+    AND INSTR(SENDFLAG, 'MicroExam') > 0
+*/
+USERPROFILE objUser = facService.GetUserProfile(new USERPROFILE() { USERID = ConnectionInfo.EventUser }, "00003");
+// 从表USERINFO中是否能搜索到值
+if (objUser != null && !string.IsNullOrEmpty(objUser.USERID))
+{
+    authFlag = true;
+}
+for (int i = 0; i < colLotMultihold.Count; i++)
+{   // HD911：品质镜检Holding代码
+    if(colLotMultihold[i].REASONCODE.Equals("HD911"))
+    {
+        if (!authFlag)
+        {   // SPEC30532：品质镜检Holding，你没有解除Holding的权限！
+            ExceptionMsgBox.This.ShowMessageBox(MessageType.Warning, "SPEC30532", this.Text);
+            return;
+        }
+        examFlag = true;
+    }
+    
+    // SELECT PRODUCTIONTYPE FROM LOT WHERE LOTNAME = :LOTNAME
+    LOT objLot = lotService.GetLotInfoView(new LOT() { LOTNAME = colLotMultihold[i].LOTNAME });
+    // 表lot中的字段PRODUCTIONTYPE是否等于Develop
+    if (objLot.PRODUCTIONTYPE.Equals("Develop"))
+    {
+        if (colLotMultihold[i].REASONCODE.Equals("SplitHold"))
+        {
+            USERPROFILE objUserEN = facService.GetUserProfile(new USERPROFILE() { USERID = ConnectionInfo.EventUser }, "00005");
+            if (objUser == null || string.IsNullOrEmpty(objUserEN.USERID))
+            {
+                ExceptionMsgBox.This.ShowMessageBox(MessageType.Warning, "SPEC30504", this.Text);
+                return;
+            }
+        }
+    }
+    
+}
+
+
+FIXME 取消CST分配
+
+界面"取消CST的分配"弹出ERROR：InvocationTargetException：Can not execute method
+界面路径：OIC(SNS)→产线运营→CST→取消CST的分配
+
+5SCQ-0216   5S1B38Z0007
+5SCQ-0606   5S1B38Z0014     5SQ1C03 取消CST分配不了   无法做Track OUT
+
+原因 : Product 被HOLD
+处理：Product表 解HOLD
+
+
+FIXME 变更Panel等级
+
+
+ENIG_OIC→产线运营→发货→发货到贴合(Box)
+当前lot为[5EG437K0173]中的Product[5SG43600003A1DF]在product表等级与发往贴合QTypePanelInfo表等级不一致，请检查！！
+SELECT subproductgrades,subproductdetailgrade,productgrade,productdetailgrade,p.* FROM product p where productname like '5SG43600003A1DF%'
+SELECT * FROM bsqtypepanelinfo where productname like '5SG43600003A1DF%'
+SELECT * FROM posreceiveproductspec where conditionid like '%BF089FBA-N50-H004%'--BF089FBA-N50-H000
+SELECT * FROM posreceiveproductspec where POSSIBLEPRODUCTSPECNAME like 'BF089FBA-N50-H000%'
+select  * from posglassmap where conditionid like '%B5S089E852401%' and spanelname = (substr('5SG43600003A1DF',14,2))
+SELECT * FROM productspec where productspecname like 'B5S089E852401%'
+
+
+
+
+
+
+
+
+
+8.9星辰化金后因每Q部分Panel有NG，需人为手动更改，现化金OIC只能更改“子Product等级”不能更改对应的“Panel的等级”，现邀请CIM科同事协助更改！
+本次共4Q需协助更改，ID如下：
+1.5SG43300005B4AF  2.5SG43300005B4DA  3.5SG43300005B4GA  4.5SG43300005B7GA
+
+--使用两个sql解决问题
+select productgrade,subproductgrades,p.* from product p 
+where productname in('5SG43300005B4AF','5SG43300005B4DA','5SG43300005B4GA','5SG43300005B7GA') for update
+--字段productgrade和字段productdetailgrade判级是相同的，也就是说同为G或N
+select * from bsqtypepanelinfo 
+where PRODUCTNAME in('5SG43300005B4AF','5SG43300005B4DA','5SG43300005B4GA','5SG43300005B7GA') for update
+
+
+
+--制造忘记修改panel等级导致无法流片
+TM1 贴合制造反映：5SUE3500001C1GF等100多pcs在bonding test工序无法进入快修，报错提示等级不为G。
+经查询后发现这块屏做过拆box，拆box后需要将等级变更为G，问题因为制造漏做操作导致。
+处理方法：协助制造批量修改等级为G
+问题真因：制造忘记修改等级导致
+
+
+
+FIXME 修改NG Panel
+
+让制造自己改
+
+界面：导入NGPanel/导入NG Panel信息
+
+表product字段subproductgrades中的NG Panel
+select subproductgrades,p.* from product p
+一个个改很麻烦，通过glassmap找到subproductgrades
+
+能修改判级(在OIC上修改判级更直观):
+1、track out(PU)
+2、track out lot(By BC Log)
+
+这些ID帮忙改判级为H
+找制造，他们有权限且可以修改(制造不愿意改，因为比较繁琐)
+OIC有改判级功能，可以开通权限，如果需要的话
+贴合能否识别H级，可以和贴合确认
+
+--逻辑上没有更新bsqtypepanelinfo
+SELECT productgrade,productdetailgrade,singlepanelcutcomplete,singlepanelpositioninqpanel,b.* 
+FROM bsqtypepanelinfo b 
+where qtypepanelname like '5SBB4Z00002A5%'
+
+
+
+B5S140L172604
+5S112500056F7
+GGGGGGGGNGGNGGNGGGGGGGGGGGNGGGGGGNN
+
+Product：Glass/Qpanel
+Glass：5S1J2Z00002F4
+Qpanel：5S1J2Z00002F4AA
+Panel：5S1J2Z00002F4AA/5S1J2Z00002F4AB
+
+ProductGrade：N/G,Glass/Qpanel的大等级
+ProductDetailGrade：N/G,Glass/Qpanel的小等级
+SubProductGrades：NGGGG,Panel的大等级，数量与Panel数量一致
+SubProductDetailGrade：NGGGG,Panel的小等级，数量与Panel数量一致
+
+--productname包含productname和glassname
+--表product有productname/lotname信息，也有carriername信息
+--可以通过lotname/productname查找productspecname/processflowname
+select subproductgrades,subproductdetailgrade,productgrade,productdetailgrade,
+productname,lotname,carriername,machinename,
+productspecname,processflowname,processoperationname,sequenceid,
+producttype,qtype,qtypeproductname,qtypeproductgrade,p.* 
+from product p where processflowname = 'S1MMP01'
+
+--表lot中有一块大板的具体信息
+select lotname,lotgrade,lotstate,
+productspecname,processflowname,processoperationname,sequenceid,machinename,machinerecipename,
+portname,porttype,communicationstate,l.* 
+from lot l where processflowname like 'S1MMP01%'
+
+--展示Q的排布，信息是切割后生成的
+select * from bsqtypepanelinfo where glassname = '5S112200001A0' order by qtypepanelname,singlepanelpositioninqpanel
+
+--修改(导入)bsngpanelinfo进而修改bsqtypepanelinfo和product
+select * from bsngpanelinfo
+
+--表processgroup中有Box的具体信息
+select processgroupname,processgrouptype,superprocessgroupname,materialquantity,productspecname,fgcode,p.* from processgroup p 
+
+--productname包含productname和glassname
+--表producthistory中每条记录代表一个glass/一个Q的NG信息
+--可以通过lotname/productname查找productspecname/processflowname
+select productgrade,subproductgrades,subproductdetailgrade,productname,lotname,carriername,
+productspecname,processflowname,processoperationname,p.* 
+from producthistory p where productname='5S112200001A0' 
+order by timekey desc
+
+
+FIXME Q排版修改邀请
+
+
+一体色技术开发因工艺变动，现需协助修改Q排版，修改如下图所示：一共4个Q，一种Q，Q ID: AA AE CA CE
+Sensor No：B5S160P172603
+Lot Type：7C
+
+1、7C00-00切割站点不能有WIP
+2、Q段也不能有WIP
+
+7C00-00切割完了我再修改，有些切割了有些没有切割不就完犊子了
+我以为还没切，现在正在切了
+我刚才打电话问过制造了，你这边修改好，那边立马就切
+那就是现在所有的屏都没有切割吗？
+是的啊
+Ship to LAM上面有wip(Q段不能有wip)，因为Q段有wip的话如果再修改layout会导致bsqtypepanelinfo里的数据有出入
+PS：bsqtypepanelinfo中的记录数量是依照posglassmap来的
+
+
+FIXME LotInfoSendFlag
+
+问题：Current CST LotInfoSendFlag is [Y]
+解决：和下面的解决方式一样
+
+问题：CST[5SCW-0362] LotInfoSendFlag is [Y].   Lot：5S4B31Z0157   固定站点无法跳站 帮忙看下
+解决：材料管理→CST→修改CST Lot信息Flag→Lot信息发送方标签将Y改为N(左下角有这个下拉框)，再点击确认
+分析：CST的状态为Hold!
+select lotinfosendflag,d.* from durable d where durablename like '5SCW-0362%'
+
+
+FIXME 帐料无法TrackOut
+
+问题：Etch04 Unload CST ID：5SCW-0117  实物60sh 帐料无法TrackOut
+搜索：OIC→产线运营→Tracking→Track Out Lot(PU)→Lot ID：5SSZ2ZE0028
+解决：在plsql中的表posproductsampling和bslotsampling中找到重复的抽检站点(2800-00)，删除不合理的
+SELECT * FROM posproductsampling where conditionid like '%B5S120E1D1502_SSZMP01_2800-00%' for update;
+SELECT * FROM bslotsampling where productspecname='B5S120E1D1502' and processoperationname='2800-00%' for update;
+ps：bs(lot/product)sampling(基本批次抽样)，什么时间哪个lot抽检
+
+特例1：如果流程是S20RW01的情况，可能是CST STATE已满的情况
+解决：OIC→信息查询→CST→查看CST信息→CST列表→CST状态：FULL
+
+特例2：SinglePanelJudge is NOT correct,please check. 帮忙看下是什么原因
+解决：TrackOut报的等级长度不对，正常是42个，这个是30个，问题是这个，手动在OIC上补账吧
+
+
+
+FIXME UNload口无法降卡
+
+Alarm Report：报警报告
+Unit State Changed：单位状态改变
+
+Lot Info Download Request：lot信息下载请求
+Lot Info Download Send：lot信息下载发送
+Load Complete：装入完成
+
+Lot Process Started：lot加工开始
+Load Request：装卡请求
+Unload Complete：降卡请求
+
+ComponentGlassInByUnit：glass进unit
+ComponentGlassInSubUnit：glass进subunit
+ComponentGlassOutByUnit：glass出unit
+ComponentGlassOutByIndexer：glass通过Indexer出
+
+如果下次出现你解决不了的问题及时向上反馈
+他这个可能就是网络延迟的原因
+
+那offline为何不能降卡
+Offline 模式不应该是什么卡夹都可以降下来吗？
+这个要问A科了，已经offline了和CIM这边就没关系了
+好了，下次offline手动bc建账就行，不用动工序
+
+5SPTK02    13:30到14:23 load口跟 UNload口卡夹无法下降  设备也没报警(还没完全解决)
+步骤：产线运营→维护→信息记录查看
+操作员：5SPTK02
+服务器：PEMsvr(永远是这个)
+起始日期/截止日期中如何修改时间：直接在“时”上修改
+问题：卡夹降不下来，Terminal Display Monitor帮忙看下第一个报警是啥意思
+解决：把设备recipe验证关了
+
+// 上下两个问题一样：设备recipe验证
+
+NO Response S2F103   5SNH3400005   PC01 卡夹降不下去，看下什么原因呗
+方法一：lothistory中的字段EVENTNAME最后有4个LotProcessCanceled(设备自动取消的)，让检查一下设备recipe(制造检查)
+SELECT * FROM lothistory where lotname = '5SNH3400005'
+方法二：UnloadRequest→LotProcessCanceled→ReplyRecipeValidation→RequestRecipeValidation
+产线运营→维护→信息记录查看……，其实和上面一样
+
+
+
+FIXME 找到多个返回的Flow和站点信息
+
+S20RW01在主Flow流程中不存在，根据实际需要执行此RW流程(S20RW01)
+
+错误分析：不是这个lot的completeflag由N修改成Y
+原因分析：返回的主flow中的StepID出现了多个，只保留正确的StepID即可
+
+OIC→产线运营→再作业→完成再作业(2020)
+ERROR：找到多个返回的Flow和站点信息
+
+--问产线返回的主flow中的StepID是那个(字段returnoperationname)，其他删掉(先在字段PRODUCTNAME的数据中添加任意字符看看)
+select productname,lotname,processflowname,processoperationname,returnflowname,returnoperationname,b.* from bsreworkproductinfo b
+WHERE PRODUCTNAME IN (SELECT PRODUCTNAME FROM PRODUCT WHERE LOTNAME = '5S2T35P0092')
+AND COMPLETEFLAG = 'N'
+
+SELECT DISTINCT RETURNFLOWNAME, RETURNOPERATIONNAME, PROCESSFLOWTYPE 
+FROM BSREWORKPRODUCTINFO WHERE COMPLETEFLAG = 'N' 
+AND PRODUCTNAME IN (:PRODUCTLIST)
+
+--panel从rework流程到主流程
+PRODUCTNAME：5SHD1300007B9
+LOTNAME：5SHD13E0071
+PROCESSFLOWNAME：S20RW01
+PROCESSOPERATIONNAME：88N0-1R
+COMPLETEFLAG：N/Y
+RETURNFLOWNAME：SHDMP01
+RETURNOPERATIONNAME：8100-00
+
+--select * from bsreworkproductinfo where lotname like '5S2T35C0007%'
+
+1、OIC→信息查询→Lot信息→查看Lot历史记录
+2、输入Lot ID后，多次点击字段“源Lot ID”最下面的lotid，直到字段“新的工程名称”出现7C00-00，立即复制左上角的Lot ID(5S2T35C0007)
+3、将表bsreworkproductinfo中记录lotname=5S2T35C0007的字段COMPLETEFLAG修改成Y即可
+
+
+FIXME singpanel等级后出现O级
+
+解决：把O删掉就可以了
+
+singpanel等级后出现O级
+
+--Product表修改
+select * from product where lotname like '5S3139K0007%'
+
+

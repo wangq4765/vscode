@@ -1,0 +1,2516 @@
+
+表fgcodemoduleidmap中是pallet标签的具体信息
+
+OIC→在制品过账→Label→打印PALLET标签
+弹出报错：The name table does not exist in the current context.
+
+Revision Code判定产品等级
+
+可以在“Panel历史查询”界面判断是那边的业务
+
+OIC分辨率问题只出现在SNS，其他OIC并没有出现
+
+NP/FA： 新产品与失效分析(New Product&Failure Analysis)
+
+IPv4地址：10.66.41.41
+针对的是主机，对瘦客户机没有影响(云桌面)
+
+手动添加\\10.65.130.123\TM1 CIM Share的网络共享，以后作为科室内部共享使用。需要什么资料或软件私聊我，我从原来的共享上扒下来放上去。
+
+嘉乐旁边的那台电脑我刚刚安装了公版向日葵，设备识别码129064199，密码cim666，向日葵进去后再通过mstsc远程自己的IP，自己的电脑需要打开远程桌面并关闭DLA验证，仅限大家在紧急情况下使用，且仅内部使用。我用手机试过了没问题。
+
+这片许多track in/out，会不会有问题
+没啥问题，这是上周二他们用通用in/out做的过站，只会导致工单不平
+
+找问题
+肯定有在这个站点数据正常的片
+那你就把不正常的和他对比一下
+不就能找到问题了吗
+
+
+
+
+
+
+
+
+设备offline下工作(通杀大部分报错)
+排查SMT Line的两个问题：
+1、无法空跑
+2、ET40 Pass模式，信息Track out问题
+
+同一张屏在不同的页面查询出来的现等级为什么不一样？我该信哪个？
+历史记录和CST信息查询里都显示N，当我去更改等级时显示的现等级又是G，怎么回事？
+G是sensorjudge，数据库里的panel grade是N
+问题原因：“ChangeLotGrade”界面前端展示的是字段SensorJudege，后端修改的是字段LotGrade
+
+问题：界面"WipByOperation"不显示站点V0108/V0110(路径是OIC(PH)→信息查询→WIP→WipByOperation)
+--在表posmachinerecipe中用下面7个FGCODE搜索，将搜索到的全部删除，重新在FactoryModeler中注册posmachinerecipe
+SELECT * FROM posmachinerecipe where conditionid like '%MZ270HBP-A4F-SC02%' for update
+--点击MachineName下拉框却是空的：通过搜索ProcessFlowName(LPHMP01)找到本身就有MachineName的站点(😀)
+PH_MZ270HBD-A4T-H000_LPHMP01_V0110_MDB01
+PH_MZ270HBD-A4T-SC00_LPHMP01_V0110_MDB01
+PH_MZ270HBD-A4T-SC01_LPHMP01_V0110_MDB01
+PH_MZ270HBD-A4T-SC02_LPHMP01_V0110_MDB01
+PH_MZ270HBP-A4F-SC00_LPHMP01_V0110_MDB01
+PH_MZ270HBP-A4F-SC01_LPHMP01_V0110_MDB01
+PH_MZ270HBP-A4F-SC02_LPHMP01_V0110_MDB01
+
+
+
+
+
+
+
+
+M2界面和贴合界面几乎一样
+
+Mini LED背光电视技术方案主要包括COB/POB
+
+当跳转工艺流程时，工单(batch)会变
+一个Flow对应一个工单(productrequest)，整条流程都是这个工单，如果更换工厂则更换工单(类比SNS/LAM)
+
+站点第一个字母是F的代表F1线
+站点第一个字母是V的代表TV线
+
+
+
+
+
+
+
+DTXX-XX灯条
+
+拔片：track out
+
+BC代表的是设备(machine)
+
+油墨在表MDCMATERIAL中
+人员添加油墨时未佩戴活性炭口罩
+
+查询CST：OIC→信息查询→CST→CST信息查询
+查询Operation：OIC→信息查询→WIP→WipByOperation(该站点每片panel的层数(12)/batch(000400090326)/设备(2FSQT01-LD01))
+
+--物料的流向是这样的：MDC(MDCMaterial)→ROOM(MainMaterial)
+select * from mdcmaterial
+select * from mainmaterialhistory
+
+
+--正常消息体
+select * from bsmessagelog
+--后端出错会有记录
+--字段message中是一个消息体
+--字段errormessage中是消息体的精华
+select * from bserrormessagelog
+
+select * from bserrormessagelog 
+where machinename = '2FSQT01' 
+and unitname = '2FSQT01-WO01'
+and lotname = '5S3U3500037A4BD'
+and productname = '5S3U3500037A4BD'
+order by eventtimekey desc
+
+
+
+
+
+
+
+WIP：工作表在制品区(看板表)
+
+MDCStockOut
+MaterialRoomOut
+ROOM：制造从MDC取物料到线里面的小仓库(room)
+
+FG：相当于生产类型，屏幕尺寸、工艺等综合编码
+BOM：物料清单，根据FGCode，查输入FGCode可以查出这条FGCode的BOM
+工单：根据FGCode查询工单，工单主要记录FGCode的生产结束时间以及生产数量等
+
+Pallet：托盘
+Port：上下料口
+BOX：来料/发货Box
+CST：卡夹里面放Panel(多张)
+线别(体)：主设备名称，下面有子设备名称
+
+
+
+
+
+
+
+EventName(事件名称)
+
+ComponentPanelOutByUnit：panel出unit
+ComponentPanelInByUnit：panel进unit
+
+AssignCarrier：绑定卡夹
+DeassignCarrier：解绑卡夹
+
+TrackOut：出设备
+TrackIn：进设备
+
+MLEDLotInfoDownLoadRequest：Lot信息
+
+
+
+
+
+
+---port---
+1：上卡(wait for cassette data)
+2：上卡完成(wait for start command)
+3：in processing
+4：退卡(processing end)
+
+
+
+
+AGV (Automatic Guided Vehicle) ：自动搬运车
+
+AGV (Automatic Guided Vehicle)中文注解自动光学导向车，指装备有电磁或光学等自动导引装置，能够沿规定的导引路径行驶，具有安全保护以及各种移载功能的运输车。
+
+具体解释：指装备有电磁或光学等自动导引装置，能够沿规定的导引路径行驶，具有安全保护以及各种移载功能的运输车，工业应用中不需驾驶员的搬运车，以可充电之蓄电池为其动力来源
+
+
+
+
+
+
+TODO 业务
+
+2厂软件下载：http://10.42.4.11:8090/#/home
+
+M2=TV+IT
+F1≈EGL(线体)
+
+PH=TV线+IT线
+工厂：TV/IT/F1/SNS/LAM
+
+username：10868834(PH)
+password：12
+
+username：F10868834(F1)
+password：12
+
+--OIC登录哪个账户(factorymodeler同时有PH和F1)
+M2(TV线&IT线)CIM沟通群：PH
+F1 POC4 Wave3 CIM沟通群：F1
+Unpacking段信息沟通：自己判断
+
+MES 王汉文
+Report 殷国庆
+EIS(MES) 郑福洋
+EAS(设备) 李想 徐维乐 刘洋铭
+
+Dear各位领导/同事:
+因业务调整 现MLED 2厂 CIM值班电话变更为7611/7612 请知悉！！！
+
+智力资本系统
+http://10.251.104.18:20000/index
+账号 10868834
+密码 a123456.
+
+M2 CIM值班→值班日志：记录日常处理的运维
+CIM推广→西米说系统：工厂都是B11
+CIM推广→事故报告：全工厂
+CIM推广→系统介绍： 工厂都是B11
+
+3季度施工监护专项培训材料已放到共享，路径：\\doc\OAshare\MLED2厂及TM1安全员共享\08 施工作业\施工监护\2023年\3季度 动火作业  
+请各位安全员9月28日前完成施工监护人员的转训（未参与技安现场培训的），本次要求施工监护人员必须答题且满分，国庆节后第一周技安将拉取数据，未完成答题将取消施工监护资格。
+以上，请知悉！
+@所有人‌
+
+
+
+TODO mstsc
+
+RT：客户退单
+
+没有log就没有下命令(日志里包含下达的命令，没有不就没有下达命令呗)
+
+M03是啥意思？
+RT工单类型(表productrequest中的字段checkincode字段)
+
+手机转接：8705
+座机右下角：扩音
+
+服务器任务栏不显示：打开任务管理器就好了
+电脑登不上云桌面：云桌面不能在两台电脑同时登录
+
+为啥PPID这么多？都30个了，只有PPID3和PPID4有值，其他都是0
+0也是值，0不是空值，简单的说就是关于recipe的校验
+
+输入你的凭据：
+名字：administrator
+密码：Hp123456
+
+Navicat
+表：点击再选择
+查询：新建查询
+
+NotePad++
+1、右边find result紫色是之前查的
+2、ctrl+f输入之后再点击"在当前文件中查找"
+3、右击文件后点击"重新载入"(刷新日志)+在右边滚动条处右击选择"底部"(最新日志)
+
+
+
+PPT"服务器部署明细"有网址和密码
+
+运营案中的TBD：不用的幻灯片(还是能参考一下的)
+
+运营案PPT的页面Inline layout Diagram有设备的具体描述
+
+Operation Scenario：操作场景(运营案)---TV线没有运营案，因为TV线是之前建的
+
+运营案PPT中的页面Normal Glass Flow有panel的具体流向(参考大致流程，实际情况会有不同)
+Panel Normal Flow  Case1: CST(PL) → Robot(L2) → Pin Align(L2) → OP50(L5) → Robot(L2) → OP55(L6) → Robot(L2) → ET(L4) → Robot(L2) 
+
+制造业中EIP是什么？
+EIP(Flexible industrial infrastructure platform)在制造业中是指“弹性工业基础设施平台”，是一种基于云计算、大数据、物联网等技术的工业互联网平台，可以实现设备、生产线、工厂等制造资源的数字化、网络化和智能化，提高制造业的生产效率和质量。 
+
+
+
+通过时间差来判断
+SAS通讯方式：D:\logs\HSMS\L15\SECSII\2023-09-20.log
+只有sendable/receiveable：D:\logs\2MTDB01_L15\INFO\2023-09-19.log
+
+IT线有一部分设备通讯方式和EGL不一样，也有部分一样
+EGL：CCLink
+IT(部分)：SAS
+
+IT线特殊命名
+Oven：终固化
+LED #1：固晶1线       --固晶：solid crystal
+LED #2：固晶2线
+WHO #1：一次白油      --白油：white oil
+WHO #2：二次白油
+EMPT #1：点胶1线      --点胶：glue dispensing
+EMPT #2：点胶2线
+
+
+
+EIS≈BC(用来监控)
+
+不用看EIPLog，直接看EIP(路径)
+
+设备里面有VCR
+VCR用来扫描并检验二维码(二维码有Lot ID)
+
+CV是两个设备之间的传送带(类似电梯)
+CV都是大元的，所有设备串成一条线
+
+Robot命令和消息：D:\Logs\Robot2
+设备命令和消息(EQLog)：
+D:\EGLServer\Logs\EIP\ET\INFO
+D:\EGLServer\Logs\EIP\OP40\INFO
+
+
+
+表his_glassinfo中的字段functionname都是发送的信号，例如sendable和receiveable
+
+bc_robot_model(robot基础配置表)
+bc_robot_configure(robot日志配置表)
+bc_robot_path_configure(robot路径配置表)
+
+wip_alarm(Alarm WIP表)
+wip_material(Material WIP表)
+wip_cassette(Cassette WIP表)
+wip_glassinfo(Glass WIP表)
+
+
+
+mapdownload：下账(MES下到设备)
+
+modelposition[16]：16是设备的数字编号
+
+transferindextoeqpcommand：index卡夹/eqp设备
+
+
+
+Robot：Select Robot Command
+TR08：Robot Control Command
+
+tr是手臂的意思
+Pincv∈Robot∈TR
+Pincv是一个设备
+
+查日志：jobid/jobmanual/returncode/sendable/receiveable/2MCF-0020
+Robot派工日志(给大元robot下命令)
+先看robot再看tr08
+Robot1：tr08
+Robot2：tr09
+
+
+
+reflect(反射率)off再sendable
+
+sendready/receiveready是非设备(PinCV)之间传输的信号，为了和sendable作区分
+
+sendable和receiveable这两个信号都是主动的
+sendable和receiveable一个为1一个为0(不能同时上下卡)
+
+0代表off,1代表on
+sendable：出片panel
+receiveable：收片panel
+
+ReceiveAble和SendAble的值0和1分别代表啥意思?
+0就是off,1就是on
+Bit位和word位你要做区分,都是传递信号,但是bit位只有一个bit点位,word可以有很多个bit位组成
+你可以理解bit是指示灯,word是文字内容
+<BIT [3] [1] [SendAble] '1'>这种是bit位吗
+是,程序检测到bit 位on的时候,就会去查对应的word位
+
+
+
+上/下游信号硬件不满足，自查
+
+LinkName：DownStreamLinkSignal
+
+BC记录设备log：D:\EGL_BCServer
+Backup是备份，BCServer是当前信息
+
+EIPSignal 表示和所有设备的连接状态
+ServerSignal 表示服务端和客户端通信状态
+
+上下游传片写值：无值接收不了
+OP20→LinkSignalLog(大元)→OP25
+D:\EGLServer\Logs\LinkSignalLog\INFO
+
+0代表off,1代表on
+--设备和robot进行信号交互
+UpStreamInline：设备作为上游
+UpStreamTrouble：False代表信号有问题，True代表信号没有问题
+DownStreamInline：设备作为下游，接上游给的片(NG代表信号有问题)
+
+LinkSignal代表的是设备的连接状态吗？
+设备与设备之间的交互信号
+啥时候会用到这个呢？不都是查询具体设备收发信号吗？
+这个在另外的log里边，一个单独的linksignal LOG，只要有交互就会有记录，异常正常都会记录
+那这个log有啥用途？
+就是做记录，不做记录拿什么查
+那用sendable查询吗？
+sentable只是其中的一个，你看看就行了，用的时候再说吧
+
+Downstream Link Signal (Downstream to Upstream)
+
+
+
+
+
+
+jobdata：[TR08]-[JobData]
+
+slotsequenceno代表层数，每次出片/收片数字递增(1→13)
+
+查询顺序：SentOutJobReportBlock→ReceivedJobReportBlock→VCRReadCompleteReportBlock
+
+每次SentOutJobReportBlock出片，LotID都不同
+SentOutJobReportBlock是消息，SendAble是信号
+SentOutJobReportBlock：sendable和receiveable都有的情况下，看SendOutJobReportBlock是否有，其代表出片消息
+
+<SentOutJobReportBlock [W, 1, 101]
+	<ASCII [0] [10] [PRODID] 'MZ270KKC-A4X-D020'>
+	<ASCII [10] [5] [OperID] 'F2-3600'>
+	<ASCII [15] [10] [LotID] '5S3U3600046E6AA'>
+	<ASCII [46] [10] [JobID] '5S3U3600046E6AA'>    #JobID和LotID一样
+	<INT [56] [1] [CSTSequenceNumber] '1452'>      #1452是卡夹编号
+	<INT [57] [1] [SlotSequenceNumber] '13'>       #层数
+	<ASCII [58] [1] [JobGradeCode] 'N'>
+	<ASCII [59] [1] [JobJudgeCode] 'G'>
+	<ASCII [71] [10] [WorkOrderID] '000400092257'>         #productrequest
+	<INT [100] [1] [DownstreamPathNumber] '1'>
+>
+
+--下面是"Trouble Shooting_IT"中的文字(trouble shoot：故障排除)
+--如果sendable和receiveable都是true的话，就需要用此方法来解决问题
+问题描述：Track In/Track Out失败
+处理方式：
+1、查询EQLog查看相关设备是否向BC上报ReceivedJobReport和SentOutJobReport消息，上报消息内容是否正确。
+2、查询BC是否向MES上报MLEDComponentPanelInByUnit及MLEDComponentPanelOutByInUnit事件。路径：D:\logs\MESLogger\INFO
+问题描述：Glass送片之后账料丢失/Glass没送给下游，但账料信息到了下游
+处理方式：
+1、查询送片设备的SentOutJobReport消息及接片设备的ReceivedJobReport消息是否正常上报，同时消息中Glass数据是否正确
+2、数据库中的his_glassinfo表可查询Glass在EQ和EQ之间的send/received/remove 的记录
+3、EQ有料无账时可通过JobDataRequest消息向BC重新请求job data
+4、查看设备在未进行实际传片动作时，上下游设备是否进行ReceivedJobReport和SentOutJobReport消息交互
+
+
+
+信号(消息)交互returncode
+
+派工的时候才会出现Return Code(派工信号)
+
+returncode在哪个log中会出现？
+returncode可以理解为一个返回值，说明命令是否执行成功
+一般在commandBlock后面设备会回复returncode，值为1是ok。除此以外都是未执行成功，不同的数值代表不同的原因
+可是log里面搜都搜不到，我刚才搜了一下
+那就是有的设备没报或者没生产
+
+Command Return Code(1456最常用)
+1：Ack is OK：确认没有问题
+2：Busy, Try again (Command buffer is not empty)
+3：CIM Mode is OFF
+4：Command is already executing：命令已经在执行
+5：Slot Value is not valid. (Mismatch or duplication)：层数值无效。(不匹配或重复)
+6：Cannot perform now (Hardware problem)：现在无法执行(硬件问题)
+7：Others. Detail information should be written in the Command Result's Comment.
+
+
+
+Cassette State
+1：No Cassette Exist
+2：Waiting for Cassette Data
+3：Waiting for Start Command
+4：Waiting for Processing
+5：In Processing
+6：Process Paused
+7：Process Completed
+
+No Cassette: There is no cassette on the port.
+
+Waiting for Start Command: Cassette Map has been received successfully, and waiting for Start Command from Master PLC or Operator.
+
+Waiting for Cassette Data: A cassette is currently loaded in a port and waiting for Cassette Map Data from Master PLC or Operator. Equipment should report this event, after clamping the cassette and (if port has BCR) reading the cassette ID and (if port has mapping unit) sensing the existence of job for each slot.
+等待卡夹数据:卡夹当前被装入端口，等待主PLC或操作员的卡带图数据。设备应在夹紧卡带并(如果端口有BCR)读取卡带后报告此事件磁带ID和(如果端口有映射单元)感知每个插槽的作业存在。
+
+
+
+Port state
+1：Empty
+2：Load Ready
+3：In Use
+4：Unload Ready
+5：Blocked(暂停)
+
+端口状态改变：PortStatusChangeReport
+退卡：PortCassetteProcessEndReportBlock
+
+⑤ Blocked :
+The port is temporarily not allowed to use (pausing); 
+该端口暂时不允许使用(暂停);
+for example, accessing to a cassette in the port is not allowed. 
+例如，在端口访问卡夹是不允许的。
+Port can be changed to this state automatically if the port is out of normal functional status.
+当端口处于非正常功能状态时，可以自动切换到该状态。
+
+
+
+FIXME 跳站
+
+OIC→特殊操作→变更属性→跳站
+
+0001卡夹无法投入，请将第30层Down的站点由V0102修改成V0100
+再试
+
+跳站到V1500  重新过账
+5S4A3500007C8AA需要回到V1500
+处理方法：OQALOTID删掉 他们再跳站
+
+帮我把这两片，站点跳到F2-3300，我们跳不过去
+panel从NMFLMP1(F1白油线FLOW)的F2-2999跳到NMFLMP2(F1固晶线FLOW)的F2-3300 ---从白油Flow跳到固晶Flow
+
+界面“跳站”左下角报错：两片panel的lotstate不是released!(卡控)
+解决：track out再track in就可以了，也可以用下面的方法
+--将字段lotstate从Shipped修改成Released，将字段lotprocessstate从WAIT修改成RUN(观察其他ID在两个站点之间有哪些字段发生变化)
+SELECT lotstate,l.* FROM lot l where lotname in ('5S3U3500011B8BD','5S3U3500018A7BB') for update
+界面“通用Track in/out”和界面"EGLCSTTrackIn"左下角报错：[UndefinedCode]没有定义错误消息Index:0,Size:0
+解决：?????
+
+
+
+ET40 Port口松卡后为什么站点没有跳过去？排查一下
+ID发一下
+看历史记录是没有Track out
+为什么没有，下卡口不因该自动Track out吗？
+？？？你们自己不能手动过账到3300吗？
+可以啊  具体原因我们要知道把  总不能每次 发生这种情况就让我们手动 过站吧
+是一卡夹里面的信息都没过去吗？
+对
+2MCT-0005卡夹的13张片制造手动过账导致站点不一致，跳站失败了
+都在一个卡夹，松卡后怎么会不跳站呢？而且都是SMT流下来的OK片
+制造手动跳站导致同一个卡夹内panel不是同一个站点，所以不能跳站
+
+
+
+
+
+FA-1000：产线FA站点
+
+OIC→特殊操作→变更属性→跳站(选择下面的，上面的被废弃了)
+输入Panel ID后再输入下面的目标工序和Targer EQP ID(EQP一般选择第一个就可以了)
+
+5S3U3400016F5AD这张片现在在3180，帮我把这片的站点做到3300呗，夜班没做过去
+都已经Scrap了呀(OIC→信息查询→Panel→Panel信息查询)
+我取消报废了，帮我过到3300呗
+
+
+
+
+
+panel id：5S3U3500028C4BC
+processflowname：NMFLMP2
+processoperationname：F2-3300
+
+5S3U3500028C4BC现场误判现在需要把站点跳到FA-1000
+过不去FA-1000(站点FA-1000在Rework Flow FA_MAIN中，这是从主Flow到Rework Flow)
+可不可以跳站到前段，然后通用In  Out到OP40在判NG(白油缺失)
+可以给你们跳到F2-3120 判R进FA_SMT流程
+
+select factoryname,p.* from productspec p where processflowname like '%NMFLMP2%'--在FactoryModeler中
+
+F2-3100 → F2-3110 → F2-3120 → F2-3300
+F2-3100：固晶
+F2-3110：返洗+OP10S
+F2-3120：Re-SMT
+F2-3300：Encap
+
+
+FIXME 过账
+
+过账是跳到下一个站点，跳帐是跳到其他站点
+
+通用Track In/Out：一进一出就过了一个站点(按流程来的)
+
+几乎每个界面都对应一个站点过账(过到flow中的下一个站点)
+
+TV模组之前：TV线TrackInView/TV线TrackOutView
+TV模组之后：TrackIn By CST/TrackOut By Panel
+IT：IT专用卡夹过账(界面右下角既有Track in也有Track out)
+EGL：EGLCSTTrackIn/EGLCSTTrackOut
+
+你用通用(OIC→在制品过账→EGLTracking→通用Track in/out)
+你用这个功能先track in ，然后trackout
+
+--字段eventname有ComponentPanelInByUnit，没有ComponentPanelOutByUnit(只有In没有Out)
+select lotname,eventname from lot where lotname like '5S3U3500036F2AD%'
+
+看一下站点为什么情况， 片已经在一次白油了，站点却在1200
+设备少报了panelout事件，导致没有跳站
+设备的问题吗？
+是设备的问题
+
+问题：OK 的基板 站点维修后  没有OUT到Encap 3300
+解决：好了，用通用track in/out   先track in，然后track out(正常过账)
+站点 为什么 没有自动跳呢
+没有track out
+
+问题详细描述：5S4A3500001B8BB需要从V2000跳回V1500重新过账
+处理方法：
+清空LOT表的PROCESSGROUPNAME，OQALOTNAME字段。修改LOTSTATE为Released，LOTPROCESSSTATE改为WAIT，LOTHOLDSTATE改为N，PROCESSFLOWNAME，PROCESSOPERATIONNAME，SEQUENCEID，
+然后让制造解绑模组ID，然后用AVITEST、BOXING正常过账
+
+--IT线专用卡夹过账报错
+处理方法：将LOT表的PRODUCTQUANTITY字段改为1
+select productquantity,l.* from lot l where lotname like '5S4A3800007A4AC%'
+--下面的log是从表bserrormessagelog中获得的
+<Return>
+  <RETURNCODE>FrameworkErrorSignal</RETURNCODE>
+  <RETURNMESSAGE>InvalidCurrentProductQuantityException : InvalidCurrentProductQuantityException: Can not execute method 'com.cim.idm.mespackage.lot.management.action.AssignCarrierAction.assignAllProductsForBatch(Lot,Lot, EventInfo,class com.cim.idm.mespackage.lot.management.info.AssignCarrierInfo, HashMap)'.Reason : [LotService.assignCarrier/LotName:5S4A3800007A4AC] ProductQuantity(0) of Lot does not match with the ProductSequence(1).</RETURNMESSAGE>
+</Return>
+
+帮我看一下2MCN-0030里面没有信息
+2MTET01昨天报的解卡事件
+让BC查一下历史lot，按照顺序绑定，再过账到packing站点
+其他panelid也发一下
+我要知道  我自己就绑定了
+暂时解决办法：开通界面“通用Track in/out”权限(OIC→在制品过账→DT_Tracking→通用Track in/out)
+PS：这是历史遗留问题，从建厂就有了(开会讨论)
+特殊情况：这一张panel在“通用Track in/out”界面无法过账
+解决方法：界面“ChangeLotGrade”将字段由R修改成G即可过账(panel在rework站点当然判级是R)
+PS：界面路径是OIC→特殊操作→变更属性→ChangeLotGrade
+
+"ITTrackInView"界面左下角报错：索引超出范围。必须为非负值并小于集合大小。参数名：index
+解决方法：这个界面需要单片过账
+那不还是和通用trackin一样，只是通用不会变换工单而已。这个功能人员目前无法适应，换个方式说。假如要做POB产品，这玩意就要抓瞎
+麻烦按照顺序和层数，绑定卡夹至22卡夹
+2MCN-0022怎么回事，设备报了解卡事件
+信息不在当前站点，应该在固晶bank站点，白天让你们兄弟处理。把卡夹信息弄丢了
+如图所示就是这个卡夹的信息和顺序，重新绑定卡夹就好了
+update lot set carriername='2MCN-0030' where lotname in (
+'5SWY3800003E5BD',
+'5SWY3800003E3AA',
+'5SWY3400003C9BD'
+)
+
+
+FIXME hold
+
+OIC→特殊操作→特殊操作→PanlHold/PanelRelease/LotHold/LotRelease
+
+
+FIXME 开通权限
+
+工序(一套站点)：白油Room/固晶Room/点补胶Room
+
+OIC_F1：F1
+OIC_MINILED：PH
+工号前面有F就开通OIC_F1，否则就是OIC_MINILED
+
+
+FIXME EN转量产
+
+31.5EN转量产,FG CODE：MZ315HEP-A4F-S200 已结束。清除多余的ID
+
+31.5EN转量产,FG CODE：MZ315HEP-A4F-S200 已结束。清除多余的ID
+5SWY3300001A7AB
+5SWY3300001D1BC
+
+处理方法：修改LOT表
+LOTSTATE='Shipped'，PRODUCTIONTYPE='DEVELOP', PRODUCTSPECNAME='MZ315HEP-A4F-D200',PRODUCTREQUESTNAME='TESTWHW', PROCESSOPERATIONNAME='V2000', SEQUENCEID='20230327132515370283',
+
+update lot set LOTSTATE='Shipped',PRODUCTIONTYPE='DEVELOP',PRODUCTSPECNAME='MZ315HEP-A4F-D200',PRODUCTREQUESTNAME='TESTWHW',PROCESSOPERATIONNAME='V2000',SEQUENCEID='20230327132515370283'
+where productspecname like 'MZ315HEP-A4F-S200%'
+
+
+FIXME 亮度/色度
+
+清掉moduleid重新生成
+
+OIC(PH)→在制品过账→Label→NewModuleIdPrint
+
+报错：请确认亮度[1]和色度[X]是否有在中维护MODULEID_FGCODE的Value是[MZ315HEP-A4C-D201]的FGCode和客户码CustomerCode
+
+看看这张玻璃站点，是不是在1600，先把模组id解绑
+V1800
+改回1600(跳站)，设备选啥(随你)
+31.5要用打印模组标签和avi test页面做(要用AVU TEST去做打包，不要用Boxing了)
+解绑界面是啥
+模组id解绑(OIC(PH)→特殊操作→绑定解绑→模组ID解绑)
+临时解决方法：我们这边跳站+删除字段moduleid，让制造用打印模组标签功能，不要用newmoduleidprint界面了(是给55产品用的)
+--模组ID解绑就是删除lot表中的字段moduleid
+select moduleid,l.* from lot l where lotname like '5SWY3500001C0BB%' for update--AS1X38KL02200000C
+
+
+FIXME Panel不存在
+
+界面"测试FA"左下角弹出报错：Panel不存在
+界面路径：OIC(EGL)→在制品过账→EGLFA→测试FA
+
+--字段REWORKSTATE由NotInRework修改成InRework
+SELECT REWORKSTATE,l.* FROM lot l
+where lotname like '5S3U3600043F3%'
+for update
+
+
+FIXME CHECKINCODE
+
+字段CHECKINCODE代表工单类型
+
+55量产 RT流程93片、有一个BOX产品 HZSX39W02300007 需要把 M01 改成M03
+是不是你上次只改了工单  忘记叫你改M03了
+
+--将字段CHECKINCODE修改成M03
+SELECT checkincode,l.* FROM lot l
+where processgroupname like 'HZSX39W02300007%'
+
+--上面是lot表，下面是processgroup表，上下都要修改
+
+--将字段CHECKINCODE修改成M03
+SELECT checkincode,p.* FROM processgroup p
+where processgroupname like 'HZSX39W02300007%'
+
+
+FIXME REVISIONCODE
+
+修改BOX的Revision Code和BOX中Panel的Revision Code
+
+OIC(PH)→信息查询→Box→Box信息查询：左边的Rev.Code就是REVISIONCODE
+
+--修改LOT表的REVISIONCODE
+SELECT REVISIONCODE,L.*  FROM LOT L WHERE PROCESSGROUPNAME IN (
+'HZQX39K02100001',
+'HZQX39K02100002',
+'HZQX39K02100003',
+'HZQX39K02100004')
+
+--修改PROCESSGROUP表的REVISIONCODE
+SELECT REVISIONCODE,P.* FROM PROCESSGROUP P WHERE PROCESSGROUPNAME IN (
+'HZQX39K02100001',
+'HZQX39K02100002',
+'HZQX39K02100003',
+'HZQX39K02100004')
+
+
+FIXME invaild panel state
+
+PLC上出现：invaild panel state
+
+--将字段lotprocessstate由RUN修改成WAIT
+SELECT lotstate,lotprocessstate,l.* FROM lot l
+where carriername like '%2MCN-0038%'
+for update
+
+
+FIXME 重新Unpack投入(工单更改)
+
+M2-1100：Unpacking
+
+5S3U3500036B5BB
+5S3U3500036B5AB
+5S3U3500037C4AB
+麻烦信息做到Unpack，stork doe需要重新Unpack投入
+解决：其实就是跳站
+
+5S3U3500036B5BB
+5S3U3500036B5AB
+5S3U3500037C4AB
+麻烦信息做到Unpack，stork doe需要重新Unpack投入，和上次一样
+好了，你们取消来料box投入
+Box取消投入：从panel历史记录界面找processgroup/carrier加到lot表中lotstate修改成run状态
+
+
+FIXME Panel列表缺少第15层信息
+
+右边Panel列表缺少第15层信息(OIC→信息查询→CST→CST信息查询)
+他的cst map里面上报了两张同样的ID
+看下15/16两层上报的ID是否能区分出来
+我看到了，我查一下原因，5SWY3400001A2AD 2MSCT01-TR01没报绑卡事件(OIC→特殊操作→CST合并拆分→Panel绑定CST)
+我知道怎么弄了   这张片报了unit in
+咋弄的
+单片取消Unit in绑定(MLEDComponentPanelOutByUnit)
+
+
+FIXME "ScrapPanel"界面左下角报错：This Lot Can Not do RewokIn!
+
+让panel在固晶段报废
+
+界面"ScrapPanel"左下角报错：This Lot Can Not do RewokIn!
+路径：OIC(PH)→在制品过账→报废/取消报废→ScrapPanel
+
+--原因是panel的字段lotstate是Shipped(为Released才不报此错误，此时投入数量需要-1)
+SELECT lotstate,l.* FROM lot l where lotname like '5S4A3800001D4BC%'
+
+
+FIXME groupid没有绑定工单
+
+OIC→信息查询→基准数据→GroupID查询功能
+
+GroupID查询功能 group id 对应的工单不显示
+
+界面“GroupID查询功能”有Group ID，但是没有对应的工单名称
+
+麻烦CIM看下，为什么工单名称没有
+这些groupid没有绑定工单
+绑了啊，白油都快投完了 NBTD   BAP2   SMTT   WPKG 目前都在干  确认下吧
+这个系统BUG，我先手动处理一下这是四个group   
+
+处理方法：
+第一步先在LOT中查询GROUPNAME对应的工单
+SELECT DISTINCT PRODUCTREQUESTNAME  FROM LOT WHERE GROUPNAME = 'WPKG'
+第二步在PRODUCTREQUEST表中修改工单的GROUPNAME字段
+SELECT GROUPNAME,P.* FROM PRODUCTREQUEST P WHERE PRODUCTREQUESTNAME IN ('000400092012')
+
+
+FIXME finishedQuantity exceed releasedQuantity
+
+OIC→在制品过账→DT_Tracking→通用Track in/out
+左下角报错：finished Quantity exceed released Quantity(完成数量超过可用数量)
+
+你看下这个卡夹，为啥一个卡夹内有5张信息没有自动out
+问题详细描述：工单不平导致无法trackout
+
+--将5张panel修改成和其他卡夹里的panel信息一致(许多字段都要修改)
+select carriername,productrequestname,l.* from lot l where carriername='2MCN-0023'
+select * from productrequest where productrequestname = '000600188769'  
+
+
+FIXME 当前Panel[5SWX3600001B1BB]设备与Panel列表中的不一致
+
+处理方法：他们一片一片过的
+
+2MCN-0048CST中panel的设备不一致
+
+OIC→在制品过账→Tracking→TrackOut By Panel
+左下角报错：当前Panel[5SWX3600001B1BB]设备与Panel列表中的不一致
+
+处理方法：将LOT表中2MCN-0048的panel的MACHINENAME字段修改成一致的
+--找CST中不同的lotname
+select lotname,l.* from lot l where carriername like '2MCN-0048%'
+--获取该lotname的字段machinename(问出machinename)
+select machinename,l.* from lot l where lotname like '5SWX3600001E0BB%'
+--将panelid:5SWX3600001B1BB的machinename修改成正确的
+select machinename,l.* from lot l where lotname like '5SWX3600001B1BB%'
+
+
+FIXME 请选择ReasonCode
+
+OIC→在制品过账→DT_Tracking→通用Track in/out
+
+出现弹窗：请选择ReasonCode！
+
+原因：panel等级是G的可以过账，但是等级为N的需要：点击界面右边的不良代码(外观不良/功能不良/碎片)→第二工序→第三工序→点击OK→Track In
+切割成的19根灯条，会继承reasoncode，对后面的过账有没有影响？
+先做下去看看，不行改库
+
+
+FIXME 取消不了Track in
+
+我刚看到我们这个可以取消track in
+对应的界面：OIC(F1)→在制品过账→EGLTracking→取消TrackIn By CST
+
+问题分析：ChangeLotProcessState 页面 将状态改为Wait  因为取消Track In界面有卡控 不是主FLOW 是取消不了的
+
+界面：OIC→在制品过账→EGLTracking→EGL单片取消TrackIn(这是F1的)
+解决：OIC→特殊操作→变更属性→ChangeLotProcessState(将下面的Process State从RUN修改成WAIT)
+
+这片我怎么取消不了Track in？
+ID：5S3U3400016E1AD
+取消不了有报错吗？
+界面"EGL单片取消TrackIn"左下角报错：Current Lot ProcessFlow is Not Main flow
+你帮我先取消下吧，这片等着RW
+
+
+FIXME 检查有效期错误！
+
+物料入库后到期日显示错误
+
+select expiringdate,m.* from mdcmaterial m
+select expiringdate,m.* from mainmaterial m
+
+物料上/下机：OIC→物料管理→物料管控→物料上机/物料下机(物料上机/治具(非玻璃)上机/混合后物料上机)
+左下角报错：检查有效期错误！
+
+23GE27521   上机报错   帮忙看下
+还没解冻
+
+
+FIXME CST位置错误
+
+OIC→设备管理→CST→改变CST位置信息
+解决：卡夹的位置可以用这个界面修改，INSTK代表在棚位上，ONEQP代表在设备上
+
+2MTPL01  prot1 （2MCN-0011）prot2（2MCN-0033）
+2MTDB01 prot3（2MCN-0049）卡夹信息在prot2滞留
+以上，需要cim同事后台修改实际卡夹位置
+
+5SCQ-0145 帮忙看下这个CST是不是位置丢了
+归正下位置。我在掉
+卡夹5SCQ-0145位置信息与MCS不符，导致无法搬运报错---F1汪强
+解决：修改durable表为实际位置
+select machinename,portname,d.* from durable d where durablename like '5SCQ-0145%'
+
+
+FIXME CST信息查询不显示数据
+
+OIC(PH)→信息查询→CST→CST信息查询
+
+设备没报2ndCuttingComplete事件，导致LOT表的PRODUCTTYPE没有将Qpanel改为Panel，从而导致CST查询界面panel列表不显示数据
+
+问题：右边panel列表不显示数据
+处理方法：将LOT表的PRODUCTTYPE由Qpanel改为Panel
+
+
+FIXME CST无实物设备报满卡
+
+将表durablestate中的字段durablestate修改成EMPTY就可以了
+
+2MCN-0011卡夹无实物，OIC上查询也是空卡，但是上设备后报错是满卡，帮忙看看什么原因
+
+--lotquantity等于0则durablestate为EMPTY,lotquantity不等于0则durablestate为FULL
+SELECT lotquantity,durablestate,d.* FROM durable d where durablename like '2MCN-0011%'
+
+
+FIXME "CSTBind"界面右边字段"位置"没有值
+
+LOT表和Product表站点信息不一致导致
+
+问题：表product中有值，但是表lot中没有
+
+界面"CSTBind"右边字段"位置"没有值
+路径：OIC(PH)→特殊操作→CST Handle→CSTBind
+
+select position,l.* from lot l where lotname like '5S4A3800004D5BD%'
+--从product表中找到位置并在lot表中加上去
+select position,p.* from product p where lotname like '5S4A3800004D5BD%'
+
+
+FIXME "CSTBind"界面左下角报错 [LOT-9001] Panel ID[5S4A3800001C1BB]已生成
+
+界面"CSTBind"左下角报错 [LOT-9001] Panel ID[5S4A3800001C1BB]已生成
+路径：OIC(PH)→特殊操作→CST Handle→CSTBind
+
+处理方法：暂时修改lot表的CARRIERNAME和POSITION字段，修改DURABLE表的LOTQUANTITY字段
+select carriername,position,l.* from lot l where lotname like '5S4A3800001C1BB%'
+select lotquantity,d.* from durable d where durablename like '1DCW-0010%'
+
+
+FIXME Panel信息丢失
+
+手动绑卡，手动过账：在OIC上将panel和cst绑定
+OIC→特殊操作→CST Handle→CSTBind
+
+这7个从V1202拔出后，信息丢失
+你们手动绑卡，手动过账吧
+
+FG code：MZ315KKP-A4K-D201
+V1202 COF BD站点，拔屏后OIC上信息丢失。共8张信息丢失，帮忙找回提下
+卡夹是多少
+卡夹都流下去了，进设备里面技术拔了
+流进去之前的卡夹ID
+最近的一次请帐是今天下午5点56的
+在这之前，屏实物还在现场。明天投入时候看看panel id找下历史信息吧
+
+
+FIXME Panel创建时间超过当前卡夹限制时间！
+
+OIC→特殊操作→CST Handle→CSTBind(将panel和cst绑定)
+
+左下角报错：Panel创建时间超过当前卡夹限制时间！
+原因Panel创建时间和绑定卡夹超过了8小时，
+那我所有的panel应该都超了，这个限制要取消
+他说当时他提的是48小时，不是8小时
+
+1、左边输入Panel ID
+2、选中panel列表后点击中间的→
+3、右边输入CST ID
+4、选中后再点击右下角的OK
+
+
+FIXME MDC入库界面报错
+
+MDC入库 功能报错
+
+物料已经从PH发到F1了
+
+OIC(PH)→物料管理→MDC线边仓管理→MDC入库
+
+问题真因：没有维护BSMATERIALMAP表，BSMATERIALMAP表中没有数据
+
+弹框报错：Index was out of rang. Must be non-negative and less than the site of the collection. Parameter name: index
+弹框报错汉化：索引超出范围。必须为非负值并小于集合大小。参数名：index
+
+解决方法：
+第一步：在BSMATERIALMAP表中查看需要入库物料号是否存在
+第二步：在BSMATERIALMAP表添加不存在的物料号（物料号的具体信息在CONSUMABLESPEC表中），添加的数据模仿BSMATERIALMAP中已存在的数据，只需要关注MATERIALNAME、DESCRIPTION、FACTORY这三个字段。
+
+--复制粘贴materialname(consumablespecname==materialname)
+select consumablespecname,description,factoryname,c.* from consumablespec c 
+where consumablespecname in ('47-7831361','47-7831361')
+--从上面搜索到的字段MATERIALNAME、DESCRIPTION、FACTORY这三个字段复制粘贴到下面表中新创建的一行记录(其他字段不care)
+select * from bsmaterialmap b for update
+--备份新建的一行记录
+select * from bsmaterialmap where materialname in ('47-7831361')
+
+--MDC入库接收不到数据
+--OIC→物料管理→MDC线边仓管理→MDC入库
+--真实问题：查出来得SHOPNAME是F1，但是这四个物料是要发往PH
+SELECT
+  S.SHIPREQUESTNAME,
+  L.SHIPREQUESTDETAILNAME,
+  L.REQUESTQUANTITY,
+  L.ASSIGNEDQUANTITY,
+  S.WORKORDERID,
+  SUM(M.MATERIALQUANTITY) AS MATERIALQUANTITY,
+  M.MATERIALSPECNAME,
+  C.DESCRIPTION,
+  C.CONSUMEUNIT,
+  to_char(M.MAKEDATE, 'yyyy-MM-dd') AS MAKEDATE,
+  to_char(M.EXPIRINGDATE, 'yyyy-MM-dd') AS EXPIRINGDATE ,
+  M.CHARGE,
+  M.SUPPLIERNAME AS SUPPLIERNO,
+  M.ERPLOCATION,
+  P.Materialtype,
+  M.SHOPNAME
+  --C.LOCATIONNAME AS STORAGENAME
+FROM
+  M2WMSMES.MATERIALSHIPREQUEST S ,
+  M2WMSMES.MATERIALSHIPREQUESTDETAIL L,
+  CONSUMABLESPEC C,
+  M2WMSMES.MATERIALPACKING M ,
+  M2WMSMES.MATERIALSPEC P
+WHERE
+  S.SITENAME IN ('PH', 'TM1')
+  AND S.SHIPREQUESTNAME ='0021185953'
+  AND S.SHIPREQUESTNAME = L.SHIPREQUESTNAME
+  AND (S.DELIVERYTYPE = 'WO'
+    OR 
+    (
+    	(S.SHIPREQUESTTYPE = 'StockOut' OR s.SHIPREQUESTTYPE IS NULL )
+    	AND S.DELIVERYTYPE = 'Reserve')
+
+    )
+  AND S.SHIPREQUESTNAME = M.SHIPREQUESTNAME
+	AND C.FACTORYNAME IN ('PH', 'TM1')
+ AND C.CONSUMABLESPECNAME = L.MATERIALSPECNAME
+  AND L.SHIPREQUESTDETAILNAME = M.SHIPREQUESTDETAILNAME
+  AND L.MATERIALSPECNAME = M.MATERIALSPECNAME
+  AND C.CONSUMABLESPECNAME = M.MATERIALSPECNAME
+  AND M.MATERIALSPECNAME = P.MATERIALSPECNAME
+  AND M.SHOPNAME IN ('PH', 'TM1')
+  AND (M.MESRECEIVEFLAG IS NULL OR M.MESRECEIVEFLAG != 'Y')
+  AND P.SITENAME = (SELECT SITENAME FROM M2WMSMES.MATERIALSHIPREQUEST WHERE SHIPREQUESTNAME = '0021185953')
+GROUP BY
+  S.SHIPREQUESTNAME,
+  L.SHIPREQUESTDETAILNAME,
+  L.REQUESTQUANTITY,
+  L.ASSIGNEDQUANTITY,
+  S.WORKORDERID,
+  M.MATERIALSPECNAME,
+  C.DESCRIPTION,
+  C.CONSUMEUNIT,
+  M.MAKEDATE,
+  M.EXPIRINGDATE,
+  M.CHARGE,
+  M.SUPPLIERNAME,
+  M.ERPLOCATION,
+  P.Materialtype,
+  M.SHOPNAME
+ORDER BY
+  SHIPREQUESTDETAILNAME ASC
+
+
+FIXME MDC物料替换包装号
+
+客户要追溯批次号
+
+我现在导入还缺一个包装号，需要你后台帮忙看下包装号是多少
+我先想想你在哪个表里面看，你在MDC库存里面查询这个LOT NO(23GE25367)
+SELECT materialpackingname,m.* FROM mdcmaterial m where lotno like '23GE25367%'
+
+F1 IC物料号：47-7831416 ，物料ID为：23GC1605-5/23GC1605-8/23GC1605-1，帮忙查下MDC入料的包装箱号是多少？
+--MDCMATERIAL 表的 MATERIALPACKINGNAME字段
+select materialpackingname,m.* from mdcmaterial m
+where materialname like '47-7831416%'
+and lotno in ('23GC1605-5','23GC1605-8','23GC1605-1')
+
+--MDC物料替换包装号，修改MATERIALPACKINGNAME字段
+SELECT MATERIALPACKINGNAME,M.* FROM MDCMATERIAL M WHERE LOTNO  IN (
+'23H11608',
+'23H11606-3',
+'23GC1605-11-5',
+'23GC1605-11-4',
+'23GC1605-11-5',
+'23GC1605-11-3',
+'23GC1605-11-4'
+)
+
+
+FIXME MDC看板两行记录删除
+
+烦请后台把这两组画红线的从MDC看板里删除@张彦庆（外协）‌
+
+麻烦把30-0110365，30-0110366，42-7090056，42-7090066，42-7090067，47-6043433，47-7521443这几个物料从MDC看板里面清除
+PH工厂清除数据
+查看：OIC→物料管理→MDC看板→MDC物料看板
+
+--搜索到的记录直接删除就可以了
+SELECT * FROM MDCMATERIAL WHERE LOTNO IN ('23FC0901', '23FC0902', '23FC0801', '23FC0802')
+--字段MATERIALNAME是物料，字段LOTNO是批次号
+select * from MDCMATERIAL WHERE MATERIALNAME='47-6043657'and LOTNO='23G85704-2' for update
+
+
+FIXME 打印机
+
+我新装的一台打印机，使用效果和外面那一台不一致
+你调下新打印机的设置吧   这种情况和我们没关系
+
+
+FIXME 标签二维码
+
+这个标签能不能帮生成个电子档的二维码发我
+要和目前产线模组标签二维码的逻辑一样
+解决：点击打印但不连接打印机则默认保存pdf
+
+
+FIXME 维护回冻标签
+
+47-7961018需要维护回冻标签
+处理方法：oic可以直接维护
+
+OIC→物料管理→物料标签管理→MaterialLabelTemplateDesignView
+在左边的FGCODE LIST中选择相应的consumablespecname
+标签类型：FREEZE
+宽度：60mm(询问)
+高度：30mm(询问)
+标签模板：有BOX和PALLET两种，从别的fgcode中复制粘贴即可(询问)
+select * from consumablespec where consumablespecname like '47-7961018%'
+
+
+FIXME 标签产品等级
+
+OIC→在制品过账→Label→LabelTemplateDesignView
+
+右下角添加[table.GRAD]，它和[Substring]叠加在一起，需要拉出来
+
+标签后面的产品等级没有
+麻烦你看下、标签后面的等级没有显示出来
+
+
+FIXME 注册标签相关信息
+
+OIC→在制品过账→Label→虚拟打印All标签
+
+问题详细描述：OIC 虚拟打印ALL标签界面 弹出错误“请注册标签相关信息”错误
+处理方法：在factorymodelor→Process→Policy→POSLabelType中维护
+
+
+FIXME 标签信息向右移动
+
+左箭头可以向右移动
+
+双击进去可以修改具体信息
+
+OIC(PH)→在制品过账→Label→LabelTemplateDesignView
+
+FG code，数量，box id，时间，条形码，物料号，全部往下移
+Model，Qty，serialno，date是固定的，你只需要调整数值的位置
+
+--productspecname=打印机打印出来的标签MODEL(左上角)+S201(右下角)
+SELECT factoryname,p.* 
+FROM productspec p 
+where productspecname = (select FGCODE from processgroup where processgroupname like '20238GM00023%')
+
+帮忙把55模组标签二维码向右微调0.3mm，第三行字母有些过大换行了变成四行了，对应FG-CODE:DZ550GFQ-E47-S201
+加急搞快点，打电话  7611
+还有那种换行情况，字母向左再微调0.3mm,二维码向右微调0.1mm,应该差不多
+可以往左边移，第四行的Z应该在第三行最后一个
+
+
+FIXME 标签修改国外/国内
+
+这批55量产 是出国外 是E  D是国内 麻烦改下
+
+OIC→信息查询→Box→Box信息查询(输入Box ID后左边的字段D/E就是了)
+
+MODEL：DZ550GFQ-E47
+QTY：1
+DATE：2023/07/07               D
+PALLET ID：20237GM0。000000000   0001
+
+OIC→在制品过账→Label→LabelTemplateDesignView
+先选择左边的FGCODE LIST，再点击右下角的"修改"按钮，修改好了之后点击"Commit"按钮
+PS：标签模板选择PALLET(PALLET有数据，BOX没有数据)
+
+今天谁值班，这次55不是国外向吗，应该是E吧？
+Box ID：5S4A3500001B2AA
+有多少个BOX 是D的啊
+所有的BOX，目前已生成18个BOX了
+目前 国内国外向D/E体现在Pallet标签上 ，这个标签的取值和信息查询的信息没用关联，你们打的Pallet标签上面是E
+别吃饭了   55国外向改成D   原因是不出口，发国内璨鸿。所以pallet 标签需要改成D
+
+
+FIXME 远程服务器返回错误：(550)文件不可用(例如，未找到文件，无法访问文件)
+
+远程服务器返回错误：(550)文件不可用(例如，未找到文件，无法访问文件)
+
+在数据库中删除之后再在OIC上重新修改就可以了
+
+--删除最新的记录
+SELECT * FROM bslabeltemplatehistory
+where productspecname like 'MZ315HEP-A4F-S200%'--输入productspec
+and labeltype like 'MODULE%'--输入labeltype
+order by eventtimekey desc
+
+--上面是删除最新版本，下面是更改当前版本，两者都要修改
+
+--修改字段version(修改成之前的版本,例如10)
+SELECT * FROM bslabeltemplate 
+where productspecname like 'MZ315HEP-A4F-S200%'--输入productspec
+and labeltype like 'MODULE%'--输入labeltype
+
+
+FIXME 修改回冻次数
+
+OIC→物料管理→物料标签管理→SolderPasteFluxPrint
+
+23GE27544，这瓶实物只回冻了一次
+能麻烦CIM把信息做回去吗？不小心点错啦，还请处理下
+
+--修改字段freezetimes(将2改成1即可)
+SELECT freezetimes,freezedflag,m.* FROM MAINMATERIAL m where materialname like '47-7961027%' order by lasteventtimekey desc for update
+--表mainmaterialhistory用来查询历史记录
+SELECT * FROM MAINMATERIALHISTORY where materialname like '47-7961027%' order by timekey desc
+
+
+FIXME 修改物料解冻/回冻时间
+
+解冻==回冻
+PS：回冻就是再次解冻
+
+解冻重新导入再试试看行不行
+不行我们最后导入吧
+
+由于现场人员手动操作失误回冻了物料，由于现场着急物料上机，现制造已经解冻物料，需要MES修改解冻时间
+LOTNO：'23GE27521', '23GE27504', '23GE27518', '23GE27533'
+
+F1  锡膏人员勿点解冻，需要CIM同事将第二次解冻时间删除
+23GE25367   解冻时间：2023-08-16 13:24:46.0    解冻完成时间：2023-08-16 16:24:46.0
+有效期：2023-08-17 04:24:46.0
+
+为啥修改时间？
+实物出给现场但物料没有用，实物在8：16已回冻，但是oic出库无法回冻，所以要修改物料位置和回冻时间
+解决方法：先退库再回冻(制造在OIC上操作)
+
+--在MAINMATERIALHISTORY表中找到物料最近的解冻履历，将TIMEKEY和EVENTTIME时间提前4个小时(这个时间由制造提供)
+SELECT TIMEKEY,EVENTTIME,M2.* FROM MAINMATERIALHISTORY M2 WHERE LOTNO = '23GE27533' --ORDER BY TIMEKEY DESC
+--注意：这个表不修改
+--EXPIRINGDATE：到期日
+SELECT * FROM MAINMATERIAL WHERE LOTNO = '23GE27533' --ORDER BY TIMEKEY DESC
+
+
+FIXME 当前Spec[47-7961018]尚未维护该类型[UNFREEZE]的模板
+
+OIC→物料管理→物料标签管理→SolderPasteFluxPrint
+Error：[LabelService]当前Spec[47-7961018]尚未维护该类型[UNFREEZE]的模板！请维护模板！
+
+OIC→物料管理→物料标签管理→MaterialLabelTemplateDesignView
+在左边的FGCODE LIST中选择相应的consumablespecname
+标签类型：UNFREEZE
+宽度和高度：询问
+标签模板：有BOX和PALLET两种，从别的fgcode中复制粘贴即可(询问)
+select * from consumablespec where consumablespecname like '47-7961018%'
+
+
+FIXME Panel ID为R
+
+SELECT P.* FROM PRODUCT P WHERE CARRIERNAME = '1DCW-0006'
+将PRODUCT表中SUBPRODUCTGRADES、SUBPRODUCTDETAILGRADE全部改为G
+
+1DCW-0010到底行不行？
+1DCW-0006也好了，需要重新请帐(MES重新Down信息)
+已经连续四个卡夹了，全部都不行
+1DCW-0010/1DCW-0006这两个都修改成G了啊
+
+FG code：MZ315KKP-A4K-D201
+能不能后台查查还有那些Panel ID是R级的
+现在倒卡每个卡夹都有几张是R级，设备投入不下去。浪费时间
+出现R级的panel查了，上一个站点都是正确的，上一个站点和这个站点之间的MES和设备通信的信息我都看了，没发现grade上传或修改的记录，暂时判断是系统BUG导致的
+我现场设备厂商反馈，CV给的panel ID,但是正面固晶设备端识别的是载具ID，频频导致信号交互异常
+我们后台扫描载具二维码可否宕下来panel信息？
+VUV投入就是扫的载具二维码，down下来的信息就是panel ID，但是到OP30  SPI  OP40扫描载具二维码就是单纯的载具二维码，导致与CV  down下来的panel ID不一致
+固晶线是一个站点，track in的话就没法扫载具了，只能扫panel id
+除非拆成一个设备一个站点，但是需要人手动trackout
+
+
+FIXME Aging Test
+
+V1400的描述是Aging
+
+OIC(PH)→在制品过账→Final→Aging Test
+
+问题描述：RT回V1400的panel过账报错，现场没法online作业
+处理方法：
+这批184张Panel返回到V1400站点信息错乱十分严重是由于首次生产时OFFLINE投入。
+查询发现lot表的PROCESSOPERATIONNAME,PRODUCTTYPE， SEQUENCEID，MACHINENAME字段有误，
+跳站到1400后，制造不愿意再过V1450
+与制造沟通后，制造邀请后台跳站至V1500，今天夜班不再生产这批产品。
+
+
+FIXME AVI界面弹出报错：不存在的Panel情报
+
+界面"AVI"弹出报错：不存在的Panel情报
+界面路径：OIC(PH)→在制品过账→Final→AVI
+
+--将字段producttype由QPanel修改成Panel
+select producttype,l.* from lot l where lotname in (
+'5S4A3500005B6AB',
+'5SWY3500001C1AC',
+'5SWY3500001B1BB',
+'5SWY3500001D4AB'
+) for update
+
+
+FIXME AVI TEST界面无法过账
+
+select moduleid,l.* from lot l 
+where lotname in ('5S4A3500001E3AD','5S4A3500002A5BD','EQ2X38CW042000015Z','EQ2X38CW042000014Z')
+
+5S4A3500001E3AD     EQ2X38CW042000015Z
+5S4A3500002A5BD     EQ2X38CW042000014Z
+工单：000200564606，帮忙解绑一下啊模组标签，AVI TEST无法过账
+这个解绑模组标签咋弄，是删除掉moduleid吗？
+删掉就行
+
+OIC(F1)→在制品过账→Packing→Boxing
+临时解决办法：打包有问题，就把lot表的模组ID删了
+看TV线群里七点以后的聊天记录：
+Panel ID输进去后，按回车没有反应。。。。
+用"AVI TEST"界面吧，我们把模组ID清了，临时解决方案跟宏海哥说了
+5S4A3500002E6AC  调回V1600，用AVI TEST试一下
+
+
+FIXME AVI TEST界面弹出报错：Object reference not set to an instance of an object.
+
+界面"AVI TEST"弹出报错：Object reference not set to an instance of an object.
+界面路径：在制品过账→Final→AVI TEST
+Avitest强制打包报错，帮忙解决一下
+HZSX38H0510002O/HZSX38H0510002M两个BOX
+这两个box是从v1900拆分回来，重新生成的box id。线里面正常过账的可以强制打包,这两个BOX过账报错
+--删除三个字段oqajudge,oqaresult,oqalotname就可以了
+SELECT oqajudge,oqaresult,oqalotname,l.* FROM lot l
+where processgroupname in (
+SELECT PROCESSGROUPNAME FROM processgroup where processgroupname in ('HZSX38H0510002O','HZSX38H0510002M'))
+for update
+
+
+FIXME AVI TEST界面左下角报错：没有信息！
+
+LPHMP01：V1500(Final ET)→V1600(AVI外观检)→V1800(Box)→V1750(OQA)→V1900(Pallet)→V2000(Ship)
+
+AVI TEST = AVI(过账) + BOXING(打包)
+AVI TEST界面就是从V1500过到下下一个站点V1600
+
+界面"AVI TEST"(V1600)左下角报错：没有信息！
+界面"Final AOI"(V1500)左下角报错：Panel不存在
+
+不是除了55的屏不用AVI和Boxing过账吗
+现在OQA检测过的退回重新打包都用AVI->Boxing
+
+1500那一张可以带出数据
+1600的片用AVI过站
+在Boxing页面重新打包(1800)
+你们现在想怎么做 V1600 到V1800打BOX 然后V1750抽检？？？
+
+问题：将BOX中的站点改为1750(V1600(AVI外观检)→V1750(OQA))
+用AVI过，再用Boxing
+这个问题反应多少次了(之前有人将panel从V1900(Pallet)过到V1500(Final ET)了)
+解决(不想重新生成Box)：update lot set processoperationname='V1750',sequenceid='20220831133928893900',
+lasteventcomment='2023/9/14CIM协助章清跳站至V1750' 
+where processgroupname in ('HZSX39W0220000X','HZSX39W0210000L')
+
+OQA(V1750)批退到V1500的片后续用AVI TEST过站打包，退回V1600的片用AVI->Boxing过站打包(下一个站点)
+OQA批退我们屏说明里面肯定有N G屏在里面。我们把那张屏挑出来用AVI和Boxing过账，如何补入一张新的panel ID？
+啥意思？那就正常过站的片嘛，需要放到BOX里面?
+批退回来的用avi和boxing过账，外观检用avitest过账
+OQA批退到1500的片后续用AVI TEST过站打包，退回1600的片用AVI->Boxing过站打包
+对啊。退回1600用AVI->Boxing过站打包。如果有NG的那这BOX就不满，就是想问问1600站点没有绑定模组id的屏如何AVI->Boxing生成BOX id
+
+
+FIXME AVI TEST界面弹出报错：未将对象引用设置到对象的实例
+
+界面"AVI TEST"弹出报错：未将对象引用设置到对象的实例
+路径：OIC(PH)→在制品过账→Final→AVI TEST
+
+已经有box了，不会生成新的box
+除非需要生成新的boxid，不然就只能数据库改数据
+
+你问他们是不是要生成新box，不要的话那就只能我们给他们跳到1750
+他想生成新box，把boxid清掉吗？
+boxid清掉，oqalot也要清，用AVI+Boxing过站
+
+AVI TEST是绑定模组标签，需要输入模组ID，AVI不需要
+不需要模组ID AVI也能过站，Boxing页面就需要模组ID了，打Boxing再输入
+你下次把OIC上面的功能，你在测试OIC上面玩一玩，找一个数据从头开始玩，你就知道功能都咋用了
+
+问题：RT回来的Panel从V1900站点拆解BOX到V1500之后，FinalAOI过站至V1600后查看履历有重新绑定BOX的操作，AVI TEST功能对已绑定BOX的Panel强制过站打包会报错。
+临时解决方案：制造将产品从1500过到1600，然后联系cim绑定原有的模组id(从表lothistory中找字段moduleid)，
+绑定后用AVI界面过账，然后boxing过账，可以成功做到V1750
+
+RT回来的Panel从V1900站点拆解BOX到V1500之后，FinalAOI过站至V1600后查看履历有重新绑定BOX的操作，AVI TEST功能对已绑定BOX的Panel强制过站打包会报错。
+现梳理以下流程：
+1.V1500过站到V1600后不需要进行重新绑定BOX操作
+2.V1600站点用AVI功能过账至V1800，若Boxing页面输入PanelID后带不出ModuleID需要用绑定模组ID功能进行绑定后在重新使用Boxing页面进行打包
+3.若过站至OQA站点，需要创建OQALot，若是出现报错，请将panel信息提供CIM值班人员，CIM值班人员会及时处理
+
+
+FIXME Final AOI界面左下角[LOT-9099] Lot没有原因代码(Lot[{0}] not have reasoncode)
+
+界面"Final AOI"左下角报错：[LOT-9099] Lot没有原因代码(Lot[{0}] not have reasoncode)
+界面路径：OIC(PH)→在制品过账→Final→Final AOI
+--将字段lotgrade由N修改成G
+select lotgrade,l.* from lot l where lotname in (
+'5SWY3500001D4AB',
+'5SWY3500001C3BA',
+'5SWY3500001A5BC'
+) for update
+
+
+FIXME Boxing界面左下角 不一致的工单
+
+用AVI TEST强制打包或者不同工单分开打包
+
+5S4A3800005E7AB  ES2X39BW02200001HX，boxing过账报错，不一致工单
+解决：用AVI TEST界面
+
+工单不一致不是可以放在一个BOX里面吗？
+一般来说一个BOX里面都是一种工单
+
+
+FIXME Boxing界面左下角 Panel数量不足
+
+AUTO是10，你选manual，改成5就可以了
+
+界面"Boxing"左下角报错：Panel数量不足
+界面路径：OIC(PH)→在制品过账→Packing→Boxing
+
+
+FIXME Boxing界面左下角 [LOT-9062] Lot[5S4A3500005A6AA]的OQAL---后面看不到了
+
+--删除字段oqalotname和processgroupname就可以了
+SELECT oqalotname,processgroupname,l.* FROM lot l 
+where lotname like '5S4A3500005A6AA%' 
+for update
+
+
+FIXME Boxing界面弹出报错 5S4A3500001C6AA无TTL ID数据
+
+--删除字段oqalotname和processgroupname就可以了
+SELECT oqajudge,oqaresult,oqalotname,processgroupname,l.* FROM lot l
+where lotname in ('5S4A3500001C6AA','5S4A3500005F1BD')
+for update
+
+
+FIXME Panel分配到原Box
+
+这5张帮忙给分配到原Box，我们取消绑定
+取消投入试试
+目前都是Wait状态
+--先将lotprocessstate修改成RUN后再取消投入就可以了
+SELECT LOTPROCESSSTATE,l.* FROM lot l where lotname in (
+'5S4A3700001B1BC',
+'5S4A3700001C7BD',
+'5S4A3500005F8BD',
+'5S4A3500005C6AB',
+'5S4A3500007D3BD'
+) for update
+
+
+FIXME Box/Pallet等级修改
+
+把这个等级在WMS系统里加上C
+
+M2在表processgroup和lot中修改；贴合一般不修改Box等级(WMS)，必要时询问担当
+
+WMS处理方法：根据LOTNAME找到关联的MODULE ID，根据MODULE ID去FGCODEMODULEIDMAP查，把GRADE字段里面的值改成制造要的就行
+
+WMS的“正常入库”界面中BOX信息没有等级 ---TV李韩(在fgcodemoduleidmap维护字段GRADE)
+--输入Pallet ID
+SELECT grade,f.* FROM fgcodemoduleidmap f where MODULEID in(
+select MODULEID from lot where lotname in(
+SELECT lotname FROM lot where processgroupname in(
+select processgroupname from processgroup where superprocessgroupname in('20238GM00023'--输入Pallet ID
+))))
+--更新表fgcodemoduleidmap中的字段grade为需要的等级
+update fgcodemoduleidmap set grade='S' where MODULEID in(
+select MODULEID from lot where lotname in(
+SELECT lotname FROM lot where processgroupname in(
+select processgroupname from processgroup where superprocessgroupname in('20238GM00023'--这是Pallet ID
+))))
+
+--上面是WMS，下面是M2
+
+等级与我生成的等级信息不一致，这个是啥问题
+提供下每拍里面的LOTNAME
+LOTNAME就是Panel ID
+
+HZAX38W0430000X
+HZAX38W04400002
+HZAX38W0430000Y
+工单：000100792322  帮忙把BOX等级改为Q级
+
+--把数据库表article中的所有title字段里的w3cschool字符串替换成hello
+update `article` set title=replace(title,'w3cschool','hello');
+
+--将两个表processgroup和lot中的字段processgroupname中的第三个字符
+select processgroupname,p.* from processgroup p where processgroupname in (
+'HZAX38W0420000O',
+'HZAX38W0420000O',
+'HZAX38W0420000O'
+) for update
+--box一个一个修改(在表lot中把字段processgroupname中的第三个字符修改成需要的)
+select processgroupname,l.* from lot l where processgroupname in('HZAX38W0420000O') for update
+
+
+FIXME CST中panel的站点和状态不一样
+
+Panel ID：5SWX3600001E5AD
+现工序：M2-MWWO-Bank
+LOTSTATE：Shipped
+进行状态：WAIT
+--------------------------上面是错误的，下面是正确的
+Panel ID：5SWX3600001E5AC
+现工序：M2-2000
+LOTSTATE：Released
+进行状态：RUN
+
+这个是啥问题，为啥第二卡还是这样
+一个卡夹的信息有的自动out，有的不动？
+这是之前Plasma有一卡信息异常 导致000400090983该工单产出数量和投入数量相等 自动和手动Track Out失败
+你的意思是没有自动变更的原因是因为，这些panel是工单out的数量大于投入数量？
+对，现在这个工单投入产出已经相等了 所以产出会报错
+
+
+FIXME 修改lot/product等级
+
+S：scrap
+R：rework
+
+界面ChangeLotGrade左下角：[UndefinedCode] 没有定义错误消息null
+界面路径：OIC→特殊操作→变更属性→ChangeLotGrade
+
+问题详细描述：修改Lot等级页面，将G等级修改成R级报错，报错信息：没有定义错误消息null
+临时解决方法：将数据库LOT表中LOTGRADE和PRODUCT表中PRODUCTGRADE字段修改为R
+
+select lotgrade,l.* from lot l where lotname like '5SKF8100019D1BD%' for update
+select productgrade,subproductgrades,p.* from product p where productname like '5SEB4100002A0CE%' for update
+
+
+问题详细描述：
+5SWY3300001F6BA 5SWY3300001F6BC 5SWY3300003A2BC 5SWY3300001D8BD等级信息应该为R，但是现在等级为G。
+问题原因：这３pcs大元设备放入卡夹之后OP40设备又上报了recive，导致数据库数据发生改变，等级从R变为G。
+解决方法：在数据库中Product、LOT表中将ProductGrade和LOTGrade字段改为R
+
+问题主题：设备段判级 点错了修改lot等级界面从G改成N reasoncode没有显示
+问题详细描述：设备段判级 点错了，修改lot等级界面从G改成N  reasoncode没有显示。需要维护reasoncode就可以正常用
+临时解决方法：修改lot表和product表中的 lotgrade和productgrade字段改成N
+
+
+2MCN-0031 等级改下 改成R  
+老板  31卡夹搞定没有
+全是R吗
+是的，要进RW设备   不是R的产品无法进设备
+oic就可以改，你试一下(界面"ChangeLotGrade")
+select productdetailgrade,subproductdetailgrade,p.* from product p where carriername like '2MCN-0031%'
+
+
+FIXME 工单变更
+
+工单往前跳：releasedquantity--,finishedquantity--
+工单往后跳：releasedquantity++,finishedquantity++
+
+M2COG01：白油
+M2COG02：固晶
+M2COG03：模组
+
+一个Flow中有三段工单：白油→固晶→模组
+LPHMP01
+LPHMP02
+
+
+
+
+下面的工单变更是固晶(M2COG02)→白油(M2COG01)
+
+5SWY3400002A3AC   目标站点M2-200R   目标工单000600191661   目标卡夹2MCN-0040  4层
+跳站吗？
+是的，账实不一致。产品已经在目标站点，信息还在plasma站点
+
+处理方法：
+1：修改LOT表中的PRODUCTSPECNAME、PRODUCTREQUESTNAME(前两个字段在PRODUCTREQUEST表中查)、PROCESSFLOWNAME、PROCESSOPERATIONNAME、SEQUENCEID(后三个字段PROCESSFLOWSEQ表中查)字段
+2：PRODUCTREQUESTNAME = '000400090983'，将FINISHEDQUANTITY 97减15
+PRODUCTREQUESTNAME = '000600188769'，将RELEASEDQUANTITY  97减15
+
+产品过Plasma后超Delay Time导致需要将信息重新跳回Plasma站点进行作业，该问题涉及到工单变更问题，具体信息如下：
+2MCN-0034包装数量15，当前站点M2-2140，当前工单000600188769，目标站点M2-2000，目标工单：000400090983
+5SWX3600001D1AB
+5SWX3600001E6BD
+5SWX3600001B0BD
+
+--查询panel信息(在FactoryModeler中可视化)
+--Flow参考：OIC(PH)→信息查询→基准数据→工艺流程查询
+select productspecname,productrequestname,processflowname,processoperationname,sequenceid,l.* 
+from lot l where carriername like '2MCN-0044%' 
+
+--通过目标工单000100793684搜索对应的productspec(MZ315HEA-A44-H002)
+select productspecname,p.* from productrequest p 
+where productrequestname like '000100793684%'--000100793684是目标工单
+--目标站点M2-2000在所有flow中唯一，可以直接通过它来搜索
+--M2COG01    M2-2000    20230414175549281320(复制粘贴对应的flow/stepid/sequenceid)
+select * from processflowseq where processoperationname = 'M2-2000'--M2-2000是目标站点
+
+--更新卡夹中的panel信息(字段信息都是从上面获取的)
+update lot set productspecname='MZ315HEA-A44-H002',productrequestname='000100793684',
+processflowname='M2COG01',processoperationname='M2-2000',sequenceid='20230414175549281320'
+where carriername like '2MCN-0044%' 
+
+--减少当前工单的releasedquantity(投入)--固晶
+select releasedquantity,finishedquantity,p.* from productrequest p 
+where productrequestname like '000600191661%' for update
+--减少目标工单的finishedquantity(产出)--白油
+select releasedquantity,finishedquantity,p.* from productrequest p 
+where productrequestname like '000100793684%' for update--000100793684是目标工单
+
+
+
+--上面是不同Flow中的，下面是一个Flow中的
+
+
+
+--查询panel信息(在FactoryModeler中可视化)
+select productspecname,productrequestname,processflowname,processoperationname,sequenceid,l.* 
+from lot l where lotname like '5S4A3500007C9BC%' 
+
+--panel历史查询里可以得到三段工单(往前跳的话)
+--OIC(PH)→生产计划→工单作业→工单Mapping关系查询(按时间"关联"工单)
+--将下面sql语句查到的字段复制粘贴到"工单Mapping关系查询"界面查询三段工单(注意下拉框一定要选“白油段”)
+select inch,productiontype,shipmenttype,processflowname,p.* from productspec p
+where productspecname in (
+select productspecname from lot where lotname like '5S4A3500005B6AB%')--输入任意lotname即可查询
+
+--通过目标工单000100792321搜索对应的productspec(HZ550GFA-E47-H042)
+select productspecname,p.* from productrequest p 
+where productrequestname like '000100792321%'--000100792321是目标工单
+--目标站点V0100在所有flow中唯一，可以直接通过它来搜索
+--LPHMP02    V0100    20220831133928799880(复制粘贴对应的flow/stepid/sequenceid)
+select * from processflowseq where processoperationname = 'V0100'--V0100是目标站点
+
+--更新卡夹中的panel信息(字段信息都是从上面获取的)
+update lot set productspecname='HZ550GFA-E47-H042',productrequestname='000100792321',
+processflowname='LPHMP02',processoperationname='V0100',sequenceid='20220831133928799880'
+where lotname in (
+'5S4A3500005F6BC',
+'5S4A3500007A8AA'
+)
+
+--将查询到的三段工单修改
+select releasedquantity,finishedquantity,productspecname,p.* from productrequest p
+where productrequestname in (
+'000100792321',
+'000600190850',
+'000100792322'
+)
+order by instr(--按初始化顺序排列
+'000100792321,--白油
+000600190850,--固晶
+000100792322',--模组
+productrequestname)--都是productrequestname字段下的数据
+
+这个6pcs 工单还是白油工单  需要产出到模组(信息在白油，实物在模组)：
+000100792321(白油)的finishedquantity+6
+000600190850(固晶)的releasedquantity+6,finishedquantity+6
+000100792322(模组)的releasedquantity+6
+
+--这个6pcs 工单还是白油工单  需要产出到模组
+因使用通用in/out功能导致产品信息Flow至ship站点，后台工单未变更，现邀请CIM将下列ID基板对应工单按照Flow流程进行变更（需要白油段Out，固晶段in/out，模组段in）
+5S4A3500005B6AB
+5S4A3500007C1AC
+5S4A3500007C4BD
+5S4A3500007A4AB
+5S4A3500005F4AB
+5S4A3500005C9AA
+
+
+
+FIXME 工单修改
+
+000400084095   投入数量和绑定数量改为 26
+400084124         投入数量和绑定数量改为 51
+000400084248   计划数量、投入数量和绑定数量改为 72
+000400084251   投入数量改为   50
+000400084096   投入数量改为   26
+000400084793   投入数量和绑定数量改为 92
+000400084250   投入数量和绑定数量改为 27
+000400085125   投入数量和绑定数量改为 80，完成数量改为 63
+000400085126   投入数量改为 36，完成数量改为 28
+000400085239   投入数量和绑定数量改为 113，完成数量改为 62 ，报废数量 改为 51
+000400085252   投入数量改为 26
+000400085255   投入数量改为 9
+000400085240   投入数量和绑定数量改为 62，完成数量改为 29，报废数量改为 33@王千楠‌
+
+
+--plan是计划，投入是release，绑定是assignedquantity，完成是finishedquantity，报废是scrappedquantity
+SELECT planquantity,releasedquantity,assignedquantity,finishedquantity,scrappedquantity,p.* FROM productrequest p
+where productrequestname in (
+'000400084095',
+'400084124',
+'000400084248',
+'000400084251',
+'000400084096',
+'000400084793',
+'000400084250',
+'000400085125',
+'000400085126',
+'000400085239',
+'000400085252',
+'000400085255',
+'000400085240'
+)
+--excel中快速复制粘贴：=E2&","
+order by instr(--按初始化顺序排列
+'000400084095,
+400084124,
+000400084248,
+000400084251,
+000400084096,
+000400084793,
+000400084250,
+000400085125,
+000400085126,
+000400085239,
+000400085252,
+000400085255,
+000400085240',
+productrequestname)--都是productrequestname字段下的数据
+
+
+
+FIXME 工单分析
+
+原因：在bank中报废导致完成数量没有-1(已经报废就不会完成了)
+
+通过“工单历史记录查询”界面进行比对：OIC(PH)→信息查询→工单→工单历史记录查询
+
+两个工单投入数量和绑定数量一致，看下是什么问题   要结工单了
+000100799083  投入数量+1
+000100797580   投入数量-1
+绑定数量和投入数量要对的上
+
+
+
+FIXME 工单状态不对
+
+新需求  工单投入数量为0的工单状态应该Created
+
+有投入的对应的工单状态 应该是 Created
+工单还没有绑定屏的状态都是  Created，绑定屏了以后，是Released。
+工单投入数量为0的工单状态应该 Creared
+
+--将字段productrequeststate由Released修改成Created
+SELECT productrequeststate,p.* FROM productrequest p
+where productrequeststate like 'Created%'
+
+
+FIXME 取消工单绑定
+
+帮忙把这5张取消工单绑定，结算工单
+取消投入，工单就平了
+没Box我们取消不了
+这五张你们是不打算继续做了是吗
+材损退库
+有四张可以了，但最后一张报废之后又取消报废，目前正在处理
+
+OIC→信息查询→panel→Panel信息查询
+
+OIC→在制品过账→来料投入→来料Box取消投入
+
+OIC→生产计划→绑定工单→工单与Pallet绑定
+
+1.通过查找这5张panel的履历得到boxID，然后用 来料box取消投入 功能取消panel投入。
+来料box取消投入SQL语句:
+select  'true'    as CHECKBOX,
+B.PALLETNAME,L.LOTNAME,L.REVISIONCODE,L.CHECKINCODE,L.MACHINENAME ,L.LOTGRADE,L.PROCESSOPERATIONNAME,
+L.PROCESSGROUPNAME,L.PRODUCTREQUESTNAME,L.PRODUCTSPECNAME, L.PROCESSFLOWNAME,L.MACHINERECIPENAME,L.LINENAME 
+from bsoembox b,bsoemqpanel Q, lot L  WHERE  
+B.BOXNAME=Q.BOXNAME
+AND b.factoryname=:FACTORYNAME and b.boxname =:PROCESSGROUPNAME
+and  Q.PANELNAME=L.LOTNAME
+and l.productrequestname is not null and l.lotstate='Released'AND L.PRODUCTTYPE='Qpanel' 
+AND L.LOTPROCESSSTATE='RUN'；
+2.用 工单与pallet绑定 功能解绑工单
+
+
+FIXME 工单与Pallet绑定
+
+OIC(PH)→生产计划→绑定工单→工单与Pallet绑定
+
+27量产 Possible Pallet List中信息协助清空，因这里面有正品退库信息，后面涉及重新领取在投入，避免信息重复
+
+Possible Pallet List 信息给清空下
+从OIC删除，这些信息用不到了(信息残留)
+将表lot中的字段lotstate修改成Completed就可以了
+
+--将“工单与Pallet绑定”界面右边的数量和下面select语句搜索到的对比一下数量是否相等
+SELECT LOTSTATE,L.*
+FROM LOT L
+WHERE L.PRODUCTSPECNAME = 'MZ270HBD-A4T-H000'
+AND L.LOTSTATE = 'Created'
+AND L.PRODUCTREQUESTNAME IS NULL
+AND L.PROCESSGROUPNAME is not null
+--将字段lotstate修改成Completed
+update lot set LOTSTATE = 'Completed'
+WHERE PRODUCTSPECNAME = 'MZ270HBD-A4T-H000'
+AND LOTSTATE = 'Created'
+AND PRODUCTREQUESTNAME IS NULL
+AND PROCESSGROUPNAME is not null
+
+
+FIXME 取消报废再投入(工单不平)
+
+先取消投入再退库就可以了
+
+白油段产出276+报废10，10片取消报废后一起投入到固晶段则有286
+
+实际投入数量276pcs，原因是有10pcs信息在OP05报废，再次取消报废状态变为Wait状态，但是工单未减，请CIM尽快调查原因
+明天我需要你们筛选重复值删除
+
+我需要把这10pcs从工单扣除
+我知道10pcs是报废   需要材损退库   信息需要和工单解绑
+正确是绑定数量：286     投入数量：276（10pcs需要在投入数量中减少）
+
+
+FIXME 物料重复
+
+解决方法：物料重复让制造自己删除重复的记录
+select * from consumablespec
+
+问题主题：物料描述重复
+问题详细描述：锡膏的物料描述全部重复
+临时处理方法：删掉这个物料号在重新创建一下就可以了。
+问题真因：数据库MDCMATERIAL表中没有设立主键，导致一个物料号可以多次创建使用。
+删除物料料号：OIC→物料管理→物料管控→创建物料料号：选择"耗材类型"后点击中间的"耗材规格"，右下角有增加/修改/删除功能
+
+
+FIXME 制造退料
+
+OIC→MDC线边仓管理→制造退料
+
+FG Code：AZ448RGD-A4C-DC0
+物料号：44-8061823
+数量：255270
+退料类型：正品
+工单号：000600187548
+退料来源：固晶Room
+
+
+
+FIXME 料号查询数据
+
+料号44-8061595昨天晚上是不是拆出来一个72001的数据
+所以让后台帮查一下
+我查不到几点
+
+处理方法：
+select * from MDCMATERIAL WHERE MATERIALNAME='44-8061595'and LOTNO='23EN9506-3-2-1-2-2-1-2' 
+
+
+FIXME 不可超过数量范围
+
+OIC→物料管理→Room Management→混合油墨(物料A中的油墨和物料B中的进行混合)
+左下角报错：不可超过数量范围
+原因：这个LOT NO 23EM3102-8的物料用完了
+
+
+FIXME 账料和显示不一致
+
+2MCT-0024在OP10上机后帐料显示13层实物只有2张
+2MCT-0002的Process Start 信号没有接收到
+处理方法：联系EAS赵凌云排查，发现是设备测试后没有改成online，更换0002卡夹并修改为online后问题解决
+
+0024这个CST在OP10上机后帐料显示13层实物只有2张
+大元厂商说是MES问题
+排查一下谁的问题
+Process Start 信号没有接收到
+打电话沟通
+2MCT-0002
+13pcs
+
+
+FIXME 该混合物料已上机，无法重复上机
+
+目前物料上机前需检查是与否已有物料上机，如果有需全部下机后再上机，贴片机(就是槽位)可以重复上机，相同槽位只能上一次物料
+
+OIC(PH)→物料管理→物料管控→物料上机
+设备列表里面的就是已经上机的物料
+
+界面"物料上机"弹出Warning：该混合物料已上机，无法重复上机
+解决：已经上机的先下机(已经有物料上机了)
+
+--字段kittingstatus：装配状态
+SELECT * FROM bsmaterialkitting
+where machinename = '2FWWO02-WO01'
+for update
+
+
+FIXME OIC产线已叫料，但门户收不到叫料单号
+
+OIC→物料管理→MDC看板→制造叫料单看板(未发料的叫料单在叫料看板中显示，若不用或者叫料错误可删除)
+
+问题详细描述：OIC产线已叫料，但门户收不到叫料单号，正常的门户能收到叫料单号
+问题真因：暂时在MAINRESERVESHIPREQUESTDETAIL表中查询叫料单给到制造
+
+界面"MDC发料至产线"左下角出现错误：[T-POC4SN-0001] Error：[料号查询有误，请确认:2]
+OIC(PH)→物料管理→MDC线边仓管理→MDC发料至产线
+有两个相同的物料号，请生管确认
+
+OIC→物料管理→MDC线边仓管理→MDC发料至产线(未发料的叫料单太多)
+我想确认的是，门户怎么收不到叫料单号了
+有可能给你们发送消息的服务挂了，需要开发看一下
+暂时我们就先给你们发叫料单
+尽快，因为目前无法删除未发料的叫料单，MDC发料至产线的叫料单需要一个个找。效率低
+这个可能还牵扯的IT部门什么的，查起来也不容易.你们叫料后先暂时联系我们这边提供一下单号
+
+
+FIXME 搬空卡夹送到P02口
+
+参考手册：EGL操作手册-20230621.pptx
+
+不使用这个界面：OIC→物流搬送→AGVC→请求搬送工作
+
+OIC(F1)→物流搬送→TM1 STK→请求搬送工作 TO TM1(界面中间没有数据则表明为空卡夹)
+
+麻烦搬个空卡夹送到F1 Unpack   P02口
+5SCQ-0326 制造那边确认了，这个是空的
+---F1陈洁   (厂商作业导致stk宕机无法搬卡)
+
+从位置
+工厂名称：F1
+设备类型：ProductionMachine
+设备名称：2FSQT01
+设备状态：DOWN(自动生成)
+--直接让制造找一个空的卡夹，粘贴到上面的"CST ID"，再次点击"查询"按钮
+工厂名称：F1
+设备类型：ProductionMachine
+设备名称：2FUUP01
+Port ID：P02
+--点击右下角的OK按钮再输入密码就可以了
+
+--上下是两种不同的情况
+
+从位置
+工厂名称：LAMINATION
+设备类型：StorageMachine
+设备名称：PFST05(Unpacking)
+设备状态：UP(自动生成)
+--点击"查询"按钮后，从中间选择字段Panel ID为空的那行记录，双击CST后粘贴到上面的"CST ID"，再次点击"查询"按钮
+到达位置
+工厂名称：F1
+设备类型：ProductionMachine
+设备名称：2FUUP01(Unpacking)
+Port ID：P02
+--点击右下角的OK按钮再输入密码就可以了
+
+Error：bidmMES服务器发送的信息为空
+查询设备：OIC→设备管理→设备→设备状态变更_OEE(Unpacking(设备2FUUP01)通信状态是offline，需要现场确定)
+解决方案：(重启MES服务MES)日志显示命令已经下了，至于mcs.stocker没有收到MES命令有可能是中间层消息断了，所以需要系统的检查一下中间层的消息是否通畅
+MES发送了搬送卡夹命令，但AGVC没有回复消息，需要你们那边确认一下
+初步排查是TM1和M2之间2套MES的通讯，或Stocker与MES间通讯异常，正在全力对应！
+已经定位到问题了，是IT线AGV的Controll Offline导致MES的搬送svr启动报错 ，暂时先屏蔽掉AGVC的通讯，10点前处理好
+刚刚这个问题就是其中一个服务挂机了导致的，这会暂时没做搬运任务。重启一下服务器
+已经让相关的人看了，后续现场再看一下
+PS：stocker二科，AGV程凯
+
+
+
+PH：ProductionMachine(生产机器)
+LAM：StorageMachine(存储机器)
+
+LAM=PFST05(STK)
+PH=2M5CT02(Cut)+2MUUP01(Unpacker)
+F1=2F5QT01(SBK+白油)+2FUUP01(Unpacking)
+
+--porttransferstate
+ReadyToProcess：搬不了
+ReadyToUnload：可以搬，但接收的状态是ReadyToLoad
+port状态名称为Full可以搬，接收的状态是EMPTY
+
+
+FIXME 卡夹搬送出现报错(目标分区已满)
+
+弹出报错：Destination partition full(目标分区已满)
+
+stk满了，联系A科处理
+
+请帮忙把5SCQ- 0428搬到STK, 在把5SCQ-0286搬到SBK  2口。
+异常原因：卡夹搬送出现报错，显示分区已满
+
+原因分析：stock满了
+解决方法：A科从stk搬走两个卡夹，在重新搬送就可以了(联系7795)
+
+原因分析：卡夹搬送到STK失败，帮忙看下什么情况
+解决方法：棚位慢了，联系自动化，6391
+
+
+FIXME 卡夹搬送出现报错(机器是productionType，但是不存在端口)
+
+原因：开始位置选错了
+
+弹出报错：Machine is productionType, but No Exist Port(机器是productionType，但是不存在端口)
+解决方法：到达位置的设备名称选择错误，正确的应该是2FUUP01(Unpacking)
+
+我直接往Unpack空的port口搬也不行
+找厂商看一下，这个问题之前就发生过，厂商解决的
+Port口状态问题
+哪个Port口？
+SBK
+
+
+FIXME 卡夹搬送出现报错(端口不是ReadyToUnLoad)
+
+弹出报错：Port is not ReadyToUnLoad(端口不是ReadyToUnLoad)
+
+Port口的搬送状态可以用“变更Port传输状态”这个界面修改，ReadyToLoad表示可以上卡，ReadyToUnload代表可以下卡
+
+--让现场松卡(谷嘉乐)
+select * from port where machinename like '2FSQT01%' 
+
+OIC(F1)→设备管理→Port→变更Port传输状态
+--上下两种方法都可以，字段transferstate中的数据修改成ReadyToUnLoad就可以了
+select transferstate,p.* from port p where machinename like '2FSQT01%' and portname like 'P01%'
+
+5SCQ-0472卡夹为啥搬送到unload 失败
+Port口的状态不对啊
+报错不是显示了吗  Port搬运状态不是ReadyToUnLoad
+看下MCS是不是下过搬送命令了
+没有收到搬送命令，Port那个搬送状态不对  你下了也搬不走
+Port口状态查询功能，这个能查吗，可以话把功能释放下
+去OIC主界面
+解决方法：在数据库将卡夹位置修改成正确的或者将卡夹搬送到正确位置
+
+
+FIXME 没有BIN级
+
+SELECT bin,l.* FROM lot l
+
+OIC→信息查询→CST→CST信息查询
+
+SMT3的，怎么又没BIN级了？
+正在改，信息又被设备流下去了
+快点吧，我这RW要修了，没BIN级信息不行啊·
+还有 就是LED bin 信息丢失的事  源头查到没有  后面我们应该怎么避免
+
+
+
+FIXME BIN级没有L01/L02/L03选项
+
+LED BIN级没有L01/L02/L03选项。请CIM同事帮忙解决
+
+factorymodeler→admin→EnumDef
+SELECT * FROM enumdef where usingtype like 'System%' and enumname like 'LEDBINCODE%'
+
+TV线 31.5Acer产品：MZ315HED-A4C-D200/D201/D202.，LED BIN级没有L01/L02/L03选项。请CIM同事帮忙解决
+异常原因；信息没有维护导致的。
+解决方法；在modeler里 ENUMDEF里system 下的LEDBINCODE维护信息就可以了。
+
+
+FIXME 缺失WaferID，无法生成SN码
+
+创建条形码：OIC→特殊操作→SN→CreateSNCode
+
+select led,l.* from lot l where lotname in ('5S3U3500036B8BB')
+
+处理方法：
+固晶机03里找不到该panel生产log，需要设备担当确认
+需要确认这片是那台固晶机生产的，如果是固晶机1 固晶机2 生产的我们这边就捞不到 需要让技术在机台上看一下这一片的WaferID，然后提供给我们 我们在LOT表里的LED字段加进去就好了。
+
+有个片SN码无法生成，帮忙看下
+ID：5S3U3500036B8BB
+显示没有waferld，是这个原因吧，看能不能维护下
+是这个原因，我维护一下
+这两张设备没有上报waferID，我们在log中捞不到。需要确认这两片是那台固晶机生产的，如果是固晶机1 固晶机2 生产的我们这边就捞不到 需要让技术在机台上看一下这一片的WaferID，然后提供给我们 我们在LOT表里的LED字段加进去就好了。
+
+【重要异常】
+1.产品：BAP2
+2.工序：SN码
+3.问题：SN码信息缺失无法生成
+4.描述：5S3U3500027D7AB/SN码信息中Wafer ID信息缺失，导致无法生成，CIM反馈数据库无法捞取，导致产品滞留无法Flow
+还请CIM尽快排查原因，给出对策
+
+
+FIXME 扩晶/固晶Wafer解析拆分
+
+wafer：晶原
+
+这个应该就是MDC拆解时系统带出信息不规范导致的，清看下拆解的为何只有"OBH6-001"，这样同铝箔袋上的OB202305H00416-001
+
+问题详细描述：
+OB202303H00429-001|72000|44-8061595  真空袋小码 
+44-8061595|67B060M0600|72000|NK1331|230917;  解析内容大码
+左下角出错文字：不存在的MachineName，请确认！
+OIC→物料管理→Room Management→扩晶
+
+WaferID输入46B0G0K1407后回车出现的错误：
+左下角出错文字：数据未找到，请检查！
+OIC→物料管理→Room Management→扩晶
+扩晶界面对应的sql表：select * from consumable 
+扩晶界面输入waferID：46B0G0K1407后还是那个报错
+让他输入lotno，在那里要输入的是lotno
+是不是IT线的固晶，如果还不行，让他们产线用他们的方法临时对应吧
+我们这边先用以前使用的小程序扩了，这两张后面需要补录OIC
+后续需要补录OIC，怎么补录？也是你们补录OIC吗？
+算是吧，主要是码扫的有问题
+
+OB202305H00416-001|72000|44-8061595
+44-8061595|39B06Y30600|72000|NK1332|230917;
+这个解析失败  帮忙看下
+左下角出错文字：数据不存在
+OIC→物料管理→Room Management→固晶Wafer解析拆分
+数据库中只有OB202307H00119-001，没有OB202307H00119-002，你们再确定一下物料
+OB202307H00119-002  这个物料制造还没从MDC领料
+
+真空袋号(小码)：OB202307H00119-002
+OIC→物料管理→Room Management→固晶Wafer解析拆分
+下方报错：inser into mainmaterial ORA-00001：unique constraint(MESADM_MAINMATERIAL_PK) violated
+
+
+
+--select * from consumable where consumablename like 'OB202307H00119-002%'
+select * from mainmaterial where lotno in ('OB202307H00119-002','OB202307H00119-001')--mainmaterial：主材
+select * from mdcmaterial where lotno in ('OB202307H00119-002','OB202307H00119-001')
+select * from mdcmaterialhistory where lotno in ('OB202307H00119-002','OB202307H00119-001')
+
+
+FIXME 扫大小码
+
+我有个疑问，为啥我扫完大小码之后，解析内容列表不显示此袋里所有芯片信息，而是一次次的扫大小码
+多次扫的是同一个大小码？
+是的，因为每扫一次只出现一个LotNo，不会显示袋里所有的，所以才会重复扫
+有可能扫描一次，数据库中只查询一次。这个明天和开发对一下，确定扫描的逻辑，看能不能进行优化
+
+问题：每扫一次大小码只出现一个LotNo，不会显示袋里所有的
+问题详细描述：
+扫完大小码之后，解析内容列表不显示此袋里所有芯片信息，而是一次次的扫大小码
+每扫一次只出现一个LotNo，不会显示袋里所有的，所以才会重复扫
+处理方法：问题还未解决
+
+
+FIXME Factory Modelor功能显示不全
+
+Factory Modelor功能显示不全
+
+factorymodeler→admin→EnumDef(左边空白)
+彭的电脑可以，其他人的电脑不可以
+
+
+
+FIXME 解冻界面显示已报废物料
+
+解冻界面显示已报废物料----雷金凤
+
+OIC→物料管理→MDC线边仓管理→Freezed/Unfreezed(未解决)
+
+物料类型：Solder
+物料规格：SN100C(锡膏)
+
+
+FIXME RW的实物和信息不一致
+
+2MCN-0027  待RW的实物：11pcs   信息只有：5pcs
+0039卡夹信息不对吧   实物在30   29层     信息在29  28
+0027是ET没有cim on我手动做进去的信息。
+有点问题 调一下位置吧 28应该是30
+嗯嗯   你调整一下吧
+
+0027卡夹内只有昨晚做的5pcs是offline投的，信息亚杰已经做到卡夹内了，剩下的是今天online生产的，但是信息没有进卡夹
+2MCN-0027卡夹的信息已经做好了 11片全部绑进去了
+
+这片产品与2MCN-0034解绑时MES回复的意思应该是站点不对，导致解绑失败。
+后面在和0023卡夹绑定也就失败了。
+这是0023卡夹19层缺少信息的原因，20层由于设备没有上报这一层的绑卡事件，所以也没绑定。
+
+IT线
+2MCN-0035卡夹   实物：30pcs  信息：29  缺少28层信息
+2MCN-0023卡夹   实物：30pcs  信息：28  缺少19、20层信息
+
+
+FIXME RW/制造叫料界面查不到单号
+
+OIC→物料管理→MDC线边仓管理→MDC发料至产线
+
+select * from MAINRESERVESHIPREQUESTDETAIL where PRODUCTSPECNAME='MZ270KKA-A4X-DQ02'and MATERIALNAME='44-9355799'
+
+帮忙看下这个胶水叫料没数据啥原因，是不是没维护
+FGCODE 和物料号给我一下  我给你查查(OIC→物料管理→MDC线边仓管理→RW制造叫料)
+没维护
+
+界面"RW制造叫料"下方出现错误：
+[FrameworkErrorSignal] UnexpectedException: [ConsumableService.CreatePHReserveShipRequest] Unexcpected Exception [NumberFormatException:empty String]
+路径：OIC(PH)→物料管理→MDC线边仓管理→RW制造叫料
+叫料数量都为空，没法叫料
+
+生产型号：ENC4
+工段：BD  
+物料号：42-7061394
+物料描述：ACF
+数量：100（2盘） 06：30解冻
+MDC请及时备料！
+
+
+FIXME 在WIP中
+
+不要看这两张图，看F1所有的打包完Shipping过的全部都在Wip中
+
+怎么已经入库的屏
+信息还挂在产线的WIP里面呢？
+帮忙查一下怎么回事
+比如这张ID：5S3U3500001F1AA
+
+--将字段lotstate由Released修改成Shipped
+select lotstate,l.* from lot l where lotname like '5S3U3500001F1AA%'
+
+
+FIXME [Recipe-0001]{0}：没有注册参数
+
+OIC→在制品过账→DT_Tracking→COB Cut过账
+左下角报错：[Recipe-0001]{0}：没有注册参数
+解决：FactoryModeler→Process→Policy→TPFOMPolicy→POSMachineRecipe(添加Cut站点DT-4000即可)
+FACTORYNAME：PH
+PRODUCTSPECNAME：MZ315KKP-A4K-D201
+PROCESSFLOWNAME：M2COG03
+使用sql查询：select factoryname,productspecname,processflowname,l.* from lot l where lotname like '2MAA37000091001%'
+--------------------------------------------------------------------------------------------------------------------
+select * from posmachinerecipe where conditionid like '%MZ315KKP-A4K-D201_M2COG03%'
+select * from tpfompolicy where conditionid like '%MZ315KKP-A4K-D201_M2COG03%'
+
+OIC→在制品过账→来料投入→来料Box取消投入
+左下角报错：[Recipe-0001]{0}：没有注册参数
+
+panel ID ：5SWX3600001D9BA  5SWX3600001D1AA  
+能帮忙把以上两片信息做到 BOX：5SWXQ37000054   这个box吗，需要重新投unpacking
+
+01A4BB  01D9BB 5SWXQ37000035  取消BOX投入中这些片
+01D1BC  01C0BB 5SWXQ37000034  取消BOX投入中这些片 
+信息帮忙处理下呢  需要重新投unpacking
+ 
+更新：
+panel ID ：5SWX3600001D9BA  
+能帮忙把以上1片信息做到 BOX：5SWXQ37000037   这个box，状态改成wait，需要重新投unpacking
+你们自己不是可以操作吗？
+WO LAI
+
+这个BOX的第一张如果不在M2COG01流程的第一个站点 你们取消投入会报错
+你有跳站权限的话我给你讲下
+界面第一张ID  先跳站到M2-1100，然后再取消投入，完成后再把刚刚跳站的那个ID 跳回原站点
+关于来料取消BOX投入功能，处理逻辑是首片必须为这个工单的首站点，具体的操作就是郭凯说的这样
+-----------------------------------------------------------------------------------
+我的想法是到了下一个站点BOX信息必须释放   
+在M2-1100站点Track out至M2-1200站点 BOX里面对应的Panel信息需要释放
+按照道理来说   你取消BOX投入不行我可以理解   那我拆分也不可以   我就不能理解了
+这个功能不是为了这个做的，功能都有各自的使用场景
+BOX拆分   BOX合并    BOX投入   BOX取消投入  这些全部是为了Unpack前来料信息的处理
+
+
+FIXME wip上刷不出来V1202
+
+注意一下：machinename有多种情况，全都注册保证覆盖所有情况
+
+信息站点都在V1202，为啥wip上刷不出来呢
+查询Operation：OIC→信息查询→WIP→WipByOperation
+
+000400090985这个工单帮我看下模组段的信息差了一些  但是wip by operation站点看不到啊(让其提供一个panelid就可以用下面的方法了)
+select factoryname,productspecname,processflowname,l.* from lot l where productrequestname like '000400090985%'
+
+解决：FactoryModeler→Process→Policy→TPFOMPolicy→POSMachineRecipe(添加站点V1202即可)
+FACTORYNAME：PH
+PRODUCTSPECNAME：MZ315KKP-A4K-D201
+PROCESSFLOWNAME：M2COG03
+使用sql查询：select factoryname,productspecname,processflowname,l.* from lot l where lotname like '5SWX3600001B5AD%'
+--------------------------------------------------------------------------------------------------------------------
+select * from posmachinerecipe where conditionid like '%MZ315KKP-A4K-D201_M2COG03%'
+select * from tpfompolicy where conditionid like '%MZ315KKP-A4K-D201_M2COG03%'
+
+
+FIXME 投入数量修改
+
+模组投入说是需要改成1482
+000400090649  这个要改成1482？
+对的  投入数量
+select releasedquantity,p.* from productrequest p where productrequestname like '000400090649%'--SCRAPPEDQUANTITY
+
+planquantity：计划数量
+releasedquantity：可用数量
+finishquantity：完成数量
+scrappedquantity：报废数量
+
+
+FIXME 报废数量修改
+
+还得麻烦你们一下   000400090649   报废数量全清空
+select scrappedquantity,p.* from productrequest p where productrequestname like '000400090649%'
+
+
+FIXME VUV
+
+【紧急异常】
+1.产品：13.48车载
+2.工序：VUV
+3.问题：产品从VUV扫码投入后，经VUV后无法后流。
+4.影响时间：1h30min
+5.影响产能：10Q
+现场与程凯确认，为产品缺失信息，程凯已反馈给Cim，待cim确认排查，恢复时间暂未反馈，
+处理方法：单片请帐目前下发的sequence是0，目前设备卡控0不能投，需要设备解除卡控
+
+
+---------------------------------重账---------------------------------
+
+重账：vuv信息残留
+
+xinyihua删除重账命令后，tr12正常(robot取片层数不对)
+
+cim下达的指令不对，tr08从port01取片进plasma，robot不取片
+cim下发的命令异常，（命令位置产品不对）
+
+郑福洋：BC上手动派工后，技术那边手动拔片，后续如果没有异常就做的下去，有异常就做不下去
+
+手动派工下命令后Robot不动：实际已经手动派工了，大元在排查
+
+只能在印刷前拔片，不能在VUV拔片
+Robot取片后，待vuv上面的片(5S3U3500037E8BB)流到印刷前再拔片
+
+1、手动拔片  技术VUV信息清除不掉
+2、手动派工  VUV清除清除掉，技术可以在印刷前把信息清除掉(印刷前信息好清除)
+
+VUV给CIM的信号没有维护
+手动派工后，VUV状态上报等待超时(所有的设备信号都有了，但是不动)，没有接收到ReceiveAble信号，需要哥瑞利排查一下
+
+cim下达的指令不对，tr08从port01取片进plasma，robot不取片
+cim下发的命令异常，（命令位置产品不对）
+找福洋手动派工，技术反馈Robot不动，无法取片
+大元在排查后，VUV状态上报等待超时(所有的设备信号都有了，但是不动)，没有接收到ReceiveAble信号
+需要哥瑞利排查一下
+vuv上面的片：5S3U3500010F0AB
+
+
+FIXME plasma
+
+【一般异常】
+1.产品：Mini Build
+2.工序：plasma
+3.问题：设备与CIM信号交互异常
+4.影响时间：5：15~？
+5.影响产能：10pcs
+处理方法：层数信息不对，已经解决了
+
+问题详细描述
+【一般异常】
+1.产品：31.5清华同方
+2.工序：plasma
+3.问题:   plasma产出后信息未自动out，卡夹有实物无信息，固晶无片投入IDLE中，请CIM同事尽快排查原因处理
+4.影响时间：30min
+5.影响产能：6pcs
+绑卡夹报错信息：
+Not exist Machine id : [2MTPL01-TR12]
+处理方法：将信息捞出，让制造手动将信息绑到卡夹上，在整卡Out
+问题真因：BC维护设备错误 设备应该是2MTPL01-TR19 
+
+
+FIXME tr04不取片
+
+问题详细描述：
+二次白油的设备2FWWO02-TR04 ，PC电脑显示 LineStatus:Down，制造反馈不取片
+当时卡夹：2MCT-0021
+
+处理方法：查询BC，命令已经正常下去了，等待厂商反馈进度。。
+问题真因：ROBOT原点回归异常，于4点恢复自动。
+
+
+FIXME TR08不取片
+
+【一般异常】
+1.产品：BAP3
+2.工序：SMT
+3.问题：TR08 不取片
+4.描述：18:30 TR08机械臂接受错误命令，设备报警：Robot有命令请确认后消除，目前大元厂商&技术处理中
+4.影响时间：2.5H
+5.影响产能：13×
+lot表和product表  8  9 10层 数据没对上
+已经改好了 通知过制造了
+为什么会出现这种情况 制造手动做的帐吗
+查了那个卡的几张ID  有手动绑2MCT-0022 CST的历史记录
+
+
+FIXME TR07没指令
+
+TR07 这边突然没指令了
+设备信号什么的都有吗？
+设备上下游信号都在的
+
+--设备的字段communicationstate=REMOTE且字段machinestatename=DOWN(不合理)
+select communicationstate,machinestatename,m.* from machine m where machinename like '2FWRF01%'
+处理方法：重启AOI恢复
+问题真因：ThincknessAOI没有发收片信号导致
+
+
+FIXME TR09异常
+
+TR09异常，006CST第九层有片，ET40刚测完一片，Robot表示还是要放入第九层，导致Robot异常,信息交互异常，请cim同志排查
+哪个卡夹？
+2MCT-0006
+看2MCT-0006 Slot9站点在Encap啊，为啥设备产出后进卡自动跳站了?导致CST内站点不一致，是不是这个原因？
+设备报了track out，肯定到下一站了
+是啊，所以我想知道是不是和这个有关系，这个情况怎么解决
+这种情况是信息已经到2MCT-0006，但实物没到。所以现在需要现场手动将片放入卡夹，然后手动过账(有账无料)
+信息也没到，还在ET40(无料无账)
+
+
+
+FIXME ET40Robot不取片
+
+TR10从OP45取片，一半不动了
+玻璃在手臂上吗，在手臂上先找大元
+还没碰到片呢
+手臂已经动作了吗
+要取片往外拿
+动到一半停了？
+对
+直接找大元
+先把厂商叫进来看看，这个不能等，时间长基板就废了
+那我帮忙联系一下大元吧
+
+故障发生时OP45有报警或者切到手动吗
+欣亦华到达现场的时候，robot无任何报警，且使能也是有的，所以不是robot手动或者报警引起的 目前判断是op45与大元交互中断 大元会给robot hold暂停的指令  
+需要在cim log里确认下当时信号交互是不是断了
+
+刚才取出那片帮制造做下账吧 手动放入了cst
+【重要异常】1.产品：ENC42.工序：Encap3.问题：OP45完成后Robot不取片(已解决)解决后因Robot未收到CIM指令，无法取片4.影响时间：2H
+现在推断这张片重账，还在查在哪个设备出现重账，现在办法一个是在ui界面手动派工，一个是手动拔片
+Tr10  tr03问题均已解决
+
+R09   OP40后CV 到 ET40Robot不取片
+【 一般异常】
+1.产品：PSMT
+2.工序：SMT
+3.问题描述: TR09   OP40后CV 到 ET40Robot不取片, 原因大元厂商发送信号为N导致不取片，大元厂商只有一人在对应TR05，TR09暂时无厂商对应    
+4影响时间：1.5H
+5影响产能：7Pcs
+
+
+FIXME 回流焊设备不接片
+
+问题主题：OP30复判结束后，基板停留在回流焊前不进片
+处理方法：
+3:00-5:00之前，基本上没有关于2FTDB01的（ComponentPanelInByUnit） 和（ComponentPanelOutByUnit）信息
+五点左右，技术重启设备后恢复1
+
+8月7日凌晨，SMT线回流焊设备不接片原因：
+由于8月5日21:24左右回流焊设备出片时OnSendAble信号，大于设备没有在规定时间内OnReceiveAble信号，回流焊为了减少撞片的可能，停止设备前端接片。直至8月7日凌晨5:09重启软件，回流焊设备接片信号恢复。
+以上，请须知。
+
+【一般异常】
+1.产品：BAP2
+2.工序：SMT
+3.问题： 回流焊前CV无动作
+4.描述：OP30复判结束后，基板停留在回流焊前不进片，导致基板无法后流，生产停滞，技术/Inline/ CIM 正在对应排查
+5.影响时间：2：30---？
+6.影响产能：5pcs
+
+
+FIXME Unpack LD破片
+
+有片的卡夹搬到unpacking load口夹锁
+会，不夹怎么知道有片(再放panel会让panel重叠，容易造成破片)
+
+处理方法：Unpack上卡后直接下空账，不会向mes请账。所以unpacker不能上有玻璃的卡夹，制造上的卡里有玻璃设备没有感应到，导致玻璃碎片
+
+【生产异常】
+1.产品：BAP2
+2.工序：Unpack
+3.问题：Unpack LD破片5pcs
+4.描述:因SBK LD未投完CST解锁后无法重新Clamp，需将CST搬走后重新搬回夹锁
+19:00因搬送至PFST05未成功，制造将CST搬至Unpack Port1口，正常情况CST内存在信息且站点不一致，Port口应自动Cancel，重新下达搬出指令时发现Port口状态为Ready To Process无法搬走，现场去Unpack查看时CST正在下降，CST内基板已压碎5pcs；
+还请Inline&CIM排查UPK LD防呆措施&解决SBK LD无法重新夹锁情况；
+
+
+FIXME Port3的是哪个卡夹
+
+从此界面查询port口具体信息：OIC→设备管理→Port→改变Port状态/变更Port传输状态
+
+现在Port3这个站点注册了吗    IT线的    现场反馈说没有Port3的棚位
+Load Port123 没有3     白油     Unload Port456 没有6
+FMC只显示两个口，实际是三个 这个只是没画出来
+明天我们会现场测试  到时候有问题再反馈吧  嗯嗯  就是确认一下这个
+这个你们要实时统计。有些卡是厂商自己搬的，MES没收到实时位置信息
+
+
+FIXME 更新CIM PC/机械手臂不动
+
+问题：机械手臂OP40S无法取片(不动)
+解决：打7654找EAS
+
+问题：更新CIM PC
+解决：打7654找EAS
+
+
+FIXME 因喷码二维码全部在产品背面，设备端扫描载具二维码，无法获取产品panel信息
+
+【一般异常】
+1.产品：13.7 POB
+2.工序：SPI /OP30/OP40
+3.问题 : 因喷码二维码全部在产品背面，设备端扫描载具二维码，无法获取产品panel 信息，还请各技术科室同事推动cim以及设备厂商尽快修改。
+4.影响时间：1Q/1min
+5.影响产能：48min
+
+处理方法：现场手动翻转屏幕暂时扫描panel二维码解决
+问题真因：
+固晶线是一个站点，track in的话就没法扫载具了，需要先确认设备之前能否传递数据，如果不能传递数据只能扫描panel的二维码
+如果站点内设备间不能传递jobdata的话，就需要修改flow，将一个站点拆分成多个站点

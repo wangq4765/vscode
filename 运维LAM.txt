@@ -1,0 +1,1079 @@
+单片：pcs
+
+物强/化强是工艺
+
+判NGpanel进rework
+
+TFOG(出货类型)：OIC→生产计划→TFOG
+
+sensor白玻璃→Q→贴合1段→贴合2段
+贴合分段产出
+
+贴合以lot为单位
+贴合来料每个lot40片
+
+工艺流程名称：LGSMP71
+FG Code：SG080FBE-A72-HH00
+
+--FGCODE生管注册
+一个spec对应一个flow
+一个flow对应多个spec
+
+
+
+
+
+贴合R1000中的R是Rework的意思
+T/V/P都是一套工艺的定义(T6000是主站点，V1050是子站点)
+
+STEP_2NDCUTTING：T1000
+STEP_PALLETIZING：P9000
+STEP_CREATEOQALOT：Q8000
+STEP_OQAJUDGE：Q8050
+STEP_FGMS：B9000
+
+Final Test和电镀之间存在着密切的联系，主要表现在以下几个方面：
+1. 电镀是一种表面处理技术，其目的是在物体表面形成一层金属薄膜，以提高其耐腐蚀性、美观度和机械强度。在电镀过程中，需要进行一系列的检测和测试，以确保电镀质量符合要求，其中就包括Final Test。
+2. Final Test是指产品生产过程中最后的测试环节，用于检验产品是否符合规格和质量标准。在电镀行业中，Final Test可能包括对电镀层厚度、附着力、耐腐蚀性等进行测试，以确保电镀质量符合要求。
+3. 电镀行业中，Final Test也可以用于检验电镀机的性能和稳定性。例如，对电镀机的电流、电压、温度等进行检测和测试，以确保电镀过程的稳定性和可靠性。
+4. 在一些特定的电镀应用领域，如半导体、光电子等领域，Final Test的要求更加严格和复杂。这些领域中的电镀产品需要经过多次测试和检验，以确保其符合高精度、高稳定性的要求。
+
+
+
+
+
+
+TTL是模组ID
+
+物料=主材(材料)
+
+主材是LCM那么就是LCMID
+
+下面的ID是为了标记这个panel用了哪些主材
+
+lotname(PanelID)：5S5G3600002C7DG
+LCMID(主材是LCM)：2304077760U365104P36
+TTLID(主材是TTL)：99095191E36JT060U365(TTLID和LCMID同时出现，其他ID均为空)
+RMATTLID：23020716B0A06D039D0000000000000000000000000000A(RMATTLID出现，LCMID有空的也有不为空的，其他ID均为空)
+MODULEID：7ZA31983SP0T002TR
+TPID(绑定出货标签)：CN0YY4J6BO50082F7461A00(TPID出现，其他ID均为空)
+CGID(主材是CG)：30981419052003767(CGID和MODULEID同时出现，其他ID均为空)
+
+SELECT LOTNAME
+FROM LOT
+WHERE (LOTNAME = :LOTNAME)
+OR (TTLID = :LOTNAME  )
+OR (LCMID = :LOTNAME)
+OR (RMATTLID = :LOTNAME)
+OR (MODULEID = :LOTNAME)
+OR (TPID = :LOTNAME) 
+OR (CGID = :LOTNAME)
+OR (LOTNAME=(SELECT LOTNAME FROM BSBLU WHERE BLUID= :LOTNAME)   )
+OR (LOTNAME=(SELECT LOTNAME FROM BSPCBA WHERE PCBID= :LOTNAME) 
+
+
+
+
+
+
+--SPC相关表.txt
+SELECT * FROM POSMACHINE where conditionid like '%TV101WUM-AN0-HB40%'
+SELECT * FROM TPFOMPOLICY WHERE PRODUCTSPECNAME = 'TV101WUM-AN0-HB40' 
+SELECT * FROM SPCCONTROLSPECITEM WHERE SPCCONTROLSPECNAME LIKE '%TV101WUM-AN0-HB40%' 
+SELECT * FROM SPCCONTROLSPECRULE  WHERE SPCCONTROLSPECNAME   like '%TV101WUM-AN0-HB40%' 
+SELECT * FROM SPCCONTROLSPECCAPABILITY WHERE SPCCONTROLSPECNAME like '%TV101WUM-AN0-HB40%'
+SELECT * FROM SPCCONTROLSPECCHART WHERE SPCCONTROLSPECNAME like '%TV101WUM-AN0-HB40%'
+SELECT * FROM SPCCONTROLSPEC WHERE  SPCCONTROLSPECNAME like '%TV101WUM-AN0-HB40%'
+SELECT * FROM POSDCSPEC WHERE CONDITIONID like '%TV101WUM-AN0-HB40%'
+SELECT * FROM DATACOLLECTSPECITEM WHERE DCSPECNAME like '%TV101WUM-AN0-HB40%'
+SELECT * FROM DATACOLLECTSPEC WHERE DCSPECNAME like '%TV101WUM-AN0-HB40%'
+上下限可以直接改
+SPCCONTROLDATACUMULATIVERESULT   删掉超限的数据，然后重新录入数据，根据重新录入的ID修改成指定时间
+
+
+
+FIXME 开通账号
+
+副号前加A：
+A10296838
+AGY0013990
+
+帮我们科室全员开通华为新增作业站点权限：OIC→在制品过账→OffineStep→下面的9个界面全部开通权限
+选择各个岗位中的1个工号分别开通组权限(基本都开通了，少量之后再开通)
+
+因工作需要，需开通LAM OIC，LAM OIC参考人账号30105392   账号如下：
+胡立婷 10318200
+李靳  10335481
+温晨  10074914
+袁少华 50115785
+夏魏东 10091461
+曹皖红 30103584
+
+10318200-1胡立婷
+10091461-1夏魏东
+其他人的userid都是工号，密码都是12
+之前的不能直接添加功能吗
+10318200   10091461  功能不全，直接加上就好了
+已经有账号的就把缺失的功能加上就可以了，如果没有账号的就开通账号再添加功能，是这样吗？
+嗯嗯
+有许多打印标签的功能，具体你需要哪个？拿一个账号我参考一下
+业务协助申请上有写
+
+
+
+FIXME 添加站点
+
+添加站点不需要维护设备
+
+贴合加站点和Sensor一样
+
+在WIP上显示出来需要修改代码(界面WIP By Step展示更多的站点是这样的)
+
+TV142FSM-AD0-H5L0    LGSMP97
+V1000 --- A1010---A1020---F1000
+WIP上加两个站点
+
+
+
+FIXME 删除站点
+
+11.45的纳米海绵擦拭站点(A1070)取消，FG-Code为TV115C9M-L20-5BP0
+原因：跟客户汇报的CP里无此站点，目前擦拭短边时，亦会刮蹭到LCM的FPC
+切换时间：2023/8/1 12:30 以后
+
+OIC→信息查询→WIP→WIP By Step
+Process：MainBack
+FG Code：TV115C9M-L20-5BP0
+--最后点击“查询”按钮后就可以了
+
+--一个flow对应好几个fgcode
+select processflowname,p.* from productspec p where productspecname like 'TV115C9M-L20-5BP0%'--LGSMP0E
+select * from productspec where processflowname like 'LGSMP0E%'
+
+--这个Flow有多少WIP
+select * from lot 
+where processoperationname like 'A1070%' 
+and productspecname in ('TV115C9M-L20-5BP0','TV127XUM-LW1-D050','TV115C9M-L20-DBP0','TV127XUM-LB2-DSP1')
+
+
+
+FIXME 工单不平
+
+000100781430工单投入显示为1280，实际该工单绑定了1351
+
+处理方法：
+查询1351其中有报废品再投入的，
+以及离职人员的操作记录，
+需要担当进一步排查真因
+
+
+FIXME 变更panel等级
+
+
+202373M003358无法接收---SNS代华强（存在R级产品）
+解决办法：无法修改(rework)
+
+
+
+贴合修改panel等级只修改lot表
+
+贴合productgrade是A，和G几乎一样(能过账，某个流程有区别)
+
+panel等级更改(让制造在OIC上修改)
+路径：OIC→特殊操作→变更属性→变更panelGrade
+
+问题详细描述：panel经过V1050后等级从G变为A，制造在跳站到之前的站点时没同步变更等级
+处理方法：修改panel等级
+问题真因：制造在跳站到之前的站点时没同步变更等级
+
+
+
+
+
+8.9星辰 BF089FBA-N50-H001 现有6+447 G0等级出货需求，库存需要拆分后对应相应DN进行拣配并回复拣配信息后才可发货；现由于RT拆分完入库后自动变更为A0等级，QT&SO等级不一致无法出货；
+特此邀请将拆分完入库成A0等级的产品，变更回原先的G0等级进行出货。
+
+将字段lotgrade由A修改成G就可以了(RT流程强制是A)
+
+还是不行
+Panel对应的Box和Pallet等级也要修改，这样就可以了
+
+--修改等级包含两个表：lot和processgroup
+select lotgrade,processgroupname,l.* from lot l where lotname in (select * from cimtestlot) for update
+update lot set lotgrade='G' where lotname in (select * from cimtestlot)
+select lotgrade,p.* from processgroup p 
+where processgroupname in (select processgroupname from lot where lotname in (select * from cimtestlot)) for update
+--上面是修改Box，下面是修改Pallet
+select lotgrade,p.* from processgroup p where processgroupname in ('20238TM00072','20238TM00073') for update
+
+
+--上下颇为相似
+
+233273914
+233274060
+这个FGCODe OIC选成EN 的了，帮忙改下或者删除下
+
+--修改fgcode和productiontype包含两个表：lot和processgroup
+select * from lot where processgroupname in (SELECT processgroupname FROM processgroup where superprocessgroupname in ('233273914','233274060'))
+update lot set productspecname = 'TE160QDM-AW0-HDM0',productiontype = 'PRODUCTION' where processgroupname in (SELECT processgroupname FROM processgroup where superprocessgroupname in ('233273914','233274060'))
+SELECT * FROM processgrouphistory where processgroupname in ('233273914','233274060')
+update processgroup set fgcode = 'TE160QDM-AW0-HDM0',lottype = 'PRODUCTION' where superprocessgroupname in ('233273914','233274060')
+--上面是修改Box，下面是修改Pallet
+update processgroup set fgcode = 'TE160QDM-AW0-HDM0',lottype = 'PRODUCTION' where processgroupname in ('233273914','233274060')
+
+
+FIXME 修改panel状态
+
+5S313400004E8DA的panel状态不对做不下去
+--将字段lotprocessstate从RUN改为WAIT
+SELECT lotprocessstate,l.* FROM lot l where lotname like '5S313400004E8DA%' for update
+
+
+FIXME 工单与RT/RMA Pallet绑定
+
+
+表consumable锁表了，解锁即可
+
+OIC(PH)→生产计划→绑定工单→工单与RT/RMA Pallet绑定
+
+if(!atr.isEmpty()){
+    consumableData = CommonUtil.getConsumableInfo(lotData.getLcmID());
+
+    if(!consumableData.equals(null)){
+        udf.put(Consumable.FIELD.productRequestName, receiveWorkOrder);		
+        com.cim.idm.mespackage.consumable.management.info.SetEventInfo setEventInfo = new com.cim.idm.mespackage.consumable.management.info.SetEventInfo();
+        setEventInfo.setUserColumns(udf);
+        
+        ConsumableServiceProxy.getConsumableService().setEvent(consumableData.getKey(), eventInfo, setEventInfo);
+    }
+}
+com.cim.idm.mespackage.lot.management.info.SetEventInfo setEventInfo = new com.cim.idm.mespackage.lot.management.info.SetEventInfo();
+setEventInfo.setUserColumns(lotDataUdf);
+LotServiceProxy.getLotService().setEvent(new LotKey(lotName), eventInfo, setEventInfo);
+lotQty++;
+
+2023-09-01 01:38:54,498 [AssignWOToPallet] [20230901013849130479] [THREAD-ID=106] [DEBUG] - Executing prepared SQL query
+2023-09-01 01:38:54,498 [AssignWOToPallet] [20230901013849130479] [THREAD-ID=106] [DEBUG] - Executing prepared SQL statement [select * from Consumable where consumableName=?]
+2023-09-01 01:39:00,375 [AssignWOToPallet] [20230901013849130479] [THREAD-ID=106] [ INFO] - ▶ START ConsumableServiceImpl.setEvent DataKey=[ConsumableName:T5AZ236ZRA0000A8E]
+2023-09-01 01:39:00,377 [AssignWOToPallet] [20230901013849130479] [THREAD-ID=106] [DEBUG] - Executing prepared SQL query
+2023-09-01 01:39:00,378 [AssignWOToPallet] [20230901013849130479] [THREAD-ID=106] [DEBUG] - Executing prepared SQL statement [select * from Consumable where consumableName=? for update]
+2023-09-01 01:39:27,419 [AssignWOToPallet] [20230901012926549445] [THREAD-ID=102] [ INFO] - ▶ ENDNG ConsumableServiceImpl.setEvent DataKey=[ConsumableName:T5AZ236ZRA0000A8E] 499604 ms (3, 499597, 2)
+2023-09-01 01:39:27,422 [AssignWOToPallet] [20230901012926549445] [THREAD-ID=102] [ INFO] - DataAccessException: [ConsumableService.setEvent] 无法访问数据。 ErrorCode=[ORA-01013: 用户请求取消当前的操作
+] SQL=[select * from Consumable where consumableName='T5AZ236ZRA0000A8E' for update] BindSet=[T5AZ236ZRA0000A8E]
+2023-09-01 01:44:35,583 [AssignWOToPallet] [20230901013434104183] [THREAD-ID=104] [ INFO] - ▶ ENDNG ConsumableServiceImpl.setEvent DataKey=[ConsumableName:T5AZ236ZRA0000A8E] 475929 ms (3, 475922, 3)
+2023-09-01 01:44:35,594 [AssignWOToPallet] [20230901013434104183] [THREAD-ID=104] [ INFO] - DataAccessException: [ConsumableService.setEvent] 无法访问数据。 ErrorCode=[ORA-01013: 用户请求取消当前的操作
+] SQL=[select * from Consumable where consumableName='T5AZ236ZRA0000A8E' for update] BindSet=[T5AZ236ZRA0000A8E]
+
+
+
+FIXME PCBA信息与产品解绑
+
+需要发邮件
+
+SELECT PCBID,TPID,l.* FROM lot l where PCBID in('78430GD3A34M0086') 
+
+因生产需要，请协助将附件中的PCBA信息与产品解绑，并清空PCBA信息，以便PCBA可以正常生产，感谢！
+DP228 PCBA 麻烦拆解下TP信息和清空PCBA信息，邮件已发
+拆解下TP信息啥意思？将TPID删除，是这样吗？
+现在他们是绑定关系，需要拆解TP ID后，清空PCBA信息
+除了清除PCBA ID ,还要清除PCBA绑过的信息，不然绑不上新的
+星期一搞好就行，之前是代利民搞过
+你没做过为什么觉得能做呢？
+
+
+FIXME 接收Sensor Lot报错
+
+OIC→生产计划→接收→接收Sensor Lot
+左下角报错：[LOT-9001] Panel ID[5S3S3500019A2DG]已生成
+
+问题详细描述：
+5SCQ-0338  5S3S35X0622和 5SCQ-0789  5S3S35K0166接收的时候报错
+(LOT-9001)Panel ID(5S3S3500019A2DG)已生成
+
+处理方法：Product表数据清掉  -----不熟悉的人员不建议操作
+问题真因：取消Sensor LOT接收的时候 Product数据没删  只删了 LOT表的数据
+
+
+FIXME F2051电测界面闪退
+
+33333O23061200959
+我是说贴合哪个界面，截个图
+OIC→在制品过账→LAM→F2051电测
+输入panel id后就闪退吗？
+输入后回车  直接闪退
+我试了，没有闪退，但是左下角有错误，你也是这样吗？
+这个站点 需要输入 电测程序 你电脑上没有程式
+电测程序是啥？
+这个站点是需要上传电测结果的，这是个电测站点
+导入excel吗？
+不是
+小乌龟 没办法加程式  必须主机电脑
+小乌龟又是啥？
+客户机
+输入后回车直接闪退是这个界面闪退还是整个OIC都闪退了？
+整个OIC，我没办法演示给你看，演示就直接退
+临时解决方案：关闭FA检测，待明天处理
+
+
+FIXME 下拉框“设备Recipe名称”是空的
+
+问题：OIC(LAM)→在制品过账→CUT→Cutting：下拉框“设备Recipe名称”是空的，选不到2
+解决：在表TPFOMPOLICY添加一行记录就可以了
+SELECT * FROM POSMACHINERECIPE where conditionid like '%SG116FBB-A26-H800%' for update--LAMINATION_SG116FBB-A26-H800_LGSMP06_T1000_LINE6C
+SELECT * FROM TPFOMPOLICY where PRODUCTSPECNAME = 'SG116FBB-A26-H800' for update  and PROCESSFLOWNAME = 'LGSMP06' for update
+SELECT * FROM BSCUSTOMQUERY WHERE QUERYID = 'GetRecipeList' AND VERSION = '00001' 
+/* GetRecipeList [00001] */
+  SELECT TPFOM.FACTORYNAME,
+         TPFOM.PRODUCTSPECNAME,
+         TPFOM.PROCESSFLOWNAME,
+         TPFOM.PROCESSOPERATIONNAME,
+         TPFOM.MACHINENAME,
+         POSM.MACHINERECIPENAME
+    FROM TPFOMPOLICY TPFOM, POSMACHINERECIPE POSM, MACHINE M
+   WHERE M.MACHINENAME = '5LCLS61'
+     AND M.SUPERMACHINENAME = TPFOM.MACHINENAME
+     AND TPFOM.CONDITIONID = POSM.CONDITIONID
+     AND TPFOM.FACTORYNAME = 'LAMINATION'
+     AND TPFOM.PRODUCTSPECNAME = 'SG116FBB-A26-H800'
+     AND TPFOM.PROCESSFLOWNAME = 'LGSMP06'
+     AND TPFOM.PROCESSOPERATIONNAME = 'T1000'
+ORDER BY POSM.MACHINERECIPENAME
+
+
+FIXME 机种未导入Mapping关系
+
+OIC→模组在制品过账→接收→模组工单Mapping关系维护/模组工单Mapping关系查询/Mapping关系导入
+PS：Mapping关系实际上就是表posglassmap(还有posglassmaphistory)
+
+你点击track in就过账了吗？
+从箱子里把panel送到设备里，是这样吗？
+是的
+
+OIC→模组在制品过账→切割→2ndCutting_S1000
+输入BoxID后左下角出现：没有Q-Panel数据
+SELECT *
+FROM LOT
+WHERE 1 = 1
+AND PROCESSGROUPNAME like '5SG4Q37000199%'
+--AND PRODUCTTYPE = 'Qpanel'
+--AND LOTSTATE = 'Released'
+
+点击"Q-Panel列表"和"Single Panel List"中间的→后左下角出现：该机种[{0}]未导入[{1}]的Mapping关系
+TTV127XUM-LW1-D050虚拟CG标签维护(字段BOXGBN在表productspec和poslabelattribute中都存在)
+SELECT * FROM poslabelattribute where conditionid in ('LAMINATION_TV115C9M-L20-DBP0','LAMINATION_TV127XUM-LW1-D050')
+SELECT * FROM productspec where productspecname in ('TV115C9M-L20-DBP0','TV127XUM-LW1-D050') 
+查询FGCode路径：OIC→生产计划→基准信息→FGCode管理：发现左边都是黑框，右边可以通过"FG Code"搜索，也可以通过"描述"来搜索
+
+标签维护+FGCode维护：
+1、在表poslabeltypeposlabeltype中添加4条记录(模仿)
+2、在表poslabelattribute中添加一条TTV127XUM-LW1-D050的记录
+poslabeltype(LAM)=poslabeltype(SNS)
+poslabelattribute(LAM)=posreceiveproductspec(SNS)
+
+
+FIXME 界面"CGReceiveFromFGMS"添加FG CODE下拉框
+
+界面"CGReceiveFromFGMS"添加FG CODE下拉框(OIC(LAM)→生产计划→接收→虚拟CG信息接收)
+--模仿一行记录把FGCODE(TV115C9M-L20-HBP2)加进去就可以了
+SELECT ENUMNAME,ENUMVALUE,DESCRIPTION FROM ENUMDEFVALUE WHERE ENUMNAME = 'VistualCGInfo' for update
+界面"WipByStep"下拉框Process选择"MainLam"(能搜索到所有的产品)且下拉框CheckInCode选择"M02,M01"，下面没有特定FGCode
+没有WIP的原因：这些panel的lotstate是Created，不是Inspected
+解决：制造搞定了，少操作了一步，只绑了工单，没有投入进7000站点
+
+
+FIXME Lot在返修不能操作
+
+附件ID信息无法过账(excel)，帮忙看下
+
+parentlotname是母lotname
+
+OIC→在制品过账→FOG→FOG Bonding
+WARNING：Lot在返修，不能进行这个操作
+
+--OIC→信息查询→Panel→Panel历史查询
+--在这个界面输入Panel/TTL/LCM ID查看对应的parentlotname(字段为"母Lot名称")
+--然后执行下面语句
+update lot set parentname ='5S313400003A4BD' where lotname = '5S313400003A4BD'
+
+select parentlotname,l.* from lot l where lotname in ('5S313400004E1CH',
+'5S313400003A4BD',
+'5S313400005D0BB',
+'5S313400003A4CE',
+'5S313400002D3CD',
+'5S313400002A1CB',
+'5S313400003A8BE'
+)
+
+
+
+
+if (objLot.REWORKSTATE != ReworkState.NotInRework)
+{
+    // Lot在返修，不能进行这个操作
+    ExceptionMsgBox.This.ShowMessageBox(MessageType.Warning, "SPEC10040", this.Text);
+    return false;
+}
+
+
+FIXME TTLID VERSION!
+
+必须输入TTLID VERSION!
+
+信息查询→Panel→Panel信息查询：JSA336K3GS00000X6(查询到这是LCM ID)
+在制品过账→OQA→OQAPanelJudge：JSA336K3GS00000X6
+
+他本身就不绑定ttlidversion
+我都说了，你要问他确定要绑定ttlidversion嘛？如果绑定，我来改，不绑定就把ttlidversion清掉
+他本身注册就是可以不绑定，但是绑定了，现在paneljudge必须要求绑定，因为之前绑定了，但是注册又是不绑定，所有就有问题了
+不绑
+那不就结了，清掉，让他走邮件
+找OQA龚传强
+
+if (string.IsNullOrEmpty(this.txtTtlVerison.Text) && workLot != null && !string.IsNullOrEmpty(workLot.TTLIDVERSION))
+{
+    ExceptionMsgBox.This.ShowMessageBox(MessageType.Warning, "B5TM00040", this.Text);
+    return false;
+}
+
+LOT objLot = new LOT();
+objLot.LOTNAME = txtLOTNAME.Text;
+objLot = lotService.GetLotInformationRow(objPara, "00032");
+
+workLot = new LOT();
+workLot = objLot;
+
+if (this.txtCurrentStepName.Text.Equals(ProcessOperationName.Finalnspection) ||
+    this.txtCurrentStepName.Text.Equals(ProcessOperationName.VisualInspection) ||
+    this.txtCurrentStepName.Text.Equals(ProcessOperationName.OQAVisualInspection) ||
+    this.txtCurrentStepName.Text.Equals(ProcessOperationName.UVCuring))
+{
+    objLot = lotService.GetLotInformationRow(objPara, "00032");
+}
+else
+{
+    objLot = lotService.GetLotInformationRow(objPara, "10030");--panel在Q8050用的是这个sql
+    // TTLIDVERSION是21WXM415CXSTLY36861902，不为空
+}
+
+LOT opjara = new LOT();
+LOT OPRESULT = new LOT();
+// PRODUCTSPECNAME='EV121WXM-A14-HD30'
+opjara.CONDITIONID = "LAMINATION_" + objLot.PRODUCTSPECNAME;
+OPRESULT = lotService.GetLotInfo(opjara, "10008");
+// SELECT * FROM POSLABELATTRIBUTE P WHERE P.CONDITIONID like '%EV121WXM-A14-HD30%'--TTLIDVERSIONFLAG=="N"
+// 好像是TTLIDVERSIONFLAG="N"的原因
+// 本来这玩意就是N
+if (OPRESULT.TTLIDVERSIONFLAG == "Y")
+{
+    this.uLabel3.Visible = true;
+    this.txtTtlVerison.Visible = true;
+    this.txtTtlVerison.Clear();
+    //this.txtTtlVerison.Focus();
+}
+else
+{
+    // 原因不是txtTtlVerison.Text没有显示出来，取不到值(本来txtTtlVerison.Text就为空)，而workLot有数据
+    this.uLabel3.Visible = false;
+    this.txtTtlVerison.Visible = false;
+}
+
+FIXME OQA抽检
+
+千楠你好，帮忙查下表格里，sheet1＆sheet2 对应ID 刷取下有无经过OQA抽检+对应名单，感谢哈
+
+select processoperationname,l.* from lot l where lotname in (
+select distinct lotname from lothistory where oldprocessoperationname ='Q8050' 
+)
+
+FIXME 绑定Group ID
+
+
+OIC→特殊操作→特殊操作→GroupID绑定
+
+特殊情况：groupid在T1000一切之前已经有了，需要覆盖掉
+对应的界面：OIC→特殊操作→变更属性→变更GroupID(单片)/批量变更GroupID(多片)
+
+7.0" 精电 GG 7004 (SG070FBE-AL8-H000) 切割下来自带Group ID：EM-7MCYZ，7月17号下午 16：55-21:03 过T6000的屏是验证批，需绑定Group ID：EM-MCYZ
+877PCS Group ID已由EM-7MCYZ变更为EM-MCYZ
+
+select lotname,productspecname,processflowname,processoperationname,processgroupname,groupname from lot where lotname in(
+  SELECT lotname FROM LOTHISTORY WHERE PRODUCTSPECNAME='SG070FBE-AL8-H000'
+  AND OLDPROCESSOPERATIONnaME='T6000' AND EVENTNAME='TrackOut'
+  and timekey >='202307171655000000000'and timekey<='202307172103000000000') and processgroupname  is null
+
+
+
+
+--提供了excel(excel中有panelid)
+
+现需要管控8.9星辰单管 450pcs（FG CODE：BF089FBA-N50-H001），特邀请CIM同事将附件list 绑定Group ID：EM-89-HJ，感谢~
+
+--将excel中的panelid导入表cimtestlot
+select * from cimtestlot for update
+
+--更新groupid
+update lot set groupname ='EM-89-HJ' ,lasteventcomment ='制造20230717邀请绑定GroupID' where lotname in (
+select distinct lotname from cimtestlot)
+
+--检查groupid
+select groupname,l.* from lot l 
+where lotname in (select distinct lotname from cimtestlot)
+
+
+
+--多次刷groupID
+
+11.6" Keystone MLK Relayout-B8  NV116WHM-A23-H880
+预计量产今晚夜班开始FOG，请制造同事帮忙关注站点和开始时间，CIM同事协助绑定ID:EM-FPCA621 
+
+FOG是站点S1250
+
+可以将lotname导入表cimtestlot中，也可以在excel单元格中前后都加上'
+
+--lamination
+select groupname,l.* from lot l 
+where lotname in (select distinct lotname from lothistory where oldprocessoperationname ='T6050' 
+and productspecname ='NV116WHM-A23-H880' and timekey >'2023062701')
+
+--这个是今天需要刷的groupID，大概是四天，刷的话得勤一点，大概四小时刷一次，大家夜班也注意下，不是四小时也没关系，别太久就行
+--刷的时候可以改一下时间哈，不然老是重复刷同一个panel
+update lot set groupname ='EM-FPCA621' ,lasteventcomment ='制造20230627邀请绑定GroupID' where lotname in (
+select distinct lotname from lothistory where oldprocessoperationname ='T6050' 
+and productspecname ='NV116WHM-A23-H880' and timekey >'2023062701')
+and processgroupname is null
+
+FIXME 退回Bank
+
+帐  生管  财务  ERP
+
+(bank)切割后变成panel了，不能以panel为单位退回到Sensor Q段
+panel实际为G，OIC上是N且没有reasoncode ————变更PanelGrade
+这是正常情况：sensor以Q为单位至贴合，Q中有G也有N，为N的就做不下去了
+
+1、CancelCuttingTrackIn：如果T1000已经做了TrackIn(Processing)，需要做取消动作CancelCuttingTrackIn
+2、取消投入：提前修改bsreceivelot表的productquantity/goodsinglequantity/singlequantity
+3、工单与lot表解除绑定工单
+4、取消接收sensorlot，需要删除lot表和product表
+select * from lot where lotname='' for update
+select * from product where lotname='' and productstate='InProduction'
+
+
+因生产需求，请将卡夹5SCQ-0765（5SHD36K0026），卡夹实物未动，退回Bank内，请协助处理
+
+STEP_2NDCUTTING：T1000
+
+接收：Sensor→贴合
+退回：贴合→Sensor
+
+--贴合第一个站点就是T1000(cutting站点)，如果lot不在这个站点就说明已经切割过了(去下面的站点了)，这时就无法退回Bank了
+SELECT processflowname,processoperationname,carriername,l.* FROM lothistory l where lotname like '5SHD36K0026%'
+SELECT * FROM processflowseq where processflowname like 'LGSMP85%'
+Create Raw：创建原始
+Calculate Product Quantity：计算产品数量
+Assign WO To Lot：为lot绑定工单
+Deassign WO From Lot：为lot解绑工单
+
+--删除前先备份(两个表将搜索到的记录全部删除)
+select * from product where lotname like '5SHD36K0026%'
+select * from lot where lotname like '5SHD36K0026%'
+
+--退回Bank需解绑工单
+生产计划→接收→取消接收Sensor Lot：输入lotname后点击下面的“取消接收”按钮就可以了
+--下面是eclipse中的代码
+bpel是CancelReceiveCell，
+sendBySender：SENCIMSender
+INSERT INTO CELLPANELINFO
+bindMap.put("PACKINGTYPE", "正品退库");
+DELETE FROM PROCESSGROUP WHERE PROCESSGROUPNAME = :PROCESSGROUPNAME
+DELETE FROM LOT WHERE PROCESSGROUPNAME = :PROCESSGROUPNAME
+
+FIXME 重置ID/不存在的Panel情报
+
+LAM数据库搜索不到，SNS数据搜索到：没有被接收
+--LAM数据库中表bsreceivedlot可以搜索到说明LOT(CST)已经接收了
+SELECT * FROM bsreceivedlot where durablename like '%5SCQ-0062%' and lotname like '5S7J34K0003%'
+
+
+制造：重置ID
+界面"Panel信息查询"左下角：不存在的Panel情报
+
+5SUL3600002D9AF
+5SUL3600008D3CE
+5SUL3600004C1DC
+5SUL3600010C0HF
+四块都重置ID
+
+处理方法：Lot表  TPID清掉
+
+OIC→信息查询→Panel→Panel信息查询
+
+TPID(绑定出货标签)：CN0YY4J6BO50082F7461A00(TPID出现，其他ID均为空)
+
+select tpid,l.* from lot l where tpid='5SUL3600016E0FF' for update--将搜索到的单元格tpid清除就可以了
+
+--SELECT LOTNAME,TPID,l.* FROM lot l where tpid like '5SUL3600008D3CE%' for update
+--SELECT LOTNAME,TPID,l.* FROM lot l where lotname like '5SUL3600008D3CE%' for update
+LOT objParm = new LOT();
+objParm.LOTNAME = this.txtSelPanelID.Text.Trim();
+Collection<LOT> colLot = new Collection<LOT>();
+colLot = lotService.GetLotList(objParm, "00038");
+if (colLot == null || colLot.Count == 0)
+{
+    this.txtResultComment.Text = fn_ErrorMessages("SPEC50001");
+    soundUtil.PlaySound(SoundUtil.SoundType.ERROR);
+}
+else
+{
+    SetPanelInfo(colLot);
+}
+
+
+
+FIXME Boxing
+
+扫码枪扫码的时候，Boxing界面的Panel ID出现E34L63620000331H35711111B
+
+利民哥自己解决的
+
+ENUMDEFVALUE objPara1 = new ENUMDEFVALUE();
+objPara1.ENUMVALUE = objlot.PRODUCTSPECNAME;
+ENUMDEFVALUE resultNew = facService.GetEnumDefValue(objPara1, "00004");
+// resultNew.ENUMNAME = “resultNew.ENUMNAME”引发了类型“System.NullReferenceException”的异常
+if (!string.IsNullOrEmpty(resultNew.ENUMNAME))
+
+
+
+FIXME Palletizing
+
+OIC(LAM)→在制品过账→Packing→Palletizing
+左下角报错：[FrameworkErrorSignal] CanNotDoAtLotStateException : CanNotDoAtLotStateException: Can not execute 
+处理方法：LOT表解HOLD
+
+
+FIXME BOX周期
+
+BOX周期
+
+20239TM00129 修改BOX 周期
+
+--修改processgroup 表的CREATETIME字段
+select createtime,p.* from processgroup p
+where SUPERPROCESSGROUPNAME in('20239TM00129') 
+
+
+FIXME 拆BOX/pallet
+
+20236TM01455,    20236TM01453,  20236TM01487
+这三拍产品信息  帮忙跳站到F2050站点，并一起把BOX  ID和pallet  ID一起拆掉
+
+解决：让他自己拆(贴合制造班长有这个权限)
+OIC→在制品过账→Packing→拆解Box/拆解Pallet
+
+
+
+FIXME 标签信息维护
+
+办公室里的打印机，线里也有
+
+打印标签：NE140WUM-A13-H8M0(FGCode)
+
+OIC→在制品过账→Label→打印BOX标签/打印PALLET标签，输入Box ID后按下Enter键就可以打印了
+PS：使用的是公用电脑
+
+三个打印的标签：Box标签/Panel标签/出货标签(MDL ID)
+PS：打印后Panel标签中的文字比Box标签中的多
+
+
+
+
+
+
+
+
+
+
+
+FactoryModeler→Process→Policy→POSPolicyTable→POSLabelAttribute(对比productspec产品注册)
+
+标签参考EN FG Code(业务协助申请最下面的文字)
+GBN：一定会修改
+CN：PPT中有
+PN：PPT中有
+
+--不变
+TTLIDVERSIONFLAG：N
+TBG：ST50K86358
+LBG：AC600008K50
+TPIDVERSIONFLAG：N
+
+OIC(LAM)→生产计划→基准信息→标签管理
+--两个表都需要维护
+select * from poslabelattribute
+select * from poslabeltype
+
+
+
+
+
+MFA823648S0K00757
+MFA823648S0K0075F
+MFA823648S0K00763
+MFA823648S0K00762
+MFA823648S0K00739
+MFA823648S0K0073C
+21.0TOC2 信息重复使用
+不是工单这个是标签的信息
+没有这么多贴合那边搞错了，我刚刚看了一下，他们查询的不对就个别几片没信息，一会我把没信息的再发你吧
+原因：consumable表信息重复
+
+
+
+FIXME WIP
+
+只有history才有时间间隔2~3点
+
+T6050站点时间是6.7号半夜2~3点
+SG160FBB-A44-H800
+16.0" Frozone Non-AR
+这个机种有没有WIP
+--------------------------------------------
+select * from lothistory 
+where productspecname = 'SG160FBB-A44-H800' 
+and oldprocessoperationname = 'T6050'
+and timekey > '20230607020000000000000'
+and timekey < '20230607030000000000000'
+--表lot是实时表
+
+
+FG CODE： AV080HDB-A1B-H750
+时间：2023-07-14 02:00:00 至 2023-07-14 06:00:00
+站点：T8010过账到T8020
+------------------------------------------------
+select * from lothistory 
+where productspecname = 'AV080HDB-A1B-H750' 
+and oldprocessoperationname ='T8010'
+and processoperationname ='T8020'
+and timekey > '20230714020000000000000'
+and timekey < '20230714060000000000000'
+
+
+通过Pallet查询Box中的panelid
+无法查到数据，让其提供LCMID或者PANELID
+----------------------------------------------
+select lotname,OLDPROCESSOPERATIONNAME,EVENTUSER,TIMEKEY from lothistory  where lotname in(
+'5S3S3500008E4AB',
+'5S3S3500008E1BC',
+'5S3S3500018F7AC',
+'5S3S3500013A5BF',
+'5S3S3500008F7CC',
+'5S3S3500011E3BH') 
+and OLDPROCESSOPERATIONNAME in('F1050','V1050','V2050')
+and TIMEKEY>=20230720000000000000 and TIMEKEY<=20230726220000000000 
+and EVENTUSER in('11030541','11020668','10086583','50122133')
+
+
+FIXME DPN
+
+维护DPN
+
+select * from poslabelattribute where CONDITIONID like '%TV101WXM-AL0-DD30%'
+
+
+FIXME LCM ID
+
+表lot中的lotname都是panel
+
+表lothistory仅使用字段oldprocessoperationname
+oldprocessoperationname是当前站点，processoperationname是下一个站点
+
+下面两个都是LCMID：
+1、23040782B0C36H03MA(18位)
+2、23040782B0C36H03MA5363A8DA1726B36DAKABAA(40位)
+
+Q8050 Q4050
+TV142FSM-AD3-H5H0
+TV142FSM-AD1-H5L0
+5.15~5.18
+的TLCM ID
+SELECT LCMID,lotname,l.* FROM lothistory l--SELECT LCMID FROM lothistory
+where oldprocessoperationname in ('Q8050','Q4050')
+and productspecname in ('TV142FSM-AD3-H5H0','TV142FSM-AD1-H5L0')
+and timekey > '20230515000000000000000'
+and timekey < '20230518000000000000000'
+
+
+FIXME CG Code
+
+CG Code=reasoncode
+
+请协助将以下ID改判成CG制损报废 Rwork S面AA区划伤透光
+ID：40092023052704700
+SELECT reasoncodetype,reasoncode,l.* FROM lot l where lotname like '40092023052704700%'
+SELECT * FROM reasoncode where description like '%S面AA区划伤透光%'
+
+Dear CIM同事，你们好！
+因维护CG Code导致R1000站点相关Code无法显示，邀请CIM同事维护：
+原Code：OA62CG G面脏污  新Code：SC24 G面AA区脏污
+原Code：OA63CG G面划伤  新Code：LA004 G面划伤
+原Code：OA64CG S面脏污  新Code：SC20 S面脏污
+原Code：OA65CG S面划伤  新Code：LA004 S面划伤
+涉及机种：
+TE160QDM-AW0-HDM0 16.0 CVTE
+SG070FBE-AL8-H000 7.0" 精电 GG 7004
+SG090FBE-AL5-HH00 9.0" 精GG 7006
+SG090FBE-AL6-HH00 9.0" 精电 GG 7007
+SG090FBE-AL7-HH00 9.0" 精电 GG 7008
+update lot 
+set reasoncode='SC24' 
+where productspecname in ('TE160QDM-AW0-HDM0','SG070FBE-AL8-H000','SG090FBE-AL5-HH00','SG090FBE-AL6-HH00','SG090FBE-AL7-HH00')
+and processoperationname = 'R1000'
+and reasoncode like 'OA62CG%'
+
+
+FIXME hold/解除hold
+
+路径：OIC→特殊操作→特殊操作→Hold/解除Hold/Hold By Excel
+
+贴合直接在数据库修改，SNS最好在解除hold CST(界面)修改
+
+--解除hold一块屏
+问题：5S13400007C8FD，这片玻璃帮忙解一下Holding，外观确认是OK的，是前两天让你们Holding的那一批屏里面的，感谢(屏已流到贴合)
+SELECT lotholdstate,lasteventcomment,l.* FROM lot l where lotname like '5S113400007C8FD%'   --表lot是贴合的
+解决：将字段lotholdstate从Y改为N，字段lasteventcomment写2023/7/3协助杨善东解除hold
+
+--hold一批屏(有excel)
+因生产需求，现邀请CIM同事将此附件136pcs信息进行Hold处理，备注“达因值验证，待换S面膜材”，感谢！
+--Copy to Excel→Copy as xlsx，将这些屏的信息导入表cimtestlot后再hold
+update lot set lotholdstate='Y',lasteventcomment='达因值验证，待换S面膜材' where lotname in(select * from cimtestlot)
+
+--下面是hold一批屏，修改成lotholdstate='N'就是解除hold一批屏(提供这批屏的信息)
+问题：协助把14.2 DP228 Non-AR-华星(对应客户99打头PN码)  TV142FSM-AD1-H5L0 (V1040,V1047,V1050,V1051,F1050,F2050,T8000,V2050,P8000) 这些站点中产品信息HOLD, 感谢
+update lot set lotholdstate='Y',lasteventcomment='9.0精电7006存在裂痕风险'
+where productspecname = 'TV142FSM-AD1-H5L0' 
+and processoperationname in('V1040','V1047','V1050','V1051','F1050','F2050','T8000','V2050','P8000')
+--检验
+select lotholdstate,l.* from lot l 
+where productspecname = 'TV142FSM-AD1-H5L0' 
+and processoperationname in('V1040','V1047','V1050','V1051','F1050','F2050','T8000','V2050','P8000')
+
+--hold之前一批屏(这批屏不知道流到哪个阶段了，已经两次出现多hold屏的问题)
+因以下两个机种出现白点不良风险，现邀请Cim科同事帮忙将不良风险批进行Holding；
+风险不良时间：时间：2023/7/6 20：30~2023/7/7 17：00期间所有过T6000站点的屏
+TV140WTM-AH1-H8L3 (14.0 OGS DP110 低成本（B5）新)
+TV140WTM-AH1-H8L2  (14.0 OGS DP110 低成本（群创） )
+update lot set lotholdstate='Y',lasteventcomment='白点不良风险' where lotname in(
+select distinct lotname from  lothistory
+where productspecname in ('TV140WTM-AH1-H8L3','TV140WTM-AH1-H8L2')
+and timekey > '20230706203000000000000'
+and timekey < '20230707170000000000000'
+and oldprocessoperationname ='T6000'
+)
+
+
+--这种是特殊情况
+界面：主线NG进入Rework
+Panel ID/LCM ID：5SHD3600014F0AB
+txtResultComment：This Lot Can Not do ReworkIn!
+解决：LOT.LOTHOLDSTATE ='N'，这块屏被hold住了
+
+
+
+
+
+FIXME 跳站(跳帐)
+
+邮件抄送到部长
+
+手动跳站是在offline下的
+
+数据库本身对记录的限制是1000条
+
+信息查询→WIP→WIP By Step(站点中的WIP)
+
+不改product表，只改lot表(和sensor不一样)
+
+先在OIC界面跳一片试试：OIC→特殊操作→变更属性→跳站
+
+5SVD3700003C4DA刚作业员用QA的号过了21块屏，但是信息过不下去
+在Q1050这儿是做什么操作的？
+过Lot，信息是只要过Lot就行
+现在panel在F2050了(自动跳站)，是你那边跳的吗？
+估计是楼上打Lot过了(OIC→在制品过账→LAM→生成OQA VT Lot)
+
+
+
+信息被接收后也不能跳站
+
+--注意换线生产这种情况
+--OIC→生产计划→绑定FGCode→FGCODE与线体绑定(制造绑定)
+SELECT machinename,linename,l.* FROM lot l where lotname like '5SGT3600002F1AD%'
+
+现在产线如果要求我们跳站F2050，不允许跳，跳了很有可能被领导批斗，大家注意下
+针对F2050跳帐权限：已联系CIM取消所有人关于F2050站点的跳帐权限
+鲁总知道的事情，不得不注意
+解决方案：不跳到F2050，而是跳到上一个站点V1050
+
+跳到B9000
+打了Box的无法跳站
+后台操作啊
+跳站可以跳到B9000吗
+让他自己用界面跳
+PS：打包打拍后需要拆包拆拍后再跳站
+
+
+
+
+功能看bpel中的代码
+
+T5000：ASF Coater(ASF涂布机)
+
+B9000：Shipping(送到FGMS(仓库)，FMGS在送到其他地方)
+
+V1050：Visual Test
+F1050：Final Test
+
+R3200：线切割拆分
+R1350：Sensor Kitting(传感器装备)
+
+RT可以跳主流程，主流程不能跳RT
+rework流程中的lotname是这样的IBA523400110V
+Rework流程站点之间可以跳站，举个例子：从R3200站点跳站到R1350站点
+
+
+
+
+
+
+
+--第一种情况(信息)
+
+SG116FBB-A22-H501    11.6 300e-2  
+工单号（000100774595）从T5000跳至T6000
+一共4223片
+
+--Copy to Excel→Copy as xlsx，然后把lotname粘贴到表cimtestlot中
+select * from lot where  PRODUCTSPECNAME='SG116FBB-A22-H501'
+and PRODUCTREQUESTNAME='000100774595'
+and PROCESSOPERATIONNAME='T5000'
+and LOTSTATE='Released'
+and LOTPROCESSSTATE='WAIT'
+
+select processflowname,p.* from productspec p where productspecname like 'SG116FBB-A22-H501%'--LGSMP0G
+select * from processflowseq where PROCESSFLOWNAME='LGSMP0G'---20230423151554491421
+
+update lot set processoperationname='T6000',sequenceid='20230423151554491421',lasteventcomment='2023/6/7CIM协助董正兴跳站至T6000' where lotname in(select * from cimtestlot)
+
+
+2023/7/24CIM协助苏宝跳站至A1080
+
+
+
+--第二种情况(有excel)
+
+协助把附近中产品信息 跳站到F2050,,感谢
+
+--直接将excel中的Panel ID复制粘贴到表cimtestlot中
+SELECT * FROM cimtestlot for update
+
+select processflowname,p.* from productspec p where productspecname like 'SG116FBB-A22-H501%'--LGSMP0G
+select * from processflowseq where PROCESSFLOWNAME='LGSMP0G'---20230423151554491421
+
+update lot set processoperationname='T6000',sequenceid='20230423151554491421',lasteventcomment='2023/6/7CIM协助董正兴跳站至T6000' where lotname in(select * from cimtestlot)
+
+
+
+
+
+--第三种情况(AR)
+
+请协助将11.6 300e-2（SG116FBB-A22-H501）T6000站点信息跳站至V1050站点。协助跳站数量：1K。 Ps：由于T6000站点Wip 9k，无法捞取具体ID，请CIM任意捞取T6000站点信息进行跳站。
+注意：Wip 9k中随意选取1K
+
+AR是虚拟的
+
+必须跳到V1050站点
+
+V1050就是一片一片过啊
+等下我全给你解决了，因为每一片都有这个问题
+
+方法一：后台跳
+方法二：清空AR lot中的字段parentlotname
+
+-- SELECT parentlotname,l.* FROM lot l where LOTNAME = 'H503W2306114204' for update--修改单行记录
+--update lot set parentlotname ='',lasteventcomment='2023/7/4CIM协助杨善东跳站至V1050' where lotname in(select * from cimtestlot)
+
+workLot = new LOT();
+// 1. Sets the lot information
+LOT objPara = new LOT();
+objPara.LOTNAME = txtLOTNAME.Text;
+objPara.LCMID = txtLOTNAME.Text;
+objLot = lotService.GetLotInformationRow(objPara, "00042");
+if (!objLot.PARENTLOTNAME.Equals(""))
+{
+    txtResultComment.Text = "AR机种不可以在此站点过账";
+    return false;
+}
+
+
+
+--第四种情况(OQALotID)
+
+1#对应生产8.0 Tovis G-Sensor，
+因Q1050站点3P无法后流作业，已经影响到正常作业。请求解除HOLD。
+现因生产需要，请求协助Q1050站点3p，跳站至V1050站点。
+ID:5SGX3600002C2EF    5SGX3600001E2DB     5SGX3600004B0GF
+
+panel从Q1050跳到V1050
+OIC→信息查询→Panel→panel信息查询：查看是否有OQA Lot ID，如果有就不给跳站(数量较少的情况下则可以)
+
+--先将6块panel的字段OQALOTNAME信息清除再跳站
+select OQALOTNAME,l.* from lot l where lotname in ('5SGX3600002C2EF','5SGX3600001E2DB','5SGX3600004B0GF') for update
+
+select processflowname,p.* from productspec p where productspecname like 'SG080FBE-A72-HH00%'--LGSMP71
+select * from processflowseq where PROCESSFLOWNAME='LGSMP71'---20210812110722127100
+
+update lot set processoperationname='V1050',sequenceid='20210812110722127100',lasteventcomment='2023/7/4CIM协助杨善东跳站至V1050' where lotname in('5SGX3600002C2EF','5SGX3600001E2DB','5SGX3600004B0GF')
+
+
+
+
+
+
+--第五种情况(有excel但是rework站点)
+
+附件ID为划透补漆OK，现邀请CIM同事从R3200站点跳站到R1350站点，感谢！
+
+--直接将excel中的Panel ID复制粘贴到表cimtestlot中
+SELECT * FROM cimtestlot for update
+
+--OIC→信息查询→Panel→Panel信息查询(在这里查询Rework工艺流程)
+select * from processflowseq where PROCESSFLOWNAME='LGSRW03'---20160913124434049500
+
+update lot set processoperationname='R1350',sequenceid='20160913124434049500',lasteventcomment='2023/7/6CIM协助王强跳站至R1350' where lcmid in (select * from cimtestlot)
+
+--Rework中的屏用字段lcmid才能查询到
+select * from lot l where lcmid in 'IBA5234000LKR' 
+
+
+
+
+
+
+--第六种情况(reworkflow跳主flow)
+
+杨善东7月28号那个邮件，将R1000站点ReworKin，V2050站点NG的跳回A1080站点，现在又出现这个问题了，就是保留dp小标签，这咋操作的？
+我在OIC上跳站出现了Panel处于ReworkIn或FA站点，不允许进行此操作
+
+--直接将excel中的Panel ID复制粘贴到表cimtestlot中
+SELECT * FROM cimtestlot for update
+
+--OIC→信息查询→Panel→Panel历史查询(在这里查询主工艺流程)
+select * from processflowseq where PROCESSFLOWNAME='LGSMP61'---20230710105126195702
+
+update lot set processflowname='LGSMP61',processoperationname='A1080',sequenceid='20230710105126195702',returnsequenceid='',
+lotgrade='G',reasoncodetype='',reasoncode='',lasteventcomment='2023/7/30CIM协助杨善东跳站至A1080' 
+where lcmid in (select * from cimtestlot)
+and processoperationname = 'R1000'
+and lotholdstate = 'N'
+
+

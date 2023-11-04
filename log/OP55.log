@@ -1,0 +1,114 @@
+/*
+ReceiveAble和SendAble的值0和1分别代表啥意思
+0就是off,1就是on
+Bit位和word位你要做区分,都是传递信号,但是bit位只有一个bit点位,word可以有很多个bit位组成
+你可以理解bit是指示灯,word是文字内容
+<BIT [3] [1] [SendAble] '1'>这种是bit位吗
+是,程序检测到bit 位on的时候,就会去查对应的word位
+*/
+2023-09-03 15:07:37,866 [202309031507378664643067]  [B READ] [OP55]-[RV_EQToEQ_LinkSignal_06_02_00](B, 0, 206)<BIT [4] [1] [SendStart] '1'>
+2023-09-03 15:07:37,866 [202309031507378664643067]  [B READ] [OP55]-[RV_EQToEQ_LinkSignal_06_02_00](B, 0, 206)<BIT [13] [1] [PinState] '1'>
+2023-09-03 15:07:57,225 [202309031507572251327984]  [B READ] [OP55]-[RV_EQToEQ_LinkSignal_06_02_00](B, 0, 206)<BIT [5] [1] [SendComplete] '1'>
+2023-09-03 15:07:57,270 [202309031507572251327984]  [B READ] [OP55]-[RV_EQToEQ_LinkSignal_06_02_00](B, 0, 206)<BIT [3] [1] [SendAble] '0'>
+2023-09-03 15:07:57,270 [202309031507572251327984]  [B READ] [OP55]-[RV_EQToEQ_LinkSignal_06_02_00](B, 0, 206)<BIT [4] [1] [SendStart] '0'>
+2023-09-03 15:07:57,270 [202309031507572251327984]  [B READ] [OP55]-[RV_EQToEQ_LinkSignal_06_02_00](B, 0, 206)<BIT [5] [1] [SendComplete] '0'>
+2023-09-03 15:07:57,270 [202309031507572251327984]  [B READ] [OP55]-[RV_EQToEQ_LinkSignal_06_02_00](B, 0, 206)<BIT [13] [1] [PinState] '0'>
+2023-09-03 15:07:57,270 [202309031507572706313891]  [B READ] [OP55]-[RV_EQToEQ_LinkSignal_06_02_00](B, 0, 206)<BIT [3] [1] [ReceiveAble] '1'>
+2023-09-03 15:07:57,306 [202309031507573068070554]  [B READ] [OP55]-[RV_EQToCIM_SentJob_06_01_00](B, 0, 102)<BIT [0] [1] [SentOutJobReport] '1'>
+2023-09-03 15:07:57,316 [202309031507573068070554]  [W READ] [SentOutJobReportBlock]
+<SentOutJobReportBlock [W, 1, 101]
+	<ASCII [0] [10] [PRODID] 'MZ270KKC-A4X-D020'>
+	<ASCII [10] [5] [OperID] 'F2-3600'>
+	<ASCII [15] [10] [LotID] '5S3U3600046E6AA'>
+	<INT [25] [1] [PPID1] '0'>
+	<INT [26] [1] [PPID2] '0'>
+	<INT [27] [1] [PPID3] '27'>
+	<INT [28] [1] [PPID4] '1'>
+	<INT [29] [1] [PPID5] '1'>
+	<INT [30] [1] [PPID6] '1'>
+	<INT [31] [1] [PPID7] '0'>
+	<INT [32] [1] [PPID8] '0'>
+	<INT [33] [1] [PPID9] '0'>
+	<INT [34] [1] [PPID10] '0'>
+	<INT [35] [1] [PPID11] '0'>
+	<INT [36] [1] [PPID12] '0'>
+	<INT [37] [1] [PPID13] '0'>
+	<INT [38] [1] [PPID14] '0'>
+	<INT [39] [1] [PPID15] '0'>
+	<INT [40] [1] [PPID16] '0'>
+	<INT [41] [1] [PPID17] '0'>
+	<INT [42] [1] [PPID18] '0'>
+	<INT [43] [1] [PPID19] '0'>
+	<INT [44] [1] [PPID20] '0'>
+	<INT [45] [1] [JobType] '0'>
+	<ASCII [46] [10] [JobID] '5S3U3600046E6AA'>    #JobID和LotID一样
+	<INT [56] [1] [CSTSequenceNumber] '1452'>      #1452是卡夹编号
+	<INT [57] [1] [SlotSequenceNumber] '13'>       #层数
+	<ASCII [58] [1] [JobGradeCode] 'N'>
+	<ASCII [59] [1] [JobJudgeCode] 'G'>
+	<INT [60] [1] [JobNGType] '0'>
+	<INT [61] [1] [SubstrateType] '0'>
+	<INT [62] [1] [GlassThickness] '0'>
+	<INT [63] [1] [JobAngle] '0'>
+	<INT [64] [1] [JobFlip] '0'>
+	<INT [65] [1] [ReworkCount] '0'>
+	<INT [66] [1] [LastGlassFlag] '0'>
+	<INT [67] [1] [SampleFlag] '0'>
+	<INT [68] [1] [OvenProcessFlag] '0'>
+	<INT [69] [1] [PanelSizeX] '0'>
+	<INT [70] [1] [PanelSizeY] '0'>
+	<ASCII [71] [10] [WorkOrderID] '000400092257'>         #productrequest
+	<BIT [81] [1] [InspectionFlag] '0000000000000000'>
+	<BIT [82] [1] [InspectionResult] '0000000000000010'>
+	<BIT [83] [1] [ProcessingFlag] '0000000000000000'>
+	<BIT [84] [1] [SkipFlag] '0000000000000000'>
+	<BCD [85] [3] [SolderOutTime] '000000000000'>
+	<BCD [88] [3] [FluxOutTime] '000000000000'>
+	<INT [100] [1] [DownstreamPathNumber] '1'>
+>
+2023-09-03 15:07:57,323 [202309031507573068070554]  [B WRITE] [OP55]-[SD_CIMToEQ_Data_01_06_00](B, 0, 313)<BIT [1] [1] [SentOutJobReportReply] '1'>
+2023-09-03 15:07:57,323 [202309031507573239827216]  [B READ] [OP55]-[RV_EQToCIM_Data02_06_01_00](B, 0, 190)<BIT [5] [1] [TactTimeChangeReport] '1'>
+2023-09-03 15:07:57,331 [202309031507573239827216]  [W READ] [TactTimeChangeReportBlock]
+<TactTimeChangeReportBlock [W, 134, 6]
+	<INT [0] [1] [TactTime] '227'>
+>
+2023-09-03 15:07:57,335 [202309031507573239827216]  [B WRITE] [OP55]-[SD_CIMToEQ_Data_01_06_00](B, 0, 313)<BIT [22] [1] [TactTimeChangeReportReply] '1'>
+2023-09-03 15:07:57,395 [202309031507573068070554]  [B READ] [OP55]-[RV_EQToCIM_SentJob_06_01_00](B, 0, 102)<BIT [0] [1] [SentOutJobReport] '0'>
+2023-09-03 15:07:57,407 [202309031507573068070554]  [B WRITE] [OP55]-[SD_CIMToEQ_Data_01_06_00](B, 0, 313)<BIT [1] [1] [SentOutJobReportReply] '0'>
+2023-09-03 15:07:57,413 [202309031507573239827216]  [B READ] [OP55]-[RV_EQToCIM_Data02_06_01_00](B, 0, 190)<BIT [5] [1] [TactTimeChangeReport] '0'>
+2023-09-03 15:07:57,419 [202309031507573239827216]  [B WRITE] [OP55]-[SD_CIMToEQ_Data_01_06_00](B, 0, 313)<BIT [22] [1] [TactTimeChangeReportReply] '0'>
+2023-09-03 15:08:07,281 [202309031508072817119586]  [B READ] [OP55]-[RV_EQToCIM_Data01_06_01_00](B, 0, 507)<BIT [5] [1] [MachineStatusChangeReport] '1'>
+2023-09-03 15:08:07,289 [202309031508072817119586]  [W READ] [MachineStatusChangeReportBlock]
+<MachineStatusChangeReportBlock [W, 3, 41]
+	<INT [0] [1] [MachineStatus] '1'>
+	<INT [1] [1] [AlarmID] '0'>
+	<ASCII [2] [1] [MachineStatusReasonCode] 'NW'>
+	<ASCII [3] [1] [MachineStatusSubReasonCode] 'NW'>
+	<INT [4] [1] [Unit1Status] '1'>
+	<ASCII [5] [1] [Unit1StatusReasonCode] 'NW'>
+	<ASCII [6] [1] [Unit1StatusSubReasonCode] 'NW'>
+	<INT [7] [1] [Unit2Status] '0'>
+	<ASCII [8] [1] [Unit2StatusReasonCode] ''>
+	<ASCII [9] [1] [Unit2StatusSubReasonCode] ''>
+	<INT [10] [1] [Unit3Status] '0'>
+	<ASCII [11] [1] [Unit3StatusReasonCode] ''>
+	<ASCII [12] [1] [Unit3StatusSubReasonCode] ''>
+	<INT [13] [1] [Unit4Status] '0'>
+	<ASCII [14] [1] [Unit4StatusReasonCode] ''>
+	<ASCII [15] [1] [Unit4StatusSubReasonCode] ''>
+	<INT [16] [1] [Unit5Status] '0'>
+	<ASCII [17] [1] [Unit5StatusReasonCode] ''>
+	<ASCII [18] [1] [Unit5StatusSubReasonCode] ''>
+	<INT [19] [1] [Unit6Status] '0'>
+	<ASCII [20] [1] [Unit6StatusReasonCode] ''>
+	<ASCII [21] [1] [Unit6StatusSubReasonCode] ''>
+	<INT [22] [1] [Unit7Status] '0'>
+	<ASCII [23] [1] [Unit7StatusReasonCode] ''>
+	<ASCII [24] [1] [Unit7StatusSubReasonCode] ''>
+	<INT [25] [1] [Unit8Status] '0'>
+	<ASCII [26] [1] [Unit8StatusReasonCode] ''>
+	<ASCII [27] [1] [Unit8StatusSubReasonCode] ''>
+>
+2023-09-03 15:08:07,293 [202309031508072817119586]  [B WRITE] [OP55]-[SD_CIMToEQ_Data_01_06_00](B, 0, 313)<BIT [0] [1] [MachineStatusChangeReportReply] '1'>
+2023-09-03 15:08:07,376 [202309031508072817119586]  [B READ] [OP55]-[RV_EQToCIM_Data01_06_01_00](B, 0, 507)<BIT [5] [1] [MachineStatusChangeReport] '0'>
+2023-09-03 15:08:07,382 [202309031508072817119586]  [B WRITE] [OP55]-[SD_CIMToEQ_Data_01_06_00](B, 0, 313)<BIT [0] [1] [MachineStatusChangeReportReply] '0'>

@@ -1,0 +1,67 @@
+﻿{
+    "ver":"5.0",
+    "tag":"hipsuser",
+    "data":[
+        {
+            "id":1,
+            "power":1,
+            "name":"Chrome Protection",
+            "procname":"*",
+            "treatment":1,
+            "policies":[
+                {
+                    "montype":1,
+                    "action_type":6,
+                    "res_path":"?:\\Users\\*\\AppData\\Local\\*\\User Data\\Default\\*"
+                },
+                {
+                    "montype":1,
+                    "action_type":6,
+                    "res_path":"?:\\Users\\*\\AppData\\Local\\*\\Chrome\\User Data\\Default\\*"
+                }
+            ]
+        },
+        {
+            "id":2,
+            "power":1,
+            "name":"Edge Protection",
+            "procname":"*",
+            "treatment":1,
+            "policies":[
+                {
+                    "montype":1,
+                    "action_type":6,
+                    "res_path":"*\\User Data\\Default\\History"
+                }
+            ]
+        },
+        {
+            "id":3,
+            "power":1,
+            "name":"Firefox Protection",
+            "procname":"*",
+            "treatment":1,
+            "policies":[
+                {
+                    "montype":1,
+                    "action_type":6,
+                    "res_path":"?:\\Users\\*\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\*"
+                }
+            ]
+        },
+        {
+            "id":4,
+            "power":1,
+            "name":"防止读取浏览器历史",
+            "procname":"*",
+            "treatment":1,
+            "policies":[
+                {
+                    "montype":1,
+                    "action_type":6,
+                    "res_path":"*\\User Data\\Default\\History"
+                }
+            ]
+        }
+    ]
+}

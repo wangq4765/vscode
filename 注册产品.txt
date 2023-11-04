@@ -1,0 +1,460 @@
+
+
+
+TODO ProcessFlow
+
+-----------检查processflow脚本中的错误(Main+Rework)-------------
+--写入--
+Main→MainFlow||Material→MASK_ID||Rework→MainFlow_Rework
+--Main--
+Flow ID
+1、Flow ID总是错误
+1.PPID中的lot type正确
+2.S2W(RJ)MP01是模板错误，每次都要修改
+
+Operation Name/Step ID/Mandatory(找到经常出错的地方就行了，不用这么麻烦)
+1、删除Q段不存在的站点xxxx-1Q(在左边选中那一行直接删除)
+1.除了9Q00-00之外，其他所有xxxx-1Q的都不存在
+2.之所以删除而不是修改是因为Operation Name+Mandatory只能找到xxxx-1Q一个站点
+2、跑"Step ID对比.sql"，只要对比Operation Name就可以了，Mandatory由RecipeCheck解决，且最后一位格式一致(充分不必要)
+1.如果格式不一致，跑"Step ID更换.sql"修改Step ID(动Step ID，不动Operation Name和Mandatory，都不符合才修改Mandatory)
+2.搜索Step ID前4位(一定正确)+Operation Name+mandatoryoperationflag
+--Layer是SiOxNy1(上)
+SELECT DESCRIPTION,PROCESSOPERATIONNAME,MANDATORYOPERATIONFLAG 
+FROM processoperationspec 
+where description like '%SiOxNy%'--SiOxNy不变
+and processoperationname like '%C3M1%' --C3M1变
+and mandatoryoperationflag='N'--Main是Y，其他都是N
+--Layer是SiOxNy2(下)
+SELECT DESCRIPTION,PROCESSOPERATIONNAME,MANDATORYOPERATIONFLAG 
+FROM processoperationspec 
+where description like '%SiOxNy2%'--SiOxNy2不变
+and processoperationname like '%C300%' --C300变
+and mandatoryoperationflag='N'--Main是Y，其他都是N
+--如果mandatoryoperationflag全部不匹配，就不修改Step ID，转而修改Mandatory
+SELECT DESCRIPTION,PROCESSOPERATIONNAME,MANDATORYOPERATIONFLAG 
+FROM processoperationspec 
+where processoperationname='TX50-00';
+
+2、先跑找错误的Step ID.sql和compare(数组Mandatory).sql
+--找错误的Step ID.sql
+sdpm=SELECT DESCRIPTION,PROCESSOPERATIONNAME,MANDATORYOPERATIONFLAG FROM processoperationspec where processoperationname in () order by instr('',processoperationname)
+--只要比较Operation Name这个字段了(在excel中比较数据没有plsql好，excel不清晰)
+
+3、2的思路
+1.通过Step ID查找，再通过Operation Name+Mandatory判断Step ID是否正确
+2.如果Step ID不正确，Step ID前4位(一定正确)+Operation Name+mandatoryoperationflag找到新的Step ID
+3.最后看新的Step ID中的Mandatory是否正确，如果不正确就换一个新的Step ID
+4.如果新的Step ID全部错误(没有匹配的Mandatory，只好改Mandatory)
+
+4、2的FactoryModeler版本
+1.FactoryModeler(量产库)→Process→ProcessOperationSpec
+2.ManDatoryOperationFlag中Y代表Main，N代表非Main(原因：其他字段有空的)
+3.DetailProcessOperation/ProcessOperationGroup中有Operation Name
+4.把ProcessOperationSpec中的description字段拉大一点，不然会遮挡一部分
+
+
+EQP
+1、一行EQP有7个：在左边插入一行单元格，把多的EQP放到下一行，两行其他单元格按列合并后居中
+Recipe(PPID)
+1、Recipe(PPID)中看一下前面两个340(Sensor.No)/W4(Lot Type)是否正确
+2、120_SY_PG_RW_01：把120和SY改成正确即可
+3、133_KE_FICD_MM_ITO1：左边有隐藏行(模板问题)，一行都删除
+Sampling Rule
+1、sheet中A就是All slot
+2、2sh/lot对应#1,2，3sh/lot对应#1,2,3(动slot，不动sheet)
+
+
+--Rework--
+注意：在FactoryModeler→ProcessFlow中可以找到Rework的Flow ID(直接运行"Step ID对比(reworkflow).sql"就可以了)
+MainFlow_Rework表中的Flow ID对比FactoryModeler→FlowDesigner(Drawing)→Sub Process Flow→Step ID
+1、Rework中的Flow ID在Sub Process Flow找不到(说明Flow ID错误)
+2、Rework中的Flow ID在Sub Process Flow找的到+Step ID正确(不用改)
+3、Rework中的Flow ID在Sub Process Flow找的到+Step ID错误(说明Flow ID错误)
+1.Flow ID只有第二个和第三个字母错了(SGT(DS)RW09，SKS(DS)RW05)
+2.RW+(00~30)找Flow ID，再通过Step ID检验是否正确(Step ID一定正确)
+3.两个Step ID流程图等价(SBARW18和SBMRW18，SBMRW29和SDSRW09)，但更倾向于SB/D/KMRW00
+4.Flow ID和Step ID都错找开发确认
+
+
+--需要自己填写的sheet：POSGLASSMAP，Sheet1/2只要填Q段，Sheet3/4不用管(三个表都有insert语句)
+1、为什么sheet1/2中的数据都违反唯一性约束：没有修改spec和flow(光复制粘贴了)/EQP(Main)一样
+2、POSGLASSMAP参考ProcessFlow注册培训版4纠错，Sheet1/2参考ProcessFlow纠错脚本
+3、Sheet2=Sheet1中的conditionid字段下的每个数据*30(30抽1)，后面字段都一样
+4、POSGLASSMAP中复制粘贴INSERT语句到plsql，Sheet1/2先搜寻Q段再复制粘贴commit
+5、sheet1/2处理的都是同一行，conditionid字段是Main信息，其他字段都是Sampling信息
+6、Lot Frequency/sheet/slot都存在才填到Sheet1中(1/10代表600，A代表60)
+7、unit存在才填到Sheet2中(把SCT01-06改成SCT1，这是模板错误，每次都是这样)
+ps：TPFOPolicy删除SQL(SQL自动生成)
+
+
+
+-------------------导入数据库------------------------
+点击Materials中的Create Data跑脚本，导入数据到plsql中
+1、Main页站点不存在(橙色标记)：6个(删掉多余信息就行)
+2、Main页站点属性不匹配(粉色标记)：3个(Main改成Test)
+Ps：出现问题的站点带有颜色，容易被找到
+1、之前把excel数据复制到plsql中commit
+2、现在把所有INSERT语句复制粘贴到plsql的Command Window中，再commit
+Ps：最后SSORT的INSERT有错误是正常情况(因为有错误会终止语句执行，所以不用SQL Window)
+1、运行时错误‘13’：类型不匹配(字段没有对应上)
+2、For LoopCountPosition = 1 To Worksheets("MainFlow_Rework").Cells(Count + OffCount, 17)
+解决问题：通过代码得知MainFlow_Rework表的第17列，也就是Q列出现问题
+1、运行时错误'9'：下标越界
+2、Worksheets("POSPRODUCTSAMPLINGEQP").Range("B3:K2000").ClearContents
+解决问题：把sheet表名POSPRODUCTSAMPLINGEQP改成了posproductsamplingeqpbyslot
+
+
+
+--------------------注册+画图------------------------
+在FactoryModeler中注册processflow+productspec+FlowDesigner(Drawing)，不清楚的看书(S/Q)
+1、Step ID按集合复制粘贴(看Step ID的开头：C/2/D/5/7)
+2、右边的Rework也要复制，不同再改(Step ID/Into Flow/Return Step三者一一对应)
+3、S段直接复制粘贴修改就行(5100-00及后面的Step ID集合选择对应的Rework再复制粘贴)
+4、Q段复制整个模块(把左边的SSORT01全部改成QSORT01)，且最后3个站点不填(6X70-00/7X70-00/6X90-00)
+5、Main→Into Flow操作
+1.把Rework表的所有情况全部填上(好找Flow ID和Step ID)
+2.PR Rework、IR/CLS hole Print在Rework这个sheet表中不到(不画)
+3.一个Step ID对应两个相同的Metal Decap(在Drawing中画一个就行了)
+4.Main中的LED Print(Main)，Rework中是LED Print Rework(两者等价)
+ps：processflow和productspec都是plsql中的表
+6、FactoryName=SENSOR,ProcessFlowName=SBMRW19,ProcessOperationName=7P52-1R is not found. Please check which condition uses the ProcessOperation.
+1.测试库中的SBMRW19第一个step id是7P52-1R，而量产库是7P60-1R(不一样)
+2.如果rework flow量产和测试第一个step id一样，无误
+3.如果rework flow量产和测试第一个step id不一样，删掉红色的线重画
+4.如果rework flow量产和测试第2/3个step id错误，并没有影响
+ps：多加了Rework(SBMRW19)站点没有问题，因为没有PPID，画了也没有信息
+
+
+
+----------------注册标签和维护FGCode---------------
+
+--FactoryModeler中是下拉框选择，很麻烦，不如直接在plsql修改
+--FactoryModeler→Porcess→Policy→TPPolicy→POSLabelType/POSReceiveProductSpec
+SELECT * FROM poslabeltype where CONDITIONID like '%B5Q123E782501%' for update
+SELECT * FROM posreceiveproductspec where CONDITIONID like '%B5Q123E782501%' for update
+
+
+
+------------------plsql反向验证---------------------
+
+检验excel和plsql中的表是否一致
+1.字段一一对应
+
+plsql搜索ProccessFlow的九张表：
+select * from recipe
+select * from tpfopolicy
+select * from tpfompolicy
+select * from posmachine
+select * from posmachinerecipe
+select * from posglassmap
+select * from tppolicy
+select * from posproductsampling
+select * from posproductsamplingeqpbyslot
+
+
+
+
+
+
+
+
+TODO SPC&EDC
+
+
+-------------检查SPC&EDC脚本中的错误(NO)-------------
+
+SensorNo.
+1、将Step ID最前面为7的(Q段)站点对应的SensorNo修改成B5Q
+2、7P40-00是特殊情况：				
+B5S122L372602改成B5Q122L372602(7P40-00是Q段的)				
+7P40-00先改成7PM0-00(因为VBA里面的逻辑是M)，跑完脚本后再全部改回7P40-00(工作表改成工作簿)				
+
+DC Spec Name
+1、DCSpecName=Sensor.No(去掉B5S)+Confirm Item
+2、DCSpecName中经常有数字错误，以Confirm Item字段为准(MT1改成MT2)
+
+SPEC
+1、SPEC中百分号改成小数形式(把85%改成0.85)
+2、上限和下限都有，中间如果没有就要填上(Target=(USL+USL)/2)
+
+Sampling Plan
+1、Sampling Plan字段中检查大单元格是否合并后居中，不是就自己合并(向右移动的时候单元格被拆散了，必会出现此错误)
+1.单元格没有合并就跑脚本并不会出现错误
+2、Point字段中出现反斜杠/，把/改成1
+后面的字段基本没有什么错误了
+需要注意的是：Step ID以00结尾的没有问题，不是00结尾的有可能有问题(C5M1-50)
+
+
+-------------------导入数据库------------------------
+
+SNSUpperSoreenLimit=SNSUpperSpecLimit*5
+解决方法：SPEC&EDC脚本上的SPEC字段下有横杠要删掉(单元格需要空着)
+未查询到ProcessFlowName信息
+解决方法：ProcessFlow未注册
+
+
+----------------OIC上查看是否成功注册--------------
+
+SPC Spec→Modeling→Policy(TPFOM)→SPCSpec Tree→SENSOR→B5S/Q101E302601
+1、15M1-00对应excel中的Step ID
+2、5SMTE01对应excel中的EQP1/2-Unit ID
+3、102E1F1602_BMMS对应excel中的DC Spec Name
+4、OD/CD1/TPDX/TPDY对应excel中的DC Item Details(PI_TOTAL不算)
+1.PI_TOTAL是EDC中的DC Item Details
+2.TM1 SPC维护spec，不维护EDC(TM1 SPC名字上没有加EDC)
+
+
+
+------------------发邮件和群通知---------------------
+
+审议通过
+
+--收件人：工艺/Touch全科   抄送：CIM全科
+Dear Touch工艺开发科、制造科、技术科同事：
+你们好！
+新产品14.0 HW DP228 Morgen项目（SNS NO:B5S142H5D1601   Lot Type: 31)现已注册完成，产品的Layout信息注册需多方进行Double Check，麻烦Touch工艺开发科、制造科、技术科同事进行确认。
+
+--工艺&CIM 文件注册事项沟通群
+新产品14.0 HW DP228 Morgen项目（SNS NO:B5S142H5D1601   Lot Type: 31)现已注册完成
+@程子豪 Double Check的邮件已发（如下），请各科室担当注意查收（Flow信息、Layout信息、Spec信息、抽检信息、Rework信息、Mask ID、SPC等信息），确认后请回复，感谢合作！
+
+
+
+
+
+
+TODO ENIG
+
+化金flow加了一个出货检查站点：EQ00-00(description:OQA Judge)
+
+化金新增 ENIG Ship To LAM 9997-00站点
+ENIG 这边需要以Box Ship到贴合的生产规格，PRODUCTSPEC表注意两个地方，一个是PRODUCTSPECTYPE='SENSOR_END',一个是PACKINGTYPE='Box'
+后面有这种产品需要注意，目前开发逻辑是这样定的
+
+
+--------------------ENIGProcessFlow------------------------
+
+化金比sensor注册多了一个表unittrackoutpolicy(需要手动导入，之后会自动)
+
+没有MaskID(化金没有Photo工艺)/posglassmap(化金不切割)/两张抽检表(化金没有抽检)，其他表一样
+
+Flow id
+1.以PPID为准
+2.Materials中也有可能是错误的
+
+没有Rework
+只有Main站点
+设备只有5SEGD01
+
+
+
+--------------------注册+画图------------------------
+
+在FactoryModeler中注册processflow+productspec+FlowDesigner(Drawing)
+
+SensorNo不存在，Flow存在(一种Flow对应好几种SensorNo(lot type一样))
+Flow ID一样，FGCode不一样
+
+因为化金不切割，所以数量都是1(看成一个整体)
+ProductQuantity：1
+SubProductUnitQuantity：1
+
+这款产品的ship站点是(化金完打包然后再去二厂)
+ProductSpecType：ENIG
+
+化金productspec中的ProductCountOnXaxis/ProductCountOnYaxis填写(因为化金不切割，所以这两个参数和Q段一样)：
+--通过lot type找B5Q(化金Lot type和Sensor的lot type相同)
+select productcountonxaxis,productcountonyaxis,p.* from productspec p where PROCESSFLOWNAME like '%5F%'--5F是modeltype
+--在FactoryModeler的productspec中找这个B5Q(抄)
+
+大Q小Q，两种Q出货，一般情况下Q1Q2打包规则，也就是下面这两个参数和Q段一样(但出现过不一样的情况，所以说询问最准)
+DENSEBOXPRODUCTQTY：15
+PALLETBOXQTY：7
+select denseboxproductqty,palletboxqty,p.* from productspec p where processflowname like '%G4%' 
+
+ENIG Box：去化金
+Box：去贴合(有的会打包之后去贴合)
+select packingtype,productioninputtype,p.* from productspec p where productspecname like '%B5Q315E672201%' for update
+--仅针对Q段这行记录，与其他记录无关
+--Q段packingtype修改成ENIGBox(去化金)
+--Q段productioninputtype修改成BP(去化金)
+
+--参照Box标签维护(ENIG和SNS不一样)
+select * from poslabeltype where conditionid like '%MZ270KKA-A4X-DQQ1%'
+
+之前是Sensor BP，出现特殊情况是别的工厂代工(B8→化金)
+SELECT * FROM posreceiveproductspec where conditionid like '%ENIG_MZ270KKC-A4X-D021%'
+--字段receivefactoryname修改成OEM
+--字段possibleproductspecname修改成代工厂的FGCode(询问)
+
+
+--------------------化金FGCode维护------------------------
+
+注册两款化金产品MZ315HEA-A44-DQ00和MZ270HEA-A4Z-H001(processflow中的sensorno)
+
+BP的FG-Code：MZ270HEA-A4Z-H002(possibleproductspecname)
+BP化金FG-Code：MZ270HEA-A4Z-H001(processflow中的sensorno)
+
+select * from PRODUCTSPEC where PRODUCTSPECNAME='MZ270HEA-A4Z-D001' 
+select * from PRODUCTSPEC where MODELTYPE='WZ'
+select * from posreceiveproductspec where CONDITIONID='SENSOR_B5Q315L672201'
+select * from posreceiveproductspec where CONDITIONID='ENIG_MZ270HEA-A4Z-D001'
+select * from posreceiveproductspec where CONDITIONID LIKE 'ENIG_%'
+
+--复制粘贴化金fgcode：BF089FBA-N50-H004
+select processflowname,modeltype,p.* from productspec p where productspecname like 'BF089FBA-N50-H004%'
+--查询表productspec的字段modeltype(这个字段的值是上面的)
+select * from productspec where modeltype = 'G4'--将查询到的G4.5段sensorno复制粘贴：B5Q089E852401
+--复制粘贴化金fgcode，查询表productspec的字段productiontype
+select productiontype,p.* from productspec p where productspecname like 'BF089FBA-N50-H004%'--复制粘贴productiontype：Production
+--这样就可以确认化金和G4.5段相同的possibleproductspecname是哪个(B5Q315L672201和Develop是上面两个sql语句查询到的)
+select * from posreceiveproductspec where conditionid like '%B5Q089E852401%' and productiontype like 'Production%'
+--将上面sql语句查询到的possibleproductspecname(BF089FBA-N50-H000)复制粘贴到一行(化金只有一行fgcode要维护，sensor有3行)
+select * from posreceiveproductspec where CONDITIONID LIKE '%ENIG%' for update
+--最后判断是否有两种Q(Q1/Q2)，如果有就再加一条记录
+select * from posreceiveproductspec where conditionid like '%B5Q089E852401%'
+select * from posreceiveproductspec where conditionid like '%BF089FBA-N50-H004%'
+--也可以直接问Q段的productiontype是哪个(Develop/Engineer/Production)
+
+
+
+--------------------SPC-----------------------
+
+化金不需要注册SPC(后续会有)
+
+化金段Q类型：WIP→生产规格→lot ID→product表→Q TYPE→productname
+
+化金没有SPC脚本，用Sensor的SPC脚本会出现错误：未查询到ProcessFlowName信息
+Sensor的解决办法：ProcessFlow未注册
+化金的解决方法：B→M
+
+
+
+------------------发邮件和群通知---------------------
+
+审议通过
+
+--收件人：工艺/Touch全科   抄送：CIM全科
+Dear BP工艺开发科、制造科、技术科同事：
+你们好！
+新产品8.9星辰 LTPS直显项目（SNS NO:BF089FBA-N50-H004   Lot Type: G4)现已注册完成，产品信息注册需多方进行Double Check，麻烦BP工艺开发科、制造科、技术科同事进行确认。
+
+--工艺&CIM 文件注册事项沟通群
+新产品8.9星辰 LTPS直显项目（SNS NO:BF089FBA-N50-H004   Lot Type: G4)现已注册完成
+@张仁伟
+Double Check的邮件已发（如下），请各科室担当注意查收（Flow信息、Spec信息、Rework信息、SPC等信息），确认后请回复，感谢合作！
+
+
+
+
+
+
+FIXME SPC/EDC/FDC原理
+
+SPC控制图比较多
+
+EDC表和SPC一样(部分)
+
+SPC都是反编译后的文件(.class)，无法修改
+
+EDC和SPC区分：PEX中的xml标签<item>下的<site>，一个是EDC，多个是SPC
+
+设备参数：EDC
+工艺参数：SPC
+
+SPC&EDC 方差、平均值
+SPC→SPC→Control Chart：UCL~LCL之间正常，反映设备的参数情况
+
+FDC：管控参数趋势
+EDC：每一片屏经过每一个unit时的设备特性，如温度
+SPC：产品参数
+
+EDC(equipment data collection)：设备数据采集
+SPC(Statistical Process Control)：统计过程控制
+FDC(Fault Detection & Classification System)：故障检测与分类系统
+
+EDC消息在每一张glass/Q track out触发上报
+productProcessData.bpel
+vscode→EDCsvr→EDCsvr21
+
+
+
+
+
+
+
+FIXME SPC/EDC/FDC数据
+
+
+SPC/EDC注册都在一个excel里面
+
+DCSPECNAME可以看成PPID好理解些
+
+datacollectspec最后3个字段写死
+
+EDC只生成前3个sheet表：datacollectspec/datacollectspecitem/spccontrolspec(后面的sheet表最前面三个字母都是SPC)
+
+设备自动上传EDC数据到EIS→MES→bpel(PEX)自动运行，不需要配置(接口)→数据库
+Inline：设备自动将每一步的消息上传
+
+数据增删改查是这样操作的：
+1、SPC在SPC系统里管控
+2、EDC在OIC中管控
+
+140L752601_OC0_THK
+140L752601：SensorNO去掉B5S
+OC0：工艺名
+THK：SPC参数
+
+
+
+
+
+
+--EDC
+
+EDC预警信息：
+select * from edcdataruleout
+
+EDC报警有站点和屏的ID：
+select * from edccontrolspec
+
+EDC信息收集processflow/processoperationname/machinename/machinerecipename/lotname/carriername/productname/eventname
+select * from edcdatacollect
+
+useflag是Y：启用
+overlimit是Y：超限
+select * from edcdatacollectitem
+
+
+
+
+
+
+
+plsql搜索SPC&EDC的八张表：
+select * from datacollectspec where dcspecname like '%122L372602%' for update
+select * from datacollectspecitem where dcspecname like '%122L372602%' for update
+select * from posdcspec where dcspecname like '%122L372602%' for update
+select * from spccontrolspec where spccontrolspecname like '%122L372602%' for update
+select * from spccontrolspecchart where spccontrolspecname like '%122L372602%' for update
+select * from spccontrolspeccapability where spccontrolspecname like '%122L372602%' for update
+select * from spccontrolspecrule where spccontrolspecname like '%122L372602%' for update
+select * from spccontrolspecitem where spccontrolspecname like '%122L372602%' for update
+
+//SPC和EDC数据
+SELECT * FROM BSPRODUCTPROCESSDATA--basic product process data：产品基本工艺数据
+SELECT * FROM BSPRODUCTPROCESSDATAITEM--basic product process data item：产品工艺基础数据项
+//EDC数据
+SELECT * FROM DATACOLLECT--data collect：数据收集
+SELECT * FROM DATACOLLECTRESULT--data collect result：数据收集结果
+//SPC数据
+SELECT * FROM SPCCONTROLDATARESULT--spc control data result：SPC控制数据结果
+SELECT * FROM SPCCONTROLDATACUMULATIVERESULT--spc control data cumulative result：SPC控制数据累计结果
+SELECT * FROM SPCCONTROLDATARULEOUT--spc control data rule out：SPC控制数据排除
+
+
+
+
+

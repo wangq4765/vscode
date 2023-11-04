@@ -1,0 +1,457 @@
+/*
+<BIT [0] [1] [RobotControlCommand] '1'>
+<BIT [3] [1] [ReceiveAble] '1'>
+<BIT [3] [1] [SendAble] '1'>
+*/
+2023-09-03 15:11:30,112 [202309031511300963926806]  [B WRITE] [TR13]-[SD_CIMToIDX_RobotData_01_02_00](B, 0, 58)<BIT [0] [1] [RobotControlCommand] '1'>
+2023-09-03 15:11:30,880 [202309031511300963926806]  [B READ] [TR13]-[RV_IDXToCIM_RobotData_02_01_00](B, 0, 244)<BIT [0] [1] [RobotControlCommandReply] '1'>
+2023-09-03 15:11:30,891 [202309031511300963926806]  [W READ] [RobotControlCommandReplyBlock]
+<RobotControlCommandReplyBlock [W, 162, 58]
+	# ReturnCode是1代表Ack is OK
+	<INT [0] [1] [ReturnCode] '1'>
+	<ASCII [1] [50] [ReturnCodeText] 'Teach Mode  d de'>
+>
+2023-09-03 15:11:30,898 [202309031511300963926806]  [B WRITE] [TR13]-[SD_CIMToIDX_RobotData_01_02_00](B, 0, 58)<BIT [0] [1] [RobotControlCommand] '0'>
+2023-09-03 15:11:31,155 [202309031511300963926806]  [B READ] [TR13]-[RV_IDXToCIM_RobotData_02_01_00](B, 0, 244)<BIT [0] [1] [RobotControlCommandReply] '0'>
+2023-09-03 15:11:31,203 [202309031511312037253866]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [3] [1] [ReceiveAble] '1'>
+2023-09-03 15:11:33,469 [202309031511334695595724]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [4] [1] [ReceiveStart] '1'>
+2023-09-03 15:11:34,270 [202309031511342708952502]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [10] [1] [RobotBusy] '1'>
+2023-09-03 15:11:34,270 [202309031511342708952502]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [14] [1] [RobotInterlock] '0'>
+2023-09-03 15:11:34,270 [202309031511342708952502]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [24] [1] [RobotArmOrigin] '0'>
+2023-09-03 15:11:34,270 [202309031511342708952502]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [10] [1] [RobotBusy] '1'>
+2023-09-03 15:11:34,270 [202309031511342708952502]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [14] [1] [RobotInterlock] '0'>
+2023-09-03 15:11:34,270 [202309031511342708952502]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [22] [1] [RobotArmOrigin] '0'>
+2023-09-03 15:11:38,575 [202309031511385756234096]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:38,575 [202309031511385756234096]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:38,605 [202309031511386053692587]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:38,605 [202309031511386053692587]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:38,611 [202309031511386113692587]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:38,611 [202309031511386113692587]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:38,641 [202309031511386415449249]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:38,683 [202309031511385756234096]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:38,683 [202309031511385756234096]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:38,715 [202309031511386053692587]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:38,715 [202309031511386053692587]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:38,715 [202309031511386113692587]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:38,715 [202309031511386113692587]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:38,745 [202309031511386415449249]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,067 [202309031511390679620592]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,067 [202309031511390679620592]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,097 [202309031511390972377255]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,097 [202309031511390972377255]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,097 [202309031511390972377255]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,097 [202309031511390972377255]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,133 [202309031511391334133918]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,205 [202309031511390972377255]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,205 [202309031511390972377255]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,205 [202309031511390972377255]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,205 [202309031511390972377255]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,205 [202309031511390679620592]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,205 [202309031511390679620592]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,235 [202309031511391334133918]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,582 [202309031511395821061924]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,588 [202309031511395884291169]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,588 [202309031511395884291169]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,625 [202309031511396256047831]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,625 [202309031511396256047831]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,625 [202309031511396256047831]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,625 [202309031511396256047831]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:39,688 [202309031511395821061924]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,697 [202309031511395884291169]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,697 [202309031511395884291169]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,727 [202309031511396256047831]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,727 [202309031511396256047831]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,727 [202309031511396256047831]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:39,727 [202309031511396256047831]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,075 [202309031511400752975838]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,082 [202309031511400822975838]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,082 [202309031511400822975838]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,109 [202309031511401099434327]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,109 [202309031511401099434327]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,115 [202309031511401159434327]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,115 [202309031511401159434327]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,182 [202309031511400752975838]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,187 [202309031511400822975838]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,187 [202309031511400822975838]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,217 [202309031511401099434327]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,217 [202309031511401099434327]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,217 [202309031511401159434327]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,217 [202309031511401159434327]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,493 [202309031511404938619763]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,499 [202309031511404997147181]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,499 [202309031511404997147181]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,529 [202309031511405298903843]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,529 [202309031511405298903843]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,535 [202309031511405358903843]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,535 [202309031511405358903843]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,594 [202309031511404938619763]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,600 [202309031511404997147181]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,600 [202309031511404997147181]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,636 [202309031511405298903843]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,636 [202309031511405298903843]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,636 [202309031511405358903843]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,636 [202309031511405358903843]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,780 [202309031511407805360800]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,780 [202309031511407805360800]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,810 [202309031511408102819291]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,810 [202309031511408102819291]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,810 [202309031511408102819291]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,849 [202309031511408494575954]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,849 [202309031511408494575954]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:40,885 [202309031511407805360800]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,885 [202309031511407805360800]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,915 [202309031511408102819291]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,916 [202309031511408102819291]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,916 [202309031511408102819291]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,916 [202309031511408494575954]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:40,916 [202309031511408494575954]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:41,086 [202309031511410866803665]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,092 [202309031511410921032911]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,092 [202309031511410921032911]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,122 [202309031511411222789573]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,122 [202309031511411222789573]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,122 [202309031511411222789573]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,122 [202309031511411222789573]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,188 [202309031511410866803665]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:41,194 [202309031511411222789573]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:41,194 [202309031511411222789573]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:41,194 [202309031511410921032911]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:41,194 [202309031511410921032911]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:41,231 [202309031511411222789573]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:41,231 [202309031511411222789573]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:11:41,683 [202309031511416833918640]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,683 [202309031511416833918640]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,689 [202309031511416893918640]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,689 [202309031511416893918640]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,719 [202309031511417195675303]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,719 [202309031511417195675303]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:41,719 [202309031511417195675303]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '1'>
+2023-09-03 15:11:54,424 [202309031511417195675303]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [10] [1] [RobotBusy] '0'>
+2023-09-03 15:11:54,424 [202309031511544248994198]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [14] [1] [RobotInterlock] '1'>
+2023-09-03 15:11:54,424 [202309031511544248994198]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [24] [1] [RobotArmOrigin] '1'>
+2023-09-03 15:11:54,424 [202309031511544248994198]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [10] [1] [RobotBusy] '0'>
+2023-09-03 15:11:54,424 [202309031511544248994198]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [14] [1] [RobotInterlock] '1'>
+2023-09-03 15:11:54,424 [202309031511544248994198]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [22] [1] [RobotArmOrigin] '1'>
+2023-09-03 15:11:54,599 [202309031511545997708584]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [3] [1] [SendAble] '1'>
+2023-09-03 15:11:54,599 [202309031511545997708584]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [2] [1] [JobTransferSignal] '1'>
+2023-09-03 15:11:54,599 [202309031511545997708584]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [5] [1] [ReceiveComplete] '1'>
+2023-09-03 15:11:54,623 [202309031511546239465247]  [B READ] [TR13]-[RV_IDXToCIM_RobotData_02_01_00](B, 0, 244)<BIT [2] [1] [RobotArmSubstrateLoadReport] '1'>
+2023-09-03 15:11:54,632 [202309031511546239465247]  [W READ] [RobotArmSubstrateLoadReportBlock]
+<RobotArmSubstrateLoadReportBlock [W, 142, 10]
+	<INT [0] [1] [RobotArmCSTSequenceNumber] '1452'>
+	<INT [1] [1] [RobotArmSlotSequenceNumber] '13'>
+	<INT [2] [1] [ArmNumber] '1'>
+	<INT [3] [1] [CurrentPosition] '11'>
+>
+2023-09-03 15:11:54,635 [202309031511546239465247]  [B WRITE] [TR13]-[SD_CIMToIDX_RobotData_01_02_00](B, 0, 58)<BIT [2] [1] [RobotArmSubstrateLoadReportReply] '1'>
+2023-09-03 15:11:54,701 [202309031511545997708584]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [2] [1] [JobTransferSignal] '0'>
+2023-09-03 15:11:54,701 [202309031511545997708584]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [3] [1] [ReceiveAble] '0'>
+2023-09-03 15:11:54,701 [202309031511545997708584]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [4] [1] [ReceiveStart] '0'>
+2023-09-03 15:11:54,701 [202309031511545997708584]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [5] [1] [ReceiveComplete] '0'>
+2023-09-03 15:11:54,713 [202309031511547137207817]  [B READ] [TR13]-[RV_EQToCIM_Data01_02_01_00](B, 0, 507)<BIT [5] [1] [MachineStatusChangeReport] '1'>
+2023-09-03 15:11:54,721 [202309031511547137207817]  [W READ] [MachineStatusChangeReportBlock]
+<MachineStatusChangeReportBlock [W, 3, 41]
+	<INT [0] [1] [MachineStatus] '2'>
+	<INT [1] [1] [AlarmID] '50'>
+	<ASCII [2] [1] [MachineStatusReasonCode] 'FR'>
+	<ASCII [3] [1] [MachineStatusSubReasonCode] ''>
+	<INT [4] [1] [Unit1Status] '3'>
+	<ASCII [5] [1] [Unit1StatusReasonCode] 'HF'>
+	<ASCII [6] [1] [Unit1StatusSubReasonCode] ''>
+	<INT [7] [1] [Unit2Status] '1'>
+	<ASCII [8] [1] [Unit2StatusReasonCode] 'NW'>
+	<ASCII [9] [1] [Unit2StatusSubReasonCode] ''>
+	<INT [10] [1] [Unit3Status] '0'>
+	<ASCII [11] [1] [Unit3StatusReasonCode] ''>
+	<ASCII [12] [1] [Unit3StatusSubReasonCode] ''>
+	<INT [13] [1] [Unit4Status] '0'>
+	<ASCII [14] [1] [Unit4StatusReasonCode] ''>
+	<ASCII [15] [1] [Unit4StatusSubReasonCode] ''>
+	<INT [16] [1] [Unit5Status] '0'>
+	<ASCII [17] [1] [Unit5StatusReasonCode] ''>
+	<ASCII [18] [1] [Unit5StatusSubReasonCode] ''>
+	<INT [19] [1] [Unit6Status] '0'>
+	<ASCII [20] [1] [Unit6StatusReasonCode] ''>
+	<ASCII [21] [1] [Unit6StatusSubReasonCode] ''>
+	<INT [22] [1] [Unit7Status] '0'>
+	<ASCII [23] [1] [Unit7StatusReasonCode] ''>
+	<ASCII [24] [1] [Unit7StatusSubReasonCode] ''>
+	<INT [25] [1] [Unit8Status] '0'>
+	<ASCII [26] [1] [Unit8StatusReasonCode] ''>
+	<ASCII [27] [1] [Unit8StatusSubReasonCode] ''>
+>
+2023-09-03 15:11:54,726 [202309031511547137207817]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [0] [1] [MachineStatusChangeReportReply] '1'>
+2023-09-03 15:11:54,941 [202309031511546239465247]  [B READ] [TR13]-[RV_IDXToCIM_RobotData_02_01_00](B, 0, 244)<BIT [2] [1] [RobotArmSubstrateLoadReport] '0'>
+2023-09-03 15:11:54,947 [202309031511546239465247]  [B WRITE] [TR13]-[SD_CIMToIDX_RobotData_01_02_00](B, 0, 58)<BIT [2] [1] [RobotArmSubstrateLoadReportReply] '0'>
+2023-09-03 15:11:54,983 [202309031511549831123265]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [4] [1] [SendStart] '1'>
+2023-09-03 15:11:55,132 [202309031511547137207817]  [B READ] [TR13]-[RV_EQToCIM_Data01_02_01_00](B, 0, 507)<BIT [5] [1] [MachineStatusChangeReport] '0'>
+2023-09-03 15:11:55,144 [202309031511547137207817]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [0] [1] [MachineStatusChangeReportReply] '0'>
+2023-09-03 15:11:55,240 [202309031511552406580222]  [B READ] [TR13]-[RV_EQToCIM_ReceiveJob_02_01_00](B, 0, 102)<BIT [0] [1] [ReceivedJobReport] '1'>
+2023-09-03 15:11:55,250 [202309031511552406580222]  [W READ] [ReceivedJobReportBlock]
+<ReceivedJobReportBlock [W, 1, 101]
+	<ASCII [0] [10] [PRODID] 'MZ270KKC-A4X-D020'>
+	<ASCII [10] [5] [OperID] 'F2-3600'>
+	<ASCII [15] [10] [LotID] '5S3U3600046E6AA'>
+	<INT [25] [1] [PPID1] '0'>
+	<INT [26] [1] [PPID2] '0'>
+	<INT [27] [1] [PPID3] '27'>
+	<INT [28] [1] [PPID4] '1'>
+	<INT [29] [1] [PPID5] '1'>
+	<INT [30] [1] [PPID6] '1'>
+	<INT [31] [1] [PPID7] '0'>
+	<INT [32] [1] [PPID8] '0'>
+	<INT [33] [1] [PPID9] '0'>
+	<INT [34] [1] [PPID10] '0'>
+	<INT [35] [1] [PPID11] '0'>
+	<INT [36] [1] [PPID12] '0'>
+	<INT [37] [1] [PPID13] '0'>
+	<INT [38] [1] [PPID14] '0'>
+	<INT [39] [1] [PPID15] '0'>
+	<INT [40] [1] [PPID16] '0'>
+	<INT [41] [1] [PPID17] '0'>
+	<INT [42] [1] [PPID18] '0'>
+	<INT [43] [1] [PPID19] '0'>
+	<INT [44] [1] [PPID20] '0'>
+	<INT [45] [1] [JobType] '0'>
+	<ASCII [46] [10] [JobID] '5S3U3600046E6AA'>
+	<INT [56] [1] [CSTSequenceNumber] '1452'>
+	<INT [57] [1] [SlotSequenceNumber] '13'>
+	<ASCII [58] [1] [JobGradeCode] 'G'>
+	<ASCII [59] [1] [JobJudgeCode] 'G'>
+	<INT [60] [1] [JobNGType] '0'>
+	<INT [61] [1] [SubstrateType] '0'>
+	<INT [62] [1] [GlassThickness] '0'>
+	<INT [63] [1] [JobAngle] '0'>
+	<INT [64] [1] [JobFlip] '0'>
+	<INT [65] [1] [ReworkCount] '0'>
+	<INT [66] [1] [LastGlassFlag] '0'>
+	<INT [67] [1] [SampleFlag] '0'>
+	<INT [68] [1] [OvenProcessFlag] '0'>
+	<INT [69] [1] [PanelSizeX] '0'>
+	<INT [70] [1] [PanelSizeY] '0'>
+	<ASCII [71] [10] [WorkOrderID] '000400092257'>
+	<BIT [81] [1] [InspectionFlag] '0000000000000000'>
+	<BIT [82] [1] [InspectionResult] '0000000000000010'>
+	<BIT [83] [1] [ProcessingFlag] '0000000000000000'>
+	<BIT [84] [1] [SkipFlag] '0000000000000000'>
+	<BCD [85] [3] [SolderOutTime] '000000000000'>
+	<BCD [88] [3] [FluxOutTime] '000000000000'>
+	<INT [100] [1] [UpstreamPathNumber] '1'>
+>
+2023-09-03 15:11:55,252 [202309031511552406580222]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [0] [1] [ReceivedJobReportReply] '1'>
+2023-09-03 15:11:55,285 [202309031511552856864302]  [B READ] [TR13]-[RV_EQToCIM_MachineVariable_02_01_00](B, 0, 80)<BIT [0] [1] [DVDataReport] '1'>
+2023-09-03 15:11:55,287 [202309031511552856864302]  [W READ] [DVDataReportBlock]
+<DVDataReportBlock [W, 2, 48]
+	<INT [0] [1] [DVType] '1'>
+	<ASCII [1] [20] [JobID] '5S3U3600046E6AA'>
+	<INT [21] [1] [CSTSequenceNumber] '1452'>
+	<INT [22] [1] [SlotSequenceNumber] '13'>
+	<INT [23] [1] [LocalProcessStartTimeYear] '0'>
+	<INT [24] [1] [LocalProcessStartTimeMonth] '0'>
+	<INT [25] [1] [LocalProcessStartTimeDay] '0'>
+	<INT [26] [1] [LocalProcessStartTimeHour] '0'>
+	<INT [27] [1] [LocalProcessStartTimeMinute] '0'>
+	<INT [28] [1] [LocalProcessStartTimeSecond] '0'>
+	<INT [29] [1] [LocalProcessEndTimeYear] '0'>
+	<INT [30] [1] [LocalProcessEndTimeMonth] '0'>
+	<INT [31] [1] [LocalProcessEndTimeDay] '0'>
+	<INT [32] [1] [LocalProcessEndTimeHour] '0'>
+	<INT [33] [1] [LocalProcessEndTimeMinute] '0'>
+	<INT [34] [1] [LocalProcessEndTimeSecond] '0'>
+	<INT [35] [1] [UnitNumber] '1'>
+	<INT [36] [1] [SlotNumber] '1'>
+	<INT [37] [1] [RecipeNumber] '1'>
+>
+2023-09-03 15:11:55,291 [202309031511552856864302]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [6] [1] [DVDataReportReply] '1'>
+2023-09-03 15:11:55,330 [W READ] [TR13][READ BC_EQToCIM_DVData_02_01_00] 
+[BC_EQToCIM_DVData_02_01_00, 
+<BC_EQToCIM_DVData_02_01_00 [W, 0, 210]
+	<DVDataBlock [, 0, 210]
+		<INT [0] [1] [T1] '23'>
+		<INT [1] [1] [T2] '291'>
+		<INT [2] [1] [T3] '0'>
+		<INT [3] [1] [T4] '0'>
+		<INT [4] [1] [T5] '0'>
+		<INT [5] [1] [TactTime] '0'>
+	>
+>]
+2023-09-03 15:11:55,660 [202309031511552406580222]  [B READ] [TR13]-[RV_EQToCIM_ReceiveJob_02_01_00](B, 0, 102)<BIT [0] [1] [ReceivedJobReport] '0'>
+2023-09-03 15:11:55,672 [202309031511552406580222]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [0] [1] [ReceivedJobReportReply] '0'>
+2023-09-03 15:11:55,702 [202309031511552856864302]  [B READ] [TR13]-[RV_EQToCIM_MachineVariable_02_01_00](B, 0, 80)<BIT [0] [1] [DVDataReport] '0'>
+2023-09-03 15:11:55,708 [202309031511552856864302]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [6] [1] [DVDataReportReply] '0'>
+2023-09-03 15:11:59,901 [202309031511599018818005]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [10] [1] [RobotBusy] '1'>
+2023-09-03 15:11:59,901 [202309031511599018818005]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [14] [1] [RobotInterlock] '0'>
+2023-09-03 15:11:59,901 [202309031511599018818005]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [24] [1] [RobotArmOrigin] '0'>
+2023-09-03 15:12:10,892 [202309031511545997708584]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:12:10,892 [202309031511545997708584]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_04_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:12:10,892 [202309031511416833918640]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:12:10,892 [202309031511416833918640]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_05_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:12:10,892 [202309031511416893918640]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:12:10,892 [202309031511416893918640]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_06_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:12:10,922 [202309031511599018818005]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [16] [1] [GlassExistArm#1] '0'>
+2023-09-03 15:12:19,511 [202309031511599018818005]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [10] [1] [RobotBusy] '0'>
+2023-09-03 15:12:19,511 [202309031512195116661706]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [14] [1] [RobotInterlock] '1'>
+2023-09-03 15:12:19,511 [202309031512195116661706]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [24] [1] [RobotArmOrigin] '1'>
+2023-09-03 15:12:19,714 [202309031512197147132755]  [B READ] [TR13]-[RV_IDXToCIM_RobotData_02_01_00](B, 0, 244)<BIT [3] [1] [RobotArmSubstrateUnloadReport] '1'>
+2023-09-03 15:12:19,715 [202309031512197147132755]  [W READ] [RobotArmSubstrateUnloadReportBlock]
+<RobotArmSubstrateUnloadReportBlock [W, 152, 10]
+	<INT [0] [1] [RobotArmCSTSequenceNumber] '0'>
+	<INT [1] [1] [RobotArmSlotSequenceNumber] '0'>
+	<INT [2] [1] [ArmNumber] '1'>
+	<INT [3] [1] [CurrentPosition] '11'>
+>
+2023-09-03 15:12:19,720 [202309031512197207132755]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [2] [1] [JobTransferSignal] '1'>
+2023-09-03 15:12:19,720 [202309031512197207132755]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [5] [1] [SendComplete] '1'>
+2023-09-03 15:12:19,720 [202309031512197147132755]  [B WRITE] [TR13]-[SD_CIMToIDX_RobotData_01_02_00](B, 0, 58)<BIT [3] [1] [RobotArmSubstrateUnloadReportReply] '1'>
+2023-09-03 15:12:19,738 [202309031512197381362001]  [B READ] [TR13]-[RV_EQToCIM_SentJob_02_01_00](B, 0, 102)<BIT [0] [1] [SentOutJobReport] '1'>
+2023-09-03 15:12:19,744 [202309031512197448889418]  [B READ] [TR13]-[RV_EQToCIM_MachineVariable_02_01_00](B, 0, 80)<BIT [0] [1] [DVDataReport] '1'>
+2023-09-03 15:12:19,745 [202309031512197381362001]  [W READ] [SentOutJobReportBlock]
+<SentOutJobReportBlock [W, 1, 101]
+	<ASCII [0] [10] [PRODID] 'MZ270KKC-A4X-D020'>
+	<ASCII [10] [5] [OperID] 'F2-3600'>
+	<ASCII [15] [10] [LotID] '5S3U3600046E6AA'>
+	<INT [25] [1] [PPID1] '0'>
+	<INT [26] [1] [PPID2] '0'>
+	<INT [27] [1] [PPID3] '27'>
+	<INT [28] [1] [PPID4] '1'>
+	<INT [29] [1] [PPID5] '1'>
+	<INT [30] [1] [PPID6] '1'>
+	<INT [31] [1] [PPID7] '0'>
+	<INT [32] [1] [PPID8] '0'>
+	<INT [33] [1] [PPID9] '0'>
+	<INT [34] [1] [PPID10] '0'>
+	<INT [35] [1] [PPID11] '0'>
+	<INT [36] [1] [PPID12] '0'>
+	<INT [37] [1] [PPID13] '0'>
+	<INT [38] [1] [PPID14] '0'>
+	<INT [39] [1] [PPID15] '0'>
+	<INT [40] [1] [PPID16] '0'>
+	<INT [41] [1] [PPID17] '0'>
+	<INT [42] [1] [PPID18] '0'>
+	<INT [43] [1] [PPID19] '0'>
+	<INT [44] [1] [PPID20] '0'>
+	<INT [45] [1] [JobType] '0'>
+	<ASCII [46] [10] [JobID] '5S3U3600046E6AA'>
+	<INT [56] [1] [CSTSequenceNumber] '1452'>
+	<INT [57] [1] [SlotSequenceNumber] '13'>
+	<ASCII [58] [1] [JobGradeCode] 'G'>
+	<ASCII [59] [1] [JobJudgeCode] 'G'>
+	<INT [60] [1] [JobNGType] '0'>
+	<INT [61] [1] [SubstrateType] '0'>
+	<INT [62] [1] [GlassThickness] '0'>
+	<INT [63] [1] [JobAngle] '0'>
+	<INT [64] [1] [JobFlip] '0'>
+	<INT [65] [1] [ReworkCount] '0'>
+	<INT [66] [1] [LastGlassFlag] '0'>
+	<INT [67] [1] [SampleFlag] '0'>
+	<INT [68] [1] [OvenProcessFlag] '0'>
+	<INT [69] [1] [PanelSizeX] '0'>
+	<INT [70] [1] [PanelSizeY] '0'>
+	<ASCII [71] [10] [WorkOrderID] '000400092257'>
+	<BIT [81] [1] [InspectionFlag] '0000000000000000'>
+	<BIT [82] [1] [InspectionResult] '0000000000000010'>
+	<BIT [83] [1] [ProcessingFlag] '0000000000000000'>
+	<BIT [84] [1] [SkipFlag] '0000000000000000'>
+	<BCD [85] [3] [SolderOutTime] '000000000000'>
+	<BCD [88] [3] [FluxOutTime] '000000000000'>
+	<INT [100] [1] [DownstreamPathNumber] '4'>
+>
+2023-09-03 15:12:19,747 [202309031512197448889418]  [W READ] [DVDataReportBlock]
+<DVDataReportBlock [W, 2, 48]
+	<INT [0] [1] [DVType] '1'>
+	<ASCII [1] [20] [JobID] '5S3U3600046E6AA'>
+	<INT [21] [1] [CSTSequenceNumber] '1452'>
+	<INT [22] [1] [SlotSequenceNumber] '13'>
+	<INT [23] [1] [LocalProcessStartTimeYear] '0'>
+	<INT [24] [1] [LocalProcessStartTimeMonth] '0'>
+	<INT [25] [1] [LocalProcessStartTimeDay] '0'>
+	<INT [26] [1] [LocalProcessStartTimeHour] '0'>
+	<INT [27] [1] [LocalProcessStartTimeMinute] '0'>
+	<INT [28] [1] [LocalProcessStartTimeSecond] '0'>
+	<INT [29] [1] [LocalProcessEndTimeYear] '0'>
+	<INT [30] [1] [LocalProcessEndTimeMonth] '0'>
+	<INT [31] [1] [LocalProcessEndTimeDay] '0'>
+	<INT [32] [1] [LocalProcessEndTimeHour] '0'>
+	<INT [33] [1] [LocalProcessEndTimeMinute] '0'>
+	<INT [34] [1] [LocalProcessEndTimeSecond] '0'>
+	<INT [35] [1] [UnitNumber] '1'>
+	<INT [36] [1] [SlotNumber] '1'>
+	<INT [37] [1] [RecipeNumber] '1'>
+>
+2023-09-03 15:12:19,750 [202309031512197381362001]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [1] [1] [SentOutJobReportReply] '1'>
+2023-09-03 15:12:19,750 [202309031512197448889418]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [6] [1] [DVDataReportReply] '1'>
+2023-09-03 15:12:19,796 [W READ] [TR13][READ BC_EQToCIM_DVData_02_01_00] 
+[BC_EQToCIM_DVData_02_01_00, 
+<BC_EQToCIM_DVData_02_01_00 [W, 0, 210]
+	<DVDataBlock [, 0, 210]
+		<INT [0] [1] [T1] '4'>
+		<INT [1] [1] [T2] '247'>
+		<INT [2] [1] [T3] '0'>
+		<INT [3] [1] [T4] '0'>
+		<INT [4] [1] [T5] '0'>
+		<INT [5] [1] [TactTime] '0'>
+	>
+>]
+
+2023-09-03 15:12:19,964 [202309031512197207132755]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [2] [1] [JobTransferSignal] '0'>
+2023-09-03 15:12:19,964 [202309031512197207132755]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [3] [1] [SendAble] '0'>
+2023-09-03 15:12:19,964 [202309031512197207132755]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [4] [1] [SendStart] '0'>
+2023-09-03 15:12:19,964 [202309031512197207132755]  [B READ] [TR13]-[RV_EQToEQ_LinkSignal_02_03_00](B, 0, 206)<BIT [5] [1] [SendComplete] '0'>
+2023-09-03 15:12:20,131 [202309031512197147132755]  [B READ] [TR13]-[RV_IDXToCIM_RobotData_02_01_00](B, 0, 244)<BIT [3] [1] [RobotArmSubstrateUnloadReport] '0'>
+2023-09-03 15:12:20,146 [202309031512197147132755]  [B WRITE] [TR13]-[SD_CIMToIDX_RobotData_01_02_00](B, 0, 58)<BIT [3] [1] [RobotArmSubstrateUnloadReportReply] '0'>
+2023-09-03 15:12:20,152 [202309031512197381362001]  [B READ] [TR13]-[RV_EQToCIM_SentJob_02_01_00](B, 0, 102)<BIT [0] [1] [SentOutJobReport] '0'>
+2023-09-03 15:12:20,158 [202309031512197448889418]  [B READ] [TR13]-[RV_EQToCIM_MachineVariable_02_01_00](B, 0, 80)<BIT [0] [1] [DVDataReport] '0'>
+2023-09-03 15:12:20,170 [202309031512197381362001]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [1] [1] [SentOutJobReportReply] '0'>
+2023-09-03 15:12:20,170 [202309031512197448889418]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [6] [1] [DVDataReportReply] '0'>
+2023-09-03 15:12:21,216 [202309031512212163874497]  [B READ] [TR13]-[RV_IDXToCIM_RobotData_02_01_00](B, 0, 244)<BIT [1] [1] [RobotCommandResultReport] '1'>
+2023-09-03 15:12:21,224 [202309031512212163874497]  [W READ] [RobotCommandResultReportBlock]
+<RobotCommandResultReportBlock [W, 14, 128]
+	<INT [0] [1] [CommandSequenceNumber] '2545'>
+	<INT [1] [1] [1stCommandResult] '1'>
+	<ASCII [2] [20] [1stCommandResultComment] ''>
+	<INT [22] [1] [2ndCommandResult] '0'>
+	<ASCII [23] [20] [2ndCommandResultComment] ''>
+	<INT [43] [1] [3rdCommandResult] '0'>
+	<ASCII [44] [20] [3rdCommandResultComment] ''>
+	<INT [64] [1] [4thCommandResult] '0'>
+	<ASCII [65] [20] [4thCommandResultComment] ''>
+	<INT [85] [1] [CurrentPosition] '15'>
+>
+2023-09-03 15:12:21,228 [202309031512212163874497]  [B WRITE] [TR13]-[SD_CIMToIDX_RobotData_01_02_00](B, 0, 58)<BIT [1] [1] [RobotCommandResultReportReply] '1'>
+2023-09-03 15:12:21,636 [202309031512212163874497]  [B READ] [TR13]-[RV_IDXToCIM_RobotData_02_01_00](B, 0, 244)<BIT [1] [1] [RobotCommandResultReport] '0'>
+2023-09-03 15:12:21,654 [202309031512212163874497]  [B WRITE] [TR13]-[SD_CIMToIDX_RobotData_01_02_00](B, 0, 58)<BIT [1] [1] [RobotCommandResultReportReply] '0'>
+2023-09-03 15:13:39,812 [202309031513398128330787]  [B READ] [TR13]-[RV_EQToCIM_Data01_02_01_00](B, 0, 507)<BIT [5] [1] [MachineStatusChangeReport] '1'>
+2023-09-03 15:13:39,822 [202309031513398128330787]  [W READ] [MachineStatusChangeReportBlock]
+<MachineStatusChangeReportBlock [W, 3, 41]
+	<INT [0] [1] [MachineStatus] '1'>
+	<INT [1] [1] [AlarmID] '50'>
+	<ASCII [2] [1] [MachineStatusReasonCode] 'NW'>
+	<ASCII [3] [1] [MachineStatusSubReasonCode] ''>
+	<INT [4] [1] [Unit1Status] '3'>
+	<ASCII [5] [1] [Unit1StatusReasonCode] 'HF'>
+	<ASCII [6] [1] [Unit1StatusSubReasonCode] ''>
+	<INT [7] [1] [Unit2Status] '1'>
+	<ASCII [8] [1] [Unit2StatusReasonCode] 'NW'>
+	<ASCII [9] [1] [Unit2StatusSubReasonCode] ''>
+	<INT [10] [1] [Unit3Status] '0'>
+	<ASCII [11] [1] [Unit3StatusReasonCode] ''>
+	<ASCII [12] [1] [Unit3StatusSubReasonCode] ''>
+	<INT [13] [1] [Unit4Status] '0'>
+	<ASCII [14] [1] [Unit4StatusReasonCode] ''>
+	<ASCII [15] [1] [Unit4StatusSubReasonCode] ''>
+	<INT [16] [1] [Unit5Status] '0'>
+	<ASCII [17] [1] [Unit5StatusReasonCode] ''>
+	<ASCII [18] [1] [Unit5StatusSubReasonCode] ''>
+	<INT [19] [1] [Unit6Status] '0'>
+	<ASCII [20] [1] [Unit6StatusReasonCode] ''>
+	<ASCII [21] [1] [Unit6StatusSubReasonCode] ''>
+	<INT [22] [1] [Unit7Status] '0'>
+	<ASCII [23] [1] [Unit7StatusReasonCode] ''>
+	<ASCII [24] [1] [Unit7StatusSubReasonCode] ''>
+	<INT [25] [1] [Unit8Status] '0'>
+	<ASCII [26] [1] [Unit8StatusReasonCode] ''>
+	<ASCII [27] [1] [Unit8StatusSubReasonCode] ''>
+>
+2023-09-03 15:13:39,824 [202309031513398128330787]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [0] [1] [MachineStatusChangeReportReply] '1'>
+2023-09-03 15:13:40,233 [202309031513398128330787]  [B READ] [TR13]-[RV_EQToCIM_Data01_02_01_00](B, 0, 507)<BIT [5] [1] [MachineStatusChangeReport] '0'>
+2023-09-03 15:13:40,251 [202309031513398128330787]  [B WRITE] [TR13]-[SD_CIMToEQ_Data_01_02_00](B, 0, 313)<BIT [0] [1] [MachineStatusChangeReportReply] '0'>

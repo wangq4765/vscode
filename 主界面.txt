@@ -1,0 +1,455 @@
+
+
+
+TODO 安全培训活动
+
+
+
+------每月每次培训------
+
+PPT要和科室相关
+
+两个安全活动PPT+总结PPT+签到表拍照
+
+
+
+------每月每次培训填------
+
+填写三级教育台账
+
+培训签到表最新.xls(需要打印)
+
+--发邮件给安全科的所有同事，抄送领导
+各位领导同事：
+大家好。
+TM1 智造技术部 CIM科为提高员工安全意识与责任培养，学习安全作业管理，特举办安全培训活动，邀请技安同事参加此次活动，并对安全工作作出指示。
+活动时间：2023.5.22 17：00
+活动地点：智造技术部会议室
+
+
+
+--------CIM安全答题群---------
+
+给刘清成/吴翰答题
+
+答题：登录网页→培训管理→试卷管理
+
+我平安电控的密码不知道了，能帮我修改密码吗？改成123456，谢谢
+这个找王晨哈，他管平安电控
+
+最新网址：https://aqhb.behc.com.cn/html/login.html
+帐号：京东方晶芯科技有限公司
+密码：123456
+
+本月安全答题大家答一下，答题在平安电控-工作-培训课程-日常培训（当月）-课程（点击看一下即可）-考试
+公司名称：京东方晶芯科技有限公司
+账号：手机号
+密码：123456
+@所有人
+
+
+
+你们是1个活动。先把活动策划给我。然后约李甜进行活动。最后将总结报告发给我
+先写"8月安全系列活动",在此基础上写总结
+
+[培训主题]动火作业安全、化学品安全
+[培训时间]2023年9月21日 09:00~10:30
+[培训地点]21#1F Sensor制造培训教室
+
+各位领导及同事：
+9月科室安全月会邀请：
+时间：9/21  16:30
+地点：Sensor 3F智造会议室1-2
+融合会议邀请已发出
+以上，请知晓！
+
+这个是9月25的是吗？
+你看清楚，再说
+
+这个和昨天的有啥区别？
+昨天是技安组织的所有安全员的月会
+这个是我们自己部门的月会
+
+
+
+TODO 积累
+
+
+
+弹性IP
+
+
+唧唧·类似
+
+思维导图连接文件
+
+vscode和idea配置git
+
+主从 + 分库分表 咋整 几台服务器
+主要是运维篇后面都需要多个服务器我就学不下去了
+我电脑内存就不够，我就一个Linux系统学完的，学会配置，以后搭建的时候翻翻笔记就行了
+
+
+
+
+
+工作：
+119服务：172.27.189.119
+开通王蓟网关账号
+政务云开通访问IP
+
+172.27.129.82/32：新大楼(振峰)
+10.209.135.0/24：政务办公点IP(紫峰)
+172.27.160.0/24：政务云
+172.27.189.0/24(映射到10.168.0.0/24)：VPN
+
+
+
+人大金仓的问题直接问ai(网页搜太难了)
+
+linux中由于密码是被加密的，解密比较麻烦，建议直接使用即可，至于root密码，可以在越权后，百度搜索改密码命令即可修改链接密码
+
+linux中root用户切换到其他用户不需要密码，其他用户切换到root用户需要root密码，那其他用户需要设置密码吗？
+其他用户仍然需要设置密码。虽然切换到root用户时不需要输入其他用户的密码，但是为了保护系统安全，建议为每个用户设置独立的密码。
+
+操作系统(Linux系统)：centos7.6
+kingbase版本(数据库)：V008R006C006B0021
+
+可以执行：./kingbase -V;
+不可执行：.\kingbase.exe –V;
+可以执行：./ksql -p 54321 -U system test
+不可执行：.\ksql.exe -p 54321 -U system test
+
+
+
+连那个就用那个的端口(端口用来区分服务)
+
+xshell连上内网IP后再连wifi：此连接依然有效
+KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat都有效)
+
+内网IP：10.168.0.239
+xshell中连接的都是映射过的地址：172.27.189.119
+
+连接网站用VPN，连接服务器用网线(登录服务器)
+PS：连接网口之后就绕过防火墙了
+
+
+
+卡死：关机>重启(也卡死)
+
+终端粘贴直接右击就可以了
+
+守护进程(daemon)就是windows中的“服务”
+
+shift+enter(询问ai问题)：类似于excel中的alt+enter
+
+在电脑网络，电脑设备会透过节点之间的连接(数据链路)互相交换数据。传输介质可分为有线及无线两类——有线的可用到双绞线、光纤电缆等介质；无线则可用到Wi-Fi
+可以吧，本质是信息的交换，实体线是交换媒介的一种。
+
+微软 Edge 浏览器即将移除「网页选择」功能，回应称使用率低、成本高，对此你怎么看？
+9 月 19 日消息，微软在 9 月 15 日发布的 Edge 117.0.2045.31 浏览器稳定版中，将“网页选择”（Web Select）工具设置为过时。
+这项工具允许用户在保持其格式的情况下复制选中区域，用户可以对选中的区域进行交互，用户可以通过菜单或者 Ctrl+Shift+X 快捷方式启用。
+这个功能特别好用，省去F12然后搜索的时间，直接能把文字提取出来，方便做笔记。可惜被砍掉了。
+日常砍最好用的产品，满足复制网页表格的需求
+日常使用最大用处大概是一些不能被复制的文本可以用网页选择复制。但是也有替代方案
+谢了，知识星球上没法直接复制的文字就靠这个，不知道做好的功能砍个啥，放在那边不就行了，需要支持个毛？
+PS：现在更名为"网页捕获",右击即可看到(快捷键Ctrl+Shift+X没有用了)
+
+
+
+解决WIN10网线连接与无线连接不能共存
+更新到WIN10之后发现网线连接与无线连接经常打架，只能选一个，在连接网线的情况下，打开WIFI会自动关掉
+解决：
+1. 控制面板 > 网络和 Internet > 网络连接 > WLAN > 右键 > 属性 > 配置(C)（网络选项卡）> 电源管理 > ◻允许计算机关闭此设备以节约电源(A)
+关掉打勾
+2.此电脑 > 右键 > 管理 > 服务和应用程序 > 服务 > WWAN AutoConfig > 右键 > 属性 > 停止 > 启动 > 确定 （不要在外面点重启此服务，不好使）
+牛逼 一下解决了我的问题
+有线跟无线可以一起使用吗？
+不知道有没有效果等待测试
+
+网线和WIFI同时使用时的冲突问题
+网线和WiFi同时使用时，可能会出现冲突问题。一种常见的情况是，当两者同时连接时，设备可能优先使用WiFi的网络，如果WiFi网络不通，才会切换到网线的网络。此外，有些用户在更新到Windows 10后发现，当连接网线时，打开WiFi会自动关闭。
+为了解决这类问题，您可以尝试以下方法：
+1. **调整电源管理设置**：右击桌面右下角的网络图标，选择“打开网络和共享中心”。接着，点击当前连接的WiFi，进入“属性”窗口。在“配置”选项卡下，找到“电源管理”并取消勾选“允许计算机关闭此设备以节约电源”选项。
+2. **调整相关服务设置**：按Win+R键打开运行窗口，输入“services.msc”并回车。在服务列表中找到“WWAN AutoConfig”，右键选择“属性”，首先停止该服务，然后再次启动。这样可以确保每次重启后服务保持启动状态。
+3. **手动设置网络优先级**：如果发现网络连接不稳定或者存在冲突，您可以尝试手动设置网络的优先级，确保您更常用的网络连接位于顶部。
+
+解决电脑同时使用有线网上内网，无线网上外网的冲突：
+由于内网有网络限制（限制娱乐等），所以肯定要用外网（无线网卡）
+但是有的网站只能用内网访问，比如gitlab，oa等。我电脑刚开始连接了wifi后上不了gitlab，搞到每次都要关闭wifi使用内网访问。
+问过大佬才知道是网关的问题。
+比如内网（有线网）的地址信息是：
+ip: 192.168.100.2
+subnet: 255.255.255.0
+default gateway: 192.168.100.254
+dns server: 192.168.200.1
+外网（wifi）的地址信息是：
+ip: 192.168.3.12
+subnet: 255.255.255.0
+default gateway: 192.168.3.1
+连了wifi外网后，cmd输入route print，你会看到两个0.0.0.0开头的地址信息，这样会路由冲突
+解决方法：
+管理员进入cmd；
+route delete 0.0.0.0//删除掉两个默认路由
+route add 0.0.0.0 mask 0.0.0.0 192.168.3.1//将外网网关设置为默认路由，这样代表默认使用外网访问
+route -p add 192.168.200.0 mask 255.255.255.0 192.168.100.254//意思是当访问的站点ip是192.168.200开头（例如192.168.200.14），就使用内网访问
+添加永久路由：在route之后添加 -p
+添加永久路由的前提是，你的ip不会改变，一般内网ip都是管理员分配给你的（例如192.168.233.5），而使用无线网（wifi）你的ip可能每次都不一样（重启路由器后ip地址会发生改变，因为ip是自动分配的），所以无线网不需要添加永久路由
+其实就是将比较常用的内网才能访问的ip（192.168.200.X）使用内网网关（192.168.100.254）访问
+比如我的gitlab是172.233.1.1，那我就route add 172.233.0.0 mask 255.255.0.0 192.168.100.254//这样172.233开头的站点都用内网访问
+实测好使，感谢楼主分享。如果有不好使的可以查一下有默认路由配置冲突删除即可
+
+
+
+
+
+
+
+
+
+发IT数字编号命名的文档(SECSII)
+
+拆解Box界面：删除BoxID和OQALot
+
+"AVI"界面点击"OK"按钮过账：V1600(AVI外观检)→V1800(Box)
+
+--修改标签都是在这个表里面
+SELECT * FROM bscustomlabel
+
+下账   下卡   lotinfodownload
+请账   上卡   lotinfodownloadrequest
+
+2MTC-0001实为空卡，需解绑5S3U3600022E4BA（碎片）。-- F1电话8705
+2MTC-0001当前状态为EMPTY，制造无法自行解绑，select * from lot where CARRIERNAME= '2MCT-0001' 清空卡夹字段
+
+前提：lotstate是Shipped
+productrequestname如果没变：当前工单finishedquantity需要-1
+productrequestname如果变了：上一个工单finishedquantity需要-1，当前工单releasedquantity需要-1
+
+问题：000400092679  帮忙看下这个工单为啥在WIP by Operation查不到了
+--字段productrequeststate是Completed(工单关闭了)
+SELECT productrequeststate,p.* FROM productrequest p
+where productrequestname like '000400092679%'
+
+问题：在固晶站点但是工单还是白油工单
+是用通用Track In/Out过的账吗？
+需要用TV线专用过账界面过账(TV线TrackkInView+TV线TrackOutView)
+通用Track In/Out无法修改工单
+
+修改模组标签
+按←移动过大：ctrl+←
+标签打开后字母太小：ctrl+滚轮上滑
+标签打开后在左上角看不见：双击或者向下拉
+字体过大：格式刷修改字体或者直接修改
+问题：修改了但没有变化
+解决：我这已经移了，你重启电脑和打印机试一下
+
+
+
+
+VCR(Veri Code Reader)：二维码读码器，读Glass ID或PanelID
+读玻璃ID、Panel ID的Code reader
+
+BCR(Barcode Scanner)：条形码扫描器
+笔记本条码扫描器这种产品绝大多数采用CIS技术，光学分辨率为300dpi，有彩色和灰度两种，彩色型号一般为24位彩色。
+
+BOM(Bill of Material)：材料清单，是计算机可以识别的产品结构数据文件，也是ERP的主导文件。表现构成产品的材料与材料间、材料与装配件间等相互关系的目录, 指开发及生产/制造活动的 Master data
+
+二维码和条形码有什么区别？
+二维码和条形码都是用于标识物品的图形标识符，但它们有一些区别。二维码是一种比条形码更高级的条码格式，能在水平和垂直方向都可以存储信息，而一维条形码只能在一个方向（一般是水平方向）上表达信息 。 
+此外，二维码能存储汉字、数字和图片等信息，因此它的应用领域要广得多。 二维码也更安全。
+
+AOI Sampling  Function
+Sampling Rule：可在设备上设置抽检频率
+Sampling Panel Flow：
+被AOI抽检的panel 被判定No Scrap的 返回设备，然后流到下游设备
+被AOI抽检的panel 被判定Scrap的，留在NG 工位里等待人员确认
+NG 工位里的panel 人员确认为非Scrap NG的 ，人员将此panel 复投进设备的复投口，向EAS请求信息复投；
+NG 工位里的panel 人员确认为Scrap NG的 ，人员将此panel 拿到FA工位进行确认；
+人员将此panel 拿到FA工位确认为No Scrap的,则将此panel 复投进Cleaner设备的复投口，向EAS请求信息复投；
+人员将此panel 拿到FA工位确认为Scrap的 ，则拿去Rework
+
+
+
+FIXME java
+
+catch (System.Exception ex)
+catch (IDMessageException idmex)
+
+ChangeGradeInfo changeGradeInfo = new ChangeGradeInfo();
+changeGradeInfo.setLotGrade(lotData.getLotGrade());
+// 结构体changeGradeInfo中的函数setLotGrade给结构体changeGradeInfo中的变量lotGrade赋值
+public void setLotGrade(String lotGrade)
+{
+    this.lotGrade = lotGrade;
+}
+// 上面函数赋值，下面函数获取值(如果直接get说明有值)
+public String getRevisionCode(){
+    return revisionCode;
+}
+
+
+
+FIXME sql
+
+--oracle模糊查询表中字段的名字
+可以使用以下SQL语句进行模糊查询表中字段的名字：
+```sql
+SELECT column_name 
+FROM user_tab_columns 
+WHERE table_name = '表名' 
+AND column_name LIKE '%关键字%';
+```
+其中，将`表名`替换为你要查询的表名，将`关键字`替换为你要匹配的字段名的关键字，比如想查询所有包含"age"的字段名，可以将`关键字`替换为"age"。执行该SQL语句后，会返回符合条件的所有字段名。
+
+
+
+--表名模糊查询(直接用客户端自带搜索就可以了)
+
+show tables like '要模糊查询的表名%';--mysql
+
+这个表也可以查询select * from tab where tname like '%USER%'
+
+有时候，数据库中的表名太多，而你又不是清楚地记得表名，那么你可以用下面SQL语句，模糊地查询你想要的表名：
+select  table_name，tablespace_name，status，temporary from user_tables where table_name like '%tab_name%';
+tab_name 为要查表名的其中一部分。
+如：你要查表名中有USER的表名
+select table_name，tablespace_name  from user_tables where table_name like '%USER%';
+
+
+
+查询一段时间的sql ：SELECT *FROM productspec WHERE CREATETIME 
+BETWEEN TO_DATE('2023-07-18', 'YYYY-MM-DD') AND TO_DATE('2023-07-19', 'YYYY-MM-DD');        
+
+select * from posglassmaphistory where LASTEVENTTIME>=  to_date('2020-05-02','yyyy-mm-dd')    
+and  LASTEVENTTIME<=to_date('2024-05-30','yyyy-mm-dd') 
+--上面sql可以，下面sql不可以
+select * from posglassmaphistory where LASTEVENTTIME>=  to_char('2020-05-02','yyyy-mm-dd')    
+and  LASTEVENTTIME<=to_char('2024-05-30','yyyy-mm-dd') 
+
+Oracle 数据库日期范围查询有两种方式：to_char 方式和 to_date 方式。
+to_date 方式：
+select * from tablename where time>=  
+to_date('2011-05-02','yyyy-mm-dd')    
+and  time<=to_date('2011-05-30','yyyy-mm-dd')
+to_char 方式：
+select * from tablename where to_char(time,'yyyy-mm-dd')>='2011-05-02'    
+and to_char(time,'yyyy-mm-dd')<='2011-05-30'
+
+
+
+FIXME debug
+
+Name指的是字段名(变量名)
+Text指的是显示的文本
+
+F5(Start Debugging)：调试
+Ctrl+F5(Start Without Debugging)：运行
+
+update语句可以连表修改数据，select语句不行
+在select语句中用and，在update语句中用,(逗号)
+plsql的sql语句执行后记录不全(新加的数据无法获取)：需要打开新界面重新执行sql
+
+调试时无法复制粘贴窗体
+load函数没有被引用，但是被执行了(引用：0)
+当前不会命中断点，还没有为该文档加载任何符号：Release→Debug(可能Debug调试信息更多)
+
+idea调试的时候可以像vs一样把当前运行箭头向上拉吗？
+在 IntelliJ IDEA 中，没有类似于 Visual Studio 中的"Set Next Statement"（设置下一条语句）功能，也就是不能直接将当前运行箭头向上拉。这是因为 Java 程序的字节码是预编译的，一旦程序开始执行后，就不能更改代码的执行顺序或跳过某些代码。
+PS；vba调试时黄色的箭头可以像vs一样向上拉
+
+
+
+FIXME oracle
+
+之前遇到过这样的问题：vs中的未在本地计算机上注册“microsoft.ACE.oledb.12.0”提供程序
+
+.ora文件替换后plsql可以使用(plsql以路径搜索)
+
+H:\instantclient\NETWORK\ADMIN\tnsnames.ora
+C:\app\10868834\product\11.2.0\client_1\network\admin\tnsnames.ora
+
+--连接新的数据库：直接在tnsnames.ora添加再连接就可以了
+ORA-12154：TNS:could not resolve the connect identifier specified
+mesadm@M2MESDB
+--Oracle Logon
+Username：mesadm
+Password：oracle
+Database：M2MESDB
+--连接设置
+主机：10.42.2.24
+端口：1521
+数据库：mesdb
+
+我好像没有FGMS的库，也不知道怎么进
+Oracle Logon
+Username：FGMSADM
+Password：FGMSADM
+Database：FGMSADM@SRV_LAM
+Connect as：Normal
+
+FactoryModeler加数据库：TNSNames Editor中加上就可以访问了(注意点击打开页面的Save按钮才能保存)
+DatabaseAlias：M2MESDB
+User ID：mesadm
+User Password：oracle
+
+
+
+FIXME others
+
+BOE-Staff
+账号：10868834
+密码：13865174350wqn~
+
+Quote：引用
+
+diagram：图
+
+policy：策略
+
+invoke：调用
+
+generic：通用的
+
+validation：验证
+
+Entities：实体(一个类或一个对象)
+
+layer：层
+mandatory：强制性的
+
+sample：样本
+sampling：抽样
+
+quality：质量
+quantity：数量
+
+consume：消费
+consumable：可消费的
+
+pos什么意思，加工中心面板上pos是什么意思？
+POS(POSITION)是位置的意思，在加工中心上代表一个界面，打开这个界面里边都是格坐标查看。
+
+工厂的线体是什么意思？
+工厂的线体是输送设备直接完成物料输送工程的主体，它主要有输送链条、附件、链轮、头轴、尾轴、轨道、支架等部分组成。
+
+Q-panel是什么？
+“Q-panel指的是将一张液晶大玻璃切成几小片,每片含几个小的single cell(产品)。这样的每一片就叫做Q-panel。可以理解为包含几个小液晶屏幕的一张玻璃,通常是应用于小尺寸产品,如手机,pad类产品。” 
+
+SiN是什么化学物质？
+SiN是硅的氮化物中化学性质最为稳定的(仅能被稀的HF和热的HSO分解),也是所有硅的氮化物中热力学最稳定的。所以一般提及“氮化硅”时,其所指的就是SiN。它也是硅的氮化物中最重要的化合物商品。
+
+不能算差值，等距离移动
+
+网站上画的是标签样式，只是打印机打印出来的效果图(C#)
+^FO50,60^GB1050,0,3^FS
+^FO50,50：线段的起始点坐标(50,50)
+^GB1050,0：1050是横线的长度
+^GB0,1050：1050是竖线的长度
+3^FS：3是加粗的程度
+
+^FT60,230^A0N,30,30^FDVendor Name:[Vendor]^FS
+^FT60,230：线段的起始点坐标(60,230)
+^A0N,30,30：文字的长宽(定死的值)
+^FDVendor Name:[Vendor]^FS：显示Vendor Name:[Vendor]
+

@@ -1,0 +1,143 @@
+{
+  //json脚本
+  //JSON（JavaScript Object Notation，JavaScript对象表示法）：这是一种常用的Web数据格式
+  //JSON(JavaScript Object Natation) —-javascript的对象表现形式，但是目前已经发展成为一种轻量级的数据交换格式
+  //最大特点：完全独立于语言的文本格式（跨平台数据格式）不依赖于任何语言、有结构的、方便人和机器解析
+  //vs code默认设置
+  "code-runner.runInTerminal": true, // code-runner插件运行在终端上，防止乱码和不能输入
+  "code-runner.executorMap": { //对不同的语言设置自定义的运行逻辑了
+    "c": "gcc '$fileName' -o '$fileNameWithoutExt.exe' -Wall -O2 -m64 -lm -static-libgcc -std=c11 -fexec-charset=GBK && &'./$fileNameWithoutExt.exe'",
+    "cpp": "g++ '$fileName' -o '$fileNameWithoutExt.exe' -Wall -O2 -m64 -static-libgcc -std=c++14 -fexec-charset=GBK && &'./$fileNameWithoutExt.exe'",
+    "java": "cd $dir && javac -encoding utf-8 $fileName && java $fileNameWithoutExt",
+    /*这是每种语言运行时所执行命令的对应表，因为笔者使用的语言有限，这里只列出了javascript、python和windows批处理的命令，其他语言的命令可自行添加*/
+    /*笔者其他博客中可能会有关于对此设置项的添加或删改的内容*/
+    "name": "Python3",
+    "type": "python",
+    "request": "launch",
+    "stopOnEntry": false,
+    "python.pythonPath": "D:\\anaconda3\\python.exe",
+    "python.formatting.provider": "yapf",
+    //这里根据自己的下载路径修改，注意双斜杠，否则可能报错
+    //也可以这样写python的安装路径"pythonPath": "D:/anaconda3/python.exe",
+    // [这里要改！]python配置，python.exe编译器的位置
+    // 配置python插件执行的命令：用上面python.exe编译器，编译要执行的文件
+    "program": "${file}",
+    "cwd": "${workspaceRoot}",
+    "env": {},
+    "envFile": "${workspaceFolder}/.env",
+    "console": "integratedTerminal",
+  },
+  // 右键run code时运行的命令；未注释的仅适用于PowerShell（Win10默认）和pwsh，文件名中有空格也可以编译运行；注释掉的适用于cmd（win7默认）、PS和bash，但文件名中有空格时无法运行
+  "code-runner.saveFileBeforeRun": true, // 运行前自动保存
+  "code-runner.preserveFocus": true, // 若为false，run code后光标会聚焦到终端上。如果需要频繁输入数据可设为false
+  "code-runner.clearPreviousOutput": true, // 似乎没啥用，好像是自动清除控制台多余内容，开着吧
+  "code-runner.ignoreSelection": true, // 默认为false，效果是鼠标选中一块代码后可以单独执行，但C是编译型语言，不适合这样用
+  "code-runner.fileDirectoryAsCwd": true, // 将code runner终端的工作目录切换到文件目录再运行，对依赖cwd的程序产生影响；如果为false，executorMap要加cd $dir
+  "code-runner.customCommand": " cls", //这使Ctrl+Alt+K这个快捷键可以快速清空控制台内容
+  "code-runner.respectShebang": false, //我是Windows系统所以不需要按shebang来运行
+  //需要注意的是，所有命令前都有一个空格，用来“喂给”上一次运行结尾的“请按任意键继续. . .”
+  "editor.minimap.enabled": false, // 我个人不用minimap，就是右边那个东西
+  "editor.acceptSuggestionOnEnter": "off", // 我个人的习惯，按回车时一定是真正的换行，只有tab才会接受Intellisense
+  "editor.renderWhitespace": "boundary", //除了两个单词之间用于分隔单词的一个空格，以一个小灰点的样子使空格可见
+  "editor.suggestSelection": "first", //代码自动补全时选中第一个，方便记忆位置而且不会导致某些建议消失
+  "editor.suggest.snippetsPreventQuickSuggestions": false, //这个开不开效果好像都一样，据说是因为一个bug，建议关掉
+  "editor.renderControlCharacters": true, //编辑器中显示不可见的控制字符
+  "editor.linkedEditing": true, //html标签自动重命名（喜大普奔！终于不需要Auto Rename Tag插件了！）
+  //"editor.copyWithSyntaxHighlighting": false, //复制时复制纯文本而不是连语法高亮都复制了
+  //"editor.wordBasedSuggestions": false, //关闭基于文件中单词来联想的功能（语言自带的联想就够了，开了这个会导致用vscode写MarkDown时的异常联想）
+  "editor.tabSize": 2, // 设定tabsize（其实默认也是2）
+  "editor.tabCompletion": "on", //启用Tab补全
+  "editor.detectIndentation": false, //不基于文件内容选择缩进用制表符还是空格
+  "editor.insertSpaces": true, //敲下Tab键时插入空格而不是制表符
+  "editor.stickyTabStops": true, //在缩进上移动光标时四个空格一组来移动，就仿佛它们是制表符(\t)一样
+  "editor.fontSize": 16, //设置文字大小
+  "editor.fontLigatures": true, //启用字体连字
+  "editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace", //字体设置
+  "editor.formatOnSave": true, //每次保存自动格式化
+  "editor.formatOnPaste": true, //在粘贴时格式化代码
+  "editor.formatOnType": true, // 敲完一行代码自动格式化
+  "editor.cursorSmoothCaretAnimation": "on", // 移动光标时变得平滑
+  "editor.cursorBlinking": "smooth", //使编辑器光标的闪烁平滑，有呼吸感
+  "editor.smoothScrolling": true, // 滚动平滑，不过效果很微弱
+  "files.autoSave": "afterDelay", //在编辑器失去焦点时自动保存，这使自动保存近乎达到“无感知”的体验
+  "files.defaultLanguage": "c", // ctrl+N新建文件后默认的语言
+  //"files.trimTrailingWhitespace": true, // 保存时，删除每一行末尾的空格
+  "files.insertFinalNewline": true, // 保存后文件最末尾加一整行空行，Linux下的习惯
+  "files.autoGuessEncoding": true, //让VScode自动猜源代码文件的编码格式
+  "workbench.editor.enablePreview": false, //可以打开多个文件，打开文件时不是“预览”模式，即在编辑一个文件时打开编辑另一个文件不会覆盖当前编辑的文件而是新建一个标签页
+  "workbench.list.smoothScrolling": true, //使文件列表滚动变平滑
+  "workbench.settings.useSplitJSON": true, // 使用这个完美解决
+  "workbench.editor.wrapTabs": true, //编辑器标签页在空间不足时以多行显示
+  "workbench.editor.decorations.colors": true, //在标签页上以颜色强调标签页的状态（例如有问题或有警告）
+  "workbench.editor.decorations.badges": true, //在标签页上以小徽章强调标签页的状态（例如git未提交更改）
+  //"workbench.colorTheme": "Default Dark+", // 主题
+  "terminal.integrated.cursorBlinking": true, //终端光标闪烁
+  //"terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe", //将终端设为cmd，个人比较喜欢cmd作为终端
+  //"terminal.integrated.rightClickBehavior": "default", //在终端中右键时显示菜单而不是粘贴（个人喜好）
+  //"explorer.confirmDelete": false, //删除文件时不弹出确认弹窗（因为很烦）
+  //"explorer.confirmDragAndDrop": false, //往左边文件资源管理器拖动东西来移动/复制时不显示确认窗口（因为很烦）
+  "debug.onTaskErrors": "showErrors", //预启动任务出错后显示错误，并不启动调试
+  "debug.internalConsoleOptions": "openOnSessionStart", //每次调试都打开调试控制台，方便调试
+  "debug.showBreakpointsInOverviewRuler": true, //在滚动条标尺上显示断点的位置，便于查找断点的位置
+  "debug.toolBarLocation": "docked", //固定调试时工具条的位置，防止遮挡代码内容
+  "git": "D:/git/Git/cmd", //可执行文件路径
+  //"git.enabled": false, // 如果你不用git，可以考虑关闭它
+  //"git.ignoreMissingGitWarning": true, // 同上
+  "window.zoomLevel": 0.2, // 整体放大
+  "emmet.triggerExpansionOnTab": true, //tab自动补全html代码失效解决办法  !+tab
+  "*.json": "jsonc", //Comments are not permitted in JSON
+  "search.followSymlinks": false, //据说可以减少vscode的CPU和内存占用
+  "html.format.indentHandlebars": true, //在写包含形如{{xxx}}的标签的html文档时，也对标签进行缩进（更美观）
+  "files.exclude": { //隐藏一些碍眼的文件夹
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/tmp": true,
+    "**/node_modules": true,
+    "**/bower_components": true
+  },
+  "files.watcherExclude": { //不索引一些不必要索引的大文件夹以减少内存和CPU消耗
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true,
+    "**/bower_components/**": true,
+    "**/dist/**": true
+  },
+  //某些插件自定义配置
+  //prettier是前端的
+  //-------- prettier配置参数 --------
+  "prettier.eslintIntegration": true, // 让prettier使用eslint的代码格式进行校验
+  "prettier.printWidth": 100, // 超过最大值换行
+  "prettier.tabWidth": 4, // 缩进字节数
+  "prettier.useTabs": false, // 缩进不使用tab，使用空格
+  "prettier.semi": true, // 句尾添加分号
+  "prettier.singleQuote": true, // 使用单引号代替双引号
+  "prettier.trailingComma": "none", // 在对象或数组最后一个元素后面是否加逗号，不加
+  "prettier.arrowParens": "avoid", // prettier- (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
+  "prettier.bracketSpacing": true,
+  "files.associations": {
+    "iostream": "cpp"
+  },
+  // Todo Tree plugin config
+  "todo-tree.highlights.defaultHighlight": {
+    "type": "text",
+    "foreground": "#ffff00",
+    "background": "#aaa",
+    "opacity": 0.5,
+    "iconColour": "#ffff00",
+    "gutterIcon": true
+  },
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "check",
+      "type": "line"
+    },
+    "FIXME": {
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+    }
+  }
+}

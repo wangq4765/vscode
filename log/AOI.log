@@ -1,0 +1,124 @@
+# 问题描述:Robot手臂不取片/送片
+# 排查Robot派工Log查看是否符合派工条件,再逐一排查各设备Link信号和Glass JobData,路径为D:\logs\Robot1\INFO
+
+# 上一个派工结果
+2023-09-07 17:33:01,434 [SearchRobotCommand][result] ***************Robot Dispatch Reuslt*************** 
+[TransferPort Check]   NG  Check DownstreamLinkSignal Condition NG
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:ThicknessAOI,link.LinkName:UpstreamLinkSignal
+[  TransferEQ Check]   NG  Check DownstreamLinkSignal Condition NG
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:OP10,link.LinkName:UpstreamLinkSignal
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:ROBOT,link.LinkName:
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:U01,link.LinkName:
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:L01,link.LinkName:
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:U02,link.LinkName:
+[SearchRobotCommand]   NG  Check CommandList.Count==0
+
+
+# TR07取片
+2023-09-07 17:33:01,935 Robot ThreadFunc Start,dispatch indexName:TR07 RobotEnable:True
+
+2023-09-07 17:33:01,935 [RobotControlService][start]---------------Dispatch Start-----------------
+
+# 并没有PinCV这个设备(无需关注)
+2023-09-07 17:33:01,935 [RobotControlService][LineModeCheck] - Pre Check.LineType == PinCVPinalign
+
+# Pre Check OK,OK对应的是load,NG对应的是unload
+# PortStatus=3,3对应的是In Use(只看port状态,其他不看)
+# Wait Glass Count=3,3对应有片,0对应无片,所以Port2FWRF01-TR07-PT01正在使用
+2023-09-07 17:33:01,935 [CheckLoadingPort] - Pre Check OK.PortID=2FWRF01-TR07-PT01,PortStatus=3,CassetteStatus=WaitingforProcessing,Wait Glass Count=3; WaitingforProcessingTime:09/07/2023 16:33:03
+2023-09-07 17:33:01,935 [CheckLoadingPort] - Pre Check NG.PortID=2FWRF01-TR07-PT02,PortStatus=3,CassetteStatus=WaitingforProcessing,Wait Glass Count=0; WaitingforProcessingTime:09/07/2023 10:30:57
+2023-09-07 17:33:01,935 [CheckLoadingPort] - Pre Check NG.PortID=2FWRF01-TR07-PT03,PortStatus=3,CassetteStatus=WaitingforProcessing,Wait Glass Count=0; WaitingforProcessingTime:09/07/2023 10:31:08
+
+2023-09-07 17:33:01,935 [TransferIndexToEQPCommand] Begin
+
+# Normal代表的是unload路径模式
+# Normal路径在表bc_robot_path_configure中
+# select idx_name,path_name,source_path_name,target_path_name,modepath,b.* from bc_robot_path_configure b
+2023-09-07 17:33:01,935 [GetPathConfigureList] PathList.ContainsKey(ModePath);ModePath:Normal
+# 数字对应的含义都在表bc_robot_model中
+# select eqpid,unitid,modelname,modelposition,b.* from bc_robot_model b
+# 11=ThicknessAOI=2FWRF01-TA01
+2023-09-07 17:33:01,935 [GetPathConfigureList] cfg.SourcePathName:11;CurrentModelPosition:1 
+# 12=Reflect=2FWRF01-RF01
+2023-09-07 17:33:01,935 [GetPathConfigureList] cfg.SourcePathName:12;CurrentModelPosition:1 
+# 13=OP10=2FWRF01-OP10
+2023-09-07 17:33:01,935 [GetPathConfigureList] cfg.SourcePathName:13;CurrentModelPosition:1 
+# 1=L01=2FWRF01-TR07
+2023-09-07 17:33:01,935 [GetPathConfigureList] cfg.SourcePathName:1;CurrentModelPosition:1 
+# 从L01去Reflect(逆时针往后扫,因为从load口进去,通过好几个设备之后再从unload口出来)
+2023-09-07 17:33:01,935 [GetPathConfigureList]==>pathlist Add;  cfg.SourcePathName:1;CurrentModelPosition:1;TargetModelPosition:12 
+
+# 下面的日志配合运营案PPT中的页面"Robot Position"食用更佳
+
+# Reflect作为下游设备向上游设备L01发送ReceiveAble信号(失败),说明Reflect有片或者其他情况才收不了L01的片
+2023-09-07 17:33:01,935 [TransferIndexToEQPCommand] - Check TartgetModel OK.TartgetModelName=Reflect; Check Get Arm(LowHand) 
+2023-09-07 17:33:01,935 [CheckLinkStatusReceive] - DownstreamLinkSignal NG; unitid:2FWRF01-RF01;LinkName:DownstreamLinkSignal;DownstreamInline:False,DownstreamTrouble:False,ReceiveAble:False
+2023-09-07 17:33:01,935 [TransferIndexToEQPCommand] end
+
+# ThicknessAOI作为上游设备向下游设备OP10发送SendAble信号(失败),说明OP10有片或者其他情况才收不了ThicknessAOI的片
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UnitName:ThicknessAOI; getRobotModel:ThicknessAOI modelposition:11
+2023-09-07 17:33:01,935 [CheckUpLinkStatus] - UpstreamLinkSignal NG; LinkName:ThicknessAOI Current UpLinkStatus => UpStreamInline : False, UpStreamTrouble :False, SendAbleOn : False
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UpstreamLinkSignal Check NG;ModelName:ThicknessAOI, link.LinkName:UpstreamLinkSignal
+
+# Reflect作为上游设备向下游设备ThicknessAOI发送SendAble信号(成功)
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UnitName:Reflect; getRobotModel:Reflect modelposition:12
+2023-09-07 17:33:01,935 [CheckUpLinkStatus] - UpstreamLinkSignal OK; LinkName:Reflect Current UpLinkStatus => UpStreamInline : True, UpStreamTrouble :False, SendAbleOn : True
+
+# Reflect作为上游设备向下游设备ThicknessAOI发送panelid具体信息
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand]  UpstreamLinkSignal Check OK;ModelName:Reflect, link.LinkName:UpstreamLinkSignal
+# 1765是CST No,10是slot,12是Reflect
+# 当前片在表wip_glassinfo中
+# select lotid,glassid,cassettesequenceno,slotsequenceno,modepath,w.* from wip_glassinfo w--可以通过字段cassettesequenceno和slotsequenceno得到glassid
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] GlassA;getGlass[1765,10] modelposition[12]
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - Link Check OK,ModelName=Reflect,LinkName=UpstreamLinkSignal
+
+# modepath代表panel具体流程路径
+# select modepath,w.* from wip_glassinfo w
+2023-09-07 17:33:01,935 [GetPathConfigureList] PathList.ContainsKey(ModePath);ModePath:Normal 
+2023-09-07 17:33:01,935 [GetPathConfigureList] cfg.SourcePathName:11;CurrentModelPosition:12 
+2023-09-07 17:33:01,935 [GetPathConfigureList] cfg.SourcePathName:12;CurrentModelPosition:12 
+# 从Reflect到ThicknessAOI
+2023-09-07 17:33:01,935 [GetPathConfigureList]==>pathlist Add;  cfg.SourcePathName:12;CurrentModelPosition:12;TargetModelPosition:11 
+2023-09-07 17:33:01,935 [GetPathConfigureList] cfg.SourcePathName:13;CurrentModelPosition:12 
+2023-09-07 17:33:01,935 [GetPathConfigureList] cfg.SourcePathName:13;CurrentModelPosition:12 
+2023-09-07 17:33:01,935 [GetPathConfigureList] cfg.SourcePathName:1;CurrentModelPosition:12 
+
+# ThicknessAOI作为下游设备向上游设备Reflect发送ReceiveAble信号(失败),现在可以知道是ThicknessAOI这个设备的问题了
+2023-09-07 17:33:01,935 [CheckLinkStatusReceive] - DownstreamLinkSignal NG; unitid:2FWRF01-TA01;LinkName:DownstreamLinkSignal;DownstreamInline:False,DownstreamTrouble:False,ReceiveAble:False
+# OP10的代号就是13
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UnitName:OP10; getRobotModel:OP10 modelposition:13
+
+# OP10作为上游设备向下游设备U02发送SendAble信号(失败)
+2023-09-07 17:33:01,935 [CheckUpLinkStatus] - UpstreamLinkSignal NG; LinkName:OP10 Current UpLinkStatus => UpStreamInline : False, UpStreamTrouble :False, SendAbleOn : False
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UpstreamLinkSignal Check NG;ModelName:OP10, link.LinkName:UpstreamLinkSignal
+
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UnitName:TR07; getRobotModel:ROBOT modelposition:0
+2023-09-07 17:33:01,935 [CheckUpLinkStatus] - Pre Check NG UnitName=TR07,Link is null
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UpstreamLinkSignal Check NG;ModelName:ROBOT, link.LinkName:
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UnitName:TR07; getRobotModel:U01 modelposition:2
+2023-09-07 17:33:01,935 [CheckUpLinkStatus] - Pre Check NG UnitName=TR07,Link is null
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UpstreamLinkSignal Check NG;ModelName:U01, link.LinkName:
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UnitName:TR07; getRobotModel:L01 modelposition:1
+2023-09-07 17:33:01,935 [CheckUpLinkStatus] - Pre Check NG UnitName=TR07,Link is null
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UpstreamLinkSignal Check NG;ModelName:L01, link.LinkName:
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UnitName:TR07; getRobotModel:U02 modelposition:3
+2023-09-07 17:33:01,935 [CheckUpLinkStatus] - Pre Check NG UnitName=TR07,Link is null
+2023-09-07 17:33:01,935 [TransferEQPToIndexOrEQPCommand] - UpstreamLinkSignal Check NG;ModelName:U02, link.LinkName:
+
+2023-09-07 17:33:01,935 [RobotControlService][end]---------------Dispatch End----------------- 
+
+# 当前派工结果,之所以是当前,是因为从时间中的935(2023-09-07 17:33:01,935)和上面的一样
+2023-09-07 17:33:01,935 [SearchRobotCommand][result] ***************Robot Dispatch Reuslt*************** 
+[TransferPort Check]   NG  Check DownstreamLinkSignal Condition NG
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:ThicknessAOI,link.LinkName:UpstreamLinkSignal
+[  TransferEQ Check]   NG  Check DownstreamLinkSignal Condition NG
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:OP10,link.LinkName:UpstreamLinkSignal
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:ROBOT,link.LinkName:
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:U01,link.LinkName:
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:L01,link.LinkName:
+[    TransferEQ Check]   NG  UpstreamLinkSignal Check NG; ModelName:U02,link.LinkName:
+[SearchRobotCommand]   NG  Check CommandList.Count==0
+
+
+
+

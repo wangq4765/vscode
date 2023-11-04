@@ -1,0 +1,203 @@
+
+
+
+TODO 运维ENIG
+
+ENIG→产线运营→维护→收集药液数据
+
+篮子(可以调整大小)≈CST
+化金要进篮子生产，报进篮子的消息出篮子的消息(子/母篮)
+
+basket：篮子
+这是lot吧，设备上报的是basket，也就是篮子ID，lot是MES那边的概念
+
+OIC→产线运营→BP接收→接收FGMS BP
+下面界面出现错误：不存在的匹配关系[AE448BKA-X51-D0000][AV448BKQ-N50-DQP0]
+问题分析：只有Sensor BP，没有OEM的对应关系
+
+ERROR：请联系CIM科注册打印标签信息！
+路径：OIC→特殊操作→包装→再打印Box
+解决：添加Box两行记录(表poslabeltype中的字段factoryname为ENIG)
+
+问题：5SWY3300002F2BD 不是Processing状态(5SWY3300002F2BD是productname)
+SELECT processgroupname,p.* FROM product p where productname like '5SWY3300002F2BD%'
+SELECT  processgroupname,p.* FROM product p where processgroupname like '5SWYQ33000057%'
+解决：字段MATERIALLOCATIONNAME下有个数据不太一样(设备信息有问题，请确认打包的设备)
+
+UPK投片投进去自动排出
+5S3UQ37000154刚刚投进去,已经试过好几次了
+现在又重投好了，麻烦看下是什么原因导致
+这应该是BOX DOWN信息的问题吧，我看下日志
+从日志看，前三次请求Box信息没有转给MES，没Down信息下去，第四次请求成功Down信息了，这中间你们做了什么操作吗
+重启了CIM主机那边的软件
+中祥英同事说可能是配置文件的问题，等会发布下
+再投下，后续我们一起监控下服务运行情况，确认下Bug有没有修复成功
+MES验证Box不存在，没有Down信息Not exist Box Info,Box ID:[5S3UQ37000155]
+看提示是Box信息在MES那边没维护，所以验证没通过
+
+麻烦看下BOELL004这个母篮，我刚才投了13Q 进这个篮子
+空的呀(查看CST信息)  @许倍源  实物在吗？
+在，篮子扫码过后开始插片的
+查信息是空的
+已经插完了进主线设备了
+这个能查到问题在哪吗？
+ID发我
+5S3U3500027C4AB  5S3U3500027C8AB
+这13Q是一个LOT吗？
+同一盒的
+你们投的时候是不是应该和篮子绑定？
+不是吧？你意思是我每次投之前先LOT绑定篮子？
+你们之前怎么做的呀
+正常流程就是投片，到PIN 口VCR扫码ROBOT，自动取
+篮子是扫完码流到插片位置
+
+
+
+FIXME 运维PTMS
+
+每个站点的物料
+
+PTMS可以在每个表格里修改数据
+
+每个界面“操作管理”和“信息管理”一一对应
+
+--Mask
+在photo时会用
+网版命名规则=Mask ID
+Mask ID供应商会打标签，上机会扫
+物料报上下机，Mask就是物料上下机
+
+网版的spec是别人注册的
+油墨调配基准：辅料和主料
+PR胶有解冻和回冰两种状态
+Mask：layout覆盖一层mask
+靶材：镀膜(通过设备反查站点信息)
+网版/Roller：创建，有的有上机/报废，有的没有下机/报废
+
+materialnames：物料名称  
+materialtype：物料类型
+standardcode：规格号
+materialstate：物料状态
+JUDGE：MaterialJudge
+
+
+
+--物料规格
+
+问题：帮我把物料规格改成SOC-4307U-R01，OC23C29ABT1039   OC23C29ABT1040，领入的时候领入录入错了
+select * from ptmaterial where materialname in('OC23C29ABT1039','OC23C29ABT1040') for update
+解决：将表ptmaterial中的字段STANDARDCODE(物料规格)修改成SOC-4307U-R01
+
+
+
+TODO 运维Report
+
+问题：B5S315E172601，31.5星璇技术开发MLED BLU；3500-20，OC1-2 Photo；Report不显示(制造有可能讲成Robot，这是错误的)
+解决：在rpt_operationseq中添加一条记录
+FACTORYNAME：SENSOR
+PROCESS：3500-20
+PROCESSNAME：OC1-2 Photo
+ORDER_SEQ：介于3510-00和3500-00之间(不重复就行)
+SELECT * FROM rpt_operationseq where PROCESS like '%35%' for update
+SELECT * FROM rpt_operationseq where ORDER_SEQ='8801'--(不重复就行)
+
+
+
+TODO 运维EIS
+
+问题：5STPE02 Inline还是报警"CIM Confirm Bit Timeover"
+解决：你们Inline查一下，我们这边EIS查过没有问题
+是设备没有上报Recipe信息给系统，所以系统也没有将信息返回给设备，就出现了这样的问题
+你们那边Inline(内联)啥意思？
+LOAD和UNLD
+5STPE02断连还是报警，这个问题是BC没上报还是那边没反应
+吴翰说没问题，你找厂商检查一下设备吧
+
+
+
+TODO 运维WMS
+
+WMS和FGMS的问题都找担当王晓芳
+
+WMS是材料库，FGMS是成品库，两者都是仓库
+
+问题：WMS库存删除邀请
+Dear CIM科同事：
+UV270QUM-N10-AD30 数量1225，BOXID：BT12306290030001
+烦请CIM科同事手动删除BOX ID信息感谢
+
+问题：抛送wms信息无等级(F1)
+问题详细描述：由于20237M00001，20237M00002抛送wms信息无等级,需要CIM添加等级信息
+把该拍的所有panel对应的模组id等级改为C
+select * from fgcodemoduleidmap where MODULEID in(
+select MODULEID from lot where lotname in()
+
+问题：WMS后台把等级加上
+处理方法：根据LOTNAME找到关联的MODULE ID，根据MODULE ID去FGCODEMODULEIDMAP查，把GRADE字段里面的值改成制造要的就行
+
+
+
+TODO 运维FGMS
+
+22-0431200 3399 6个月维护下寿命，谢谢
+30-0190046  30-0190047    3399   6个月
+解决问题：bs_materialspecchargeflag 表的EXPIRATIONDAY为保质期
+
+问题：数量维护一下
+物料号：47-6041544
+单位：EA
+请求数量：70500
+累计接收数量：64700
+接收数量：41450
+剩余接收数量：5800
+本月物控剩余可收数量：无限制
+
+问题：Pallet ID 20238TM00611  20238TM00613 没有ERP工厂 ERP工厂是3300 2拍都帮忙解下Hold
+--将字段factory修改成3300
+SELECT factory,m.* FROM mmsplt m where PLT in ('20238TM00613','20238TM00611') for update
+
+问题：LOT类型麻烦改成 Develop
+查看：OIC→产线运营→OEM→OEM信息接收
+解决：在FGMSADM@SRV_LAM数据库将三张sql表中的字段PRODUCTIONTYPE改成Develop
+SELECT * FROM MMS_SENSORIF_PLT WHERE PALLETNAME IN ('2022ZKM000488','202301KM000011') FOR UPDATE
+SELECT * FROM MMS_SENSORIF_BOX WHERE PALLETNAME IN ('2022ZKM000488','202301KM000011') FOR UPDATE
+SELECT * FROM MMS_SENSORIF_PAN WHERE BOXNAME IN ('2022ZKM000488','202301KM000011') FOR UPDATE
+
+FGMS特殊操作下的哪个界面导入的？FGMS软件哪个可以删除的？指导指导呗
+导入是在mloc管理里导入的，删除是在FGMS特殊操作删除信息
+select * from mms_sensorif_plt where palletname in ('2023809140001','2023809140002','2023809140003')
+select * from mms_sensorif_box where palletname in ('2023809140001','2023809140002','2023809140003')
+select * from mms_sensorif_panel where boxname in (
+select boxname from mms_sensorif_box 
+where palletname in ('2023809140001','2023809140002','2023809140003'))
+这上面的6份Excel  在FGMS库里查下palletID  和panel ID
+palletname咋填
+群里的Excel里面的palletname，就这个，一共三个拍
+一共只有三个pallet，正确的和错误的pallet一样
+box还真给他们导入了三遍，看下panel的数量
+查出一共多少个panel后   看下群里6个表格的panel页的总和是多少 看下6个表格里panel页数量总和是不是这么多
+7+27+40=74=222/3
+那就对上了，可以删
+三个表所有的信息全部删除吗
+删除222条panel信息，删之前把信息复制到一个Excel中，存一下，防止后面有问题
+只删除这一个表吗？
+不是  要依次删panel  box  和plt  一个个来
+全部备份到excel中吗？
+每个删除前都要复制数据到Excel中存
+因为删除这个操作是没有履历的  一旦有问题找都找不回来  这样保险  而且可以防止后续出现问题别人甩锅
+如果有问题再把excel中的数据导入数据库就可以把数据补回来，是这样吗？
+是的  他们有可能会让你补或者让你改回来 这个时候也不能直接补或者直接改  需要视情况而定
+
+OIC(SNS)→产线运营→OEM信息接收
+这三坨信息都重复了，T04的需要删掉
+为啥这样Sensor这个界面就查不出数据了，删除这些数据会将sensor中的数据一起删除吗？
+因为数据都删掉了  sns界面查询的数据就是FGMS这个接口表的数据        
+MMS_SENSORIF_PLT@SNS2FGMS，是这个表吗？
+是的
+这个接口是本身就有的还是我们自己配置某些东西实现的？
+这几个表  是FGMS专门建的  就是为了和sns进行信息传输
+咋传输的，讲讲大概就行了
+FGMS给SNS开通访问权限(DB Link)
+
+
+
