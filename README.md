@@ -1,3 +1,3 @@
 # vscode
 
-*测试vscode是否可以用git*
+咋没有提交上去？
