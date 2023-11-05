@@ -429,10 +429,6 @@ select * from edcdatacollectitem
 
 
 
-
-
-
-
 plsql搜索SPC&EDC的八张表：
 select * from datacollectspec where dcspecname like '%122L372602%' for update
 select * from datacollectspecitem where dcspecname like '%122L372602%' for update
