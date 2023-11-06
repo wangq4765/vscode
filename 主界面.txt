@@ -1,6 +1,18 @@
 
 
 
+
+
+
+
+rpm -e --nodeps mariadb-libs
+
+
+
+
+
+
+
 TODO 积累
 
 
