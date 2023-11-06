@@ -34,6 +34,9 @@ linux中怎么查看日志？
 - 根据具体的应用程序，错误日志的位置可能会有所不同。通常可以在应用程序的安装目录或配置文件中找到错误日志的路径。
 请注意，对于某些应用程序，可能需要具有管理员权限才能访问错误日志文件。
 
+Nov  6 17:34:30 test-003 dockerd: time="2023-11-06T17:34:30.135048701+08:00" level=info msg="manager selected by agent for new session: { }" module=node/agent node.id=62lcifiqxvbhomtvg8rh47dz8
+Nov  6 17:34:30 test-003 dockerd: time="2023-11-06T17:34:30.135070541+08:00" level=info msg="waiting 3.845291497s before registering session" module=node/agent node.id=62lcifiqxvbhomtvg8rh47dz8
+
 
 
 TODO 积累
