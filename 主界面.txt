@@ -6,6 +6,15 @@
 
 
 
+CHANGE replication source TO source_host = '172.27.160.252',-- 192.168.200.200是主库
+source_user = 'itcast',           -- 主库用户名
+source_password = 'Root@123456',  -- 主库密码
+source_log_file = 'binlog.000010',-- 主库二进制文件
+source_log_pos = 853;             -- 主库文件位置
+
+
+
+
 TODO 积累
 
 
