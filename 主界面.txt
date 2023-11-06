@@ -9,9 +9,19 @@
 CHANGE replication source TO source_host = '172.27.160.252',-- 192.168.200.200是主库
 source_user = 'itcast',           -- 主库用户名
 source_password = 'Root@123456',  -- 主库密码
-source_log_file = 'binlog.000010',-- 主库二进制文件
-source_log_pos = 853;             -- 主库文件位置
+source_log_file = 'binlog.000011',-- 主库二进制文件
+source_log_pos = 371;             -- 主库文件位置
 
+
+
+
+mysql> show warnings;
++-------+------+------------------------------------------------------------+
+| Level | Code | Message                                                    |
++-------+------+------------------------------------------------------------+
+| Note  | 3083 | Replication thread(s) for channel '' are already runnning. |
++-------+------+------------------------------------------------------------+
+1 row in set (0.00 sec)
 
 
 
