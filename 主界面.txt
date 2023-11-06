@@ -1,10 +1,7 @@
 
-
 能不能把172.27.160.9这个服务器的aqbigdata用户名 密码提供一下，现在这个用户名下的密码都不知道，能否重置一下
 是要这个服务器的密码还是数据库账号的密码？
 数据库密码
-
-
 
 CHANGE replication source TO source_host = '172.27.160.252',-- 192.168.200.200是主库
 source_user = 'itcast',           -- 主库用户名
@@ -12,9 +9,9 @@ source_password = 'Root@123456',  -- 主库密码
 source_log_file = 'binlog.000011',-- 主库二进制文件
 source_log_pos = 371;             -- 主库文件位置
 
-
-
-
+mysql> start replica;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+请问上面的warning怎么查看？
 mysql> show warnings;
 +-------+------+------------------------------------------------------------+
 | Level | Code | Message                                                    |
@@ -22,6 +19,20 @@ mysql> show warnings;
 | Note  | 3083 | Replication thread(s) for channel '' are already runnning. |
 +-------+------+------------------------------------------------------------+
 1 row in set (0.00 sec)
+
+linux中怎么查看日志？
+在Linux中，可以通过以下命令查看错误日志：
+1. 查看系统级别的错误日志：
+- `/var/log/messages`：记录系统消息和警告信息。
+- `/var/log/syslog`：记录系统日志信息。
+2. 查看MySQL的错误日志：
+- 默认情况下，MySQL的错误日志位于`/var/log/mysql/error.log`。
+- 如果你修改了错误日志的路径，可以使用`--log-error`选项指定新的路径。
+3. 查看特定进程的错误日志：
+- 使用`tail -f`命令实时查看进程的错误输出。例如，要查看MySQL服务器的错误输出，可以运行`sudo tail -f /var/log/mysql/error.log`。
+4. 查看应用程序的错误日志：
+- 根据具体的应用程序，错误日志的位置可能会有所不同。通常可以在应用程序的安装目录或配置文件中找到错误日志的路径。
+请注意，对于某些应用程序，可能需要具有管理员权限才能访问错误日志文件。
 
 
 
