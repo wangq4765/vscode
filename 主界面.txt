@@ -91,7 +91,7 @@ kingbase版本(数据库)：V008R006C006B0021
 连那个就用那个的端口(端口用来区分服务)
 
 xshell连上内网IP后再连wifi：此连接依然有效
-KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat也是这样)
+KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat都有效)
 
 内网IP：10.168.0.239
 xshell中连接的都是映射过的地址：172.27.189.119
