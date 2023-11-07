@@ -39,6 +39,12 @@ Nov  6 17:34:30 test-003 dockerd: time="2023-11-06T17:34:30.135070541+08:00" lev
 
 
 
+CHANGE replication source TO source_host = '172.27.160.252',-- 192.168.200.200是主库
+source_user = 'itcast',           -- 主库用户名
+source_password = 'Root@123456',  -- 主库密码
+source_log_file = 'binlog.000015',-- 主库二进制文件
+source_log_pos = 371;             -- 主库文件位置
+
 
 
 
@@ -49,8 +55,6 @@ TODO 积累
 
 思维导图连接文件
 
-主从 + 分库分表 咋整 几台服务器
-主要是运维篇后面都需要多个服务器我就学不下去了
 我电脑内存就不够，我就一个Linux系统学完的，学会配置，以后搭建的时候翻翻笔记就行了
 
 
@@ -87,7 +91,7 @@ kingbase版本(数据库)：V008R006C006B0021
 连那个就用那个的端口(端口用来区分服务)
 
 xshell连上内网IP后再连wifi：此连接依然有效
-KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat都有效)
+KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat也是这样)
 
 内网IP：10.168.0.239
 xshell中连接的都是映射过的地址：172.27.189.119
