@@ -12,9 +12,22 @@
   <dataHost name="dhost1" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql"
     dbDriver="jdbc" switchType="1" slaveThreshold="100">
     <heartbeat>select user()</heartbeat><!-- heart beat心跳，不用管 -->
-    <!-- ?后面跟的是参数，不变 -->
-    <writeHost host="master" url="jdbc:mysql://172.27.160.252:3306?" user="root" password="1234"><!--
-      数据库的连接信息 -->
+    <!-- ?后面指定的是参数，比如时区/字符集，直接拷贝过来就可以了 -->
+    <!-- 这个就是jdbc的连接参数，url ? 后面的可以不写，有默认值，具体要看Driver的版本，有些版本不用写有些一定要加 -->
+    <writeHost host="master" url="jdbc:mysql://172.27.160.252:3306?" user="root" password="P1l494(5">
+    </writeHost>
+    <!-- writeHost是写主机，还有一种readHost是读主机 -->
+  </dataHost>
+  <dataHost name="dhost2" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql"
+    dbDriver="jdbc" switchType="1" slaveThreshold="100">
+    <heartbeat>select user()</heartbeat>
+    <writeHost host="master" url="jdbc:mysql://172.27.160.73:3306?" user="root" password='I3j440"5'>
+    </writeHost>
+  </dataHost>
+  <dataHost name="dhost3" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql"
+    dbDriver="jdbc" switchType="1" slaveThreshold="100">
+    <heartbeat>select user()</heartbeat>
+    <writeHost host="master" url="jdbc:mysql://172.27.160.82:3306?" user="root" password="P5q264!3">
     </writeHost>
   </dataHost>
 </mycat:schema>
