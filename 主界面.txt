@@ -281,10 +281,6 @@ User Password：oracle
 
 FIXME others
 
-BOE-Staff
-账号：10868834
-密码：13865174350wqn~
-
 Quote：引用
 
 diagram：图
