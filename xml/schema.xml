@@ -5,12 +5,14 @@
     <table name="TB_ORDER" dataNode="dn1,dn2,dn3" rule="auto-sharding-long" /><!-- 逻辑表 -->
   </schema>
   <dataNode name="dn1" dataHost="dhost1" database="db01" /><!-- 数据节点 -->
-  <dataNode name="dn2" dataHost="dhost2" database="db01" /><!-- 数据节点 -->
-  <dataNode name="dn3" dataHost="dhost3" database="db01" /><!-- 数据节点 -->
-  <dataHost name="dhost1" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql"
-    dbDriver="jdbc"> <heartbeat>select user()</heartbeat>
-<writeHost host="master"
-      url="jdbc:mysql://localhost:3306" user="root" password="1234">
+  <dataNode name="dn2" dataHost="dhost2" database="db02" /><!-- 数据节点 -->
+  <dataNode name="dn3" dataHost="dhost3" database="db03" /><!-- 数据节点 -->
+  <!-- 节点主机 -->
+  <dataHost name="dhost1" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql" dbDriver="jdbc" switchType="1"
+    slaveThreshold="100">
+    <heartbeat>select user()</heartbeat><!-- heart beat心跳，不用管 -->
+    <!-- ?后面跟的是参数，不变 -->
+    <writeHost host="master" url="jdbc:mysql://172.27.160.252:3306?" user="root" password="1234"><!-- 数据库的连接信息 -->
     </writeHost>
   </dataHost>
 </mycat:schema>
