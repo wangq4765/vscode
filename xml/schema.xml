@@ -1,0 +1,16 @@
+<!-- 把其他服务器的配置复制到自己的mycat中 -->
+<mycat:schema xmlns:mycat="http://io.mycat/">
+  <schema name="DB01" checkSQLschema="true" sqlMaxLimit="100"><!-- 逻辑库 -->
+    <!-- rule="auto-sharding-long"就是分片规则(rule.xml)，这张表中的数据怎么拆分 -->
+    <table name="TB_ORDER" dataNode="dn1,dn2,dn3" rule="auto-sharding-long" /><!-- 逻辑表 -->
+  </schema>
+  <dataNode name="dn1" dataHost="dhost1" database="db01" /><!-- 数据节点 -->
+  <dataNode name="dn2" dataHost="dhost2" database="db01" /><!-- 数据节点 -->
+  <dataNode name="dn3" dataHost="dhost3" database="db01" /><!-- 数据节点 -->
+  <dataHost name="dhost1" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql"
+    dbDriver="jdbc"> <heartbeat>select user()</heartbeat>
+<writeHost host="master"
+      url="jdbc:mysql://localhost:3306" user="root" password="1234">
+    </writeHost>
+  </dataHost>
+</mycat:schema>
