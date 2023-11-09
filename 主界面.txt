@@ -20,19 +20,13 @@ linux中怎么查看日志？
 2. 查看MySQL的错误日志
 [root@test-002 mycat]# tail -f /var/log/mysqld.log
 
-
-
-Navicat连接MyCat
-
-岂不是每次新增库和表都要去修改配置文件？
-
 cd /usr/local/mycat/conf
 主要关注一下这三个配置：
 rule.xml 主要是指定各个表的分片算法
 schema.xml 配置多节点的信息
 server.xml mycat服务配置，账号密码配置
 
-
+用到读写分离，没用到分库分表
 
 
 
