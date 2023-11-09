@@ -5,7 +5,7 @@
     <table name="TB_ORDER" dataNode="dn1,dn2,dn3" rule="auto-sharding-long" /><!-- 逻辑表 -->
   </schema>
   <!-- 数据节点 -->
-  <!-- dataHost之前是逻辑库(虚拟的)，之后是物理库(实际的)，而它本身是连接两者的桥梁(接口) -->
+  <!-- dataHost前面的代码是逻辑库(虚拟的)，后面的代码是物理库(实际的)，而它本身是连接两者的桥梁(接口) -->
   <dataNode name="dn1" dataHost="dhost1" database="db01" />
   <dataNode name="dn2" dataHost="dhost2" database="db01" />
   <dataNode name="dn3" dataHost="dhost3" database="db01" />
