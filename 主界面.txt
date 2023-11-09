@@ -19,16 +19,15 @@ mysql> show warnings;
 linux中怎么查看日志？
 在Linux中，可以通过以下命令查看错误日志：
 1. 查看系统级别的错误日志：
-- `/var/log/messages`：记录系统消息和警告信息。
-- `/var/log/syslog`：记录系统日志信息。
-2. 查看MySQL的错误日志：
-- 默认情况下，MySQL的错误日志位于`/var/log/mysql/error.log`。
-- 如果你修改了错误日志的路径，可以使用`--log-error`选项指定新的路径。
-3. 查看特定进程的错误日志：
-- 使用`tail -f`命令实时查看进程的错误输出。例如，要查看MySQL服务器的错误输出，可以运行`sudo tail -f /var/log/mysql/error.log`。
-4. 查看应用程序的错误日志：
-- 根据具体的应用程序，错误日志的位置可能会有所不同。通常可以在应用程序的安装目录或配置文件中找到错误日志的路径。
-请注意，对于某些应用程序，可能需要具有管理员权限才能访问错误日志文件。
+
+2. 查看MySQL的错误日志
+[root@test-002 mycat]# tail -f /var/log/mysqld.log
+
+
+
+Navicat连接MyCat
+
+岂不是每次新增库和表都要去修改配置文件？
 
 
 
