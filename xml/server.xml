@@ -1,4 +1,4 @@
-<!-- 配置mycat的用户及密码信息 -->
+<!-- 这个文件默认配置都可以直接使用，替换以下部分就行 -->
 
 <!-- name：mycat用户名 -->
 <user name="root" defaultAccount="true">
