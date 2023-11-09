@@ -1,16 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- 这个文件默认配置都可以直接使用，替换以下部分就行 -->
+<mycat:server xmlns:mycat="http://io.mycat/">
+  <system>
+  </system>
+  <!-- name：mycat用户名 -->
+  <user name="root" defaultAccount="true">
+    <!-- mycat密码 -->
+    <property name="password">123456</property>
+    <!-- 对应schema.xml文件中的schema标签的name -->
+    <property name="schemas">DB01</property>
+  </user>
 
-<!-- name：mycat用户名 -->
-<user name="root" defaultAccount="true">
-  <!-- mycat密码 -->
-  <property name="password">123456</property>
-  <!-- 对应schema.xml文件中的schema标签的name -->
-  <property name="schemas">DB01</property>
-</user>
-
-<user name="user">
-  <property name="password">123456</property>
-  <property name="schemas">DB01</property>
-  <!-- 只读属性，root用户既可以读又可以写，而user用户只能读不能写-->
-  <property name="readOnly">true</property>
-</user>
+  <user name="user">
+    <property name="password">123456</property>
+    <property name="schemas">DB01</property>
+    <!-- 只读属性，root用户既可以读又可以写，而user用户只能读不能写-->
+    <property name="readOnly">true</property>
+  </user>
+</mycat:server>
