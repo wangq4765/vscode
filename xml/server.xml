@@ -1,0 +1,7 @@
+<!-- name：mycat用户名 -->
+<user name="root" defaultAccount="true">
+  <!-- mycat密码 -->
+  <property name="password">maluole</property>
+  <!-- 对应schema.xml文件中的schema标签的name -->
+  <property name="schemas">mycat1</property>
+</user>
