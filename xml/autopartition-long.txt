@@ -1,0 +1,14 @@
+# range start-end, data node index
+# K=1000,M=10000.
+0-500M=0
+500-1000M=1
+1000M-1500M=2
+
+# autopartition-long.txt的路径：/usr/local/mycat/conf/
+# 上面两行是注释，下面三行是范围(start-end)，data node index代表数据节点的索引
+# 500M=500×10000=5000000
+# 0/1/2代表的是节点
+# 0~5000000的数据存放在第1个节点
+# 例如字段id=100M在第1个节点(搞了半天是根据主键分支的)
+
+

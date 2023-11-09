@@ -14,13 +14,4 @@
     <property name="mapFile">autopartition-long.txt</property>
   </function>
 
-  <!-- 
-    autopartition-long.txt的路径：/usr/local/mycat/conf/
-    # range start-end, data node index
-    # K=1000,M=10000.
-    0-500M=0
-    500-1000M=1
-    1000M-1500M=2
-  -->
-
 </mycat:rule>
