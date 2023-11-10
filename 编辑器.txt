@@ -1,12 +1,9 @@
 
 
-TODO 前端
+TODO vs
 
-ConnectionInfo定义的变量看成全局变量
 
 先按f1再按ctrl，不是ctrl+f1(不然没有反应)
-
-贴合消息里定义了变量，空的没问题(底层)，sensor不行
 
 vs debug出现错误：把出错的那一行注释掉(点击时.Design.cs自动创建的)
 
@@ -374,11 +371,8 @@ else if (objType.FullName.IndexOf("MES.Common.Entities.CONSUMABLE") > 0)
 
 
 
-TODO 后端
+TODO eclipse
 
-后端基于spring-osgi
-
-贴合后端代码和SNS后端代码不一样
 
 vs没有完全汉化，eclipse没有汉化
 居然看到了汉化的eclipse...
@@ -387,10 +381,12 @@ vs没有完全汉化，eclipse没有汉化
 java代码和xml数据结合起来看
 C#代码和OIC界面结合起来看
 
-
-
-
-
+--MES.Env下面的文件夹
+builders：打包上传(upload)
+cfg(configuration)：配置(.ini文件)
+cmd：脚本(.sh文件)
+bpels：业务流程图
+messages：消息体
 
 
 OIC→VS(消息体)→Eclipse(拆包)→Plsql→Eclipse(封包)→VS(消息体)→OIC
@@ -405,146 +401,6 @@ PS：线程假死需要Terminate(CNX/CNM/QRY)+Remove Launch(删除当前的面�
 激活vs新添加的代码：停止调试+重新生成解决方案(调试的时候可以修改代码但无法生效，不能修改控件)
 PS：eclipse中有Build Automatically所以不需要停止调试再重新编译(eclipse每次保存都自动编译)
 ---build automatically 是指你的java代码改了后，eclipse会自动把改过的java代码编译成class
-
-
-
-
-
-
-IDMFrame.extend.Infra
-IDMFrame.extend.logger
-IDMFrame.extend.workflow
-IDMFrame.extend.formatter
-
-MESSolution.Generic
-MESSolution.Fmc.Service
-MESSolution.Extended.Object
-MESSolution.Extended.Service
-MESSolution.UserProfile.Service
-MESSolution.transportJob.Service
-
-MESSolution.Lot.Service
-MESSolution.Port.Service
-MESSolution.Query.Service
-MESSolution.Alarm.Service
-MESSolution.Durable.Service
-MESSolution.Product.Service
-MESSolution.Machine.Service
-MESSolution.Material.Service
-MESSolution.Consumable.Service
-MESSolution.ProcessGroup.Service
-MESSolution.ProductRequest.Service
-
-
-
-
-
-
-
-
-
-
-IDMMESData
-src：变量lot/product/processoperationspec
-Plug-in Dependencies：IDMFramework.Service.jar
-
---对比前端的MES.Common→Entities→DURABLELIST.cs
-
-IDMMESData→src→com.cim.idm.mesextend.generic.util→EventInfoUtil.java：数据类型EventInfo
-
-IDMMESData→src→com.cim.idm.mespackage.lot.management.data→Lot.java：表lot数据
-IDMMESData→src→com.cim.idm.mespackage.lot.management.data→LotKey.java：表LotKey数据
-
-IDMMESData→src→com.cim.idm.mespackage.product.management.data→Product.java：表product数据
-IDMMESData→src→com.cim.idm.mespackage.processoperationspec.management.data→ProcessOperationSpec.java：表processoperationspec数据
-
-IDMMESData→src→com.cim.idm.mespackage.durable.management.data→Durable.java：表durable数据
-Durable cstData = DurableServiceProxy.getDurableService().selectByKey(new DurableKey(lotData.getCarrierName()));
-
---Element.class/String.class：相当于前端的Entities
---下面的.class文件不在文件夹IDMMESData中(都是jar中的代码)
-MESSolution.Lot.Service→IDMFramework.Service.jar→com.cim.idm.framework.data→EventInfo.class
-MESSolution.Lot.Service→IDMMES.Service.jar→com.cim.idm.mespackage.product.management.info.ext→ProductU.class
-MESSolution.Generic→Plug-in Dependencies→IDMMES.Service.jar→com.cim.mespackage.durable.management.info→SetEventInfo.class
-
-
-
-
-
-
-
-
---MES.Env下面的文件夹
-builders：打包上传(upload)
-cfg(configuration)：配置(.ini文件)
-cmd：脚本(.sh文件)
-bpels：业务流程图
-messages：消息体
-
-MES.Env是操作(bpel)，其他文件夹都是Service(java文件) --bpel调用其他java文件的函数
-1、MESSolution.Lot.Service
-2、MESSolution.Product.Service
-
---MES.Env→config→bpels→CNMsvr(收发消息)
-dispatching.bpel(MES.Env/config/bpels/CNMsvr/dispatching.bpel)：case决定调用那个service，service再调用那个bpel
-RequestUnixProcessState.bpel：
-StopAutoReadBpel.bpel：停止自动读取bpel
-TerminateAfterManagement.bpel：管理后终止
-
---MES.Env→config→bpels→FMC
-ChangeAlarmState.tsnd：更改报警状态
-CreateIssueAlarm.tsnd：创建问题报警
-
---MES.Env→config→bpels→IFEsvr
-FGMSStockInReport.tsnd：FGMS库存报告
-ReceivePalletFromFGMS.tsnd：从FGMS接收打拍
-RTReceivePalletFromFGMS.tsnd：返回从FGMS接收打拍
-
---MES.Env→messages(消息体)→TM1→CNX          -----console中的xml都是.tsnd生成的
-CancelCreateCarrier.tsnd：取消创建卡夹
-ChangePanelGrade.tsnd：更改面板等级
-ReceiveOEMFromFGMS.tsnd：接收FGMS的OEM
-ReleaseHoldLot.tsnd：释放被Hold的Lot
-
-
-
-
-
-
-
-
-
-
-Program arguments：
--os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -console
-
-VM arguments：
--Declipse.ignoreApp=true
--Dosgi.noShutdown=true
--DLogDir=${workspace_loc}\logs
--Dlocation=BOE
--Dfactory=TM1
--Dcim=MES
--DworkerWeight=2
--DworkerTasks=1
--DschedulerWeight=10
--Dmode=DEVqiannan
--DREMOTE_DAEMON=
--Didmframe.serviceLookupTimeout=5000
--Dshop=SNS
--Dlamshop=LAM
--Dsvr=CNXsvr
--DSeq=CNXsvr1
--Ddq=${system_property:user.name}
--Dsmtp.hostname=mail.boe.com.cn
--Dsmtp.port=25
--Dlog4j.watchDelay=60000 
--Dlog4j.configuration="file:///${workspace_loc}\MES.Env\config\log\log4j.xml"
--DconfigRootPath=${workspace_loc}\MES.Env\config
--Didmframe.flow.bpelj=http://bpel.boe.com/bpelj/
-
-
-
 
 
 
@@ -707,23 +563,6 @@ setVariable('lotName',getXmlData('lotElement','//LOTNAME'));
 setVariable('productRequestName',getXmlData('lotElement','//PRODUCTREQUESTNAME'));
 // 上面是Expression获取变量，下面是Invoke Bean获取变量
 getXmlData('message','//Header/EVENTCOMMENT')
-
------下方是帮助文档
-
-2) getVariable : The function to get the value of variable  
-ex) getVariable('Factory') 
-
-3) setVariable : The function to set the value of variable  
-ex) setVariable('ReservedLotId', getArrayValue('Query.Result', '0', '0'))
-
-4) getField : The function to get the field value of variable
-ex) getField(getVariable('variableName'), 'fieldName'[.fieldName]*)
-
-5) setField : The function to set the value in field of variable
-ex) setField('variableName', 'fieldName'[.fieldName]*, getVariable('variableName'))
-
-
-
 
 
 
@@ -1352,98 +1191,6 @@ public static void ReceiveENIGFromSensor( Document doc, EventInfo eventInfo) thr
             log.info("Receive Success!");
         }
 }
-
-
-
-
-TODO 后端发布
-
-eclipse publish + server publish
-
-packaging-build.xml是Ant自动构建的
-
-后端发布和前端一样，先update再commit
-
-问题：无法点进code，需重新发布bpel(发布之前确认)
-
---MES.Env→builders
-PROD01/PROD02：两个服务器
-commons-net-ftp-2.0.jar：ftp实现文件的上传下载
-packaging-allBundle-build.xml：打包所有Bundle build xml
-
-
-
-
-
-
---bpel和代码分别打包(PROD01/PROD02重复两遍)
-
-代码打包：MES.Env→builders→DEV→upload_target_Custom_DEV.xml
-替换1行代码：<include name="target.boe.bundles/*.jar" />
-run as → Ant Build(选第1个)
-
-bpel打包：MES.Env→builders→DEV→upload_bpels_DEV_CNX.xml
-替换1行代码(只替换名字)：<include name="config/bpels/CNXsvr/*.bpel" />
-run as → Ant Build(选第1个)
-
-提交：upload_target_MES_Backup_DEV_PROD01.xml
-run as → Ant Build(选第1个)
-
-建立：MES.Env→builders→packaging-allBundle-build.xml
-run as → Ant Build(选第1个)
-
-
-
-
-
-
-
---依此类推
-
-upload_actions_DEV.xml：给*.adf文件打包
-替换1行代码：<include name="config/actions/*.adf" />
-run as → Ant Build(选第1个)
-
-upload_cfg_DEV.xml：给*.ini文件打包
-替换1行代码：<include name="cfg/**/*.ini" />
-run as → Ant Build(选第1个)
-
-upload_log4j_DEV.xml：给log4j.xml文件打包
-替换1行代码：<include name="config/log/log4j.xml" />
-run as → Ant Build(选第1个)
-
-upload_target_All_LIBs.xml：给*.jar文件打包
-替换1行代码：<include name="target.boe.bundles/*.jar" />
-run as → Ant Build(选第1个)
-
-upload_target_MES_Backup_DEV.xml：回退打包
-run as → Ant Build(选第1个)
-upload_target_MES_Recovery_DEV.xml：恢复打包
-run as → Ant Build(选第1个)
-upload_target_MESSolutions_DEV.xml：解决方案打包
-run as → Ant Build(选第1个)
-
-
-
-
-
-
-
-
---server publish
-
---PROD01/PROD02两个服务器分别重启(不能同时关闭)
-cs status all
-cs stop CNM
-cs stop CNX
-cs start CNM
-cs start CNX
-
-
-
-在idmframe.esb.tiboco.xml中配置
-
-
 
 
 

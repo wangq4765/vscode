@@ -16,7 +16,7 @@
     <!-- rule="auto-sharding-long"就是分片规则(rule.xml)，这张表中的数据怎么拆分 -->
     <table name="TB_ORDER" dataNode="dn1,dn2,dn3" rule="auto-sharding-long" /><!-- 逻辑表 -->
   </schema>
-  
+
   <!-- 数据节点 -->
   <!-- dataHost前面的代码是逻辑库(虚拟的)，后面的代码是物理库(实际的)，而它本身是连接两者的桥梁(接口) -->
   <!-- 
@@ -28,14 +28,14 @@
   <dataNode name="dn1" dataHost="dhost1" database="db01" />
   <dataNode name="dn2" dataHost="dhost2" database="db01" />
   <dataNode name="dn3" dataHost="dhost3" database="db01" />
-  
+
   <!-- 节点主机 -->
   <!-- 
 		name：唯一标识 dataHost 标签，供上层的标签使用
 		maxCon	指定每个读写实例连接池的最大连接。
 		minCon	指定每个读写实例连接池的最小连接，初始化连接池的大小。
 		balance	负载均衡类型，目前的取值有4种：“0”,不开启读写分离机制，所有读操作都发送到当前可用的writeHost上。“1”，全部的readHost与 stand by
-	--> 
+	-->
   <dataHost name="dhost1" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql"
     dbDriver="jdbc" switchType="1" slaveThreshold="100">
     <!--
@@ -43,22 +43,29 @@
 			例如：MYSQL 可以使用 select user()，Oracle 可以使用 select 1 from dual 等。
 		-->
     <heartbeat>select user()</heartbeat><!-- heart beat心跳，不用管 -->
+    <!-- writeHost是写主机，还有一种readHost是读主机 -->
+    <!-- 这里的host只是一个名字，可以改也可以不改，只要在XML配置文件中唯一即可 -->
     <!-- ?后面指定的是参数，比如时区/字符集，直接拷贝过来就可以了 -->
     <!-- 这个就是jdbc的连接参数，url ? 后面的可以不写，有默认值，具体要看Driver的版本，有些版本不用写有些一定要加 -->
-    <writeHost host="master" url="jdbc:mysql://172.27.160.252:3306" user="root" password="csDn2023#Jan2">
+    <writeHost host="hostS1"
+      url="jdbc:mysql://172.27.160.252:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8" 
+      user="root" password="csDn2023#Jan2">
     </writeHost>
-    <!-- writeHost是写主机，还有一种readHost是读主机 -->
   </dataHost>
   <dataHost name="dhost2" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql"
     dbDriver="jdbc" switchType="1" slaveThreshold="100">
     <heartbeat>select user()</heartbeat>
-    <writeHost host="master" url="jdbc:mysql://172.27.160.73:3306" user="root" password="csDn2023#Jan2">
+    <writeHost host="hostS2"
+      url="jdbc:mysql://172.27.160.73:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8"
+      user="root" password="csDn2023#Jan2">
     </writeHost>
   </dataHost>
   <dataHost name="dhost3" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql"
     dbDriver="jdbc" switchType="1" slaveThreshold="100">
     <heartbeat>select user()</heartbeat>
-    <writeHost host="master" url="jdbc:mysql://172.27.160.82:3306" user="root" password="1q2w3e4r">
+    <writeHost host="hostS3"
+      url="jdbc:mysql://172.27.160.82:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8"
+      user="root" password="1q2w3e4r">
     </writeHost>
   </dataHost>
 </mycat:schema>
