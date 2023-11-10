@@ -68,4 +68,33 @@
       user="root" password="1q2w3e4r">
     </writeHost>
   </dataHost>
+
+
+
+  <!-- 读写分离 -->
+
+  <schema name="ITCAST_RW" checkSQLschema="true" sqlMaxLimit="100" dataNode="dn7">
+  </schema>
+
+  <dataNode name="dn7" dataHost="dhost7" database="itcast" />
+
+  <dataHost name="dhost7" maxCon="1000" minCon="10" balance="0" writeType="0" dbType="mysql"
+    dbDriver="jdbc" switchType="1" slaveThreshold="100">
+    <heartbeat>select user()</heartbeat>
+    <writeHost host="hostS3"
+      url="jdbc:mysql://172.27.160.82:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8"
+      user="root" password="1q2w3e4r">
+
+
+      
+      <readHost host="hostS3"
+        url="jdbc:mysql://172.27.160.82:3306?useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8"
+        user="root" password="1q2w3e4r">
+      </readHost>
+
+
+
+    </writeHost>
+  </dataHost>
+
 </mycat:schema>
