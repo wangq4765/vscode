@@ -5,6 +5,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "myScanner",
+      "request": "launch",
+      "mainClass": "myScanner",
+      "projectName": "vscode_eb92d204"
+    },
+    {
+      "type": "java",
       "name": "ThrowDemo",
       "request": "launch",
       "mainClass": "ThrowDemo",

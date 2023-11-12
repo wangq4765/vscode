@@ -47,34 +47,9 @@ if (String.IsNullOrEmpty(machineInfoView1.comPortID.Text))
 
 
 
-
 感叹号：出现了冲突
 一红一黄：仅修改了一个文件
 问号：该项目目录中不存在它可能已经被移动、重命名或者删除
-
-MES.Common→Controls：定义原始控件的类
-MES.Common→Entities：传输的字段(sql表字段)
-MES.Common→Util：定义工具的类
-MES.Common→Image/MenuIcon/Resources/FunctionIcon：图片
-
-MES.Common→IDMConst.cs：定义常量
-MES.Common→ConnectionInfo.cs：定义常量
-MES.Common→UDFCONST.cs：定义常量
-MES.Common→UILogger.cs：catch中的Trace
-MES.Common→BaseForm.cs/ChildForm.cs：基础窗体
-MES.Common→ContinueMsgBox.cs/ExceptionMsgBox.cs：继续/异常消息框
-
-MES.Module.Views.UserControls：都是被定义的"小窗体"，里面有许多控件(只能使用，不能修改)
-PS："小窗体"中的KeyUp事件用GetXXInfo来补充Text控件的信息(使用类似GetPTMaterialInfo的函数)
-MES.Module.Views.UserControls.LotInfoView40
-MES.Module.Views.UserControls.MachineInfoView9
-
-MES.Common.TIB：TIBCO通信
-MES.Module.Services：定义服务的类
-MES.Shell：配置
-
-
-
 
 
 -----------设置-------------
@@ -532,44 +507,6 @@ eclipse收起展开所有方法的快捷键
 FIXME 后端代码
 
 
-
-switchstart = case + otherwise
-otherwise：是所有的case都不符合条件就执行这个
-Case
-Condition：isListEmpty('lotList')
-Input Expression(value)：isListEmpty('lotList')
-
-
-While = whilestart + whileend
-Activity Name：while
-Select a Expression type：Collection
-for(iterable_type element : iterable)
-Iterable variable：lotList
-Element variable：lot Element
-
-
-
-
-
-
-
-
-Expression
-Activity Name：expression
-Function：点击下面的Function List就会出现一模一样的在这儿
-Function List：setVariable('lotList',getElementList('message','//LOT'));
-// 从Xml中获取数据
-setVariable('lotName',getXmlData('lotElement','//LOTNAME'));
-setVariable('productRequestName',getXmlData('lotElement','//PRODUCTREQUESTNAME'));
-// 上面是Expression获取变量，下面是Invoke Bean获取变量
-getXmlData('message','//Header/EVENTCOMMENT')
-
-
-
-
-
---常见的例子
-
 No value registered for key 'LASTEVENTCOMMENT'
 未定义错误信息 No value supplied for the SQL parameter 'LASTEVENTCOMMENT': No value registered for key 'LASTEVENTCOMMENT'
 bindMapI.put("EVENTCOMMENT", eventInfo.getEventComment());
@@ -605,13 +542,6 @@ if( !StringUtils.isEmpty(lotData.getProcessGroupName()) && operationList.contain
 
 
 
-
-
-
-
-
-
-
 --Transaction
 
 // rollback Transaction：回滚事务(对应plsql中的rollback按钮)
@@ -640,13 +570,6 @@ public static void commitTransaction()
 
 
 
-
-
-
-
-
-
-
 --Invoke Bean
 
 setProductUSequence：product
@@ -663,14 +586,6 @@ upBindMap.put("carrierName", durableData.getKey().getDurableName());
 // upSql中的字符串是update语句
 IDMFrameServiceProxy.getSqlTemplate().getSimpleJdbcTemplate().update(upSql, upBindMap);
 log.info("Scrap Product deasssingCarrier");
-
-
-
-
-
-
-
-
 
 
 
@@ -714,12 +629,6 @@ public Lot getLotData(String lotName) throws FrameworkErrorSignal, NotFoundSigna
 
 
 
-
-
-
-
-
-
 --check
 
 public static void checkDurableHoldState(Durable durableData) throws CustomException {
@@ -751,12 +660,6 @@ public static void checkLotState(Lot lotData) throws CustomException{
         throw new CustomException("LOT-9001", lotData.getKey().getLotName(), lotData.getLotState());
     }
 }
-
-
-
-
-
-
 
 
 
@@ -795,15 +698,6 @@ Product productData = CommonUtil.getProductByProductName(sqlResultQ.get(i).get("
 // 多重引用
 String lotName = root.getChild("Body").getChildText("LOTNAME");
 String carrierName = root.getChild("Body").getChildText("CARRIERNAME");
-
-
-
-
-
-
-
-
-
 
 
 
@@ -911,15 +805,6 @@ for (int i = 0;i<lotList.size();i++)
 
 
 
-
-
-
-
-
-
-
-
-
 --getSimpleJdbcTemplate
 
 // BindMask.java中每个函数增删改查一个sql表
@@ -1013,16 +898,6 @@ processData.setLastEventComment(eventInfo.getEventComment());
 // 直接将更新的数据同步到数据库
 ProcessGroupServiceProxy.getProcessGroupService().update(processData);
 log.info("Update ProcessGroup Successfully!");
-
-
-
-
-
-
-
-
-
-
 
 
 
