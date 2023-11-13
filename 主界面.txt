@@ -21,33 +21,10 @@ xml等配置文件，修改之后不需要重新编译java文件，但是注解�
 
 远程既可以连接服务器，也可以连接库
 
-打包(build)和linux中的.tar
-
 word+bpmn(mindmap-eclipse)
 word+主题
 
-
-
-
-
-
-
-Spring初学：Maven和Spring以及Spring Boot的简介以及区别
-简而言之就是统一开发规范与工具。统一管理jar包。
-Spring Boot工程本质上就是一个Maven工程。
-maven和gradle才是同一层次、同一意义的东西吧，spring框架在层次上应该比这两者要高。springboot简化了spring，在意义上比spring要高，这是一个服务于框架的框架，但在层次上来说，它们属于同一层次的东西。
-精辟
-
-通过上面的描述可以总结出：
-1、maven是springboot的基础，springboot项目本身就是maven项目。在maven项目中使用springboot的多个starter加几个约定，就能成为springboot项目了。
-2、springboot是springcloud的基础，springcloud本身是springboot项目。
-3、关系：maven->springboot->springcloud
-maven是springboot的基础，springboot是springcloud的基础，maven不依赖于springboot，springboot不依赖与springcloud。
-
-SpringBoot CLI 是SpringBoot提供的控制台命令工具。
-
-
-
+vscode中的launch.json对应的是"运行和调试"
 
 
 
