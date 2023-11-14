@@ -8,12 +8,9 @@ bilibili网页版有“AI视频总结”(测试版)
 
 
 
-
-
 注解是给虚拟机看的
 
 xml等配置文件，修改之后不需要重新编译java文件，但是注解本身就编写在java类文件中，被JVM读取，并存放到内存中。因此修改之后，需要重新编译java文件，才能生效。
-
 
 
 
@@ -21,30 +18,20 @@ word+bpmn(mindmap-eclipse)
 word+主题
 
 vscode中的launch.json对应的是"运行和调试"
-
+extensions.json对应的是插件
+tasks.json对应的是什么
 
 
 
 TODO 积累
 
 
-schema：数据库
-用到读写分离，没用到分库分表
-
-双主双从
-nycat在主库中
-远程既可以连接服务器，也可以连接库
+远程既可以连接服务器，也可以连接数据库
 
 能不能把172.27.160.9这个服务器的aqbigdata用户名 密码提供一下，现在这个用户名下的密码都不知道，能否重置一下
 是要这个服务器的密码还是数据库账号的密码？
 数据库密码
 胜哥160.9的oracle数据库也连接不上……
-
-cd /usr/local/mycat/conf
-主要关注一下这三个配置：
-rule.xml 主要是指定各个表的分片算法
-schema.xml 配置多节点的信息
-server.xml mycat服务配置，账号密码配置
 
 linux中怎么查看日志？
 1. 查看系统级别的错误日志：
@@ -116,7 +103,37 @@ kingbase版本(数据库)：V008R006C006B0021
 可以执行：./ksql -p 54321 -U system test
 不可执行：.\ksql.exe -p 54321 -U system test
 
-TODO 信息
+
+TODO Mycat
+
+
+schema：数据库
+用到读写分离，没用到分库分表
+
+vim /etc/my.cnf
+从库标志：relay-log=mysql-relay
+mysqld的log路径：log-error=/var/log/mysqld.log
+
+cd /usr/local/mycat/conf
+主要关注一下这三个配置：
+rule.xml 主要是指定各个表的分片算法
+schema.xml 配置多节点的信息
+server.xml mycat服务配置，账号密码配置
+
+mycat安装在主库还是从库？
+Mycat是一种实现数据库集群的解决方案，用于对海量数据进行存储。它可以安装在主库或从库上，具体取决于您的使用场景和需求。如果您需要实现读写分离，可以将Mycat安装在从库上；如果您需要进行负载均衡，可以将Mycat安装在主库上 。在安装Mycat之前，请确保已经正确配置了数据库环境，并根据实际需求进行相应的设置。
+PS：在主库172.27.160.252中安装了Mycat
+
+怎么查看mycat的日志？
+进入Mycat的logs文件夹。例如，如果Mycat安装在/usr/local/mycat目录下，那么日志文件位于/usr/local/mycat/logs文件夹中
+在logs文件夹中，你可以找到以下日志文件：
+mycat.log：Mycat的主日志文件，记录了Mycat的主要运行信息和错误信息
+mysql-error.log：Mycat中的MySQL服务的错误日志文件
+sql_error.log：Mycat中的SQL执行错误日志文件
+slow.log：Mycat中的慢查询日志文件
+
+
+TODO 其他信息
 
 
 剪切+粘贴就可以格式化了

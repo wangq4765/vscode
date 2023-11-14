@@ -6,7 +6,7 @@
     <!-- mycat密码 -->
     <property name="password">123456</property>
     <!-- 对应schema.xml中标签schema的name -->
-    <property name="schemas">DB01</property>
+    <property name="schemas">DB01,ITCAST_RW</property>
   </user>
 
   <user name="user">
