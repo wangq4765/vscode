@@ -1,54 +1,19 @@
 唧唧·类似
 
-思维导图连接文件
-
 有个扩展屏幕拷贝的
+
+思维导图连接文件(云图)
 
 bilibili网页版有“AI视频总结”(测试版)
 
-
-
-注解是给虚拟机看的
-
-xml等配置文件，修改之后不需要重新编译java文件，但是注解本身就编写在java类文件中，被JVM读取，并存放到内存中。因此修改之后，需要重新编译java文件，才能生效。
-
-
-
-word+bpmn(mindmap-eclipse)
+word+bpmn(mindmap)
 word+主题
 
-vscode中的launch.json对应的是"运行和调试"
-extensions.json对应的是插件
-tasks.json对应的是什么
+每个服务器里面有哪些数据库？
+Navicat怎么连接oracle(为什么需要InstantClient)
 
+linux中数据库怎么扩容
 
-
-TODO 积累
-
-
-远程既可以连接服务器，也可以连接数据库
-
-能不能把172.27.160.9这个服务器的aqbigdata用户名 密码提供一下，现在这个用户名下的密码都不知道，能否重置一下
-是要这个服务器的密码还是数据库账号的密码？
-数据库密码
-胜哥160.9的oracle数据库也连接不上……
-
-linux中怎么查看日志？
-1. 查看系统级别的错误日志：
-[root@test-002 ~]# less /var/log/messages
-2. 查看MySQL的错误日志
-[root@test-002 mycat]# tail -f /var/log/mysqld.log
-
-mysql> start replica;
-Query OK, 0 rows affected, 1 warning (0.00 sec)
-请问上面的warning怎么查看？
-mysql> show warnings;
-+-------+------+------------------------------------------------------------+
-| Level | Code | Message                                                    |
-+-------+------+------------------------------------------------------------+
-| Note  | 3083 | Replication thread(s) for channel '' are already runnning. |
-+-------+------+------------------------------------------------------------+
-1 row in set (0.00 sec)
 
 
 TODO 网络
@@ -64,6 +29,21 @@ ji：蓟/嵇
 10.209.135.0/24：政务办公点IP(紫峰)
 172.27.160.0/24：政务云
 172.27.189.0/24(映射到10.168.0.0/24)：VPN
+
+
+远程既可以连接服务器，也可以连接数据库
+
+能不能把172.27.160.9这个服务器的aqbigdata用户名 密码提供一下，现在这个用户名下的密码都不知道，能否重置一下
+是要这个服务器的密码还是数据库账号的密码？是数据库密码
+胜哥160.9的oracle数据库也连接不上……
+
+172.27.160.25
+dzjkz    Ebd$628Cs45A
+这个oracl库开发了接口，调用提示数据库异常
+说之前开发接口调用是正常的，就最近两天提示这个
+不是我这ip问题，是杨海峰那边试了不行，找我，说是数梦平台问题
+测试能连库，只是接口查询数据的时候报数据库服务异常
+
 
 
 TODO 连接
@@ -86,7 +66,9 @@ PS：连接网口之后就绕过防火墙了
 当您的电脑连接到WiFi网络时，它实际上是从网络设备获取一个临时的IP地址。这个IP地址是由路由器分配的，而不是特定的设备。在实际操作中，您可以通过查看网络连接状态的详细信息来找到该IP地址。这个IP地址是用来标识电脑的唯一身份，如果网络出现问题或需要进行一些网络设置，我们就需要知道电脑的IP地址。所以，当我们说电脑连接了WiFi后的IP地址，实际上指的是电脑作为网络设备连接到网络后被赋予的临时IP地址，而非WiFi本身的IP地址。
 
 
+
 TODO 金仓
+
 
 人大金仓的问题直接问ai(网页搜太难了)
 
@@ -104,15 +86,21 @@ kingbase版本(数据库)：V008R006C006B0021
 不可执行：.\ksql.exe -p 54321 -U system test
 
 
+
 TODO Mycat
 
 
 schema：数据库
-用到读写分离，没用到分库分表
 
-vim /etc/my.cnf
-从库标志：relay-log=mysql-relay
-mysqld的log路径：log-error=/var/log/mysqld.log
+Nginx用于代理，没有使用负载均衡(云平台上已经有"弹性负载均衡---ELB"这个功能了)
+
+Mycat用到读写分离，没用到分库分表
+Mycat和安装在那台服务器上没关系(这里安装在从库中)，只要和对应服务器的网络通就可以了
+
+怎么查看mycat的日志？
+进入Mycat的logs文件夹。例如，如果Mycat安装在/usr/local/mycat目录下，那么日志文件位于/usr/local/mycat/logs文件夹中
+[root@master-01 ~]# cd /usr/local/mycat/logs
+PS：mycat.log和warpper.log在一个路径下面
 
 cd /usr/local/mycat/conf
 主要关注一下这三个配置：
@@ -120,17 +108,32 @@ rule.xml 主要是指定各个表的分片算法
 schema.xml 配置多节点的信息
 server.xml mycat服务配置，账号密码配置
 
-mycat安装在主库还是从库？
-Mycat是一种实现数据库集群的解决方案，用于对海量数据进行存储。它可以安装在主库或从库上，具体取决于您的使用场景和需求。如果您需要实现读写分离，可以将Mycat安装在从库上；如果您需要进行负载均衡，可以将Mycat安装在主库上 。在安装Mycat之前，请确保已经正确配置了数据库环境，并根据实际需求进行相应的设置。
-PS：在主库172.27.160.252中安装了Mycat
 
-怎么查看mycat的日志？
-进入Mycat的logs文件夹。例如，如果Mycat安装在/usr/local/mycat目录下，那么日志文件位于/usr/local/mycat/logs文件夹中
-在logs文件夹中，你可以找到以下日志文件：
-mycat.log：Mycat的主日志文件，记录了Mycat的主要运行信息和错误信息
-mysql-error.log：Mycat中的MySQL服务的错误日志文件
-sql_error.log：Mycat中的SQL执行错误日志文件
-slow.log：Mycat中的慢查询日志文件
+
+TODO 主从复制
+
+
+vim /etc/my.cnf
+从库标志：relay-log=mysql-relay
+mysqld的log路径：log-error=/var/log/mysqld.log
+
+linux中怎么查看日志？
+1. 查看系统级别的错误日志：
+[root@test-002 ~]# less /var/log/messages
+2. 查看MySQL的错误日志
+[root@test-002 mycat]# tail -f /var/log/mysqld.log
+
+mysql> start replica;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+请问上面的warning怎么查看？
+mysql> show warnings;
++-------+------+------------------------------------------------------------+
+| Level | Code | Message                                                    |
++-------+------+------------------------------------------------------------+
+| Note  | 3083 | Replication thread(s) for channel '' are already runnning. |
++-------+------+------------------------------------------------------------+
+1 row in set (0.00 sec)
+
 
 
 TODO 其他信息
