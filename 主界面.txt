@@ -6,9 +6,6 @@
 
 bilibili网页版有“AI视频总结”(测试版)
 
-word+bpmn(mindmap)
-word+主题
-
 每个服务器里面有哪些数据库？
 Navicat怎么连接oracle(为什么需要InstantClient)
 
@@ -17,7 +14,6 @@ linux中数据库怎么扩容
 问胜哥172.27.189.120之前开通的访问IP现在怎么关闭了：可能是攻防演练关闭的
 
 
-Error connecting to source 'itcast@192.168.200.116:3306'. This was attempt 42/86400, with a delay of 60 seconds between attempts. Message: Can't connect to MySQL server on '192.168.200.116:3306' (110)
 
 
 
