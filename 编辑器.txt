@@ -1,3 +1,5 @@
+*编辑器.txt*
+
 
 
 TODO vs
@@ -1185,7 +1187,7 @@ console有些细节的东西没法看到,debug的好处就是可以直接到断�
 
 
 
-FIXME others
+FIXME 书签功能
 
 
 Bookmarks(有快捷键)和todotree功能很相似
@@ -1216,7 +1218,7 @@ Window > Show View > Other > 输入book字样会出现Bookmarks > OK
 
 
 
-
+TODO 上个光标
 
 
 和撤销(ctrl+z)/恢复(ctrl+y)不一样，是撤销/恢复定位
@@ -1254,22 +1256,16 @@ excel中像vscode中的返回上一步快捷键是什么？
 
 
 
-
-
-
+TODO 全局查找
 
 
 word无法全局搜索，需要第三方
+everything可以搜索所有文件😂
 
-Visual Studio在整个项目中查找、替换
-方法：编辑->查找和替换->在整个解决方案中查找
-快捷键：Ctrl+Shift+f(vscode也一样)
 
-Eclipse全局搜索代码步骤 
-1、使用快捷键“ctrl+H”打开文件搜索对话框，选择“File Search”标签，在Containing text中输入你需要搜索的字符串，在Scope中，选择你要搜索的范围(Workspace就是全局)，点击Search。 
-2、在Search视图中，会列出搜索得到的结果，点击Show Next Match(Ctrl+.)跳转到下一个匹配的代码。 
+vscode在资源管理器中查找文件名：ctrl + P
 
-vscode 解決 ctrl+shift+f 无效问题(直接在左边点击搜索图标也可以全局搜索)
+vscode 解决 ctrl+shift+f 无效问题(直接在左边点击搜索图标也可以全局搜索)
 1. vscode ctrl+shift+f快捷键 一直无效，查看vscode配置没问题
 2. 猜想应该是和某个系统的快捷键冲突了，经过查找。发现是win10 自带的输入冲突
 细化一下：打开设置页面搜语言（在首选语言界面点击“中文（简体，中国）”）→点选项→点微软拼音→点选项→点按键→把热键（ctrl+shift+f）关闭即可
@@ -1277,15 +1273,9 @@ vscode 解決 ctrl+shift+f 无效问题(直接在左边点击搜索图标也可�
 原来是输入法的锅
 
 
-
-
-
-
-everything可以搜索所有文件😂
-
-Eclipse全局查找文件是ctrl+shift+r
-
-vscode在资源管理器中查找文件名：ctrl + P
+Visual Studio在整个项目中查找、替换
+方法：编辑->查找和替换->在整个解决方案中查找
+快捷键：Ctrl+Shift+f(vscode也一样)
 
 如何在Visual Studio中搜索文件名？
 在Eclipse中，你可以通过按项目搜索一个文件CTRL+SHIFT+R
@@ -1295,8 +1285,15 @@ vscode在资源管理器中查找文件名：ctrl + P
 不幸的是，这不仅限于文件名搜索，还包括符号
 
 
+Eclipse全局查找文件是ctrl+shift+r
+
+Eclipse全局搜索代码步骤 
+1、使用快捷键“ctrl+H”打开文件搜索对话框，选择“File Search”标签，在Containing text中输入你需要搜索的字符串，在Scope中，选择你要搜索的范围(Workspace就是全局)，点击Search。 
+2、在Search视图中，会列出搜索得到的结果，点击Show Next Match(Ctrl+.)跳转到下一个匹配的代码。 
 
 
+
+TODO 文件路径
 
 
 vscode会自动打开文件路径
