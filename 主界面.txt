@@ -1,17 +1,10 @@
+流量30G，通话500分钟，宽带电视免费
+
 唧唧·类似
 有个扩展屏幕拷贝的
 
 思维导图连接文件(云图)
 bilibili网页版有“AI视频总结”(测试版)
-
-流量30G，通话500分钟
-宽带电视免费
-丹姐，仅仅是换套餐需要带身份证吗？
-要的
-
-数据库扩容(一条命令就可以了)≠硬盘扩容
-
-Navicat怎么连接oracle(不需要安装InstantClient)
 
 
 
@@ -33,10 +26,9 @@ ji：蓟/嵇
 TODO 网络
 
 
-Nginx用于代理，没有使用负载均衡(云平台上已经有"弹性负载均衡---ELB"这个功能了)
-
 远程既可以连接服务器，也可以连接数据库
-每个服务器里面有哪些数据库(直接进服务器的数据库里看就可以了)
+
+Nginx用于代理，没有使用负载均衡(云平台上已经有"弹性负载均衡---ELB"这个功能了)
 
 下次遇到这个问题，先查网络是不是通的，如果网络是通的，再去服务器查端口是不是活动的
 端口没有了，就问下厂家那边什么情况
@@ -47,6 +39,32 @@ Nginx用于代理，没有使用负载均衡(云平台上已经有"弹性负载�
 172.27.189.0/24(映射到10.168.0.0/24)：VPN
 
 
+
+*oracle和mysql的创建顺序不同*
+在Oracle中，通常先创建用户，然后再创建数据库。而在MySQL中，则通常是先创建数据库，然后再创建用户。
+
+*数据库扩容(ALTER TABLESPACE)≠硬盘扩容(mount挂载)*
+方法1：在innodb_data_file_path参数后面加上autoextend参数
+innodb_data_file_path=ibdata1:12M:autoextend
+方法2：在innodb_data_file_path参数后面加上一个新的数据文件
+innodb_data_file_path = /ibdata/ibdata1:988M;/disk2/ibdata2:50M:autoextend
+
+问题：mysql的端口号为0
+# 重启解决
+[lmm@izz98rw7qik6d37cz ~]# systemctl restart mysqld.service
+# 分析过程
+[root@test-002 ~]# ping 172.27.160.252
+PING 172.27.160.252 (172.27.160.252) 56(84) bytes of data.
+64 bytes from 172.27.160.252: icmp_seq=1 ttl=64 time=0.037 ms
+[root@test-002 ~]# telnet 172.27.160.252 3306
+Trying 172.27.160.252...
+telnet: connect to address 172.27.160.252: Connection refused
+mysql> SHOW VARIABLES WHERE Variable_name = 'port'; 
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| port          | 0     |
++---------------+-------+
 
 能不能把172.27.160.9这个服务器的aqbigdata用户名 密码提供一下，现在这个用户名下的密码都不知道，能否重置一下
 是要这个服务器的密码还是数据库账号的密码？是数据库密码
@@ -65,6 +83,8 @@ TODO 连接
 
 
 连那个就用那个的端口(端口用来区分服务)
+
+Navicat连接oracle(不需要安装InstantClient)--只有两台oracle运行库
 
 xshell连上内网IP后再连wifi：此连接依然有效(vscode连接ssh后也是这样)
 KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat也是这样，查询的时间老长还以为是锁表了)
