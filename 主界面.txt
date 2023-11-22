@@ -8,6 +8,14 @@ bilibili网页版有“AI视频总结”(测试版)
 
 
 
+ 路由追踪一下试试到哪断了
+
+
+
+
+
+
+
 TODO 工作
 
 
@@ -44,10 +52,8 @@ Nginx用于代理，没有使用负载均衡(云平台上已经有"弹性负载�
 在Oracle中，通常先创建用户，然后再创建数据库。而在MySQL中，则通常是先创建数据库，然后再创建用户。
 
 *数据库扩容(ALTER TABLESPACE)≠硬盘扩容(mount挂载)*
-方法1：在innodb_data_file_path参数后面加上autoextend参数
-innodb_data_file_path=ibdata1:12M:autoextend
-方法2：在innodb_data_file_path参数后面加上一个新的数据文件
-innodb_data_file_path = /ibdata/ibdata1:988M;/disk2/ibdata2:50M:autoextend
+ALTER TABLESPACE CSDN ADD DATAFILE '/db/app/oradata/orcl/csdn23.dbf' SIZE 1024M AUTOEXTEND ON NEXT 1024M MAXSIZE UNLIMITED;
+这是一个Oracle数据库的SQL语句，用于在表空间CSDN中添加一个数据文件。数据文件的路径为'/db/app/oradata/orcl/csdn23.dbf'，初始大小为1024M，当空间不足时，会自动扩展至下一个1024M，最大扩展大小无限制。
 
 问题：mysql的端口号为0
 # 重启解决
@@ -127,6 +133,8 @@ TODO Mycat
 
 schema：数据库
 
+虽然不想说，但是主从、读写分离、集群真的是面试重灾区啊
+
 Mycat用到读写分离，没用到分库分表
 Mycat和安装在那台服务器上没关系(这里安装在从库中)，只要和对应服务器的网络通就可以了
 
@@ -178,6 +186,9 @@ shift+enter(询问ai问题)：类似于excel中的alt+enter
 
 在电脑网络，电脑设备会透过节点之间的连接(数据链路)互相交换数据。传输介质可分为有线及无线两类——有线的可用到双绞线、光纤电缆等介质；无线则可用到Wi-Fi
 可以吧，本质是信息的交换，实体线是交换媒介的一种。
+
+----excel中自动生成8位数密码----
+=CHAR(INT(RAND()*26+65))&INT(RAND()*9+1)&CHAR(INT(RAND()*26+97))&INT(RAND()*900+100)&IF(RAND()*1>0.5,CHAR(INT(RAND()*6+33)),CHAR(INT(RAND()*4+40)))&INT(RAND()*9+1)
 
 微软 Edge 浏览器即将移除「网页选择」功能，回应称使用率低、成本高，对此你怎么看？
 9 月 19 日消息，微软在 9 月 15 日发布的 Edge 117.0.2045.31 浏览器稳定版中，将“网页选择”（Web Select）工具设置为过时。
@@ -323,6 +334,7 @@ PS；vba调试时黄色的箭头可以像vs一样向上拉
 
 
 FIXME oracle
+
 
 之前遇到过这样的问题：vs中的未在本地计算机上注册“microsoft.ACE.oledb.12.0”提供程序
 
