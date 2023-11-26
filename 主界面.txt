@@ -12,6 +12,7 @@ bilibili网页版有“AI视频总结”(测试版)
 
 
 
+
 TODO 工作
 
 
@@ -26,6 +27,11 @@ ji：蓟/嵇
 禁毒支队危化品审批短信提醒项目申请公安内网服务器和云桌面资源
 10.168.0.99/10.168.0.191节点离线，重新服务器后恢复正常(下次看数梦Log)
 巡检弹性IP220.179.5.63:9090Connection refused,原因是产商端口由9090换成了443和80,并向其提供191四台服务器的详细配置
+
+
+60.171.164.67，把这个IP加入172.27.160.148这个ELB的1521端口白名单
+海康厂商开通IP
+bridge1访问这个库不通，处理下
 
 
 
@@ -53,10 +59,10 @@ VPN(k8s)：
 
 
 
-*oracle和mysql的创建顺序不同*
+**oracle和mysql的创建顺序不同**
 在Oracle中，通常先创建用户，然后再创建数据库。而在MySQL中，则通常是先创建数据库，然后再创建用户。
 
-*数据库扩容(ALTER TABLESPACE)≠硬盘扩容(mount挂载)*
+**数据库扩容(ALTER TABLESPACE)≠硬盘扩容(mount挂载)**
 ALTER TABLESPACE CSDN ADD DATAFILE '/db/app/oradata/orcl/csdn23.dbf' SIZE 1024M AUTOEXTEND ON NEXT 1024M MAXSIZE UNLIMITED;
 这是一个Oracle数据库的SQL语句，用于在表空间CSDN中添加一个数据文件。数据文件的路径为'/db/app/oradata/orcl/csdn23.dbf'，初始大小为1024M，当空间不足时，会自动扩展至下一个1024M，最大扩展大小无限制。
 
