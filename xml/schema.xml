@@ -1,4 +1,4 @@
-<!-- 把其他服务器的配置复制到自己的mycat中 -->
+<?xml version="1.0"?>
 <mycat:schema xmlns:mycat="http://io.mycat/">
 
   <!-- name：自定义名字，对应server.xml中的schemas 
@@ -68,7 +68,6 @@
       user="root" password="1q2w3e4r">
     </writeHost>
   </dataHost>
-
 
 
   <!-- 读写分离 -->
