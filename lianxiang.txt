@@ -150,11 +150,22 @@ FnLock防止误触Insert
 任务管理器有了搜索框
 截图工具支持录屏(.mp4)
 
-powerToys Run(listory)：alt+space
-文本提取器(tianruo)：win+shift+t改为win+shift+z(更方便)
+
+
+裁减和锁定(Snipaste)：ctrl+shift+x
+
+屏幕标尺：win+shift+m
+颜色选取器：win+shift+c
+
+文本提取器(tianruo)：win+shift+z(更方便)
 粘贴为纯文本：ctrl+shift+v(word中我已经设置好了，但是word中好像也出现此快捷键了)
+
+powerToys Run(listory)：alt+space
 鼠标实用工具：按ctrl两次(像mac晃动鼠标放大指针)和win+shift+h(黄色圆形遮住了视线，不好用)
+
+速览(ctrl+space)：可以预览所有文件
 File Explorer Add-ons(quicklook)：文件管理器增强 “预览窗格” 插件(文件资源管理器右边默认开启了)
+
 File Locksmith(iobit unlocker)：文件占用解锁器(找出哪些进程在使用文件)
 Hosts File Editor：主机文件编辑器，能方便用户新增、修改、删除 hosts 的内容
 
