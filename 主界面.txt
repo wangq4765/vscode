@@ -5,15 +5,18 @@
 bilibili网页版有“AI视频总结”(测试版)
 
 
+快速搜索
+
 ELB是负载均衡对应所有应用
 Mycat只对应mysql(还有宕机情况)
-
 
 windows系统自带的“远程桌面”可以连接linux系统吗？
 首先问下你想远程过去干嘛？
 用windows远程到Linux，然后打开终端，开始敲命令行，一开始就用ssh它不香么；
 如果你只是觉得用vim或者什么玩意改文件麻烦，那用vs code连吧；
 远程终究是偶尔，频率再高也是偶尔，如果你开机就需要一直到关机那本地装个Linux吧
+
+
 
 
 
@@ -108,11 +111,14 @@ TODO 连接
 
 Navicat连接oracle(不需要安装InstantClient)--只有两台oracle运行库
 
-xshell连上内网IP后再连wifi：此连接依然有效(vscode连接ssh后也是这样)
-KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat也是这样，查询的时间老长还以为是锁表了)
+用xshell连接不上172.27.189.73
+解决：需要在新创云上开通我们这边的IP
 
 内网IP：10.168.0.239
 xshell中连接的都是映射过的地址：172.27.189.119
+
+xshell连上内网IP后再连wifi：此连接依然有效(vscode连接ssh后也是这样)
+KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat也是这样，查询的时间老长还以为是锁表了)
 
 连接网站用VPN，连接服务器用网线(登录服务器)
 PS：连接网口后没有绕过防火墙(需要配置IP)
