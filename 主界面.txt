@@ -1,3 +1,6 @@
+人才补贴
+抖音团购
+
 唧唧·类似
 有个扩展屏幕拷贝的
 
@@ -15,19 +18,26 @@ windows系统自带的“远程桌面”可以连接linux系统吗？
 
 
 
-人才补贴
-抖音团购
-
-
 Nat网关给单个IP开通，安全组给多个IP开通(因为关联了多个实例，也就是服务器)
-
-Oracle库：172.27.160.25:1521  dzjkz  这个库，创建表视图权限开一下
-dzjkz 这个用户的
 
 189段url是新创的，60是政务的
 用189段的url测试：https://172.27.189.244:8301
 是今天晚上还是12月6日晚上啊？
 12-6凌晨(12点)测试，不是晚上
+
+
+
+oracle数据库DZJKZ中有表DZJKZ，怎么在sqlplus中select表DZJKZ？具体代码是啥
+SQL> CONNECT oracle/Csdn2023#0928@e2;
+ERROR:
+ORA-12154: TNS:could not resolve the connect identifier specified
+Warning: You are no longer connected to ORACLE.
+
+CONNECT oracle/Csdn2023#0928@DZJKZ;
+
+
+
+
 
 
 
@@ -47,6 +57,8 @@ ji：蓟/嵇
 60.171.164.67加入172.27.160.148这个ELB的1521端口白名单
 
 10.168.0.99/10.168.0.191节点离线，重启服务器后恢复正常(下次看数梦Log)
+
+Oracle库：172.27.160.25:1521  dzjkz  这个库，创建表视图权限开一下  dzjkz 这个用户的
 
 172.27.189.120NAT网关开通IP，之前由于攻防演练关闭了该IP
 禁毒支队危化品审批短信提醒项目申请公安内网服务器和云桌面资源
@@ -79,7 +91,7 @@ VPN(k8s)：
 
 
 **oracle和mysql的创建顺序不同**
-在Oracle中，通常先创建用户，然后再创建数据库。而在MySQL中，则通常是先创建数据库，然后再创建用户。
+在Oracle中，通常先创建用户，然后再创建数据库。而在MySQL中，则通常是先创建数据库，然后再创建用户
 
 **数据库扩容(ALTER TABLESPACE)≠硬盘扩容(mount挂载)**
 ALTER TABLESPACE CSDN ADD DATAFILE '/db/app/oradata/orcl/csdn23.dbf' SIZE 1024M AUTOEXTEND ON NEXT 1024M MAXSIZE UNLIMITED;
@@ -102,17 +114,6 @@ mysql> SHOW VARIABLES WHERE Variable_name = 'port';
 | port          | 0     |
 +---------------+-------+
 
-能不能把172.27.160.9这个服务器的aqbigdata用户名 密码提供一下，现在这个用户名下的密码都不知道，能否重置一下
-是要这个服务器的密码还是数据库账号的密码？是数据库密码
-胜哥160.9的oracle数据库也连接不上……
-
-172.27.160.25
-dzjkz    Ebd$628Cs45A
-这个oracl库开发了接口，调用提示数据库异常
-说之前开发接口调用是正常的，就最近两天提示这个
-不是我这ip问题，是杨海峰那边试了不行，找我，说是数梦平台问题
-测试能连库，只是接口查询数据的时候报数据库服务异常
-
 
 
 TODO 连接
@@ -120,23 +121,23 @@ TODO 连接
 
 连那个就用那个的端口(端口用来区分服务)
 
-Navicat连接oracle(不需要安装InstantClient)--只有两台oracle运行库
+访问新创云和政务云的网络都需要先连接(经过)新大楼路由器(网关)
 
-用xshell连接不上172.27.189.73
-解决：需要在新创云上开通我们这边的IP
+连接服务器用网线(绕过防火墙(需要配置网关))
+PS：不然所有服务器都需要给新大楼IP开通访问权限
 
 内网IP：10.168.0.239
 xshell中连接的都是映射过的地址：172.27.189.119
 
+用xshell连接不上172.27.189.73
+解决：需要在新创云上开通我们这边的IP
+
 xshell连上内网IP后再连wifi：此连接依然有效(vscode连接ssh后也是这样)
 KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat也是这样，查询的时间老长还以为是锁表了)
 
-连接网站用VPN，连接服务器用网线(登录服务器)
-PS：连接网口后没有绕过防火墙(需要配置IP)
-
 连接了wifi，那么IP是多少？
-您可以在电脑的命令行中输入“ipconfig”命令，然后在弹出的窗口中找到“IPv4 地址”，这就是您的本机 IP 地址。
-连接了wif，那么IP是电脑的IP还是wifi的IP?
+您可以在电脑的命令行中输入“ipconfig”命令，然后在弹出的窗口中找到“IPv4 地址”，这就是您的本机 IP 地址
+连接了wifi，那么IP是电脑的IP还是wifi的IP?
 应该说外部访问的是路由器的IP(防火墙限制的是路由器的IP)
 
 
