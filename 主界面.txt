@@ -17,10 +17,36 @@ windows系统自带的“远程桌面”可以连接linux系统吗？
 
 82测试机不用：一体化平台
 
+172.27.160.25加一个白名单172.27.191.227:1521
+
 189段url是新创的，60是政务的
 用189段的url测试：https://172.27.189.244:8301
 是今天晚上还是12月6日晚上啊？
 12-6凌晨(12点)测试，不是晚上
+
+
+
+"Host '172.27.160.252' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'"，这表示由于多次连接错误，MySQL 服务器已经阻止了来自 '172.27.160.252' 的连接。
+为了解决这个问题，你可以在 MySQL 服务器上执行下面的命令，以清除对 '172.27.160.252' 的阻止
+
+[root@test-003 ~]# mysqladmin -u root -p flush-hosts
+Enter password: 
+另外，由于你看到的信息 "no ilde connection in pool 1545472534" ，这意味着在尝试从连接池获取连接时，并没有空闲的连接可用，你可能需要检查 Mycat 的连接池配置，包括最大连接数、最小连接数等参数，以确保足够的连接可供使用。
+
+2023-12-06 17:31:19.904 ERROR [$_NIOREACTOR-3-RW] (io.mycat.backend.heartbeat.MySQLHeartbeat.nextDector(MySQLHeartbeat.java:215)) - set Error 2  DBHostConfig [hostName=slave, url=172.27.160.73:3306]
+这个错误信息表示在尝试连接到名为"slave"的数据库主机时出现了问题。错误代码2表示无法连接到该主机。
+
+[root@test-002 ~]# telnet 172.27.160.73 3306
+Trying 172.27.160.73...
+Connected to 172.27.160.73.
+Escape character is '^]'.
+lHost '172.27.160.252' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'Connection closed by foreign host.
+这个 telnet 测试结果说明，尽管网络连接是正常的（服务器 172.27.160.73 在端口 3306 上是可达的），但仍然无法成功建立连接。问题在于：由于存在大量的连接错误，MySQL 服务器已经阻止了从 IP 地址 '172.27.160.252' 的连接。
+您可以使用 mysqladmin flush-hosts 命令来清除和重设连接错误的计数器。但是，需要注意的是，该命令需要在阻止连接的 MySQL 服务器上执行，而不是在客户端或 Mycat 服务器上执行。
+如果您以 root 用户身份拥有权限，可以在 MySQL 服务器 172.27.160.73 上执行如下命令：
+mysqladmin -u root -p flush-hosts
+执行上述命令后，系统会提示您输入 root 账户的密码，输入正确的密码之后即可消除 IP 封锁。
+
 
 
 
@@ -125,26 +151,6 @@ KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat也是�
 
 
 
-TODO 金仓
-
-
-人大金仓的问题直接问ai(网页搜太难了)
-
-linux中由于密码是被加密的，解密比较麻烦，建议直接使用即可，至于root密码，可以在越权后，百度搜索改密码命令即可修改链接密码
-
-linux中root用户切换到其他用户不需要密码，其他用户切换到root用户需要root密码，那其他用户需要设置密码吗？
-其他用户仍然需要设置密码。虽然切换到root用户时不需要输入其他用户的密码，但是为了保护系统安全，建议为每个用户设置独立的密码。
-
-操作系统(Linux系统)：centos7.6
-kingbase版本(数据库)：V008R006C006B0021
-
-可以执行：./kingbase -V;
-不可执行：.\kingbase.exe –V;
-可以执行：./ksql -p 54321 -U system test
-不可执行：.\ksql.exe -p 54321 -U system test
-
-
-
 TODO Mycat
 
 
@@ -215,6 +221,26 @@ shift+enter(询问ai问题)：类似于excel中的alt+enter
 日常使用最大用处大概是一些不能被复制的文本可以用网页选择复制。但是也有替代方案
 谢了，知识星球上没法直接复制的文字就靠这个，不知道做好的功能砍个啥，放在那边不就行了，需要支持个毛？
 PS：现在更名为"网页捕获",右击即可看到(快捷键Ctrl+Shift+X没有用了)
+
+
+
+TODO 金仓
+
+
+人大金仓的问题直接问ai(网页搜太难了)
+
+linux中由于密码是被加密的，解密比较麻烦，建议直接使用即可，至于root密码，可以在越权后，百度搜索改密码命令即可修改链接密码
+
+linux中root用户切换到其他用户不需要密码，其他用户切换到root用户需要root密码，那其他用户需要设置密码吗？
+其他用户仍然需要设置密码。虽然切换到root用户时不需要输入其他用户的密码，但是为了保护系统安全，建议为每个用户设置独立的密码。
+
+操作系统(Linux系统)：centos7.6
+kingbase版本(数据库)：V008R006C006B0021
+
+可以执行：./kingbase -V;
+不可执行：.\kingbase.exe –V;
+可以执行：./ksql -p 54321 -U system test
+不可执行：.\ksql.exe -p 54321 -U system test
 
 
 
