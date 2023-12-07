@@ -26,15 +26,16 @@ windows系统自带的“远程桌面”可以连接linux系统吗？
 
 
 
-"Host '172.27.160.252' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'"，这表示由于多次连接错误，MySQL 服务器已经阻止了来自 '172.27.160.252' 的连接。
-为了解决这个问题，你可以在 MySQL 服务器上执行下面的命令，以清除对 '172.27.160.252' 的阻止
 
-[root@test-003 ~]# mysqladmin -u root -p flush-hosts
-Enter password: 
-另外，由于你看到的信息 "no ilde connection in pool 1545472534" ，这意味着在尝试从连接池获取连接时，并没有空闲的连接可用，你可能需要检查 Mycat 的连接池配置，包括最大连接数、最小连接数等参数，以确保足够的连接可供使用。
+
+
 
 2023-12-06 17:31:19.904 ERROR [$_NIOREACTOR-3-RW] (io.mycat.backend.heartbeat.MySQLHeartbeat.nextDector(MySQLHeartbeat.java:215)) - set Error 2  DBHostConfig [hostName=slave, url=172.27.160.73:3306]
 这个错误信息表示在尝试连接到名为"slave"的数据库主机时出现了问题。错误代码2表示无法连接到该主机。
+
+[root@test-003 ~]# mysqladmin -u root -p flush-hosts
+Enter password: csDn2023#Jan2
+另外，由于你看到的信息 "no ilde connection in pool 1545472534" ，这意味着在尝试从连接池获取连接时，并没有空闲的连接可用，你可能需要检查 Mycat 的连接池配置，包括最大连接数、最小连接数等参数，以确保足够的连接可供使用。
 
 [root@test-002 ~]# telnet 172.27.160.73 3306
 Trying 172.27.160.73...
@@ -46,6 +47,14 @@ lHost '172.27.160.252' is blocked because of many connection errors; unblock wit
 如果您以 root 用户身份拥有权限，可以在 MySQL 服务器 172.27.160.73 上执行如下命令：
 mysqladmin -u root -p flush-hosts
 执行上述命令后，系统会提示您输入 root 账户的密码，输入正确的密码之后即可消除 IP 封锁。
+
+
+这段日志是 Mycat 尝试从 MySQL 服务器中获取连接但失败的信息。以下是一些核心问题：
+1、Host '172.27.160.252' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'，该消息表明IP地址 '172.27.160.252'因为太多的连接错误被 MySQL 服务器阻塞了，提示需要用'mysqladmin flush-hosts'来解封阻塞。
+2、no ilde connection in pool 和 connection connectionError 在 Mycat 试图从连接池中获取连接以满足新的请求或进行心跳检测时，表明连接池中没有空闲连接，然后它尝试创建新的连接，但由于 MySQL 服务器拒绝新的连接请求，所以产生错误。
+3、heart beat error: slave/dhost7 retry=10 tmo=30000，心跳错误也证明了 Mycat 无法与 MySQL 服务器建立正常的连接。
+为了解决这个问题，你可以先运行命令 'mysqladmin flush-hosts' 来取消 MySQL 对该 IP 地址的阻塞。同时，应该检查 Mycat 和 MySQL 服务器的配置，防止同一主机发起的无效或者过多的连接请求。还需要确认 Mycat 的连接池设置是否合理，以帮助应对并发请求。
+
 
 
 
@@ -161,7 +170,7 @@ Mycat和安装在那台服务器上没关系(这里安装在从库中)，只要�
 
 怎么查看mycat的日志？
 进入Mycat的logs文件夹。例如，如果Mycat安装在/usr/local/mycat目录下，那么日志文件位于/usr/local/mycat/logs文件夹中
-[root@master-01 ~]# cd /usr/local/mycat/logs
+[root@master-01 ~]# tail -f /usr/local/mycat/logs/mycat.log
 PS：mycat.log和warpper.log在一个路径下面
 
 cd /usr/local/mycat/conf
