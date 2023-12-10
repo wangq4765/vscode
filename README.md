@@ -187,10 +187,6 @@ mariadb   MariaDB Server is a high performing open sou…   5603      [OK]
 
 
 
-
-
-
-
 md代码渲染比easy code formatter好
 
 Ubuntu和Debian的包管理器是apt，Fedora的包管理器是dnf，Arch的包管理器是pacman
@@ -201,21 +197,15 @@ docker官方文档中为什么没有centos版本了？
 
 \ 这啥意思  --add-repo 啥意思
 
-md中<是什么
-
 docker的官方镜像
-
-先想想我们一般写作时候需要用到什么样的排版？ 
-
-无非就是标题、引用、强调（加粗、斜体、下划线）、插入链接、插入图片、列表（有序和无序列表），甚至连表格都很少用。
 
 typora图片保存在哪里？
 
 使用docker安装gitlab，因为docker安装软件的成本相对低一些，不用提前安装依赖的环境，docker内部都弄好了
 
-ctrl+i直接斜体
 
-ctrl+b直接粗体
+
+
 
 docker本质上是进程
 
