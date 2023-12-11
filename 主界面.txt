@@ -41,13 +41,6 @@ mysqladmin -u root -p flush-hosts
 
 
 
-内存(?)
-数据盘(磁盘)
-
-
-
-
-
 
 
 
