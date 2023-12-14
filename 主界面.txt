@@ -375,6 +375,7 @@ Database：M2MESDB
 
 FIXME others
 
+
 Quote：引用
 
 diagram：图
@@ -382,8 +383,6 @@ diagram：图
 policy：策略
 
 invoke：调用
-
-generic：通用的
 
 validation：验证
 
@@ -401,8 +400,13 @@ quantity：数量
 consume：消费
 consumable：可消费的
 
+generic：通用的
+recursive：递归
+
 工厂的线体是什么意思？
 工厂的线体是输送设备直接完成物料输送工程的主体，它主要有输送链条、附件、链轮、头轴、尾轴、轨道、支架等部分组成。
 
 Q-panel是什么？
 Q-panel指的是将一张液晶大玻璃切成几小片,每片含几个小的single cell(产品)。这样的每一片就叫做Q-panel。可以理解为包含几个小液晶屏幕的一张玻璃,通常是应用于小尺寸产品,如手机,pad类产品。
+
+
