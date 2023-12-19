@@ -182,7 +182,7 @@ ALTER TABLESPACE CSDN ADD DATAFILE '/db/app/oradata/orcl/csdn23.dbf' SIZE 1024M 
 TODO mysql
 
 
-vim /etc/my.cnf
+[root@test-004 ~]# vim /etc/my.cnf
 启用二进制日志(主库标志)：log-bin=mysql-bin
 开启中继日志(从库标志)：relay-log=mysql-relay
 mysql的错误日志：log-error=/var/log/mysqld.log
@@ -243,7 +243,7 @@ Mycat和安装在那台服务器上没关系(这里安装在从库中)，只要�
 查看mycat是否运行成功：
 [root@master-01 ~]# tail -f /usr/local/mycat/logs/wrapper.log
 
-cd /usr/local/mycat/conf
+[root@test-002 lib]# cd /usr/local/mycat/conf
 主要关注一下这三个配置：
 rule.xml 主要是指定各个表的分片算法
 schema.xml 配置多节点的信息
@@ -281,6 +281,15 @@ mysql> SELECT Host, User, plugin from mysql.user;
 | localhost | mysql.sys        | caching_sha2_password |
 +-----------+------------------+-----------------------+
 5 rows in set (0.00 sec)
+
+
+
+1049 - Unknown database 'CS_YGF'
+
+2023-12-19 17:50:47.572 ERROR [$_NIOREACTOR-2-RW] (io.mycat.net.FrontendConnection.writeErrMessage(FrontendConnection.java:231)) - ServerConnection [id=1, schema=CS_YGF, host=172.27.129.82, user=root,txIsolation=3, autocommit=true, schema=CS_YGF, executeSql=SELECT * FROM `CS_YGF`.`family` LIMIT 0,1000]Unknown database 'CS_YGF'java.lang.Thread .getStackTrace1559
+
+
+
 
 
 
