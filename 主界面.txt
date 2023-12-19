@@ -284,6 +284,29 @@ mysql> SELECT Host, User, plugin from mysql.user;
 
 
 
+FIXME debug
+
+
+Text指的是显示的文本
+Name指的是字段名(变量名)
+
+F5(Start Debugging)：调试
+Ctrl+F5(Start Without Debugging)：运行
+
+update语句可以连表修改数据，select语句不行
+在select语句中用and，在update语句中用,(逗号)
+plsql的sql语句执行后记录不全(新加的数据无法获取)：需要打开新界面重新执行sql
+
+调试时无法复制粘贴窗体
+load函数没有被引用，但是被执行了(引用：0)
+当前不会命中断点，还没有为该文档加载任何符号：Release→Debug(可能Debug调试信息更多)
+
+idea调试的时候可以像vs一样把当前运行箭头向上拉吗？
+在 IntelliJ IDEA 中，没有类似于 Visual Studio 中的"Set Next Statement"（设置下一条语句）功能，也就是不能直接将当前运行箭头向上拉。这是因为 Java 程序的字节码是预编译的，一旦程序开始执行后，就不能更改代码的执行顺序或跳过某些代码。
+PS；vba调试时黄色的箭头可以像vs一样向上拉
+
+
+
 TODO 其他信息
 
 
@@ -306,24 +329,3 @@ shift+enter(询问ai问题)：类似于excel中的alt+enter
 PS：现在更名为"网页捕获",右击即可看到(快捷键Ctrl+Shift+X没有用了)
 
 
-
-FIXME debug
-
-
-Text指的是显示的文本
-Name指的是字段名(变量名)
-
-F5(Start Debugging)：调试
-Ctrl+F5(Start Without Debugging)：运行
-
-update语句可以连表修改数据，select语句不行
-在select语句中用and，在update语句中用,(逗号)
-plsql的sql语句执行后记录不全(新加的数据无法获取)：需要打开新界面重新执行sql
-
-调试时无法复制粘贴窗体
-load函数没有被引用，但是被执行了(引用：0)
-当前不会命中断点，还没有为该文档加载任何符号：Release→Debug(可能Debug调试信息更多)
-
-idea调试的时候可以像vs一样把当前运行箭头向上拉吗？
-在 IntelliJ IDEA 中，没有类似于 Visual Studio 中的"Set Next Statement"（设置下一条语句）功能，也就是不能直接将当前运行箭头向上拉。这是因为 Java 程序的字节码是预编译的，一旦程序开始执行后，就不能更改代码的执行顺序或跳过某些代码。
-PS；vba调试时黄色的箭头可以像vs一样向上拉
