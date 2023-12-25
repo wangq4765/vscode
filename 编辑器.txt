@@ -5,16 +5,11 @@
 TODO vs
 
 
-先按f1再按ctrl，不是ctrl+f1(不然没有反应)
-
 vs debug出现错误：把出错的那一行注释掉(点击时.Design.cs自动创建的)
 
 LotService/ProductService/MachineService/DurableService/FactoryService是API
 
 没有View查询按钮就复制grdproduct到.cs文件中搜索，这是逆向查找(Service在txtLotName_keyup中)
-
-grdMachineRecipeHeader.AddGridColumn("DESCIRPTION", "Description", 90, Infragistics.Win.HAlign.Left, true);
-此字段查不到数据：DESCIRPTION改成DESCRIPTION
 
 点击查询按钮后不仅grid没有数据，就连headerCaption都消失了
 分析：bscustomquery→CLOB中的sql有错误
@@ -35,18 +30,6 @@ if (String.IsNullOrEmpty(machineInfoView1.comPortID.Text))
 {
     return;
 }
-
-// PTMS界面输入密码登录不进去
-<DaemonList>
-    <Daemon>tcp:10.73.7.68:7500</Daemon>
-</DaemonList>
-// 上面是测试用的，下面是正确的
-<DaemonList>
-    <Daemon></Daemon>
-</DaemonList>
-// 这是一个 XML 格式的文件，其中包含了一个名为 DaemonList 的标签，里面有一个名为 Daemon 的子标签，并且它的值为 "tcp:10.73.7.68:7500"，这可能是一个网络地址或端口号。
-
-
 
 
 感叹号：出现了冲突
