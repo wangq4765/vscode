@@ -16,15 +16,17 @@ windows系统自带的“远程桌面”可以连接linux系统吗？
 mysql创建用户和数据库给市卫健委
 
 
+
 网关账号怎么关联数据库？
-
-
-
 
 Closed Connection An error occurred executing SQL： Select 'PID'
 
 
 
+
+docker run -itd --name jemora1221 -h jemora1221 \
+--privileged=true -p 41521:1521 -p 422:22 -p 15500:5500 -p 15501:5501 \
+jemora12c:12201 init
 
 
 
@@ -178,7 +180,11 @@ TODO mysql
 
 
 DataBridge是mysql吗？服务器里面咋找不到mysql
-这个不是数据库，是数梦的大数据平台，你不要想着从这里找问题
+DataBridge不是数据库，是数梦的大数据平台，你不要想着从这里找问题
+
+# Linux中查看MySQL的版本
+[root@host-10-168-0-7 ~]# mysql --version
+mysql  Ver 8.0.23 for Linux on aarch64 (MySQL Community Server - GPL)
 
 双主双从复制(资源不足没使用)：防止其中一个主库崩掉
 ELB(客户支撑才有权限开通)：连接两个Mycat，防止其中一个Mycat崩掉
