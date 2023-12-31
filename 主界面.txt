@@ -13,18 +13,15 @@ windows系统自带的“远程桌面”可以连接linux系统吗？
 
 
 
-
-
-mysql创建用户和数据库给市卫健委，因数据量太大，最终数据抽取到大数据平台
-172.30.2.170，172.30.2.40加白名单访问172.27.160.148:1522
-查看四台服务器的时间
-
-
-
-
 网关账号怎么关联数据库？
 
-Closed Connection An error occurred executing SQL： Select 'PID'
+Nginx就是跳转机
+我一般是先用向日葵连上公司网络的windows的跳板机上，然后在跳板机上再去连内网的ssh​
+
+下午三点的接待轮到第四组去大厅支撑下
+今天下午三点常总带人参观，你们按照排期安排一下人员，参与人员后面可以调休
+
+
 
 
 
@@ -37,20 +34,8 @@ jemora12c:12201 init
 
 
 
-
-
-隔离所导致的问题：
- 
-脏读：
-	指一个事务读取了另外一个事务未提交的数据。
- 
-不可重复读：
-	在一个事务内读取表中的某一行数据，多次读取结果不同。（这个不一定是错误，只是某些场合不对）
- 
-虚读(幻读)
-	是指在一个事务内读取到了别的事务插入的数据，导致前后读取数量总量不一致。
-
-
+1、抽取市卫健委中的数据到mysql数据库，创建用户和数据库之后因数据量太大，最终数据抽取到大数据平台
+2、卫健委晶奇IP172.30.2.170和172.30.2.40需要访问172.27.160.148:1522来抽取皖事通中的电子健康证预约信息
 
 
 
@@ -186,6 +171,9 @@ REDHAT_SUPPORT_PRODUCT_VERSION="7"
 
 TODO oracle
 
+
+-- 给wateruser赋予DBA权限
+grant dba to wateruser;  -- DBA(Database Administrator，数据库管理员)
 
 **数据库扩容(ALTER TABLESPACE)≠硬盘扩容(mount挂载)**
 SQL> ALTER TABLESPACE CSDN ADD DATAFILE '/db/app/oradata/orcl/csdn23.dbf' SIZE 1024M AUTOEXTEND ON NEXT 1024M MAXSIZE UNLIMITED;
