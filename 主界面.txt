@@ -1,13 +1,58 @@
-唧唧·类似
-有个扩展屏幕拷贝的
+人才补贴
 
-思维导图连接文件(云图)
+思维导图连接文件(关系图谱)
+
+字幕(英文需要，中文不需要)
 bilibili网页版有“AI视频总结”(测试版)
 
+windows系统自带的“远程桌面”可以连接linux系统吗？
+首先问下你想远程过去干嘛？
+用windows远程到Linux，然后打开终端，开始敲命令行，一开始就用ssh它不香么；
+如果你只是觉得用vim或者什么玩意改文件麻烦，那用vs code连吧；
+远程终究是偶尔，频率再高也是偶尔，如果你开机就需要一直到关机那本地装个Linux吧
 
 
-ELB是负载均衡对应所有应用
-Mycat只对应mysql(还有宕机情况)
+
+
+
+mysql创建用户和数据库给市卫健委，因数据量太大，最终数据抽取到大数据平台
+172.30.2.170，172.30.2.40加白名单访问172.27.160.148:1522
+查看四台服务器的时间
+
+
+
+
+网关账号怎么关联数据库？
+
+Closed Connection An error occurred executing SQL： Select 'PID'
+
+
+
+
+docker run -itd --name jemora1221 -h jemora1221 \
+--privileged=true -p 41521:1521 -p 422:22 -p 15500:5500 -p 15501:5501 \
+jemora12c:12201 init
+
+
+
+
+
+
+
+隔离所导致的问题：
+ 
+脏读：
+	指一个事务读取了另外一个事务未提交的数据。
+ 
+不可重复读：
+	在一个事务内读取表中的某一行数据，多次读取结果不同。（这个不一定是错误，只是某些场合不对）
+ 
+虚读(幻读)
+	是指在一个事务内读取到了别的事务插入的数据，导致前后读取数量总量不一致。
+
+
+
+
 
 
 
@@ -20,37 +65,66 @@ ji：蓟/嵇
 
 基本信息都在文件夹"运维文档"里面
 
-你把邮箱发给杨海峰，等他有时间加你，到时候巡检邮件你都会收到(网站上设置定期巡检)
+82测试机不用：正在使用"一体化平台"
 
 
 
 开通王蓟网关账号
 
-60.171.164.67加入172.27.160.148这个ELB的1521端口白名单
+172.27.160.250基础配置并安装mysql和redis
 
+在服务器172.27.160.164上加反向代理183.161.35.38:1433
+
+Oracle库：172.27.160.25:1521  dzjkz  这个库，创建表视图权限开一下  dzjkz 这个用户的
+
+区块链mychain中的进程baas-midway-collector.jar丢失后重新启动
 10.168.0.99/10.168.0.191节点离线，重启服务器后恢复正常(下次看数梦Log)
 
+你把邮箱发给杨海峰，等他有时间加你，到时候巡检邮件你都会收到(巡检频率为1小时)
+巡检弹性IP220.179.5.63:9090Connection refused,原因是产商端口由9090换成了443和80
+
 172.27.189.120NAT网关开通IP，之前由于攻防演练关闭了该IP
-禁毒支队危化品审批短信提醒项目申请公安内网服务器和云桌面资源
-巡检弹性IP220.179.5.63:9090Connection refused,原因是产商端口由9090换成了443和80,并向其提供191四台服务器的详细配置
+60.171.164.67加入172.27.160.148这个ELB的1521端口白名单
+协助测试172.27.189.72和172.28.205.6:1433的连通性
+
+*协助XC云升级加补丁测试业务*
+189段url是新创的，160是政务的
+用189段的url测试：http://172.27.189.101:9001/MapV/index.html#/
+是今天晚上还是12月6日晚上啊？
+12-6凌晨(12点)测试，不是晚上
+
+因铜陵市区块链节点迁移，铜陵节点IP地址发生变化，需各市相关服务器节点的18130和18230端口放开铜陵市ip：59.203.209.198的访问权限，各市节点如下：
+淮南：59.203.126.212
+安庆：59.203.212.220
+黄山：59.203.175.115
+六安：59.203.228.100
+蚌埠：59.203.64.55
+亳州：59.203.98.24
+宣城：59.203.170.82
+滁州：59.203.54.149
+宿州：59.203.71.194
+*注意事项*
+1、59开头的IP是数据中心映射过来的
+2、59.203.209.198通过数据中心访问我们(数据中心给它开通访问权限)
+3、因铜陵市区块链节点迁移，两台区块链服务器节点的端口放开铜陵市ip：59.203.209.198的访问权限
 
 
 
 TODO 网络
 
 
-远程既可以连接服务器，也可以连接数据库
+vpn原理(vpn连不上测试库是因为IP限制)
+胜哥，政务云我登录不上去，账号和密码都没有错误---有白名单的，你在家登不了
 
-Nginx用于代理，没有使用负载均衡(云平台上已经有"弹性负载均衡---ELB"这个功能了)
-PS：ELB的IP可以从*服务器访问权限清单.xlsx*中找到，在云平台上查询比较麻烦
-
-下次遇到这个问题，先查网络是不是通的，如果网络是通的，再去服务器查端口是不是活动的
-端口没有了，就问下厂家那边什么情况
+连接了wifi，那么IP是多少？
+您可以在电脑的命令行中输入“ipconfig”命令，然后在弹出的窗口中找到“IPv4 地址”，这就是您的本机 IP 地址
+连接了wifi，那么IP是电脑的IP还是wifi的IP?
+应该说外部访问的是路由器的IP(防火墙限制的是路由器的IP)
 
 ----外部访问内部的IP具体到那台服务器的那个端口，内部访问则直接开通IP就可以了----
+172.27.160.0/24：政务云
 172.27.129.82/32：新大楼(振峰)
 10.209.135.0/24：政务办公点IP(紫峰)
-172.27.160.0/24：政务云
 
 VPN(k8s)：
 172.27.204.0/24
@@ -60,12 +134,103 @@ VPN(k8s)：
 
 
 
-**oracle和mysql的创建顺序不同**
-在Oracle中，通常先创建用户，然后再创建数据库。而在MySQL中，则通常是先创建数据库，然后再创建用户。
+TODO 路由
+
+
+连那个就用那个的端口(端口用来区分服务)
+远程既可以连接服务器，也可以连接数据库(加端口)
+
+下次遇到这个问题，先查网络是不是通的，如果网络是通的，再去服务器查端口是不是活动的
+端口没有了，就问下厂家那边什么情况
+
+连接服务器用网线(绕过防火墙(需要配置网关))
+PS：不然所有服务器都需要给新大楼IP开通访问权限
+
+内网IP：10.168.0.239
+xshell中连接的都是映射过的地址：172.27.189.119
+
+用xshell连接不上172.27.189.73
+解决：需要在新创云上开通我们这边的IP(172.27.129.82)
+
+下面问题的解决办法：双网卡实现内外网同时上网或者VPN开通访问权限
+xshell连上内网IP后再连wifi：此连接依然有效(vscode连接ssh后也是这样)
+Navicat连上内网IP后再连wifi：只在当前标签页有效(查询的时间很长还以为是锁表了)
+
+
+
+TODO linux
+
+
+linux中由于密码是被加密的，解密比较麻烦，建议直接使用即可，至于root密码，可以在越权后，百度搜索改密码命令即可修改链接密码
+
+linux中root用户切换到其他用户不需要密码，其他用户切换到root用户需要root密码，那其他用户需要设置密码吗？
+其他用户仍然需要设置密码。虽然切换到root用户时不需要输入其他用户的密码，但是为了保护系统安全，建议为每个用户设置独立的密码。
+
+# 查询Linux系统版本
+[root@test-002 ~]# cat /etc/os-release
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="7"
+PRETTY_NAME="CentOS Linux 7 (Core)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:centos:centos:7"
+HOME_URL="https://www.centos.org/"
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
+
+
+
+TODO oracle
+
 
 **数据库扩容(ALTER TABLESPACE)≠硬盘扩容(mount挂载)**
-ALTER TABLESPACE CSDN ADD DATAFILE '/db/app/oradata/orcl/csdn23.dbf' SIZE 1024M AUTOEXTEND ON NEXT 1024M MAXSIZE UNLIMITED;
+SQL> ALTER TABLESPACE CSDN ADD DATAFILE '/db/app/oradata/orcl/csdn23.dbf' SIZE 1024M AUTOEXTEND ON NEXT 1024M MAXSIZE UNLIMITED;
 这是一个Oracle数据库的SQL语句，用于在表空间CSDN中添加一个数据文件。数据文件的路径为'/db/app/oradata/orcl/csdn23.dbf'，初始大小为1024M，当空间不足时，会自动扩展至下一个1024M，最大扩展大小无限制。
+
+# 查询Oracle数据库版本
+SQL> SELECT * FROM V$VERSION;
+BANNER
+--------------------------------------------------------------------------------
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+PL/SQL Release 11.2.0.1.0 - Production
+CORE	11.2.0.1.0	Production
+TNS for Linux: Version 11.2.0.1.0 - Production
+NLSRTL Version 11.2.0.1.0 - Production
+
+
+
+TODO mysql
+
+
+DataBridge是mysql吗？服务器里面咋找不到mysql
+DataBridge不是数据库，是数梦的大数据平台，你不要想着从这里找问题
+
+# Linux中查看MySQL的版本
+[root@host-10-168-0-7 ~]# mysql --version
+mysql  Ver 8.0.23 for Linux on aarch64 (MySQL Community Server - GPL)
+
+双主双从复制(资源不足没使用)：防止其中一个主库崩掉
+ELB(客户支撑才有权限开通)：连接两个Mycat，防止其中一个Mycat崩掉
+Nginx用于反向代理，没有使用负载均衡(云平台上已经有"弹性负载均衡---ELB"这个功能了)
+
+[root@test-004 ~]# vim /etc/my.cnf
+启用二进制日志(主库标志)：log-bin=mysql-bin
+开启中继日志(从库标志)：relay-log=mysql-relay
+mysql的错误日志：log-error=/var/log/mysqld.log
+
+mysql> start replica;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+请问上面的warning怎么查看？
+mysql> show warnings;
++-------+------+------------------------------------------------------------+
+| Level | Code | Message                                                    |
++-------+------+------------------------------------------------------------+
+| Note  | 3083 | Replication thread(s) for channel '' are already runnning. |
++-------+------+------------------------------------------------------------+
 
 问题：mysql的端口号为0
 # 重启解决
@@ -84,60 +249,6 @@ mysql> SHOW VARIABLES WHERE Variable_name = 'port';
 | port          | 0     |
 +---------------+-------+
 
-能不能把172.27.160.9这个服务器的aqbigdata用户名 密码提供一下，现在这个用户名下的密码都不知道，能否重置一下
-是要这个服务器的密码还是数据库账号的密码？是数据库密码
-胜哥160.9的oracle数据库也连接不上……
-
-172.27.160.25
-dzjkz    Ebd$628Cs45A
-这个oracl库开发了接口，调用提示数据库异常
-说之前开发接口调用是正常的，就最近两天提示这个
-不是我这ip问题，是杨海峰那边试了不行，找我，说是数梦平台问题
-测试能连库，只是接口查询数据的时候报数据库服务异常
-
-
-
-TODO 连接
-
-
-连那个就用那个的端口(端口用来区分服务)
-
-Navicat连接oracle(不需要安装InstantClient)--只有两台oracle运行库
-
-xshell连上内网IP后再连wifi：此连接依然有效(vscode连接ssh后也是这样)
-KStudio连上内网IP后再连wifi：只在当前标签页有效(Navicat也是这样，查询的时间老长还以为是锁表了)
-
-内网IP：10.168.0.239
-xshell中连接的都是映射过的地址：172.27.189.119
-
-连接网站用VPN，连接服务器用网线(登录服务器)
-PS：连接网口后没有绕过防火墙(需要配置IP)
-
-连接了wifi，那么IP是多少？
-您可以在电脑的命令行中输入“ipconfig”命令，然后在弹出的窗口中找到“IPv4 地址”，这就是您的本机 IP 地址。
-连接了wif，那么IP是电脑的IP还是wifi的IP?
-应该说外部访问的是路由器的IP(防火墙限制的是路由器的IP)
-
-
-
-TODO 金仓
-
-
-人大金仓的问题直接问ai(网页搜太难了)
-
-linux中由于密码是被加密的，解密比较麻烦，建议直接使用即可，至于root密码，可以在越权后，百度搜索改密码命令即可修改链接密码
-
-linux中root用户切换到其他用户不需要密码，其他用户切换到root用户需要root密码，那其他用户需要设置密码吗？
-其他用户仍然需要设置密码。虽然切换到root用户时不需要输入其他用户的密码，但是为了保护系统安全，建议为每个用户设置独立的密码。
-
-操作系统(Linux系统)：centos7.6
-kingbase版本(数据库)：V008R006C006B0021
-
-可以执行：./kingbase -V;
-不可执行：.\kingbase.exe –V;
-可以执行：./ksql -p 54321 -U system test
-不可执行：.\ksql.exe -p 54321 -U system test
-
 
 
 TODO Mycat
@@ -145,17 +256,10 @@ TODO Mycat
 
 schema：数据库
 
-虽然不想说，但是主从、读写分离、集群真的是面试重灾区啊
-
 Mycat用到读写分离，没用到分库分表
 Mycat和安装在那台服务器上没关系(这里安装在从库中)，只要和对应服务器的网络通就可以了
 
-怎么查看mycat的日志？
-进入Mycat的logs文件夹。例如，如果Mycat安装在/usr/local/mycat目录下，那么日志文件位于/usr/local/mycat/logs文件夹中
-[root@master-01 ~]# cd /usr/local/mycat/logs
-PS：mycat.log和warpper.log在一个路径下面
-
-cd /usr/local/mycat/conf
+[root@test-002 lib]# cd /usr/local/mycat/conf
 主要关注一下这三个配置：
 rule.xml 主要是指定各个表的分片算法
 schema.xml 配置多节点的信息
@@ -163,170 +267,60 @@ server.xml mycat服务配置，账号密码配置
 
 
 
-TODO 主从复制
+----get_master_public_key=1----
 
+2023-12-06 17:31:19.904 ERROR [$_NIOREACTOR-3-RW] (io.mycat.backend.heartbeat.MySQLHeartbeat.nextDector(MySQLHeartbeat.java:215)) - set Error 2  DBHostConfig [hostName=slave, url=172.27.160.73:3306]
+这个错误信息表示在尝试连接到名为"slave"的数据库主机时出现了问题。错误代码2表示无法连接到该主机。
 
-vim /etc/my.cnf
-从库标志：relay-log=mysql-relay
-mysqld的log路径：log-error=/var/log/mysqld.log
+[root@test-003 ~]# mysqladmin -u root -p flush-hosts
+Enter password: csDn2023#Jan2
+另外，由于你看到的信息 "no ilde connection in pool 1545472534" ，这意味着在尝试从连接池获取连接时，并没有空闲的连接可用，你可能需要检查 Mycat 的连接池配置，包括最大连接数、最小连接数等参数，以确保足够的连接可供使用。
 
-linux中怎么查看日志？
-1. 查看系统级别的错误日志：
-[root@test-002 ~]# less /var/log/messages
-2. 查看MySQL的错误日志
-[root@test-002 mycat]# tail -f /var/log/mysqld.log
+[root@test-002 mycat]# telnet 172.27.160.73 3306
+Trying 172.27.160.73...
+Connected to 172.27.160.73.
+Escape character is '^]'.J
+8.0.31_4q9e`yÿobHj.{7jFqcaching_sha2_password2#08S01Got timeout reading communication packetsConnection closed by foreign host.
 
-mysql> start replica;
-Query OK, 0 rows affected, 1 warning (0.00 sec)
-请问上面的warning怎么查看？
-mysql> show warnings;
-+-------+------+------------------------------------------------------------+
-| Level | Code | Message                                                    |
-+-------+------+------------------------------------------------------------+
-| Note  | 3083 | Replication thread(s) for channel '' are already runnning. |
-+-------+------+------------------------------------------------------------+
-1 row in set (0.00 sec)
-
-
-
-TODO 其他信息
-
-
-守护进程(daemon)就是windows中的“服务”
-
-shift+enter(询问ai问题)：类似于excel中的alt+enter
-
-在电脑网络，电脑设备会透过节点之间的连接(数据链路)互相交换数据。传输介质可分为有线及无线两类——有线的可用到双绞线、光纤电缆等介质；无线则可用到Wi-Fi
-可以吧，本质是信息的交换，实体线是交换媒介的一种。
-
-----excel中自动生成8位数密码----
-=CHAR(INT(RAND()*26+65))&INT(RAND()*9+1)&CHAR(INT(RAND()*26+97))&INT(RAND()*900+100)&IF(RAND()*1>0.5,CHAR(INT(RAND()*6+33)),CHAR(INT(RAND()*4+40)))&INT(RAND()*9+1)
-
-微软 Edge 浏览器即将移除「网页选择」功能，回应称使用率低、成本高，对此你怎么看？
-9 月 19 日消息，微软在 9 月 15 日发布的 Edge 117.0.2045.31 浏览器稳定版中，将“网页选择”（Web Select）工具设置为过时。
-这项工具允许用户在保持其格式的情况下复制选中区域，用户可以对选中的区域进行交互，用户可以通过菜单或者 Ctrl+Shift+X 快捷方式启用。
-这个功能特别好用，省去F12然后搜索的时间，直接能把文字提取出来，方便做笔记。可惜被砍掉了。
-日常砍最好用的产品，满足复制网页表格的需求
-日常使用最大用处大概是一些不能被复制的文本可以用网页选择复制。但是也有替代方案
-谢了，知识星球上没法直接复制的文字就靠这个，不知道做好的功能砍个啥，放在那边不就行了，需要支持个毛？
-PS：现在更名为"网页捕获",右击即可看到(快捷键Ctrl+Shift+X没有用了)
-
-
-FIXME 网线连接与无线连接不能共存
-
-
-解决WIN10网线连接与无线连接不能共存
-更新到WIN10之后发现网线连接与无线连接经常打架，只能选一个，在连接网线的情况下，打开WIFI会自动关掉
-解决：
-1. 控制面板 > 网络和 Internet > 网络连接 > WLAN > 右键 > 属性 > 配置(C)（网络选项卡）> 电源管理 > ◻允许计算机关闭此设备以节约电源(A)
-关掉打勾
-2.此电脑 > 右键 > 管理 > 服务和应用程序 > 服务 > WWAN AutoConfig > 右键 > 属性 > 停止 > 启动 > 确定 （不要在外面点重启此服务，不好使）
-牛逼 一下解决了我的问题
-有线跟无线可以一起使用吗？
-不知道有没有效果等待测试
-
-网线和WIFI同时使用时的冲突问题
-网线和WiFi同时使用时，可能会出现冲突问题。一种常见的情况是，当两者同时连接时，设备可能优先使用WiFi的网络，如果WiFi网络不通，才会切换到网线的网络。此外，有些用户在更新到Windows 10后发现，当连接网线时，打开WiFi会自动关闭。
-为了解决这类问题，您可以尝试以下方法：
-1. **调整电源管理设置**：右击桌面右下角的网络图标，选择“打开网络和共享中心”。接着，点击当前连接的WiFi，进入“属性”窗口。在“配置”选项卡下，找到“电源管理”并取消勾选“允许计算机关闭此设备以节约电源”选项。
-2. **调整相关服务设置**：按Win+R键打开运行窗口，输入“services.msc”并回车。在服务列表中找到“WWAN AutoConfig”，右键选择“属性”，首先停止该服务，然后再次启动。这样可以确保每次重启后服务保持启动状态。
-3. **手动设置网络优先级**：如果发现网络连接不稳定或者存在冲突，您可以尝试手动设置网络的优先级，确保您更常用的网络连接位于顶部。
-
-解决电脑同时使用有线网上内网，无线网上外网的冲突：
-由于内网有网络限制（限制娱乐等），所以肯定要用外网（无线网卡）
-但是有的网站只能用内网访问，比如gitlab，oa等。我电脑刚开始连接了wifi后上不了gitlab，搞到每次都要关闭wifi使用内网访问。
-问过大佬才知道是网关的问题。
-比如内网（有线网）的地址信息是：
-ip: 192.168.100.2
-subnet: 255.255.255.0
-default gateway: 192.168.100.254
-dns server: 192.168.200.1
-外网（wifi）的地址信息是：
-ip: 192.168.3.12
-subnet: 255.255.255.0
-default gateway: 192.168.3.1
-连了wifi外网后，cmd输入route print，你会看到两个0.0.0.0开头的地址信息，这样会路由冲突
-解决方法：
-管理员进入cmd；
-route delete 0.0.0.0//删除掉两个默认路由
-route add 0.0.0.0 mask 0.0.0.0 192.168.3.1//将外网网关设置为默认路由，这样代表默认使用外网访问
-route -p add 192.168.200.0 mask 255.255.255.0 192.168.100.254//意思是当访问的站点ip是192.168.200开头（例如192.168.200.14），就使用内网访问
-添加永久路由：在route之后添加 -p
-添加永久路由的前提是，你的ip不会改变，一般内网ip都是管理员分配给你的（例如192.168.233.5），而使用无线网（wifi）你的ip可能每次都不一样（重启路由器后ip地址会发生改变，因为ip是自动分配的），所以无线网不需要添加永久路由
-其实就是将比较常用的内网才能访问的ip（192.168.200.X）使用内网网关（192.168.100.254）访问
-比如我的gitlab是172.233.1.1，那我就route add 172.233.0.0 mask 255.255.0.0 192.168.100.254//这样172.233开头的站点都用内网访问
-实测好使，感谢楼主分享。如果有不好使的可以查一下有默认路由配置冲突删除即可
-
-
-FIXME sql
-
---oracle模糊查询表中字段的名字
-可以使用以下SQL语句进行模糊查询表中字段的名字：
-```sql
-SELECT column_name 
-FROM user_tab_columns 
-WHERE table_name = '表名' 
-AND column_name LIKE '%关键字%';
-```
-其中，将`表名`替换为你要查询的表名，将`关键字`替换为你要匹配的字段名的关键字，比如想查询所有包含"age"的字段名，可以将`关键字`替换为"age"。执行该SQL语句后，会返回符合条件的所有字段名。
+公司mysql换成了最新版本的mysql8.0，用navicat11，navicat12连接都不好使，提示plugin caching_sha2_password could not be loaded - ...
+后来查了下原因，是mysql登录验证的默认插件变更了，从mysql_native_password变为caching_sha2_password。后来解决了该问题，该问题解决方式大体分为两种：
+1.将mysql的登录插件改回为mysql_native_password(不推荐)
+2.将navicat升级到最新版navicat15（推荐）
+mysql> SELECT Host, User, plugin from mysql.user;
++-----------+------------------+-----------------------+
+| Host      | User             | plugin                |
++-----------+------------------+-----------------------+
+| %         | itcast           | mysql_native_password |
+| %         | root             | caching_sha2_password |
+| localhost | mysql.infoschema | caching_sha2_password |
+| localhost | mysql.session    | caching_sha2_password |
+| localhost | mysql.sys        | caching_sha2_password |
++-----------+------------------+-----------------------+
+5 rows in set (0.00 sec)
 
 
 
---表名模糊查询(直接用客户端自带搜索就可以了)
+----1049 - Unknown database 'logical_library'----
 
-show tables like '要模糊查询的表名%';--mysql
+为什么navicat登录mycat，可以select表却无法进入表中？
 
-这个表也可以查询select * from tab where tname like '%USER%'
+顿时有点恍然大悟了，我的数据库名是test的，但是配置了逻辑库名TESTDB后，查询表数据时候就用了逻辑库名去找表(TESTDB.student)，这样肯定找不到啊，于是我把逻辑库名改为和真实库名一样就好了
 
-有时候，数据库中的表名太多，而你又不是清楚地记得表名，那么你可以用下面SQL语句，模糊地查询你想要的表名：
-select  table_name，tablespace_name，status，temporary from user_tables where table_name like '%tab_name%';
-tab_name 为要查表名的其中一部分。
-如：你要查表名中有USER的表名
-select table_name，tablespace_name  from user_tables where table_name like '%USER%';
+<schema name="testing" checkSQLschema="false" sqlMaxLimit="100" dataNode="dn1">
+</schema>
+<!-- schema和database名字一样就没有这个错误了-->
+<dataNode name="dn1" dataHost="localhost1" database="testing" />
 
+2023-12-21 10:29:09.802 ERROR [$_NIOREACTOR-3-RW] (io.mycat.net.FrontendConnection.writeErrMessage(FrontendConnection.java:231)) - ServerConnection [id=15, schema=logical_library, host=172.27.129.82, user=root,txIsolation=3, autocommit=true, schema=logical_library, executeSql=SELECT * FROM `logical_library`.`family` LIMIT 0,1000]Unknown database 'logical_library'java.lang.Thread .getStackTrace1559
+PS：host=172.27.129.82是wifi的IP
 
-
-查询一段时间的sql ：SELECT *FROM productspec WHERE CREATETIME 
-BETWEEN TO_DATE('2023-07-18', 'YYYY-MM-DD') AND TO_DATE('2023-07-19', 'YYYY-MM-DD');        
-
-select * from posglassmaphistory where LASTEVENTTIME>=  to_date('2020-05-02','yyyy-mm-dd')    
-and  LASTEVENTTIME<=to_date('2024-05-30','yyyy-mm-dd') 
---上面sql可以，下面sql不可以
-select * from posglassmaphistory where LASTEVENTTIME>=  to_char('2020-05-02','yyyy-mm-dd')    
-and  LASTEVENTTIME<=to_char('2024-05-30','yyyy-mm-dd') 
-
-Oracle 数据库日期范围查询有两种方式：to_char 方式和 to_date 方式。
-to_date 方式：
-select * from tablename where time>=  
-to_date('2011-05-02','yyyy-mm-dd')    
-and  time<=to_date('2011-05-30','yyyy-mm-dd')
-to_char 方式：
-select * from tablename where to_char(time,'yyyy-mm-dd')>='2011-05-02'    
-and to_char(time,'yyyy-mm-dd')<='2011-05-30'
-
-
-FIXME java
-
-catch (System.Exception ex)
-catch (IDMessageException idmex)
-
-ChangeGradeInfo changeGradeInfo = new ChangeGradeInfo();
-changeGradeInfo.setLotGrade(lotData.getLotGrade());
-// 结构体changeGradeInfo中的函数setLotGrade给结构体changeGradeInfo中的变量lotGrade赋值
-public void setLotGrade(String lotGrade)
-{
-    this.lotGrade = lotGrade;
-}
-// 上面函数赋值，下面函数获取值(如果直接get说明有值)
-public String getRevisionCode(){
-    return revisionCode;
-}
 
 
 FIXME debug
 
-Name指的是字段名(变量名)
+
 Text指的是显示的文本
+Name指的是字段名(变量名)
 
 F5(Start Debugging)：调试
 Ctrl+F5(Start Without Debugging)：运行
@@ -345,60 +339,25 @@ PS；vba调试时黄色的箭头可以像vs一样向上拉
 
 
 
-FIXME oracle
+TODO 其他信息
 
 
-之前遇到过这样的问题：vs中的未在本地计算机上注册“microsoft.ACE.oledb.12.0”提供程序
+终端右击(万能)=复制+粘贴
 
-.ora文件替换后plsql可以使用(plsql以路径搜索)
+守护进程(daemon)就是windows中的“服务”
 
-H:\instantclient\NETWORK\ADMIN\tnsnames.ora
-C:\app\10868834\product\11.2.0\client_1\network\admin\tnsnames.ora
+shift+enter(询问ai问题)：类似于excel中的alt+enter
 
---连接新的数据库：直接在tnsnames.ora添加再连接就可以了
-ORA-12154：TNS:could not resolve the connect identifier specified
-mesadm@M2MESDB
---Oracle Logon
-Username：mesadm
-Password：oracle
-Database：M2MESDB
---连接设置
-主机：10.42.2.24
-端口：1521
-数据库：mesdb
+----excel中自动生成8位数密码----
+=CHAR(INT(RAND()*26+65))&INT(RAND()*9+1)&CHAR(INT(RAND()*26+97))&INT(RAND()*900+100)&IF(RAND()*1>0.5,CHAR(INT(RAND()*6+33)),CHAR(INT(RAND()*4+40)))&INT(RAND()*9+1)
 
+微软 Edge 浏览器即将移除「网页选择」功能，回应称使用率低、成本高，对此你怎么看？
+9 月 19 日消息，微软在 9 月 15 日发布的 Edge 117.0.2045.31 浏览器稳定版中，将“网页选择”（Web Select）工具设置为过时。
+这项工具允许用户在保持其格式的情况下复制选中区域，用户可以对选中的区域进行交互，用户可以通过菜单或者 Ctrl+Shift+X 快捷方式启用。
+这个功能特别好用，省去F12然后搜索的时间，直接能把文字提取出来，方便做笔记。可惜被砍掉了。
+日常砍最好用的产品，满足复制网页表格的需求
+日常使用最大用处大概是一些不能被复制的文本可以用网页选择复制。但是也有替代方案
+谢了，知识星球上没法直接复制的文字就靠这个，不知道做好的功能砍个啥，放在那边不就行了，需要支持个毛？
+PS：现在更名为"网页捕获",右击即可看到(快捷键Ctrl+Shift+X没有用了)
 
 
-FIXME others
-
-Quote：引用
-
-diagram：图
-
-policy：策略
-
-invoke：调用
-
-generic：通用的
-
-validation：验证
-
-Entities：实体(一个类或一个对象)
-
-layer：层
-mandatory：强制性的
-
-sample：样本
-sampling：抽样
-
-quality：质量
-quantity：数量
-
-consume：消费
-consumable：可消费的
-
-工厂的线体是什么意思？
-工厂的线体是输送设备直接完成物料输送工程的主体，它主要有输送链条、附件、链轮、头轴、尾轴、轨道、支架等部分组成。
-
-Q-panel是什么？
-Q-panel指的是将一张液晶大玻璃切成几小片,每片含几个小的single cell(产品)。这样的每一片就叫做Q-panel。可以理解为包含几个小液晶屏幕的一张玻璃,通常是应用于小尺寸产品,如手机,pad类产品。
