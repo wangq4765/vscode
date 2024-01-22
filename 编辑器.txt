@@ -15,9 +15,6 @@ LotService/ProductService/MachineService/DurableService/FactoryService是API
 The operation could not be completed.另一个程序正在使用此文件，进程无法访问ENIG.Shell.vshost.exe
 解决：任务管理器→详细信息→关闭SNS.Shell.vshost.exe/ENIG.Shell.vshost.exe(大不了多运行几次)
 
-跨项目复制粘贴：.Designer.cs和.cs两个文件此行代码修改就可以了
-namespace MES.Module.Views.Material
-
 this.grdReworkFlow.Rows[0].Activated = true;
 this.grdReworkFlow.Rows[0].Selected = true;
 // 上面两行代码自动激活下面的函数
