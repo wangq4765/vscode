@@ -5,8 +5,6 @@
 TODO vs
 
 
-vs debug出现错误：把出错的那一行注释掉(点击时.Design.cs自动创建的)
-
 LotService/ProductService/MachineService/DurableService/FactoryService是API
 
 没有View查询按钮就复制grdproduct到.cs文件中搜索，这是逆向查找(Service在txtLotName_keyup中)
