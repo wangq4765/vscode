@@ -5,37 +5,7 @@
 TODO vs
 
 
-LotService/ProductService/MachineService/DurableService/FactoryService是API
-
-没有View查询按钮就复制grdproduct到.cs文件中搜索，这是逆向查找(Service在txtLotName_keyup中)
-
-点击查询按钮后不仅grid没有数据，就连headerCaption都消失了
-分析：bscustomquery→CLOB中的sql有错误
-
-The operation could not be completed.另一个程序正在使用此文件，进程无法访问ENIG.Shell.vshost.exe
-解决：任务管理器→详细信息→关闭SNS.Shell.vshost.exe/ENIG.Shell.vshost.exe(大不了多运行几次)
-
-this.grdReworkFlow.Rows[0].Activated = true;
-this.grdReworkFlow.Rows[0].Selected = true;
-// 上面两行代码自动激活下面的函数
-private void grdReworkFlow_AfterRowActivate(object sender, EventArgs e)
-
-// 加了一个!导致调试的时候直接到了}，直接跳过中间的许多行代码
-if (String.IsNullOrEmpty(machineInfoView1.comPortID.Text))
-{
-    return;
-}
-
-
-感叹号：出现了冲突
-一红一黄：仅修改了一个文件
-问号：该项目目录中不存在它可能已经被移动、重命名或者删除
-
-
 -----------设置-------------
-
-
-
 
 vs 底部显示局部变量的窗口 打开？
 之前不小心把vs底部的局部变量窗口关掉了。一直找不到。
@@ -53,7 +23,6 @@ Visual Studio 快速定位文件位置的方法
 tools-options-Projects and Solutions-Track Active Item in SOlution Exploer
 勾选后就可以了
 PS：MyEclipse有“Link with Editor”，而vscode则自带
-
 
 
 
@@ -85,9 +54,7 @@ Alt+↑ 当前行和上面一行交互位置(同上)
 粘贴整行：Ctrl + V
 删除整行：Ctrl + L
 
-Visual Studio中关闭当前窗口的快捷键是什么？
-比如，我现在打开了多个查看代码窗口，想关闭当前窗口，使用什么快捷键？
-CTRL + F4关闭文档窗口
+
 
 跳转到定义处：F12(引用和f12互补)
 跳转到下一个Error或Warning：当有多个错误时可以按F8逐个跳转
@@ -121,22 +88,11 @@ Visual Studio 找到匹配括号问题
 VS转到定义与返回
 在VS中按F12可以转到定义，按Ctrl+- 可以返回(直接从定义转到引用处则点击“引用”)
 
-VS2010中跳转到此函数实现的快捷键？
-该快捷键是F12
-不常用根本想不到吧
-跟eclipse的设计风格很不同啊
-类似于eclipse中的按住ctrl然后单击  跳转到该实现函数
-PS：vscode两种都可以
-
 vs 中怎么查看一个方法被哪些方法调用过？
 点击方法左上角的"1个引用"最方便(和f12跳转方向相反)
 把光标移到方法上,按Shift+F12(ctrl+k+r)
 把光标放在方法上，右键，"Find All References"
 放到方法名那里，右键 查找所有引用
-
-14.快速转到字段或者函数的定义处：F12
-15.查找字段或者函数的所有引用：Ctrl+K+R 或者 Shift+F12
-16.速览定义：光标放在字段或者函数上，按Alt+F12，调出一个窗口，查看定义或者引用，好处是：字段或函数存在多个脚本引用，不用去打开各个脚本，直接在该字段或者函数下开启一个临时窗口进行速览，按ESC退出。
 
 
 
@@ -168,23 +124,6 @@ Ctrl + M + L：展开所有方法
 
 TODO eclipse
 
-
-vs没有完全汉化，eclipse没有汉化
-居然看到了汉化的eclipse...
-
-重点：代码就是图，图就是代码
-java代码和xml数据结合起来看
-C#代码和OIC界面结合起来看
-
---MES.Env下面的文件夹
-builders：打包上传(upload)
-cfg(configuration)：配置(.ini文件)
-cmd：脚本(.sh文件)
-bpels：业务流程图
-messages：消息体
-
-
-OIC→VS(消息体)→Eclipse(拆包)→Plsql→Eclipse(封包)→VS(消息体)→OIC
 
 eclipse中的项目不能全部revert(配置也还原了)，vs可以(修改配置configlocal.xml)
 
@@ -419,9 +358,6 @@ ctrl+Shift+Y：打开调试控制台
 
 console有些细节的东西没法看到,debug的好处就是可以直接到断点看具体细节,包括函数内部的互相跳转,整个运转流程,不是一个量级的
 
-卸载前端扩展后，!+tab竟然又可以了
-前端扩展：代码块，其实还是实现智能跟踪的
-
 不同文件夹下可以存在相同的文件名
 可以直接修改后缀名，文件图像随之改变
 
@@ -433,10 +369,6 @@ console有些细节的东西没法看到,debug的好处就是可以直接到断�
 在当前行的位置，鼠标点击，可以选中当前行
 用鼠标单击文件的行号，可以选中当前行
 在某个行号的位置，上下移动鼠标，可以选中多行
-
-文件直接剪切到E:\VScode-win32-x64-1.42.1-1\VS code-workspace\project\dd.csv，或者E:\update\abnormal.txt，不加会自动创建
-复制绝对路径：E:\VScode-win32-x64-1.42.1-1\VS code-workspace\project\vs code.txt
-复制相对路径：project\vs code.txt
 
 
 
@@ -495,17 +427,15 @@ PS：在宏中使用这些命令，可以实现与快捷键相似的操作
 excel中像vscode中的返回上一步快捷键是什么？
 在 Excel 中，可以使用快捷键 Ctrl + Z 来撤销上一步操作。如果需要重复上一步操作，则可以使用快捷键 Ctrl + Y。
 
-在 Word 中，撤销上一步的快捷键是 Ctrl + Z。在 Excel 里面，撤销操作的快捷键也是相同的，即 Ctrl + Z。使用这个快捷键可以方便地撤销上一步的操作。另外，Shift + F5 在 Word 中的功能是跳转到上次编辑的位置，而在 Excel 中该快捷键没有相应的功能。
+在 word 文档中跳转后如何返回到之前的位置(适用于超链接和引用)？
+点开超链接或者引用标以后，按下 Alt + 左方向即可跳回之前的阅读页
+这才是正确答案，别人都是答非所问
+简单明了，直接解决问题，其它回答都是啥啊，扯一大篇，一点用没有
 
 如何在 Word 中快速返回到前次(光标)编辑的位置
 1、“ctrl+z” 这个快捷键是退回上一步操作
 2、“Shift+F5” 是将插入点返回到上次编辑的位置，Word 能够记忆前三次的编辑位置
 在打开文档时如果想返回到上次编辑的地方，打开文档之后立即按 “Shift+F5” 快捷键，则光标﻿可以立即移动到上次退出 Word 时最后一次编辑的位置。
-
-在 word 文档中跳转后如何返回到之前的位置(适用于超链接和引用)？
-点开超链接或者引用标以后，按下 Alt + 左方向即可跳回之前的阅读页
-这才是正确答案，别人都是答非所问
-简单明了，直接解决问题，其它回答都是啥啊，扯一大篇，一点用没有
 
 
 
