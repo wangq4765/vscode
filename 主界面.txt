@@ -26,6 +26,8 @@ Nginx就是跳转机
 
 
 
+
+
 TODO 工作
 
 
@@ -305,6 +307,8 @@ FIXME debug
 
 
 LotService/ProductService/MachineService/DurableService/FactoryService是API
+
+console有些细节的东西没法看到,debug的好处就是可以直接到断点看具体细节,包括函数内部的互相跳转,整个运转流程,不是一个量级的
 
 Text指的是显示的文本
 Name指的是字段名(变量名)
