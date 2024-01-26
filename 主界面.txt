@@ -348,4 +348,3 @@ shift+enter(询问ai问题)：类似于excel中的alt+enter
 
 ----excel中自动生成8位数密码----
 =CHAR(INT(RAND()*26+65))&INT(RAND()*9+1)&CHAR(INT(RAND()*26+97))&INT(RAND()*900+100)&IF(RAND()*1>0.5,CHAR(INT(RAND()*6+33)),CHAR(INT(RAND()*4+40)))&INT(RAND()*9+1)
-
