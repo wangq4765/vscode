@@ -1,0 +1,28 @@
+<!-- 输入感叹号!，然后按tab就会有默认html模板了 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>初识vue</title>
+  <!-- 引入Vue -->
+  <script type="text/javascript" src="./js/vue.js"></script>
+</head>
+
+<body>
+  <!-- 准备好一个容器 -->
+  <div id="root">
+    <h1>Hello,???</h1>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false // Vue.config是一个对象,包含Vue的全局配置(一次修改，到处都可用)
+    // 创建Vue实例
+    const x = new Vue({
+      el: '#root', //el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串
+      data:'尚硅谷'
+    })
+  </script>
+</body>
+
+</html>
