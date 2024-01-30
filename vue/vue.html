@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>初识vue</title>
@@ -27,23 +28,62 @@
 
   <!-- 准备好一个容器 -->
   <div id="root"> <!-- id属性只能写一个，class可以有多个重名 -->
-    <h1>插值语法,{{name}},{{address}}</h1> <!-- {{插值}} -->
-    <hr/>
-    <h1>指令语法</h1>
-    <a href="url">点我去尚硅谷学习</a>
+
+    <h1>interpolation syntax:{{name}}</h1> <!-- {{插值}} -->
+
+    <hr />
+
+    <h1>command syntax</h1>
+    <a v-bind:href="school.url.toUpperCase()" x="hello">点我去{{school.name}}学习</a>
+    <!-- {{}}：用在标签体，v-bind：用在标签属性上 -->
+
+    <hr />
+
+    <!--
+      Vue中有2种数据绑定的方式：
+      1、单向绑定(v-bind)：数据只能从data流向页面
+      2、双向绑定(v-model)：数据不仅能从data流向页面，还可以从页面流向data
+      备注：
+      1.双向绑定一般都应用在表单类元素上(如：input、select等)
+      2.v-model:value可以简写为v-model，因为v-model默认收集的就是value值
+    -->
+    单向数据绑定：<input type="text" v-bind:value="name"> <br />
+    双向数据绑定：<input type="text" v-model:value="name"> <!-- 双向绑定作用于表单，其他的还是用单向绑定吧 -->
+
+    <!-- 如下代码是错误的，因为v-model只能应用在表单类元素（输入类元素）上 -->
+    <h2 v-bind:x="name">你好啊</h2>
+
   </div>
 
   <script type="text/javascript">
     Vue.config.productionTip = false // Vue.config是一个对象,包含Vue的全局配置(一次修改，到处都可用)
+
     // 创建Vue实例
-    new Vue({
+    const v = new Vue({
       el: '#root', //el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串
       data: { //data中用于存储数据，数据供el所指定的容器去使用，值我们暂时先写成一个对象
         name: 'jack',
-        address:'shanghai',
-        url:'http://www.atguigu.com'
+        school: {
+          name: 'shangguigu',
+          url: 'http://www.atguigu.com'
+        }
+      } //实现标签内容的动态化就用插值{{}}，实现标签属性的动态化就用指令
+    })
+
+    console.log(v)
+
+    v.$mount('#root') // el: '#root'是el第一种写法，这是el第二种写法(第二种更灵活),mount是linux里面的挂载
+
+    // data函数的方式，主要是组件被多个父组件调用的时候，data如果是对象的话容易相互干扰，如果data是函数就不会有这个问题（每次都是一个新的函数调用）
+    new Vue({
+      el: '#root',
+      data: function () { // data的第二种写法：函数式，上面的是对象式
+        return {
+          name: 'shangguigu'
+        }
       }
     })
+
   </script>
 
 </body>
