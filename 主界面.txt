@@ -12,6 +12,12 @@ windows系统自带的“远程桌面”可以连接linux系统吗？
 如果你只是觉得用vim或者什么玩意改文件麻烦，那用vs code连吧；
 远程终究是偶尔，频率再高也是偶尔，如果你开机就需要一直到关机那本地装个Linux
 
+新版的数梦数据中台，各位下载后结合自己的日常工作，熟悉并掌握，资料切勿外传
+数梦学习视频，惠存勿外传：http://172.27.160.229:32080/files/
+账号：test
+密码：A4b926b4&
+PS:需要内网连接
+
 
 
 linux中的oracle连接不上，需要执行startup命令，请根据alert_orcl.log分析原因
@@ -29,19 +35,9 @@ ORACLE instance started.
 然后，你应该检查数据库的警告日志，找到可能导致这些问题的具体原因，并修复它们。建议你在做出任何改变之前，先进行一个全面的数据库健康检查。
 但是，只有这些日志，我不能确定具体的问题原因。可能还需结合其他具体的系统和数据库信息来分析和解决。在处理此问题时，请记住，可能需要一个经验丰富的数据库管理员进行修复。
 
-关于此问题的解决方法有：
-文档：Alert.log shows ORA-609 with TNS-12537: TNS:connection closed (文档 ID 1538717.1)
-可能原因：
-client卡住、崩溃；连接被防火墙KILL;client超时设置；client连接后立马关闭；网络不稳定。
-须要检查clienttnsnames.ora/sqlnet.ora中信息：
-    possible timeouts in sqlnet.ora in client oracle home:
-    sqlnet.outbound_connect_time
-    sqlnet.recv_timeout
-    sqlnet.send_timeout
-    tcp_connect_timeout
-   possible timeout in client connect descriptor (hardcoded in client application or in client tnsnames.ora):
-    connect_timeout
---------------
+
+
+
 
 
 
@@ -55,7 +51,7 @@ ji：蓟/嵇
 
 基本信息都在文件夹"运维文档"里面
 
-82测试机不用：正在使用"一体化平台"
+82测试机不用：正在使用"一体化平台"  
 
 
 
@@ -109,6 +105,8 @@ Oracle库：172.27.160.25:1521  dzjkz  这个库，创建表视图权限开一�
 TODO 网络
 
 
+----外部访问内部的IP具体到那台服务器的那个端口，内部访问则直接开通IP就可以了----
+
 vpn原理(vpn连不上测试库是因为IP限制)
 胜哥，政务云我登录不上去，账号和密码都没有错误---有白名单的，你在家登不了
 
@@ -116,17 +114,6 @@ vpn原理(vpn连不上测试库是因为IP限制)
 您可以在电脑的命令行中输入“ipconfig”命令，然后在弹出的窗口中找到“IPv4 地址”，这就是您的本机 IP 地址
 连接了wifi，那么IP是电脑的IP还是wifi的IP?
 应该说外部访问的是路由器的IP(防火墙限制的是路由器的IP)
-
-----外部访问内部的IP具体到那台服务器的那个端口，内部访问则直接开通IP就可以了----
-172.27.160.0/24：政务云
-172.27.129.82/32：新大楼(振峰)
-10.209.135.0/24：政务办公点IP(紫峰)
-
-VPN(k8s)：
-172.27.204.0/24
-172.27.205.0/24
-172.27.206.0/24
-172.27.207.0/24
 
 
 
@@ -367,6 +354,7 @@ TODO 其他信息
 
 守护进程(daemon)就是windows中的“服务”
 
+像编程一样按tab(补全)
 shift+enter(询问ai问题)：类似于excel中的alt+enter
 
 ----excel中自动生成8位数密码----
