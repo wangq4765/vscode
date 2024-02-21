@@ -45,7 +45,25 @@ http://220.179.5.97:31503/prod-api/nh/providentInfo
 
 
 
+20221209绿盟设备培训.zip-------密码
 
+AQDATATG
+alter user oracle identified by "Csdn2023#0928@e2";
+
+shell中的awk和expr(实用频繁)
+shell中的read
+shell中的位置变量
+
+DSJ：aqdsj@123
+
+
+
+
+
+
+安全、质量、降本增效
+需求、卡位、商机
+收入结构、退出机制、激励对象
 
 
 
