@@ -383,6 +383,8 @@ TODO 其他信息
 
 守护进程(daemon)就是windows中的“服务”
 
+英文语言的浏览器也可以右键翻译：Translate to Chinese(Simplified)
+
 像编程一样按tab(补全)
 shift+enter(询问ai问题)：类似于excel中的alt+enter
 
