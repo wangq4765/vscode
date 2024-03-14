@@ -20,13 +20,17 @@ VS2013 断点窗口怎么调出来？
 Visual Studio 快速定位文件位置的方法
 用idea有一个瞄准的符号可以快速定位文件位置，Visual Studio没有这个但是有替代方案
 工具-选项--项目和解决方案--常规--在解决方案资源管理器中跟踪活动项
-tools-options-Projects and Solutions-Track Active Item in SOlution Exploer
+tools-options-Projects and Solutions-Track Active Item in Solution Exploer
 勾选后就可以了
 PS：MyEclipse有“Link with Editor”，而vscode则自带
 
 
 
 -----选中某个词后，单击右键的查看定义、转到定义、转到声明、查找所有引用功能都非常实用(vs的快捷键和vscode非常相似)-----
+
+重命名：比如要修改一个方法名，可以选中后按F2，输入新的名字，回车，会发现所有的文件都修改过了
+
+
 
 跳转到指定行号：Ctrl + G
 
@@ -45,18 +49,29 @@ PS：MyEclipse有“Link with Editor”，而vscode则自带
 复制整行：Ctrl + C
 剪切整行：Ctrl + X
 粘贴整行：Ctrl + V
-删除整行：Ctrl + L
+删除整行：Ctrl + L(delete)
+复制当前行到下一行：Ctrl+D(duplicate)
 
 
 
-跳转到定义处：F12(引用和f12互补)
-跳转到下一个Error或Warning：当有多个错误时可以按F8逐个跳转
-重命名：比如要修改一个方法名，可以选中后按F2，输入新的名字，回车，会发现所有的文件都修改过了
+查看函数引用：shift+f12
+跳转到定义处：f12(f12和上面的引用互补)
+
+VS转到定义与返回
+在VS中按F12可以转到定义，按Ctrl+- 可以返回(直接从定义转到引用处则点击“引用”)
 
 VS 2017在某一次更新之后，默认设置了Ctrl+单击会跳转到定义
 f12就可以跳转到定义了
 source insight、vscode、qtcreator都是Ctrl+鼠标点击，用习惯Ctrl+鼠标点击，而且F12键相对左手来说太远了
 果然习惯了按Ctrl之后全选变量，变成跳转到定义就很难受
+
+vs 中怎么查看一个方法被哪些方法调用过？
+点击方法左上角的"1个引用"最方便(和f12跳转方向相反)
+把光标移到方法上,按Shift+F12(ctrl+k+r)
+把光标放在方法上，右键，"Find All References"
+放到方法名那里，右键 查找所有引用
+
+
 
 VS设置断点等调试技巧
 f5：开始调试/跳转到下一断点(自动跳到下一个断点处，只有一个断点则执行到底)
@@ -78,25 +93,14 @@ Visual Studio 找到匹配括号问题
 
 
 
-VS转到定义与返回
-在VS中按F12可以转到定义，按Ctrl+- 可以返回(直接从定义转到引用处则点击“引用”)
-
-vs 中怎么查看一个方法被哪些方法调用过？
-点击方法左上角的"1个引用"最方便(和f12跳转方向相反)
-把光标移到方法上,按Shift+F12(ctrl+k+r)
-把光标放在方法上，右键，"Find All References"
-放到方法名那里，右键 查找所有引用
-
-
-
 -----------下面快捷键的K是key的意思-------------
 
 格式化选中代码：Ctrl + K + F(format)
-格式化当前文档代码：Ctrl + K + D
+格式化当前文档代码：Ctrl + K + D(document)
 
 vs如何快速批量注释，就是全部加上//的？
-注释：Ctrl + K + C(C：comment)
-取消注释：Ctrl + K + U(U：uncomment)
+注释：Ctrl + K + C(C：comment)       ctrl+k+c按两下就取消注释了
+取消注释：Ctrl + K + U(U：uncomment) ctrl+k+u按两下就取消注释了
 
 书签的作用：便于在不同程序文件之间切换
 添加/删除书签：Ctrl +K + K
@@ -291,7 +295,6 @@ ctrl+shit+f＞ctrl+f：全局搜索，就是左边的搜索，但是和输入法
 跳转到某行 ctrl+G
 
 ctrl+/ 注释
-ctrl+backspace：删除上一个词
 shift+tab: 与 tab 的效果相反(发现shift是递归的)
 ctrl+shift+l：同时选中所有匹配编辑(与当前行或选定内容匹配)
 
@@ -299,7 +302,7 @@ vscode行编辑，当光标停在某一行(不用选中该行)：
 复制整行：Ctrl + C
 剪切整行：Ctrl + X(不需要按ctrl+l)
 粘贴整行：Ctrl + V
-全选整行：Ctrl + L(重复则选中下一行代码) --vs中是删除整行
+选中整行：Ctrl + L(重复则选中下一行代码) --vs中是删除整行
 
 移动到行首：Home
 移动到行尾：End
