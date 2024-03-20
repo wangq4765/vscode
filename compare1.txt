@@ -1,0 +1,118 @@
+# 这是Nginx的主配置文件，其中包含了对http服务，负载均衡以及反向代理的基础配置
+
+# 定义进程数，根据硬件进行定义
+worker_processes  auto;
+
+error_log "/usr/local/nginx/logs/error.log";  #设置错误日志文件和日志级别
+
+# events模块是Nginx的事件模块，配置多用户访问和负载均衡
+events {
+    worker_connections  1024;  # 单个后台进程的最大并发链接数
+}
+
+# stream模块，处理非HTTP基于TCP/UDP的代理服务
+stream {  
+  # 医废服务的代理配置
+  server{
+    listen 3359;  # 监听3359端口
+    proxy_connect_timeout 10s;  # 连接超时时间
+    proxy_timeout 30s;  # 代理接口超时时间
+    proxy_pass 47.98.203.109:3306;  # 代理服务器ip及端口
+  }
+
+  # 潜山市住建局服务的代理配置
+  server{
+    listen 3360;  
+    proxy_connect_timeout 10s;  
+    proxy_timeout 30s;  
+    proxy_pass 183.161.35.38:1433;  
+  }
+
+  # 市直机关事务管理中心服务的代理配置
+  server{
+    listen 3361;  
+    proxy_connect_timeout 10s;  
+    proxy_timeout 30s;  
+    proxy_pass 117.71.53.199:40010;  
+  }
+}
+
+# http模块，处理HTTP基于TCP的代理服务
+http {
+    # mime.type，用于定义mime类型
+    include mime.types;
+    default_type application/octet-stream;  # 默认的mime类型，当文件类型无法确定时，使用此默认类型
+
+    sendfile on;  # 开启高效文件传输模式
+    keepalive_timeout 65;  # 长链接
+
+    # 配置服务器
+    server {
+        listen 8081;  # 监听的端口
+        server_name localhost;  # 服务器名
+
+        # location匹配规则
+        location / {
+            proxy_pass http://api.srshy.com:80;  # 代理地址
+        }   
+
+        # 定义错误页面
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+            root html;  # 错误页面所在位置
+        }
+    }
+
+    # 以下为另外几个服务器的配置，同上
+    server {
+        listen 8083;  
+        server_name localhost;
+
+        location / {
+            proxy_pass http://aqwt.liekenet.com:8088; 
+        }
+    }
+
+    server {
+        listen 8084;  
+        server_name localhost;
+
+        location / {
+            proxy_pass http://api.zjyypt.net:80;  
+        }
+    }
+
+
+    server {
+        # tssp-web-gis前端访问端口,如客户没特殊要求，不需要更改
+        listen 8080;
+        server_name localhost;
+
+        location /status {
+            # 关闭访问日志
+            access_log off;
+            # 仅允许本地访问
+            allow 127.0.0.1;
+            # 拒绝所有其他访问
+            deny all;
+        }
+
+        location /basic-api/ {
+            # 添加 CORS 头部以允许跨域请求
+            add_header Access-Control-Allow-Origin *;
+            add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+            add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+
+            # 设置代理请求的 Host 头部
+            proxy_set_header Host $host:$server_port;
+            # tssp-base-admin服务部署地址，该地址为被 Nginx 代理的服务器地址
+            proxy_pass http://172.27.160.78:18090/;
+        }
+
+        location /demo-center {
+            # tssp-web-gis前端部署地址+示例中心访问端口,端口的话如客户没特殊要求，不需要更改
+            # 将所有请求重定向到 http://172.27.160.78:8081
+            rewrite ^(.*)$ http://172.27.160.78:8081 permanent;
+        }
+   }
+}
